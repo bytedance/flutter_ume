@@ -1,0 +1,60 @@
+name: coverage
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+    paths:
+      - 'lib/**'
+      - 'kits/flutter_ume_kit_console/lib/**'
+      - 'kits/flutter_ume_kit_device/lib/**'
+      - 'kits/flutter_ume_kit_perf/lib/**'
+      - 'kits/flutter_ume_kit_show_code/lib/**'
+      - 'kits/flutter_ume_kit_ui/lib/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ env.GITHUB_REF }}
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - name: Flutter action
+        uses: subosito/flutter-action@v1.5.3
+        with:
+          flutter-version: '2.2.x'
+          channel: stable
+      - run: |
+          flutter pub get
+          flutter pub run flutter_coverage_badge
+      - run: |
+          flutter pub get
+          flutter pub run flutter_coverage_badge
+        working-directory: kits/flutter_ume_kit_device
+      - run: |
+          flutter pub get
+          flutter pub run flutter_coverage_badge
+        working-directory: kits/flutter_ume_kit_perf
+      - run: |
+          flutter pub get
+          flutter pub run flutter_coverage_badge
+        working-directory: kits/flutter_ume_kit_show_code
+      - run: |
+          flutter pub get
+          flutter pub run flutter_coverage_badge
+        working-directory: kits/flutter_ume_kit_ui
+      - run: |
+          flutter pub get
+          flutter pub run flutter_coverage_badge
+        working-directory: kits/flutter_ume_kit_console
+      - name: Commit badges
+        run: |
+          git config --global user.name smileShirely
+          git config --global user.email smileShirely@users.noreply.github.com
+          git add coverage_badge.svg kits/flutter_ume_kit_device/coverage_badge.svg kits/flutter_ume_kit_perf/coverage_badge.svg kits/flutter_ume_kit_show_code/coverage_badge.svg kits/flutter_ume_kit_ui/coverage_badge.svg kits/flutter_ume_kit_console/coverage_badge.svg
+          git commit -m "Automated report coverage"
+          git push

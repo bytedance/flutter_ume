@@ -1,0 +1,25 @@
+name: flutter_ume_kit_console
+description: Show debugPrint kit for flutter_ume.
+version: 0.0.1
+author: zhaorui.dev@bytedance.com
+homepage: https://github.com/bytedance/flutter_ume
+
+environment:
+  sdk: ">=2.3.0 <3.0.0"
+  flutter: ">=1.12.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  tuple: ^1.0.3
+  share: ^0.6.0
+  flutter_ume:
+    path: ../../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mockito: ^4.0.0
+  flutter_coverage_badge: ^0.0.1+1
+  
+flutter:
