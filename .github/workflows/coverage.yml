@@ -5,6 +5,13 @@ on:
     branches:
       - master
       - develop
+    paths:
+      - 'lib/**'
+      - 'kits/flutter_ume_kit_console/lib/**'
+      - 'kits/flutter_ume_kit_device/lib/**'
+      - 'kits/flutter_ume_kit_perf/lib/**'
+      - 'kits/flutter_ume_kit_show_code/lib/**'
+      - 'kits/flutter_ume_kit_ui/lib/**'
 
 jobs:
   build:
