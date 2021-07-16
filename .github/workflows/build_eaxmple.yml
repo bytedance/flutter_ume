@@ -1,0 +1,30 @@
+name: build_eaxmple
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release-to-gitHub:
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - name: Flutter action
+        uses: subosito/flutter-action@v1.5.3
+        with:
+          flutter-version: '2.2.x'
+          channel: stable
+      - run: flutter pub get
+        working-directory: example
+      - run: flutter build apk --debug
+        working-directory: example
+      - uses: softprops/action-gh-release@v1
+        with:
+          files: example/build/app/outputs/apk/debug/app-debug.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
