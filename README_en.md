@@ -81,9 +81,8 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
 
 ## IMPORTANT
 
-Since UME manages the routing stack at the top level, methods such as `showDialog` use `rootNavigator` to pop up by default, which will cause errors in the navigator.
-
-Therefore **must** pass in the parameter `useRootNavigator: false` in `showDialog`, `showGeneralDialog` and other 'show dialog' methods to avoid navigator errors.
+Since UME manages the routing stack at the top level, methods such as `showDialog` use `rootNavigator` to pop up by default,
+therefore **must** pass in the parameter `useRootNavigator: false` in `showDialog`, `showGeneralDialog` and other 'show dialog' methods to avoid navigator errors.
 
 ``` dart
 showDialog(
