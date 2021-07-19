@@ -26,5 +26,8 @@ class Performance extends StatelessWidget implements Pluggable {
   String get name => 'PerfOverlay';
 
   @override
+  String get displayName => 'PerfOverlay';
+
+  @override
   void onTrigger() {}
 }

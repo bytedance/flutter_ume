@@ -27,6 +27,9 @@ class ColorSucker extends StatefulWidget implements Pluggable {
   String get name => 'ColorSucker';
 
   @override
+  String get displayName => 'ColorSucker';
+
+  @override
   void onTrigger() {}
 
   @override

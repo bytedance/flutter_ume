@@ -143,6 +143,9 @@ showDialog(
       String get name => 'CustomPlugin'; // 插件名称
 
       @override
+      String get displayName => 'CustomPlugin';
+
+      @override
       void onTrigger() {} // 点击插件面板图标时调用
 
       @override

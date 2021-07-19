@@ -216,7 +216,7 @@ class _MenuCell extends StatelessWidget {
                         width: 40),
                     Container(
                         margin: const EdgeInsets.only(top: 25),
-                        child: Text(pluginData.name,
+                        child: Text(pluginData.displayName,
                             style: const TextStyle(
                                 fontSize: 15, color: Colors.black)))
                   ],

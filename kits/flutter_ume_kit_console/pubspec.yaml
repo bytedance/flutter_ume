@@ -1,6 +1,6 @@
 name: flutter_ume_kit_console
 description: Show debugPrint kit for flutter_ume.
-version: 0.0.1
+version: 0.1.0
 author: zhaorui.dev@bytedance.com
 homepage: https://github.com/bytedance/flutter_ume
 

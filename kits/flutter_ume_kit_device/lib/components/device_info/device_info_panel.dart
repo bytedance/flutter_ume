@@ -24,6 +24,9 @@ class DeviceInfoPanel extends StatefulWidget implements Pluggable {
   String get name => 'DeviceInfo';
 
   @override
+  String get displayName => 'DeviceInfo';
+
+  @override
   void onTrigger() {}
 }
 

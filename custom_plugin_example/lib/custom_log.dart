@@ -15,6 +15,9 @@ class CustomLog implements Pluggable {
   String get name => 'CustomLog';
 
   @override
+  String get displayName => 'CustomLog';
+
+  @override
   void onTrigger() {
     debugPrint('$name onTrigger');
   }

@@ -31,6 +31,9 @@ class Console extends StatefulWidget implements PluggableWithStream {
   String get name => 'Console';
 
   @override
+  String get displayName => 'Console';
+
+  @override
   void onTrigger() {}
 
   @override

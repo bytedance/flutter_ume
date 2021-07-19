@@ -29,6 +29,9 @@ class WidgetDetailInspector extends StatelessWidget implements Pluggable {
   String get name => 'WidgetDetail';
 
   @override
+  String get displayName => 'WidgetDetail';
+
+  @override
   void onTrigger() {}
 }
 

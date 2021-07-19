@@ -23,6 +23,9 @@ class CpuInfoPage extends StatefulWidget implements Pluggable {
   String get name => 'CPUInfo';
 
   @override
+  String get displayName => 'CPUInfo';
+
+  @override
   void onTrigger() {}
 
   @override

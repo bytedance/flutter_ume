@@ -24,6 +24,9 @@ class AlignRuler extends StatefulWidget implements Pluggable {
   String get name => 'AlignRuler';
 
   @override
+  String get displayName => 'AlignRuler';
+
+  @override
   void onTrigger() {}
 }
 

@@ -24,6 +24,9 @@ class ShowCode extends StatefulWidget implements Pluggable {
   String get name => 'ShowCode';
 
   @override
+  String get displayName => 'ShowCode';
+
+  @override
   void onTrigger() {}
 }
 

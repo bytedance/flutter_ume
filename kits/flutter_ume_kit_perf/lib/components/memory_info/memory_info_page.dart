@@ -27,6 +27,9 @@ class MemoryInfoPage extends StatelessWidget implements Pluggable {
   String get name => 'MemoryInfo';
 
   @override
+  String get displayName => 'MemoryInfo';
+
+  @override
   void onTrigger() {}
 }
 

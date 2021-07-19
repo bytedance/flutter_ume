@@ -18,6 +18,9 @@ class WidgetInfoInspector extends StatefulWidget implements Pluggable {
   String get name => 'WidgetInfo';
 
   @override
+  String get displayName => 'WidgetInfo';
+
+  @override
   void onTrigger() {}
 
   @override

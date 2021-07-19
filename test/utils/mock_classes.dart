@@ -57,6 +57,8 @@ class MockPluggableWithStream extends Mock implements PluggableWithStream {
   @override
   String get name => 'MockPluggableWithStream';
   @override
+  String get displayName => 'MockPluggableWithStream';
+  @override
   Stream get stream => streamController.stream;
   @override
   get streamFilter => (value) => true;
@@ -65,6 +67,8 @@ class MockPluggableWithStream extends Mock implements PluggableWithStream {
 class MockPluggable extends Mock implements Pluggable {
   @override
   String get name => 'MockPluggable';
+  @override
+  String get displayName => 'MockPluggable';
   @override
   Widget buildWidget(BuildContext context) => Container();
 }

@@ -143,6 +143,9 @@ There are 10 plugin kits built in the current open source version of UME.
       String get name => 'CustomPlugin'; // The name of the plugin kit
 
       @override
+      String get displayName => 'CustomPlugin';
+
+      @override
       void onTrigger() {} // Call when tap the icon of plugin kit
 
       @override

@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 abstract class Pluggable {
   String get name;
+  String get displayName;
   void onTrigger();
   Widget buildWidget(BuildContext context);
   ImageProvider get iconImageProvider;
