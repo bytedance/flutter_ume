@@ -23,6 +23,7 @@ const defaultLocalizationsDelegates = const [
   GlobalCupertinoLocalizations.delegate,
 ];
 
+/// Wrap your App widget. If [enable] is false, the function will return [child].
 Widget injectUMEWidget({
   @required Widget child,
   @required bool enable,
