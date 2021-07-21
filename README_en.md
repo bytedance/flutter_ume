@@ -2,6 +2,8 @@
 
 [简体中文](./README.md)
 
+<img src="./ume_logo_256.png" width = "128" height = "128" alt="banner" />
+
 UME is an in-app debug kits platform for Flutter apps.
 
 There are 10 plugin kits built in the current open source version of UME.
