@@ -12,8 +12,8 @@ dependencies:
     sdk: flutter
   tuple: ^1.0.3
   share: ^0.6.0
-  flutter_ume:
-    path: ../../
+  shared_preferences: ^0.5.0
+  flutter_ume: '>=0.1.0 <0.2.0'
 
 dev_dependencies:
   flutter_test:

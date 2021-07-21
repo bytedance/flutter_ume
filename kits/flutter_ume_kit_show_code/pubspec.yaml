@@ -10,9 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_ume:
-    path: ../../
+  flutter_ume: '>=0.1.0 <0.2.0'
   share: ^0.6.0
+  vm_service: ^4.2.0
+  string_scanner: ^1.0.0
 
 dev_dependencies:
   flutter_test:

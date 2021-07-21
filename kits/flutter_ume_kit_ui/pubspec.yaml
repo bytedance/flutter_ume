@@ -11,8 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   image: ^2.1.13
-  flutter_ume:
-    path: ../../
+  flutter_ume: '>=0.1.0 <0.2.0'
 
 dev_dependencies:
   flutter_test:

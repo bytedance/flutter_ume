@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ume/ume.dart';
+import 'package:flutter_ume/flutter_ume.dart';
 import 'custom_log.dart';
 
 void main() {
