@@ -102,12 +102,22 @@ showDialog(
 
 当前开源版 UME 内置了 10 个插件
 
-|  |  |  |  |  |
-|  ----  | ----  | ----  | ----  | ----  |
-| ![Widget 信息](./screenshots/widget_info.png) | ![Widget 详情](./screenshots/widget_detail.png) | ![颜色吸管](./screenshots/color_sucker.png) | ![对齐标尺](./screenshots/align_ruler.png) | ![性能浮层](./screenshots/perf_overlay.png) |
-| Widget 信息 | Widget 详情 | 颜色吸管 | 对齐标尺 | 性能浮层 |
-| ![代码查看](./screenshots/show_code.png) | ![内存信息](./screenshots/memory_info.png) | ![CPU 信息](./screenshots/cpu_info.png) | ![设备信息](./screenshots/device_info.png) | ![日志展示](./screenshots/console.png) |
-| 代码查看 | 内存信息 | CPU 信息 | 设备信息 | 日志展示 |
+<table border="1">
+    <tr>
+        <td align="center"><img src="./screenshots/widget_info.png" width = "186.8" height = "302.3" alt="Widget 信息" /></br>Widget 信息</td>
+        <td align="center"><img src="./screenshots/widget_detail.png" width = "186.8" height = "302.3" alt="Widget 详情" /></br>Widget 详情</td>
+        <td align="center"><img src="./screenshots/color_sucker.png" width = "186.8" height = "302.3" alt="颜色吸管" /></br>颜色吸管</td>
+        <td align="center"><img src="./screenshots/align_ruler.png" width = "186.8" height = "302.3" alt="对齐标尺" /></br>对齐标尺</td>
+        <td align="center"><img src="./screenshots/perf_overlay.png" width = "186.8" height = "302.3" alt="性能浮层" /></br>性能浮层</td>
+    </tr>
+    <tr>
+        <td align="center"><img src="./screenshots/show_code.png" width = "186.8" height = "302.3" alt="代码查看" /></br>代码查看</td>
+        <td align="center"><img src="./screenshots/console.png" width = "186.8" height = "302.3" alt="日志展示" /></br>日志展示</td>
+        <td align="center"><img src="./screenshots/memory_info.png" width = "186.8" height = "302.3" alt="内存信息" /></br>内存信息</td>
+        <td align="center"><img src="./screenshots/cpu_info.png" width = "186.8" height = "302.3" alt="CPU 信息" /></br>CPU 信息</td>
+        <td align="center"><img src="./screenshots/device_info.png" width = "186.8" height = "302.3" alt="设备信息" /></br>设备信息</td>
+    </tr>
+</table>
 
 ## 为 UME 开发插件
 
