@@ -104,24 +104,24 @@ showDialog(
 
 There are 10 plugin kits built in the current open source version of UME.
 
-<table border="1">
+<table border="1" width="100%">
     <tr>
-        <td align="center"><img src="./screenshots/widget_info.png" width = "186.8" height = "302.3" alt="Widget Info" /></br>Widget Info</td>
-        <td align="center"><img src="./screenshots/widget_detail.png" width = "186.8" height = "302.3" alt="Widget Detail" /></br>Widget Detail</td>
-        <td align="center"><img src="./screenshots/color_sucker.png" width = "186.8" height = "302.3" alt="Color Sucker" /></br>Color Sucker</td>
+        <td width="33.33%" align="center"><img src="./screenshots/widget_info.png" width="100%" alt="Widget Info" /></br>Widget Info</td>
+        <td width="33.33%" align="center"><img src="./screenshots/widget_detail.png" width="100%" alt="Widget Detail" /></br>Widget Detail</td>
+        <td width="33.33%" align="center"><img src="./screenshots/color_sucker.png" width="100%" alt="Color Sucker" /></br>Color Sucker</td>
     </tr>
     <tr>
-        <td align="center"><img src="./screenshots/align_ruler.png" width = "186.8" height = "302.3" alt="Align Ruler" /></br>Align Ruler</td>
-        <td align="center"><img src="./screenshots/perf_overlay.png" width = "186.8" height = "302.3" alt="Perf Overlay" /></br>Perf Overlay</td>
-        <td align="center"><img src="./screenshots/show_code.png" width = "186.8" height = "302.3" alt="Show Code" /></br>Show Code</td>
+        <td width="33.33%" align="center"><img src="./screenshots/align_ruler.png" width="100%" alt="Align Ruler" /></br>Align Ruler</td>
+        <td width="33.33%" align="center"><img src="./screenshots/perf_overlay.png" width="100%" alt="Perf Overlay" /></br>Perf Overlay</td>
+        <td width="33.33%" align="center"><img src="./screenshots/show_code.png" width="100%" alt="Show Code" /></br>Show Code</td>
     </tr>
     <tr>
-        <td align="center"><img src="./screenshots/console.png" width = "186.8" height = "302.3" alt="Console" /></br>Console</td>
-        <td align="center"><img src="./screenshots/memory_info.png" width = "186.8" height = "302.3" alt="Memory Info" /></br>Memory Info</td>
-        <td align="center"><img src="./screenshots/cpu_info.png" width = "186.8" height = "302.3" alt="CPU Info" /></br>CPU Info</td>
+        <td width="33.33%" align="center"><img src="./screenshots/console.png" width="100%" alt="Console" /></br>Console</td>
+        <td width="33.33%" align="center"><img src="./screenshots/memory_info.png" width="100%" alt="Memory Info" /></br>Memory Info</td>
+        <td width="33.33%" align="center"><img src="./screenshots/cpu_info.png" width="100%" alt="CPU Info" /></br>CPU Info</td>
     </tr>
     <tr>
-        <td align="center"><img src="./screenshots/device_info.png" width = "186.8" height = "302.3" alt="Device Info" /></br>Device Info</td>
+        <td width="33.33%" align="center"><img src="./screenshots/device_info.png" width="100%" alt="Device Info" /></br>Device Info</td>
     </tr>
 </table>
 
