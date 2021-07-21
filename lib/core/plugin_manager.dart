@@ -17,6 +17,7 @@ class PluginManager {
 
   PluginManager._();
 
+  /// Register a single [plugin]
   void register(Pluggable plugin) {
     if (plugin.name == null ||
         plugin.name.isEmpty ||
@@ -26,6 +27,7 @@ class PluginManager {
     _pluginsMap[plugin.name] = plugin;
   }
 
+  /// Register multiple [plugins]
   void registerAll(List<Pluggable> plugins) {
     for (final plugin in plugins) {
       assert(plugin is Pluggable);
