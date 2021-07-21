@@ -102,12 +102,26 @@ showDialog(
 
 There are 10 plugin kits built in the current open source version of UME.
 
-|  |  |  |  |  |
-|  ----  | ----  | ----  | ----  | ----  |
-| ![Widget Info](./screenshots/widget_info.png) | ![Widget Detail](./screenshots/widget_detail.png) | ![Color Sucker](./screenshots/color_sucker.png) | ![Align Ruler](./screenshots/align_ruler.png) | ![Perf Overlay](./screenshots/perf_overlay.png) |
-| Widget Info | Widget Detail | Color Sucker | Align Ruler | Perf Overlay |
-| ![Show Code](./screenshots/show_code.png) | ![Memory Info](./screenshots/memory_info.png) | ![CPU Info](./screenshots/cpu_info.png) | ![Device Info](./screenshots/device_info.png) | ![Console](./screenshots/console.png) |
-| Show Code | Memory Info | CPU Info | Device Info | Console |
+<table border="1">
+    <tr>
+        <td align="center"><img src="./screenshots/widget_info.png" width = "186.8" height = "302.3" alt="Widget Info" /></br>Widget Info</td>
+        <td align="center"><img src="./screenshots/widget_detail.png" width = "186.8" height = "302.3" alt="Widget Detail" /></br>Widget Detail</td>
+        <td align="center"><img src="./screenshots/color_sucker.png" width = "186.8" height = "302.3" alt="Color Sucker" /></br>Color Sucker</td>
+    </tr>
+    <tr>
+        <td align="center"><img src="./screenshots/align_ruler.png" width = "186.8" height = "302.3" alt="Align Ruler" /></br>Align Ruler</td>
+        <td align="center"><img src="./screenshots/perf_overlay.png" width = "186.8" height = "302.3" alt="Perf Overlay" /></br>Perf Overlay</td>
+        <td align="center"><img src="./screenshots/show_code.png" width = "186.8" height = "302.3" alt="Show Code" /></br>Show Code</td>
+    </tr>
+    <tr>
+        <td align="center"><img src="./screenshots/console.png" width = "186.8" height = "302.3" alt="Console" /></br>Console</td>
+        <td align="center"><img src="./screenshots/memory_info.png" width = "186.8" height = "302.3" alt="Memory Info" /></br>Memory Info</td>
+        <td align="center"><img src="./screenshots/cpu_info.png" width = "186.8" height = "302.3" alt="CPU Info" /></br>CPU Info</td>
+    </tr>
+    <tr>
+        <td align="center"><img src="./screenshots/device_info.png" width = "186.8" height = "302.3" alt="Device Info" /></br>Device Info</td>
+    </tr>
+</table>
 
 ## Develop plugin kits for UME
 
