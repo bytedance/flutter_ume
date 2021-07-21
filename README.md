@@ -2,6 +2,8 @@
 
 [English](./README_en.md)
 
+<img src="./ume_logo_256.png" width = "128" height = "128" alt="banner" />
+
 Flutter 应用内调试工具平台
 
 当前版本内置 10 个插件，
