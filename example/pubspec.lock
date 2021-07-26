@@ -50,6 +50,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.3"
+  device_info:
+    dependency: transitive
+    description:
+      name: device_info
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.2"
+  device_info_platform_interface:
+    dependency: transitive
+    description:
+      name: device_info_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -71,6 +85,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "6.1.2"
+  file_utils:
+    dependency: transitive
+    description:
+      name: file_utils
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -100,11 +121,25 @@ packages:
       relative: true
     source: path
     version: "0.2.0-dev.0"
+  flutter_ume_kit_device:
+    dependency: "direct dev"
+    description:
+      path: "../kits/flutter_ume_kit_device"
+      relative: true
+    source: path
+    version: "0.1.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
+  globbing:
+    dependency: transitive
+    description:
+      name: globbing
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0"
   intl:
     dependency: transitive
     description:
@@ -278,6 +313,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.1.0"
+  system_info:
+    dependency: transitive
+    description:
+      name: system_info
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.1"
   term_glyph:
     dependency: transitive
     description:

@@ -14,7 +14,7 @@ class DeviceInfoPanel extends StatefulWidget implements Pluggable {
   _DeviceInfoPanelState createState() => _DeviceInfoPanelState();
 
   @override
-  Widget buildWidget(BuildContext context) => this;
+  Widget buildWidget(BuildContext? context) => this;
 
   @override
   ImageProvider<Object> get iconImageProvider =>
