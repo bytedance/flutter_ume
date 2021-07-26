@@ -8,20 +8,18 @@ class PluginManager {
 
   Map<String, Pluggable?> _pluginsMap = {};
 
-  static PluginManager? get instance {
+  static PluginManager get instance {
     if (_instance == null) {
       _instance = PluginManager._();
     }
-    return _instance;
+    return _instance!;
   }
 
   PluginManager._();
 
   /// Register a single [plugin]
   void register(Pluggable plugin) {
-    if (plugin.name == null ||
-        plugin.name.isEmpty ||
-        plugin.onTrigger == null) {
+    if (plugin.name.isEmpty) {
       return;
     }
     _pluginsMap[plugin.name] = plugin;

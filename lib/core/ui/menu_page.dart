@@ -37,17 +37,17 @@ class _MenuPageState extends State<MenuPage>
     List<Pluggable?> dataList = [];
     List<String>? list = await _storeManager.fetchStorePlugins();
     if (list == null || list.isEmpty) {
-      dataList = PluginManager.instance!.pluginsMap.values.toList();
+      dataList = PluginManager.instance.pluginsMap.values.toList();
     } else {
       list.forEach((f) {
-        bool contain = PluginManager.instance!.pluginsMap.containsKey(f);
+        bool contain = PluginManager.instance.pluginsMap.containsKey(f);
         if (contain) {
-          dataList.add(PluginManager.instance!.pluginsMap[f]);
+          dataList.add(PluginManager.instance.pluginsMap[f]);
         }
       });
-      PluginManager.instance!.pluginsMap.keys.forEach((key) {
+      PluginManager.instance.pluginsMap.keys.forEach((key) {
         if (!list.contains(key)) {
-          dataList.add(PluginManager.instance!.pluginsMap[key]);
+          dataList.add(PluginManager.instance.pluginsMap[key]);
         }
       });
     }

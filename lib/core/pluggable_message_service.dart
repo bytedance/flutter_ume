@@ -23,13 +23,12 @@ class PluggableMessageService {
   void resetListener() {
     clearListener();
 
-    PluginManager.instance!.pluginsMap.values
+    PluginManager.instance.pluginsMap.values
         .where((element) => element is PluggableWithStream)
         .forEach((element) {
       final pluggable = element as PluggableWithStream;
       // ignore: cancel_subscriptions
       final subscription = pluggable.stream.where((event) {
-        if (pluggable.streamFilter == null) return true;
         return pluggable.streamFilter(event);
       }).listen((event) {
         _pluggableMessageData[pluggable.name]!.increaseCounter();

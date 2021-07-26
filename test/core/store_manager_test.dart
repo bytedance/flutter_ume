@@ -22,8 +22,8 @@ void main() {
 
     test('register single plugin', () {
       final plugin = MockPluggableWithStream();
-      PluginManager.instance!.register(plugin);
-      expect(PluginManager.instance!.pluginsMap['MockPluggableWithStream'],
+      PluginManager.instance.register(plugin);
+      expect(PluginManager.instance.pluginsMap['MockPluggableWithStream'],
           isInstanceOf<Pluggable>());
     });
     test('store multiple plugins, expect count', () async {

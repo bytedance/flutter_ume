@@ -14,7 +14,7 @@ void main() {
     setUp(() {
       _service = PluggableMessageService();
       _plugin = MockPluggableWithStream();
-      PluginManager.instance!.register(_plugin!);
+      PluginManager.instance.register(_plugin!);
     });
     test('constructor', () {
       final service = _service;

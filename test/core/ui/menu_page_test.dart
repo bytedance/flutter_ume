@@ -20,7 +20,7 @@ void main() {
     testWidgets('MenuPage pump widget', (tester) async {
       WidgetsFlutterBinding.ensureInitialized();
 
-      PluginManager.instance!
+      PluginManager.instance
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
 
       final menuPage = MenuPage(
@@ -44,7 +44,7 @@ void main() {
       bool minimalTapped = false;
       bool closeTapped = false;
 
-      PluginManager.instance!
+      PluginManager.instance
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
 
       final menuPage = MenuPage(

@@ -279,8 +279,8 @@ class __ContentPageState extends State<_ContentPage> {
                         right: 6,
                         top: 8,
                         child: RedDot(
-                          pluginDatas: PluginManager.instance!.pluginsMap.values
-                              .toList(),
+                          pluginDatas:
+                              PluginManager.instance.pluginsMap.values.toList(),
                         ))
                   ],
                 ),
