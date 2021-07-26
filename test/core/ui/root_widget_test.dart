@@ -21,12 +21,6 @@ void main() {
 
   group('RootWidget', () {
     testWidgets('RootWidget assert constructor', (tester) async {
-      expect(() => injectUMEWidget(child: null, enable: false),
-          throwsAssertionError);
-
-      expect(() => injectUMEWidget(child: Container(), enable: null),
-          throwsAssertionError);
-
       expect(
           (injectUMEWidget(
             child: Container(),
@@ -38,7 +32,7 @@ void main() {
     });
 
     testWidgets('RootWidget pump widget', (tester) async {
-      PluginManager.instance
+      PluginManager.instance!
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
       final umeRoot = injectUMEWidget(
           child: MaterialApp(
@@ -70,7 +64,7 @@ void main() {
           return null;
       });
 
-      PluginManager.instance
+      PluginManager.instance!
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
       final umeRoot = injectUMEWidget(
           child: MaterialApp(
@@ -86,7 +80,7 @@ void main() {
     });
 
     testWidgets('RootWidget flutter logo drag', (tester) async {
-      PluginManager.instance
+      PluginManager.instance!
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
       final umeRoot = injectUMEWidget(
           child: MaterialApp(
@@ -109,7 +103,7 @@ void main() {
     });
 
     testWidgets('RootWidget flutter logo drag', (tester) async {
-      PluginManager.instance
+      PluginManager.instance!
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
       final umeRoot = injectUMEWidget(
           child: MaterialApp(
@@ -129,7 +123,7 @@ void main() {
     });
 
     testWidgets('RootWidget flutter logo tap', (tester) async {
-      PluginManager.instance
+      PluginManager.instance!
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
       final umeRoot = injectUMEWidget(
           child: MaterialApp(
@@ -155,7 +149,7 @@ void main() {
     testWidgets('RootWidget actions', (tester) async {
       WidgetsFlutterBinding.ensureInitialized();
 
-      PluginManager.instance
+      PluginManager.instance!
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
 
       final umeRoot = injectUMEWidget(

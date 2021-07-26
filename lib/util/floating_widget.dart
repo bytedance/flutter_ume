@@ -10,12 +10,12 @@ typedef ToolbarAction = void Function();
 
 class FloatingWidget extends StatefulWidget {
   FloatingWidget(
-      {Key key, this.contentWidget, this.closeAction, this.toolbarActions})
+      {Key? key, this.contentWidget, this.closeAction, this.toolbarActions})
       : super(key: key);
 
-  final Widget contentWidget;
-  final CloseAction closeAction;
-  final List<Tuple3<String, Widget, ToolbarAction>> toolbarActions;
+  final Widget? contentWidget;
+  final CloseAction? closeAction;
+  final List<Tuple3<String, Widget, ToolbarAction>>? toolbarActions;
 
   @override
   _FloatingWidgetState createState() => _FloatingWidgetState();
@@ -32,7 +32,7 @@ class _FloatingWidgetState extends State<FloatingWidget> with StoreMixin {
   bool _fullScreen = false;
 
   double get toolBarHeight =>
-      (widget.toolbarActions != null && widget.toolbarActions.isNotEmpty)
+      (widget.toolbarActions != null && widget.toolbarActions!.isNotEmpty)
           ? _toolBarHeight
           : 0;
 
@@ -98,7 +98,7 @@ class _FloatingWidgetState extends State<FloatingWidget> with StoreMixin {
 
 class _ToolBarContent extends StatefulWidget {
   _ToolBarContent(
-      {Key key,
+      {Key? key,
       this.contentWidget,
       this.dragCallback,
       this.dragEnd,
@@ -107,12 +107,12 @@ class _ToolBarContent extends StatefulWidget {
       this.toolbarActions})
       : super(key: key);
 
-  final Widget contentWidget;
-  final Function dragCallback;
-  final Function dragEnd;
-  final CloseAction closeAction;
-  final MaximalAction maximalAction;
-  final List<Tuple3<String, Widget, ToolbarAction>> toolbarActions;
+  final Widget? contentWidget;
+  final Function? dragCallback;
+  final Function? dragEnd;
+  final CloseAction? closeAction;
+  final MaximalAction? maximalAction;
+  final List<Tuple3<String, Widget, ToolbarAction>>? toolbarActions;
 
   @override
   __ToolBarContentState createState() => __ToolBarContentState();
@@ -123,7 +123,7 @@ class __ToolBarContentState extends State<_ToolBarContent> {
   Size _windowSize = windowSize;
 
   double get toolBarHeight =>
-      (widget.toolbarActions != null && widget.toolbarActions.isNotEmpty)
+      (widget.toolbarActions != null && widget.toolbarActions!.isNotEmpty)
           ? _toolBarHeight
           : 0;
 
@@ -159,7 +159,7 @@ class __ToolBarContentState extends State<_ToolBarContent> {
                       InkWell(
                           onTap: () {
                             if (widget.closeAction != null) {
-                              widget.closeAction();
+                              widget.closeAction!();
                             }
                           },
                           child: const CircleAvatar(
@@ -172,7 +172,7 @@ class __ToolBarContentState extends State<_ToolBarContent> {
                       InkWell(
                           onTap: () {
                             if (widget.maximalAction != null) {
-                              widget.maximalAction();
+                              widget.maximalAction!();
                             }
                             setState(() {
                               _fullScreen = !_fullScreen;
@@ -219,7 +219,7 @@ class __ToolBarContentState extends State<_ToolBarContent> {
                 child: widget.contentWidget,
               ),
               if (widget.toolbarActions != null &&
-                  widget.toolbarActions.isNotEmpty)
+                  widget.toolbarActions!.isNotEmpty)
                 Container(
                   alignment: Alignment.centerLeft,
                   height: _toolBarHeight,
@@ -228,7 +228,7 @@ class __ToolBarContentState extends State<_ToolBarContent> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: widget.toolbarActions.map((tuple) {
+                      children: widget.toolbarActions!.map((tuple) {
                         final title = tuple.item1;
                         final widget = tuple.item2;
                         final action = tuple.item3;
@@ -258,10 +258,10 @@ class __ToolBarContentState extends State<_ToolBarContent> {
   }
 
   _dragCallback(DragUpdateDetails details) {
-    if (widget.dragCallback != null) widget.dragCallback(details);
+    if (widget.dragCallback != null) widget.dragCallback!(details);
   }
 
   _dragEnd(DragEndDetails details) {
-    if (widget.dragEnd != null) widget.dragEnd(details);
+    if (widget.dragEnd != null) widget.dragEnd!(details);
   }
 }

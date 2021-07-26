@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_ume/core/pluggable.dart';
@@ -44,10 +46,20 @@ class MockRenderObject extends Mock implements RenderObject {
   Rect get semanticBounds => Rect.largest;
 
   @override
-  Matrix4 getTransformTo(RenderObject ancestor) => Matrix4.identity();
+  Matrix4 getTransformTo(RenderObject? ancestor) => Matrix4.identity();
 
   @override
   Rect get paintBounds => Rect.largest;
+
+  @override
+  DiagnosticsNode toDiagnosticsNode(
+      {String? name, DiagnosticsTreeStyle? style}) {
+    return DiagnosticableTreeNode(
+      name: name,
+      value: this,
+      style: style,
+    );
+  }
 }
 
 class MockPluggableWithStream extends Mock implements PluggableWithStream {
@@ -62,6 +74,9 @@ class MockPluggableWithStream extends Mock implements PluggableWithStream {
   Stream get stream => streamController.stream;
   @override
   get streamFilter => (value) => true;
+  @override
+  ImageProvider<Object> get iconImageProvider => MemoryImage(
+      base64Decode('R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='));
 }
 
 class MockPluggable extends Mock implements Pluggable {
@@ -70,7 +85,10 @@ class MockPluggable extends Mock implements Pluggable {
   @override
   String get displayName => 'MockPluggable';
   @override
-  Widget buildWidget(BuildContext context) => Container();
+  Widget buildWidget(BuildContext? context) => Container();
+  @override
+  ImageProvider<Object> get iconImageProvider => MemoryImage(
+      base64Decode('R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='));
 }
 
 class MockStoreMixinCls extends Mock with StoreMixin implements Object {}

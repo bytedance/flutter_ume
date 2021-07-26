@@ -10,12 +10,12 @@ import 'dragable_widget.dart';
 import 'package:flutter_ume/core/ui/panel_action_define.dart';
 
 class MenuPage extends StatefulWidget {
-  MenuPage({Key key, this.action, this.minimalAction, this.closeAction})
+  MenuPage({Key? key, this.action, this.minimalAction, this.closeAction})
       : super(key: key);
 
-  final MenuAction action;
-  final MinimalAction minimalAction;
-  final CloseAction closeAction;
+  final MenuAction? action;
+  final MinimalAction? minimalAction;
+  final CloseAction? closeAction;
 
   @override
   _MenuPageState createState() => _MenuPageState();
@@ -25,7 +25,7 @@ class _MenuPageState extends State<MenuPage>
     with SingleTickerProviderStateMixin {
   PluginStoreManager _storeManager = PluginStoreManager();
 
-  List<Pluggable> _dataList = [];
+  List<Pluggable?> _dataList = [];
 
   @override
   void initState() {
@@ -34,20 +34,20 @@ class _MenuPageState extends State<MenuPage>
   }
 
   void _handleData() async {
-    List<Pluggable> dataList = [];
-    List<String> list = await _storeManager.fetchStorePlugins();
+    List<Pluggable?> dataList = [];
+    List<String>? list = await _storeManager.fetchStorePlugins();
     if (list == null || list.isEmpty) {
-      dataList = PluginManager.instance.pluginsMap.values.toList();
+      dataList = PluginManager.instance!.pluginsMap.values.toList();
     } else {
       list.forEach((f) {
-        bool contain = PluginManager.instance.pluginsMap.containsKey(f);
+        bool contain = PluginManager.instance!.pluginsMap.containsKey(f);
         if (contain) {
-          dataList.add(PluginManager.instance.pluginsMap[f]);
+          dataList.add(PluginManager.instance!.pluginsMap[f]);
         }
       });
-      PluginManager.instance.pluginsMap.keys.forEach((key) {
+      PluginManager.instance!.pluginsMap.keys.forEach((key) {
         if (!list.contains(key)) {
-          dataList.add(PluginManager.instance.pluginsMap[key]);
+          dataList.add(PluginManager.instance!.pluginsMap[key]);
         }
       });
     }
@@ -57,13 +57,13 @@ class _MenuPageState extends State<MenuPage>
     });
   }
 
-  void _saveData(List<Pluggable> data) {
-    List l = data.map((f) => f.name).toList();
+  void _saveData(List<Pluggable?> data) {
+    List l = data.map((f) => f!.name).toList();
     if (l == null || l.isEmpty) {
       return;
     }
     Future.delayed(Duration(milliseconds: 500), () {
-      _storeManager.storePlugins(l);
+      _storeManager.storePlugins(l as List<String>);
     });
   }
 
@@ -92,7 +92,7 @@ class _MenuPageState extends State<MenuPage>
                       InkWell(
                           onTap: () {
                             if (widget.closeAction != null) {
-                              widget.closeAction();
+                              widget.closeAction!();
                             }
                           },
                           child: const CircleAvatar(
@@ -105,7 +105,7 @@ class _MenuPageState extends State<MenuPage>
                       InkWell(
                           onTap: () {
                             if (widget.minimalAction != null) {
-                              widget.minimalAction();
+                              widget.minimalAction!();
                             }
                           },
                           child: const CircleAvatar(
@@ -133,12 +133,12 @@ class _MenuPageState extends State<MenuPage>
                           return true;
                         },
                         dragCompletion: (dataList) {
-                          _saveData(dataList);
+                          _saveData(dataList as List<Pluggable?>);
                         },
-                        itemBuilder: (context, data) {
+                        itemBuilder: (context, dynamic data) {
                           return GestureDetector(
                             onTap: () {
-                              widget.action(data);
+                              widget.action!(data);
                               PluggableMessageService().resetCounter(data);
                             },
                             behavior: HitTestBehavior.opaque,
@@ -163,9 +163,9 @@ class _EmptyPlaceholder extends StatelessWidget {
 }
 
 class _MenuCell extends StatelessWidget {
-  const _MenuCell({Key key, this.pluginData}) : super(key: key);
+  const _MenuCell({Key? key, this.pluginData}) : super(key: key);
 
-  final Pluggable pluginData;
+  final Pluggable? pluginData;
 
   @override
   Widget build(BuildContext context) {
@@ -211,12 +211,12 @@ class _MenuCell extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Container(
-                        child: IconCache.icon(pluggableInfo: pluginData),
+                        child: IconCache.icon(pluggableInfo: pluginData!),
                         height: 40,
                         width: 40),
                     Container(
                         margin: const EdgeInsets.only(top: 25),
-                        child: Text(pluginData.displayName,
+                        child: Text(pluginData!.displayName,
                             style: const TextStyle(
                                 fontSize: 15, color: Colors.black)))
                   ],

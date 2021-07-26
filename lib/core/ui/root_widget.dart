@@ -25,9 +25,9 @@ const defaultLocalizationsDelegates = const [
 
 /// Wrap your App widget. If [enable] is false, the function will return [child].
 Widget injectUMEWidget({
-  @required Widget child,
-  @required bool enable,
-  Iterable<Locale> supportedLocales,
+  required Widget child,
+  required bool enable,
+  Iterable<Locale>? supportedLocales,
   Iterable<LocalizationsDelegate> localizationsDelegates =
       defaultLocalizationsDelegates,
 }) {
@@ -43,22 +43,20 @@ Widget injectUMEWidget({
 
 class _FloatingWidget extends StatelessWidget {
   _FloatingWidget({
-    Key key,
-    @required this.enable,
-    @required this.child,
+    Key? key,
+    required this.enable,
+    required this.child,
     this.supportedLocales,
     this.localizationsDelegates,
-  })  : assert(child != null),
-        assert(enable != null),
-        super(key: key);
+  }) : super(key: key);
 
   final bool enable;
 
   final Widget child;
 
-  final Iterable<Locale> supportedLocales;
+  final Iterable<Locale>? supportedLocales;
 
-  final Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates;
+  final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +90,7 @@ class _FloatingWidget extends StatelessWidget {
 
 class _ContentPage extends StatefulWidget {
   _ContentPage({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -105,14 +103,14 @@ class __ContentPageState extends State<_ContentPage> {
   double _dx = 0;
   double _dy = 0;
   bool _showedMenu = false;
-  Pluggable _currentSelected;
+  Pluggable? _currentSelected;
   Widget _empty = Container();
-  Widget _currentWidget;
-  Widget _menuPage;
-  BuildContext _context;
+  Widget? _currentWidget;
+  Widget? _menuPage;
+  BuildContext? _context;
 
   bool _minimalContent = true;
-  Widget _toolbarWidget;
+  Widget? _toolbarWidget;
 
   void dragEvent(DragUpdateDetails details) {
     _dx = details.globalPosition.dx - dotSize.width / 2;
@@ -159,8 +157,8 @@ class __ContentPageState extends State<_ContentPage> {
     });
   }
 
-  void _handleAction(BuildContext context, Pluggable data) {
-    _currentWidget = data.buildWidget(context) ?? _empty;
+  void _handleAction(BuildContext? context, Pluggable data) {
+    _currentWidget = data.buildWidget(context);
     setState(() {
       _showedMenu = false;
     });
@@ -169,7 +167,7 @@ class __ContentPageState extends State<_ContentPage> {
   Widget _logoWidget() {
     if (_currentSelected != null) {
       return Container(
-          child: Image(image: _currentSelected.iconImageProvider),
+          child: Image(image: _currentSelected!.iconImageProvider),
           height: 30,
           width: 30);
     }
@@ -201,7 +199,7 @@ class __ContentPageState extends State<_ContentPage> {
     _dy = _windowSize.height - dotSize.height - bottomDistance;
     MenuAction itemTapAction = (pluginData) {
       _currentSelected = pluginData;
-      _handleAction(_context, pluginData);
+      _handleAction(_context, pluginData!);
       if (pluginData.onTrigger != null) {
         pluginData.onTrigger();
       }
@@ -249,7 +247,7 @@ class __ContentPageState extends State<_ContentPage> {
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
-          _currentWidget,
+          _currentWidget!,
           Positioned(
             left: _dx,
             top: _dy,
@@ -281,8 +279,8 @@ class __ContentPageState extends State<_ContentPage> {
                         right: 6,
                         top: 8,
                         child: RedDot(
-                          pluginDatas:
-                              PluginManager.instance.pluginsMap.values.toList(),
+                          pluginDatas: PluginManager.instance!.pluginsMap.values
+                              .toList(),
                         ))
                   ],
                 ),

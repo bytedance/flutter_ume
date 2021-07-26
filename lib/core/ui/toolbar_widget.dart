@@ -12,12 +12,12 @@ import 'package:flutter_ume/core/pluggable.dart';
 import 'package:flutter_ume/util/constants.dart';
 
 class ToolBarWidget extends StatefulWidget {
-  ToolBarWidget({Key key, this.action, this.maximalAction, this.closeAction})
+  ToolBarWidget({Key? key, this.action, this.maximalAction, this.closeAction})
       : super(key: key);
 
-  final MenuAction action;
-  final CloseAction closeAction;
-  final MaximalAction maximalAction;
+  final MenuAction? action;
+  final CloseAction? closeAction;
+  final MaximalAction? maximalAction;
 
   @override
   _ToolBarWidgetState createState() => _ToolBarWidgetState();
@@ -65,17 +65,17 @@ class _ToolBarWidgetState extends State<ToolBarWidget> {
 
 class _ToolBarContent extends StatefulWidget {
   _ToolBarContent(
-      {Key key,
+      {Key? key,
       this.action,
       this.dragCallback,
       this.maximalAction,
       this.closeAction})
       : super(key: key);
 
-  final MenuAction action;
-  final Function dragCallback;
-  final CloseAction closeAction;
-  final MaximalAction maximalAction;
+  final MenuAction? action;
+  final Function? dragCallback;
+  final CloseAction? closeAction;
+  final MaximalAction? maximalAction;
 
   @override
   __ToolBarContentState createState() => __ToolBarContentState();
@@ -84,7 +84,7 @@ class _ToolBarContent extends StatefulWidget {
 class __ToolBarContentState extends State<_ToolBarContent> {
   PluginStoreManager _storeManager = PluginStoreManager();
 
-  List<Pluggable> _dataList = [];
+  List<Pluggable?> _dataList = [];
   @override
   void initState() {
     super.initState();
@@ -117,7 +117,7 @@ class __ToolBarContentState extends State<_ToolBarContent> {
                     InkWell(
                         onTap: () {
                           if (widget.closeAction != null) {
-                            widget.closeAction();
+                            widget.closeAction!();
                           }
                         },
                         child: const CircleAvatar(
@@ -130,7 +130,7 @@ class __ToolBarContentState extends State<_ToolBarContent> {
                     InkWell(
                         onTap: () {
                           if (widget.maximalAction != null) {
-                            widget.maximalAction();
+                            widget.maximalAction!();
                           }
                         },
                         child: const CircleAvatar(
@@ -171,24 +171,24 @@ class __ToolBarContentState extends State<_ToolBarContent> {
   }
 
   _dragCallback(DragUpdateDetails details) {
-    if (widget.dragCallback != null) widget.dragCallback(details);
+    if (widget.dragCallback != null) widget.dragCallback!(details);
   }
 
   void _handleData() async {
-    List<Pluggable> dataList = [];
-    List<String> list = await _storeManager.fetchStorePlugins();
+    List<Pluggable?> dataList = [];
+    List<String>? list = await _storeManager.fetchStorePlugins();
     if (list == null || list.isEmpty) {
-      dataList = PluginManager.instance.pluginsMap.values.toList();
+      dataList = PluginManager.instance!.pluginsMap.values.toList();
     } else {
       list.forEach((f) {
-        bool contain = PluginManager.instance.pluginsMap.containsKey(f);
+        bool contain = PluginManager.instance!.pluginsMap.containsKey(f);
         if (contain) {
-          dataList.add(PluginManager.instance.pluginsMap[f]);
+          dataList.add(PluginManager.instance!.pluginsMap[f]);
         }
       });
-      PluginManager.instance.pluginsMap.keys.forEach((key) {
+      PluginManager.instance!.pluginsMap.keys.forEach((key) {
         if (!list.contains(key)) {
-          dataList.add(PluginManager.instance.pluginsMap[key]);
+          dataList.add(PluginManager.instance!.pluginsMap[key]);
         }
       });
     }
@@ -198,23 +198,23 @@ class __ToolBarContentState extends State<_ToolBarContent> {
     });
   }
 
-  void _saveData(List<Pluggable> data) {
-    List l = data.map((f) => f.name).toList();
+  void _saveData(List<Pluggable?> data) {
+    List l = data.map((f) => f!.name).toList();
     if (l == null || l.isEmpty) {
       return;
     }
     Future.delayed(Duration(milliseconds: 500), () {
-      _storeManager.storePlugins(l);
+      _storeManager.storePlugins(l as List<String>);
     });
   }
 }
 
 class _PluginScrollContainer extends StatelessWidget {
-  _PluginScrollContainer({Key key, @required this.dataList, this.action})
+  _PluginScrollContainer({Key? key, required this.dataList, this.action})
       : super(key: key);
 
-  final List<Pluggable> dataList;
-  final MenuAction action;
+  final List<Pluggable?> dataList;
+  final MenuAction? action;
 
   @override
   Widget build(BuildContext context) {
@@ -237,18 +237,18 @@ class _PluginScrollContainer extends StatelessWidget {
 }
 
 class _MenuCell extends StatelessWidget {
-  const _MenuCell({Key key, this.pluginData, this.action}) : super(key: key);
+  const _MenuCell({Key? key, this.pluginData, this.action}) : super(key: key);
 
-  final Pluggable pluginData;
-  final MenuAction action;
+  final Pluggable? pluginData;
+  final MenuAction? action;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        PluggableMessageService().resetCounter(pluginData);
+        PluggableMessageService().resetCounter(pluginData!);
         if (action != null) {
-          action(pluginData);
+          action!(pluginData);
         }
       },
       child: Stack(
@@ -263,13 +263,13 @@ class _MenuCell extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Container(
-                      child: IconCache.icon(pluggableInfo: pluginData),
+                      child: IconCache.icon(pluggableInfo: pluginData!),
                       height: 28,
                       width: 28),
                   Container(
                       margin: const EdgeInsets.only(top: 4),
                       child: Text(
-                        pluginData.name,
+                        pluginData!.name,
                         style:
                             const TextStyle(fontSize: 12, color: Colors.black),
                         maxLines: 1,

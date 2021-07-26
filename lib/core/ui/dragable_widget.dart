@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 typedef bool CanAccept(int oldIndex, int newIndex);
 
-typedef void DragCompletion<T>(List<T> data);
+typedef void DragCompletion<T>(List<T?>? data);
 
 typedef Widget DataWidgetBuilder<T>(BuildContext context, T data);
 
@@ -13,17 +13,17 @@ class DragableGridView<T> extends StatefulWidget {
   final int crossAxisCount;
   final Axis scrollDirection;
   final double childAspectRatio;
-  final DragCompletion dragCompletion;
+  final DragCompletion? dragCompletion;
 
   DragableGridView(
     this.dataList, {
-    Key key,
+    Key? key,
     this.scrollDirection = Axis.vertical,
     this.crossAxisCount = 3,
     this.childAspectRatio = 1.0,
     this.dragCompletion,
-    @required this.itemBuilder,
-    @required this.canAccept,
+    required this.itemBuilder,
+    required this.canAccept,
   })  : assert(itemBuilder != null),
         assert(canAccept != null),
         assert(dataList != null && dataList.length >= 0),
@@ -34,8 +34,8 @@ class DragableGridView<T> extends StatefulWidget {
 }
 
 class _DragableGridViewState<T> extends State<DragableGridView> {
-  List<T> dataList;
-  List<T> dataListBackup;
+  List<T?>? dataList;
+  late List<T?> dataListBackup;
   bool showItemWhenCovered = false;
   int willAcceptIndex = -1;
   int draggingItemIndex = -1;
@@ -43,8 +43,8 @@ class _DragableGridViewState<T> extends State<DragableGridView> {
   @override
   void initState() {
     super.initState();
-    dataList = widget.dataList;
-    dataListBackup = dataList.sublist(0);
+    dataList = widget.dataList as List<T?>?;
+    dataListBackup = dataList!.sublist(0);
   }
 
   @override
@@ -52,7 +52,7 @@ class _DragableGridViewState<T> extends State<DragableGridView> {
     return GridView.builder(
         physics: BouncingScrollPhysics(),
         padding: EdgeInsets.zero,
-        itemCount: dataList.length,
+        itemCount: dataList!.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3, childAspectRatio: 0.85),
         itemBuilder: ((ctx, index) {
@@ -69,8 +69,8 @@ class _DragableGridViewState<T> extends State<DragableGridView> {
             onAccept: (_) {},
             builder: (context, data, rejects) {
               return willAcceptIndex >= 0 && willAcceptIndex == index
-                  ? null
-                  : widget.itemBuilder(context, dataList[index]);
+                  ? Container()
+                  : widget.itemBuilder(context, dataList![index]);
             },
             onLeave: (_) {
               willAcceptIndex = -1;
@@ -79,16 +79,16 @@ class _DragableGridViewState<T> extends State<DragableGridView> {
                 dataList = dataListBackup.sublist(0);
               });
             },
-            onWillAccept: (int fromIndex) {
+            onWillAccept: (int? fromIndex) {
               final accept = fromIndex != index;
               if (accept) {
                 willAcceptIndex = index;
                 showItemWhenCovered = true;
                 dataList = dataListBackup.sublist(0);
-                final fromData = dataList[fromIndex];
+                final fromData = dataList![fromIndex!];
                 setState(() {
-                  dataList.removeAt(fromIndex);
-                  dataList.insert(index, fromData);
+                  dataList!.removeAt(fromIndex);
+                  dataList!.insert(index, fromData);
                 });
               }
               return accept;
@@ -96,7 +96,7 @@ class _DragableGridViewState<T> extends State<DragableGridView> {
           ),
           onDragStarted: () {
             draggingItemIndex = index;
-            dataListBackup = dataList.sublist(0);
+            dataListBackup = dataList!.sublist(0);
           },
           onDraggableCanceled: (Velocity velocity, Offset offset) {
             setState(() {
@@ -107,7 +107,7 @@ class _DragableGridViewState<T> extends State<DragableGridView> {
           },
           onDragCompleted: () {
             if (widget.dragCompletion != null) {
-              widget.dragCompletion(dataList);
+              widget.dragCompletion!(dataList);
             }
             setState(() {
               showItemWhenCovered = false;
@@ -118,7 +118,7 @@ class _DragableGridViewState<T> extends State<DragableGridView> {
             child: SizedBox(
               width: constraint.maxWidth,
               height: constraint.maxHeight,
-              child: widget.itemBuilder(context, dataList[index]),
+              child: widget.itemBuilder(context, dataList![index]),
             ),
             decoration: BoxDecoration(
               boxShadow: [
@@ -134,7 +134,7 @@ class _DragableGridViewState<T> extends State<DragableGridView> {
           childWhenDragging: Container(
             child: SizedBox(
               child: showItemWhenCovered
-                  ? widget.itemBuilder(context, dataList[index])
+                  ? widget.itemBuilder(context, dataList![index])
                   : null,
             ),
           ),

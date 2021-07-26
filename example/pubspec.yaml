@@ -3,42 +3,42 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^0.1.0
+  cupertino_icons: ^1.0.3
 
 dependency_overrides:
   flutter_ume:
     path: ../
-  flutter_ume_kit_ui:
-    path: ../kits/flutter_ume_kit_ui
-  flutter_ume_kit_perf:
-    path: ../kits/flutter_ume_kit_perf
-  flutter_ume_kit_show_code:
-    path: ../kits/flutter_ume_kit_show_code
-  flutter_ume_kit_device:
-    path: ../kits/flutter_ume_kit_device
-  flutter_ume_kit_console:
-    path: ../kits/flutter_ume_kit_console
+  # flutter_ume_kit_ui:
+  #   path: ../kits/flutter_ume_kit_ui
+  # flutter_ume_kit_perf:
+  #   path: ../kits/flutter_ume_kit_perf
+  # flutter_ume_kit_show_code:
+  #   path: ../kits/flutter_ume_kit_show_code
+  # flutter_ume_kit_device:
+  #   path: ../kits/flutter_ume_kit_device
+  # flutter_ume_kit_console:
+  #   path: ../kits/flutter_ume_kit_console
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_ume:
     path: ../
-  flutter_ume_kit_ui:
-    path: ../kits/flutter_ume_kit_ui
-  flutter_ume_kit_perf:
-    path: ../kits/flutter_ume_kit_perf
-  flutter_ume_kit_show_code:
-    path: ../kits/flutter_ume_kit_show_code
-  flutter_ume_kit_device:
-    path: ../kits/flutter_ume_kit_device
-  flutter_ume_kit_console:
-    path: ../kits/flutter_ume_kit_console
+  # flutter_ume_kit_ui:
+  #   path: ../kits/flutter_ume_kit_ui
+  # flutter_ume_kit_perf:
+  #   path: ../kits/flutter_ume_kit_perf
+  # flutter_ume_kit_show_code:
+  #   path: ../kits/flutter_ume_kit_show_code
+  # flutter_ume_kit_device:
+  #   path: ../kits/flutter_ume_kit_device
+  # flutter_ume_kit_console:
+  #   path: ../kits/flutter_ume_kit_console
 
 flutter:
   uses-material-design: true

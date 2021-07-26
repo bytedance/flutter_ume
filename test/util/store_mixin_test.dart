@@ -17,7 +17,7 @@ void main() {
 
       final mockInstance = MockStoreMixinCls();
       await mockInstance.storeWithKey('test_key_bool', true);
-      bool value = await mockInstance.fetchWithKey('test_key_bool');
+      bool? value = await mockInstance.fetchWithKey('test_key_bool');
       expect(value, isA<bool>());
       expect(value, true);
     });
@@ -27,7 +27,7 @@ void main() {
 
       final mockInstance = MockStoreMixinCls();
       await mockInstance.storeWithKey('test_key_double', double.maxFinite);
-      double value = await mockInstance.fetchWithKey('test_key_double');
+      double? value = await mockInstance.fetchWithKey('test_key_double');
       expect(value, isA<double>());
       expect(value, double.maxFinite);
     });
@@ -37,7 +37,7 @@ void main() {
 
       final mockInstance = MockStoreMixinCls();
       await mockInstance.storeWithKey('test_key_int', 1);
-      int value = await mockInstance.fetchWithKey('test_key_int');
+      int? value = await mockInstance.fetchWithKey('test_key_int');
       expect(value, isA<int>());
       expect(value, 1);
     });
@@ -47,7 +47,7 @@ void main() {
 
       final mockInstance = MockStoreMixinCls();
       await mockInstance.storeWithKey('test_key', 'test_key');
-      String value = await mockInstance.fetchWithKey('test_key');
+      String? value = await mockInstance.fetchWithKey('test_key');
       expect(value, isA<String>());
       expect(value, 'test_key');
     });

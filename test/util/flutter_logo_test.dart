@@ -26,34 +26,34 @@ void main() {
   );
 
   test('FlutterLogoDecoration lerp from null to null is null', () {
-    final FlutterLogoDecoration logo =
+    final FlutterLogoDecoration? logo =
         FlutterLogoDecoration.lerp(null, null, 0.5);
     expect(logo, isNull);
   });
 
   test('FlutterLogoDecoration lerp from non-null to null lerps margin', () {
     final FlutterLogoDecoration logo =
-        FlutterLogoDecoration.lerp(start, null, 0.4);
+        FlutterLogoDecoration.lerp(start, null, 0.4)!;
     expect(logo.lightColor, start.lightColor);
     expect(logo.darkColor, start.darkColor);
     expect(logo.textColor, start.textColor);
     expect(logo.style, start.style);
-    expect(logo.margin, start.margin * 0.4);
+    expect(logo.margin, start.margin! * 0.4);
   });
 
   test('FlutterLogoDecoration lerp from null to non-null lerps margin', () {
     final FlutterLogoDecoration logo =
-        FlutterLogoDecoration.lerp(null, end, 0.6);
+        FlutterLogoDecoration.lerp(null, end, 0.6)!;
     expect(logo.lightColor, end.lightColor);
     expect(logo.darkColor, end.darkColor);
     expect(logo.textColor, end.textColor);
     expect(logo.style, end.style);
-    expect(logo.margin, end.margin * 0.6);
+    expect(logo.margin, end.margin! * 0.6);
   });
 
   test('FlutterLogoDecoration lerps colors and margins', () {
     final FlutterLogoDecoration logo =
-        FlutterLogoDecoration.lerp(start, end, 0.5);
+        FlutterLogoDecoration.lerp(start, end, 0.5)!;
     expect(logo.lightColor, Color.lerp(start.lightColor, end.lightColor, 0.5));
     expect(logo.darkColor, Color.lerp(start.darkColor, end.darkColor, 0.5));
     expect(logo.textColor, Color.lerp(start.textColor, end.textColor, 0.5));
@@ -70,10 +70,10 @@ void main() {
   });
 
   test('FlutterLogoDecoration lerp changes styles at 0.5', () {
-    FlutterLogoDecoration logo = FlutterLogoDecoration.lerp(start, end, 0.4);
+    FlutterLogoDecoration logo = FlutterLogoDecoration.lerp(start, end, 0.4)!;
     expect(logo.style, start.style);
 
-    logo = FlutterLogoDecoration.lerp(start, end, 0.5);
+    logo = FlutterLogoDecoration.lerp(start, end, 0.5)!;
     expect(logo.style, end.style);
   });
 

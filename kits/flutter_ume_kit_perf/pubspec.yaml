@@ -17,6 +17,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^4.0.0
-  flutter_coverage_badge: ^0.0.1+1
+  flutter_coverage_badge:
+    git:
+      url: git@github.com:amondnet/flutter_coverage_badge.git
+      ref: master
 
 flutter:

@@ -22,8 +22,8 @@ void main() {
 
     test('register single plugin', () {
       final plugin = MockPluggableWithStream();
-      PluginManager.instance.register(plugin);
-      expect(PluginManager.instance.pluginsMap['MockPluggableWithStream'],
+      PluginManager.instance!.register(plugin);
+      expect(PluginManager.instance!.pluginsMap['MockPluggableWithStream'],
           isInstanceOf<Pluggable>());
     });
     test('store multiple plugins, expect count', () async {
@@ -34,7 +34,7 @@ void main() {
 
       final storePlugins = await PluginStoreManager().fetchStorePlugins();
 
-      expect(storePlugins.length, 2);
+      expect(storePlugins?.length, 2);
     });
 
     test('store minimal toolbar switch, expect bool', () async {

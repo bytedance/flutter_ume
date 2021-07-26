@@ -5,10 +5,10 @@ import 'package:flutter_ume/core/pluggable_message_service.dart';
 import 'package:flutter_ume/core/pluggable.dart';
 
 class RedDot extends StatefulWidget {
-  RedDot({Key key, @required this.pluginDatas, this.size = 16})
+  RedDot({Key? key, required this.pluginDatas, this.size = 16})
       : super(key: key);
 
-  final List<Pluggable> pluginDatas;
+  final List<Pluggable?> pluginDatas;
   final double size;
 
   @override
@@ -18,14 +18,14 @@ class RedDot extends StatefulWidget {
 class _RedDotState extends State<RedDot> {
   int _count = 0;
 
-  StreamSubscription _subscription;
+  StreamSubscription? _subscription;
   @override
   void initState() {
     super.initState();
     _subscription =
         PluggableMessageService().messageStreamController.stream.listen((data) {
       if (mounted &&
-          widget.pluginDatas.any((element) => element.name == data.key)) {
+          widget.pluginDatas.any((element) => element!.name == data.key)) {
         _refresh();
       }
     });

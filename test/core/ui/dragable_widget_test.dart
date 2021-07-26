@@ -17,7 +17,7 @@ void main() {
         dragCompletion: (dataList) {
           moveCount++;
         },
-        itemBuilder: (context, data) {
+        itemBuilder: (context, dynamic data) {
           return GestureDetector(
             onTap: () {},
             behavior: HitTestBehavior.opaque,

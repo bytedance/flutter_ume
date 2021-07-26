@@ -7,7 +7,7 @@ class PluginStoreManager {
 
   Future<SharedPreferences> _sharedPref = SharedPreferences.getInstance();
 
-  Future<List<String>> fetchStorePlugins() async {
+  Future<List<String>?> fetchStorePlugins() async {
     final SharedPreferences prefs = await _sharedPref;
     return prefs.getStringList(_pluginStoreKey);
   }
@@ -20,7 +20,7 @@ class PluginStoreManager {
     await prefs.setStringList(_pluginStoreKey, plugins);
   }
 
-  Future<bool> fetchMinimalToolbarSwitch() async {
+  Future<bool?> fetchMinimalToolbarSwitch() async {
     final SharedPreferences prefs = await _sharedPref;
     return prefs.getBool(_minimalToolbarSwitch);
   }
@@ -33,7 +33,7 @@ class PluginStoreManager {
     await prefs.setBool(_minimalToolbarSwitch, value);
   }
 
-  Future<String> fetchFloatingDotPos() async {
+  Future<String?> fetchFloatingDotPos() async {
     final SharedPreferences prefs = await _sharedPref;
     return prefs.getString(_floatingDotPos);
   }

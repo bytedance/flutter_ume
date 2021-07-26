@@ -27,7 +27,7 @@ void main() {
 
     testWidgets('build, debugMode, has error', (tester) async {
       final mockPluggable = MockPluggableWithStream();
-      PluginManager.instance.register(mockPluggable);
+      PluginManager.instance!.register(mockPluggable);
 
       final redDot = RedDot(
         pluginDatas: [mockPluggable],

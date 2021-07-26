@@ -3,8 +3,8 @@ import 'package:flutter_ume/core/pluggable.dart';
 
 class IconCache {
   static Map<String, Widget> _icons = Map();
-  static Widget icon({
-    @required Pluggable pluggableInfo,
+  static Widget? icon({
+    required Pluggable pluggableInfo,
   }) {
     if (!_icons.containsKey(pluggableInfo.name) &&
         pluggableInfo.iconImageProvider != null) {

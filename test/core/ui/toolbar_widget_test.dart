@@ -20,7 +20,7 @@ void main() {
     testWidgets('ToolbarWidget pump widget', (tester) async {
       WidgetsFlutterBinding.ensureInitialized();
 
-      PluginManager.instance
+      PluginManager.instance!
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
 
       final toolbarWidget = ToolBarWidget(
@@ -43,7 +43,7 @@ void main() {
     testWidgets('toolbarWidget drag', (tester) async {
       WidgetsFlutterBinding.ensureInitialized();
 
-      PluginManager.instance
+      PluginManager.instance!
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
 
       final toolbarWidget = ToolBarWidget(
@@ -76,7 +76,7 @@ void main() {
       bool maximalTapped = false;
       bool closeTapped = false;
 
-      PluginManager.instance
+      PluginManager.instance!
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
 
       final toolbarWidget = ToolBarWidget(

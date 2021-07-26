@@ -4,7 +4,7 @@ abstract class Pluggable {
   String get name;
   String get displayName;
   void onTrigger();
-  Widget buildWidget(BuildContext context);
+  Widget buildWidget(BuildContext? context);
   ImageProvider get iconImageProvider;
 }
 

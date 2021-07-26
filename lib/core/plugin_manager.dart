@@ -2,13 +2,13 @@ import 'package:flutter_ume/flutter_ume.dart';
 import 'package:flutter_ume/core/pluggable.dart';
 
 class PluginManager {
-  static PluginManager _instance;
+  static PluginManager? _instance;
 
-  Map<String, Pluggable> get pluginsMap => _pluginsMap;
+  Map<String, Pluggable?> get pluginsMap => _pluginsMap;
 
-  Map<String, Pluggable> _pluginsMap = {};
+  Map<String, Pluggable?> _pluginsMap = {};
 
-  static PluginManager get instance {
+  static PluginManager? get instance {
     if (_instance == null) {
       _instance = PluginManager._();
     }
