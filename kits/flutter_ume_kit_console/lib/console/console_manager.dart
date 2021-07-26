@@ -9,15 +9,15 @@ const int maxLine = 1000;
 class ConsoleManager {
   static final Queue<Tuple2<DateTime, String>> _logData = Queue();
   // ignore: close_sinks
-  static StreamController _logStreamController;
+  static StreamController? _logStreamController;
 
   static Queue<Tuple2<DateTime, String>> get logData => _logData;
 
-  static StreamController get streamController => _getLogStreamController();
+  static StreamController? get streamController => _getLogStreamController();
 
-  static DebugPrintCallback _originalDebugPrint;
+  static DebugPrintCallback? _originalDebugPrint;
 
-  static StreamController _getLogStreamController() {
+  static StreamController? _getLogStreamController() {
     if (_logStreamController == null) {
       _logStreamController = StreamController.broadcast();
       var transformer =
@@ -31,7 +31,7 @@ class ConsoleManager {
         }
       });
 
-      _logStreamController.stream.transform(transformer).listen((value) {
+      _logStreamController!.stream.transform(transformer).listen((value) {
         if (_logData.length < maxLine) {
           _logData.addFirst(value);
         } else {
@@ -45,22 +45,22 @@ class ConsoleManager {
   static redirectDebugPrint() {
     if (_originalDebugPrint != null) return;
     _originalDebugPrint = debugPrint;
-    debugPrint = (String message, {int wrapWidth}) {
-      ConsoleManager.streamController.sink.add(message);
+    debugPrint = (String? message, {int? wrapWidth}) {
+      ConsoleManager.streamController!.sink.add(message);
       if (_originalDebugPrint != null) {
-        _originalDebugPrint(message, wrapWidth: wrapWidth);
+        _originalDebugPrint!(message, wrapWidth: wrapWidth);
       }
     };
   }
 
   static clearLog() {
     logData.clear();
-    _logStreamController.add('UME CONSOLE == ClearLog');
+    _logStreamController!.add('UME CONSOLE == ClearLog');
   }
 
   @visibleForTesting
   static clearRedirect() {
-    debugPrint = _originalDebugPrint;
+    debugPrint = _originalDebugPrint!;
     _originalDebugPrint = null;
   }
 }

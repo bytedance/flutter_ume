@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tuple/tuple.dart';
 import 'package:flutter_ume/core/ui/global.dart';
 import 'package:flutter_ume_kit_console/console/console_manager.dart';
 import 'package:flutter_ume_kit_console/flutter_ume_kit_console.dart';
@@ -66,9 +65,7 @@ void main() {
 
     testWidgets('Console pump widget, call debugPrint, clear logs',
         (tester) async {
-      SharedPreferences.setMockInitialValues({
-        'console_panel_datetime_style': null,
-      });
+      SharedPreferences.setMockInitialValues({});
       final console = Console();
       await tester.pumpWidget(MaterialApp(
           key: rootKey,
@@ -92,9 +89,7 @@ void main() {
 
     testWidgets('Console pump widget, call debugPrint, trigger filter',
         (tester) async {
-      SharedPreferences.setMockInitialValues({
-        'console_panel_datetime_style': null,
-      });
+      SharedPreferences.setMockInitialValues({});
       final console = Console();
       await tester.pumpWidget(MaterialApp(
           key: rootKey,
@@ -125,7 +120,7 @@ void main() {
 
     testWidgets('Console pump widget, call debugPrint, share', (tester) async {
       SharedPreferences.setMockInitialValues({
-        'console_panel_datetime_style': null,
+        'console_panel_datetime_style': 1,
       });
       final console = Console();
       await tester.pumpWidget(MaterialApp(

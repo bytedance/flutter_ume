@@ -21,8 +21,8 @@ dependency_overrides:
   #   path: ../kits/flutter_ume_kit_show_code
   # flutter_ume_kit_device:
   #   path: ../kits/flutter_ume_kit_device
-  # flutter_ume_kit_console:
-  #   path: ../kits/flutter_ume_kit_console
+  flutter_ume_kit_console:
+    path: ../kits/flutter_ume_kit_console
 
 dev_dependencies:
   flutter_test:
@@ -37,8 +37,8 @@ dev_dependencies:
   #   path: ../kits/flutter_ume_kit_show_code
   # flutter_ume_kit_device:
   #   path: ../kits/flutter_ume_kit_device
-  # flutter_ume_kit_console:
-  #   path: ../kits/flutter_ume_kit_console
+  flutter_ume_kit_console:
+    path: ../kits/flutter_ume_kit_console
 
 flutter:
   uses-material-design: true

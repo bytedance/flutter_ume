@@ -13,7 +13,7 @@ import 'package:flutter_ume/util/store_mixin.dart';
 import 'package:flutter_ume_kit_console/console/show_date_time_style.dart';
 
 class Console extends StatefulWidget implements PluggableWithStream {
-  Console({Key key}) {
+  Console({Key? key}) {
     ConsoleManager.redirectDebugPrint();
   }
 
@@ -21,7 +21,7 @@ class Console extends StatefulWidget implements PluggableWithStream {
   ConsoleState createState() => ConsoleState();
 
   @override
-  Widget buildWidget(BuildContext context) => this;
+  Widget buildWidget(BuildContext? context) => this;
 
   @override
   ImageProvider<Object> get iconImageProvider =>
@@ -37,7 +37,7 @@ class Console extends StatefulWidget implements PluggableWithStream {
   void onTrigger() {}
 
   @override
-  Stream get stream => ConsoleManager.streamController.stream;
+  Stream get stream => ConsoleManager.streamController!.stream;
 
   @override
   StreamFilter get streamFilter => (e) => true;
@@ -46,11 +46,11 @@ class Console extends StatefulWidget implements PluggableWithStream {
 class ConsoleState extends State<Console>
     with WidgetsBindingObserver, StoreMixin {
   List<Tuple2<DateTime, String>> _logList = <Tuple2<DateTime, String>>[];
-  StreamSubscription _subscription;
-  ScrollController _controller;
-  ShowDateTimeStyle _showDateTimeStyle;
+  StreamSubscription? _subscription;
+  ScrollController? _controller;
+  ShowDateTimeStyle? _showDateTimeStyle;
   bool _showFilter = false;
-  RegExp _filterExp;
+  RegExp? _filterExp;
 
   @override
   void dispose() {
@@ -65,32 +65,33 @@ class ConsoleState extends State<Console>
   @override
   void initState() {
     super.initState();
+    _showDateTimeStyle = ShowDateTimeStyle.none;
     fetchWithKey('console_panel_datetime_style').then((value) async {
       if (value != null && value is int) {
         _showDateTimeStyle = styleById(value);
       } else {
         _showDateTimeStyle = ShowDateTimeStyle.datetime;
         await storeWithKey(
-            'console_panel_datetime_style', idByStyle(_showDateTimeStyle));
+            'console_panel_datetime_style', idByStyle(_showDateTimeStyle!));
       }
       setState(() {});
     });
     _controller = ScrollController();
     _logList = ConsoleManager.logData.toList();
-    _subscription = ConsoleManager.streamController.stream.listen((onData) {
+    _subscription = ConsoleManager.streamController!.stream.listen((onData) {
       if (mounted) {
         if (_filterExp != null) {
           _logList = ConsoleManager.logData.where((e) {
-            return _filterExp.hasMatch(e.item1.toString()) ||
-                _filterExp.hasMatch(e.item2);
+            return _filterExp!.hasMatch(e.item1.toString()) ||
+                _filterExp!.hasMatch(e.item2);
           }).toList();
         } else {
           _logList = ConsoleManager.logData.toList();
         }
 
         setState(() {});
-        _controller.jumpTo(
-            _controller.position.maxScrollExtent + 22); // 22 is a magic number
+        _controller!.jumpTo(
+            _controller!.position.maxScrollExtent + 22); // 22 is a magic number
       }
     });
   }
@@ -98,8 +99,8 @@ class ConsoleState extends State<Console>
   void _refreshConsole() {
     if (_filterExp != null) {
       _logList = ConsoleManager.logData.where((e) {
-        return _filterExp.hasMatch(e.item1.toString()) ||
-            _filterExp.hasMatch(e.item2);
+        return _filterExp!.hasMatch(e.item1.toString()) ||
+            _filterExp!.hasMatch(e.item2);
       }).toList();
     } else {
       _logList = ConsoleManager.logData.toList();
@@ -240,9 +241,9 @@ class ConsoleState extends State<Console>
   }
 
   void _triggerShowDate() async {
-    _showDateTimeStyle = styleById((idByStyle(_showDateTimeStyle) + 1) % 4);
+    _showDateTimeStyle = styleById((idByStyle(_showDateTimeStyle!) + 1) % 4);
     await storeWithKey(
-        'console_panel_datetime_style', idByStyle(_showDateTimeStyle));
+        'console_panel_datetime_style', idByStyle(_showDateTimeStyle!));
     setState(() {});
   }
 
@@ -257,7 +258,7 @@ class ConsoleState extends State<Console>
   }
 
   Future<void> _share() async {
-    if (_logList == null || _logList.isEmpty) {
+    if (_logList.isEmpty) {
       return;
     }
     final l = _logList.map((e) => '${e.item1.toString()} ${e.item2}').toList();
