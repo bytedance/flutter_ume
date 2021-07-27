@@ -16,7 +16,7 @@ class Performance extends StatelessWidget implements Pluggable {
   }
 
   @override
-  Widget buildWidget(BuildContext context) => this;
+  Widget buildWidget(BuildContext? context) => this;
 
   @override
   ImageProvider<Object> get iconImageProvider =>

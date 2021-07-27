@@ -128,6 +128,13 @@ packages:
       relative: true
     source: path
     version: "0.1.0"
+  flutter_ume_kit_perf:
+    dependency: "direct dev"
+    description:
+      path: "../kits/flutter_ume_kit_perf"
+      relative: true
+    source: path
+    version: "0.1.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter

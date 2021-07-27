@@ -6,7 +6,7 @@ import 'memory_service.dart';
 import 'icon.dart' as icon;
 
 class MemoryInfoPage extends StatelessWidget implements Pluggable {
-  const MemoryInfoPage({Key key}) : super(key: key);
+  const MemoryInfoPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class MemoryInfoPage extends StatelessWidget implements Pluggable {
   }
 
   @override
-  Widget buildWidget(BuildContext context) => this;
+  Widget buildWidget(BuildContext? context) => this;
 
   @override
   ImageProvider<Object> get iconImageProvider =>
@@ -34,15 +34,15 @@ class MemoryInfoPage extends StatelessWidget implements Pluggable {
 }
 
 class _DetailModel {
-  final int count;
-  final String classId;
-  final String className;
+  final int? count;
+  final String? classId;
+  final String? className;
 
   _DetailModel(this.count, this.classId, this.className);
 }
 
 class _MemoryWidget extends StatefulWidget {
-  _MemoryWidget({Key key}) : super(key: key);
+  _MemoryWidget({Key? key}) : super(key: key);
 
   @override
   _MemoryWidgetState createState() => _MemoryWidgetState();
@@ -53,7 +53,7 @@ class _MemoryWidgetState extends State<_MemoryWidget> {
 
   int _sortColumnIndex = 0;
 
-  bool _checked = true;
+  bool? _checked = true;
 
   @override
   void initState() {
@@ -63,9 +63,9 @@ class _MemoryWidgetState extends State<_MemoryWidget> {
     });
   }
 
-  void _hidePrivateClass(bool check) {
+  void _hidePrivateClass(bool? check) {
     _checked = check;
-    _memoryservice.hidePrivateClasses(check);
+    _memoryservice.hidePrivateClasses(check!);
     setState(() {});
   }
 
@@ -74,7 +74,7 @@ class _MemoryWidgetState extends State<_MemoryWidget> {
       return Scaffold(
           body: _MemoryDetail(detail: detail, service: _memoryservice),
           appBar: PreferredSize(
-              child: AppBar(elevation: 0.0, title: Text(detail.className)),
+              child: AppBar(elevation: 0.0, title: Text(detail.className!)),
               preferredSize: Size.fromHeight(44)));
     }));
   }
@@ -177,19 +177,19 @@ class _MemoryWidgetState extends State<_MemoryWidget> {
                       onTap: () {
                         _DetailModel detail = _DetailModel(
                             stats.instancesAccumulated,
-                            stats.classRef.id,
-                            stats.classRef.name);
+                            stats.classRef!.id,
+                            stats.classRef!.name);
                         _enterDetailPage(detail);
                       },
                       child: _PerRow(
                         darkColor: index % 2 == 0,
                         widgets: [
                           Text(
-                              "${_memoryservice.byteToString(stats.accumulatedSize)}",
+                              "${_memoryservice.byteToString(stats.accumulatedSize!)}",
                               style: TextStyle(color: Colors.black87)),
                           Text("${stats.instancesAccumulated}",
                               style: TextStyle(color: Colors.black87)),
-                          Text("${stats.classRef.name}",
+                          Text("${stats.classRef!.name}",
                               style: TextStyle(color: Colors.black87)),
                         ],
                       ),
@@ -208,11 +208,11 @@ typedef _DropState = void Function(int, bool);
 
 class _DropButton extends StatefulWidget {
   _DropButton(
-      {Key key,
+      {Key? key,
       this.showArrow = false,
       this.descending = true,
-      @required this.title,
-      this.index,
+      required this.title,
+      this.index = 0,
       this.stateChanged})
       : super(key: key);
 
@@ -220,14 +220,14 @@ class _DropButton extends StatefulWidget {
   final bool descending;
   final int index;
   final String title;
-  final _DropState stateChanged;
+  final _DropState? stateChanged;
 
   @override
   __DropButtonState createState() => __DropButtonState();
 }
 
 class __DropButtonState extends State<_DropButton> {
-  bool _descending;
+  bool _descending = false;
 
   @override
   void initState() {
@@ -244,7 +244,7 @@ class __DropButtonState extends State<_DropButton> {
             _descending = !_descending;
           }
           if (widget.stateChanged != null) {
-            widget.stateChanged(widget.index, _descending);
+            widget.stateChanged!(widget.index, _descending);
           }
         });
       },
@@ -262,12 +262,12 @@ class __DropButtonState extends State<_DropButton> {
 
 class _PerRow extends StatelessWidget {
   const _PerRow(
-      {Key key, this.widgets, this.customColor, this.darkColor = false})
+      {Key? key, this.widgets, this.customColor, this.darkColor = false})
       : super(key: key);
 
-  final List<Widget> widgets;
+  final List<Widget>? widgets;
   final bool darkColor;
-  final Color customColor;
+  final Color? customColor;
 
   @override
   Widget build(BuildContext context) {
@@ -279,7 +279,7 @@ class _PerRow extends StatelessWidget {
               : Colors.grey.withOpacity(0.03)),
       child: Row(
           children: this
-              .widgets
+              .widgets!
               .map((e) => Expanded(
                   child: Align(
                       child: Padding(
@@ -292,7 +292,7 @@ class _PerRow extends StatelessWidget {
 }
 
 class _MemoryDetail extends StatefulWidget {
-  _MemoryDetail({Key key, this.detail, this.service})
+  _MemoryDetail({Key? key, required this.detail, required this.service})
       : assert(service != null),
         assert(detail != null),
         super(key: key);
@@ -313,7 +313,7 @@ class __MemoryDetailState extends State<_MemoryDetail> {
   void initState() {
     super.initState();
 
-    widget.service.getClassDetailInfo(widget.detail.classId, (info) {
+    widget.service.getClassDetailInfo(widget.detail.classId!, (info) {
       StringBuffer buffer = StringBuffer();
       info?.propeties?.forEach((element) {
         buffer.writeln(element.propertyStr);
