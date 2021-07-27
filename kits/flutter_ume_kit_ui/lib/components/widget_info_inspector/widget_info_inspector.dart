@@ -6,13 +6,13 @@ import 'package:flutter_ume_kit_ui/components/hit_test.dart';
 import 'icon.dart' as icon;
 
 class WidgetInfoInspector extends StatefulWidget implements Pluggable {
-  const WidgetInfoInspector({Key key}) : super(key: key);
+  const WidgetInfoInspector({Key? key}) : super(key: key);
 
   @override
   _WidgetInfoInspectorState createState() => _WidgetInfoInspectorState();
 
   @override
-  Widget buildWidget(BuildContext context) => this;
+  Widget buildWidget(BuildContext? context) => this;
 
   @override
   String get name => 'WidgetInfo';
@@ -33,13 +33,13 @@ class _WidgetInfoInspectorState extends State<WidgetInfoInspector>
   _WidgetInfoInspectorState()
       : selection = WidgetInspectorService.instance.selection;
 
-  final window = WidgetsBinding.instance.window;
+  final window = WidgetsBinding.instance!.window;
 
-  Offset _lastPointerLocation;
+  Offset? _lastPointerLocation;
 
   final InspectorSelection selection;
 
-  void _inspectAt(Offset position) {
+  void _inspectAt(Offset? position) {
     final List<RenderObject> selected =
         HitTest.hitTest(position, edgeHitMargin: 2.0);
     setState(() {
@@ -56,7 +56,7 @@ class _WidgetInfoInspectorState extends State<WidgetInfoInspector>
     final Rect bounds =
         (Offset.zero & (window.physicalSize / window.devicePixelRatio))
             .deflate(1.0);
-    if (!bounds.contains(_lastPointerLocation)) {
+    if (!bounds.contains(_lastPointerLocation!)) {
       setState(() {
         selection.clear();
       });
@@ -72,7 +72,7 @@ class _WidgetInfoInspectorState extends State<WidgetInfoInspector>
   @override
   void initState() {
     super.initState();
-    selection?.clear();
+    selection.clear();
   }
 
   @override

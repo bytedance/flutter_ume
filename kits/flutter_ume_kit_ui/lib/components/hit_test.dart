@@ -5,26 +5,26 @@ import 'package:flutter_ume/flutter_ume.dart';
 class HitTest {
   // all of RenderObjects of current point
   static List<RenderObject> hitTest(
-    Offset position, {
+    Offset? position, {
     double edgeHitMargin = 0.0,
   }) {
-    final dynamic ignorePointer = rootKey.currentContext.findRenderObject();
+    final dynamic ignorePointer = rootKey.currentContext!.findRenderObject();
     final RenderObject userRender = ignorePointer.child;
 
     bool _hitTestHelper(
       List<RenderObject> hits,
       List<RenderObject> edgeHits,
-      Offset position,
+      Offset? position,
       RenderObject object,
       Matrix4 transform,
     ) {
       bool hit = false;
-      final Matrix4 inverse = Matrix4.tryInvert(transform);
+      final Matrix4? inverse = Matrix4.tryInvert(transform);
       if (inverse == null) {
         return false;
       }
       final Offset localPosition =
-          MatrixUtils.transformPoint(inverse, position);
+          MatrixUtils.transformPoint(inverse, position!);
 
       final List<DiagnosticsNode> children = object.debugDescribeChildren();
       for (int i = children.length - 1; i >= 0; i -= 1) {
@@ -32,8 +32,8 @@ class HitTest {
         assert(diagnostics != null);
         if (diagnostics.style == DiagnosticsTreeStyle.offstage ||
             diagnostics.value is! RenderObject) continue;
-        final RenderObject child = diagnostics.value;
-        final Rect paintClip = object.describeApproximatePaintClip(child);
+        final RenderObject child = diagnostics.value as RenderObject;
+        final Rect? paintClip = object.describeApproximatePaintClip(child);
         if (paintClip != null && !paintClip.contains(localPosition)) continue;
 
         final Matrix4 childTransform = transform.clone();
@@ -58,8 +58,8 @@ class HitTest {
     _hitTestHelper(regularHits, edgeHits, position, userRender,
         userRender.getTransformTo(null));
     double _area(RenderObject object) {
-      final Size size = object.semanticBounds?.size;
-      return size == null ? double.maxFinite : size.width * size.height;
+      final Size size = object.semanticBounds.size;
+      return size.width * size.height;
     }
 
     regularHits

@@ -8,7 +8,7 @@ import 'search_bar.dart';
 import 'icon.dart' as icon;
 
 class WidgetDetailInspector extends StatelessWidget implements Pluggable {
-  const WidgetDetailInspector({Key key}) : super(key: key);
+  const WidgetDetailInspector({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class WidgetDetailInspector extends StatelessWidget implements Pluggable {
   }
 
   @override
-  Widget buildWidget(BuildContext context) => this;
+  Widget buildWidget(BuildContext? context) => this;
 
   @override
   ImageProvider<Object> get iconImageProvider =>
@@ -36,7 +36,7 @@ class WidgetDetailInspector extends StatelessWidget implements Pluggable {
 }
 
 class _DetailPage extends StatefulWidget {
-  const _DetailPage({Key key}) : super(key: key);
+  const _DetailPage({Key? key}) : super(key: key);
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -45,13 +45,13 @@ class _DetailPage extends StatefulWidget {
 class _DetailPageState extends State<_DetailPage> with WidgetsBindingObserver {
   _DetailPageState() : selection = WidgetInspectorService.instance.selection;
 
-  final window = WidgetsBinding.instance.window;
+  final window = WidgetsBinding.instance!.window;
 
-  Offset _lastPointerLocation;
+  Offset? _lastPointerLocation;
 
   final InspectorSelection selection;
 
-  void _inspectAt(Offset position) {
+  void _inspectAt(Offset? position) {
     final List<RenderObject> selected = HitTest.hitTest(position);
     setState(() {
       selection.candidates = selected;
@@ -70,7 +70,7 @@ class _DetailPageState extends State<_DetailPage> with WidgetsBindingObserver {
     Future.delayed(Duration(milliseconds: 100), () {
       Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
         return _InfoPage(
-            elements: selection.currentElement.debugGetDiagnosticChain());
+            elements: selection.currentElement!.debugGetDiagnosticChain());
       }));
     });
   }
@@ -78,7 +78,7 @@ class _DetailPageState extends State<_DetailPage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    selection?.clear();
+    selection.clear();
   }
 
   @override
@@ -112,7 +112,7 @@ class _DetailModel {
 }
 
 class _InfoPage extends StatefulWidget {
-  const _InfoPage({Key key, @required this.elements})
+  const _InfoPage({Key? key, required this.elements})
       : assert(elements != null),
         super(key: key);
 
@@ -124,7 +124,7 @@ class _InfoPage extends StatefulWidget {
 
 class __InfoPageState extends State<_InfoPage> {
   List<_DetailModel> _showList = <_DetailModel>[];
-  List<_DetailModel> _originalList;
+  late List<_DetailModel> _originalList;
 
   @override
   void initState() {
@@ -243,7 +243,7 @@ class __InfoPageState extends State<_InfoPage> {
 }
 
 class _DetailContent extends StatelessWidget {
-  const _DetailContent({Key key, this.element})
+  const _DetailContent({Key? key, required this.element})
       : assert(element != null),
         super(key: key);
 
@@ -253,7 +253,7 @@ class _DetailContent extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 12, left: 12),
       child: Text(
-        title ?? "",
+        title,
         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
       ),
     );
@@ -261,7 +261,7 @@ class _DetailContent extends StatelessWidget {
 
   Future<List<String>> getInfo() async {
     Completer<List<String>> completer = Completer();
-    String string = element.renderObject.toStringDeep();
+    String string = element.renderObject!.toStringDeep();
     List<String> list = string.split("\n");
     completer.complete(list);
     return completer.future;
@@ -297,7 +297,8 @@ class _DetailContent extends StatelessWidget {
                               physics: BouncingScrollPhysics(),
                               itemBuilder: (_, index) {
                                 return SingleChildScrollView(
-                                    child: Text(snapshot.data[index]),
+                                    child: Text(
+                                        (snapshot.data as List<String>)[index]),
                                     scrollDirection: Axis.horizontal);
                               },
                               itemCount:

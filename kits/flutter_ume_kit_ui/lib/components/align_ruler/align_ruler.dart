@@ -8,13 +8,13 @@ import 'package:flutter_ume/flutter_ume.dart';
 import 'icon.dart' as icon;
 
 class AlignRuler extends StatefulWidget implements Pluggable {
-  AlignRuler({Key key}) : super(key: key);
+  AlignRuler({Key? key}) : super(key: key);
 
   @override
   _AlignRulerState createState() => _AlignRulerState();
 
   @override
-  Widget buildWidget(BuildContext context) => this;
+  Widget buildWidget(BuildContext? context) => this;
 
   @override
   ImageProvider<Object> get iconImageProvider =>
@@ -34,8 +34,8 @@ class _AlignRulerState extends State<AlignRuler> {
   Size _windowSize = windowSize;
   final Size _dotSize = Size(80, 80);
   Offset _dotPosition = Offset.zero;
-  BorderRadius _radius;
-  Offset _dotOffset;
+  BorderRadius? _radius;
+  late Offset _dotOffset;
   final TextStyle _fontStyle = TextStyle(color: Colors.red, fontSize: 15);
   Size _textSize = Size.zero;
   double _toolBarY = 60.0;
@@ -49,7 +49,7 @@ class _AlignRulerState extends State<AlignRuler> {
     _dotOffset = _dotSize.center(Offset.zero);
     super.initState();
     _textSize = _getTextSize();
-    _selection?.clear();
+    _selection.clear();
   }
 
   void _onPanUpdate(DragUpdateDetails dragDetails) {
@@ -64,7 +64,7 @@ class _AlignRulerState extends State<AlignRuler> {
     _selection.candidates = objects;
     Offset offset = Offset.zero;
     for (var obj in objects) {
-      var translation = obj?.getTransformTo(null)?.getTranslation();
+      var translation = obj.getTransformTo(null).getTranslation();
       Rect rect = obj.paintBounds.shift(Offset(translation.x, translation.y));
       if (rect.contains(_dotPosition)) {
         double dx, dy = 0.0;
@@ -112,7 +112,7 @@ class _AlignRulerState extends State<AlignRuler> {
     setState(() {
       _switched = swi;
       if (!_switched) {
-        _selection?.clear();
+        _selection.clear();
       }
     });
   }

@@ -16,20 +16,20 @@ class SearchBar extends StatefulWidget {
   final String placeHolder;
   final bool autofocus;
   final bool enabled;
-  final String cancelText;
-  final Color cursorColor;
-  final Color searchIconColor;
+  final String? cancelText;
+  final Color? cursorColor;
+  final Color? searchIconColor;
   final Brightness keyboardAppearance;
   final BarStyle style;
-  final Widget right;
+  final Widget? right;
   final int inputCharactersLength;
-  final Function rightAction;
-  final OnChangeHandle onChangeHandle;
-  final OnSubmitHandle onSubmitHandle;
-  final OnFocusChangeHandle onFocusChangeHandle;
+  final Function? rightAction;
+  final OnChangeHandle? onChangeHandle;
+  final OnSubmitHandle? onSubmitHandle;
+  final OnFocusChangeHandle? onFocusChangeHandle;
 
   SearchBar({
-    Key key,
+    Key? key,
     this.placeHolder = '请输入要搜索的内容',
     this.autofocus = false,
     this.enabled = true,
@@ -60,14 +60,14 @@ class _SearchInputState extends State<SearchBar> {
     super.initState();
     _focusNode.addListener(() {
       if (widget.onFocusChangeHandle != null) {
-        widget.onFocusChangeHandle(_focusNode.hasFocus);
+        widget.onFocusChangeHandle!(_focusNode.hasFocus);
       }
     });
   }
 
   @override
   void dispose() {
-    _inputController?.dispose();
+    _inputController.dispose();
     super.dispose();
   }
 
@@ -83,7 +83,7 @@ class _SearchInputState extends State<SearchBar> {
   void _inputSubmitHandle(String query) {
     _unfocus();
     if (widget.onSubmitHandle is OnSubmitHandle) {
-      widget.onSubmitHandle(query);
+      widget.onSubmitHandle!(query);
     }
   }
 
@@ -95,7 +95,7 @@ class _SearchInputState extends State<SearchBar> {
       });
     }
     if (widget.onChangeHandle != null) {
-      widget.onChangeHandle(query);
+      widget.onChangeHandle!(query);
     }
   }
 
@@ -115,7 +115,7 @@ class _SearchInputState extends State<SearchBar> {
     }
     return GestureDetector(
       onTap: () {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
+        WidgetsBinding.instance!.addPostFrameCallback((_) {
           _inputController.clear();
           _focus();
         });
@@ -214,7 +214,7 @@ class _SearchInputState extends State<SearchBar> {
       } else {
         right = Padding(
             padding: const EdgeInsets.only(left: 20.0, right: 20),
-            child: Text(widget.cancelText,
+            child: Text(widget.cancelText!,
                 style: TextStyle(
                     fontSize: 15.0,
                     fontWeight: FontWeight.bold,
@@ -225,7 +225,7 @@ class _SearchInputState extends State<SearchBar> {
         onTap: () {
           _inputSubmitHandle(_inputController.text);
           if (widget.rightAction != null) {
-            widget.rightAction();
+            widget.rightAction!();
           }
         },
         child: right);

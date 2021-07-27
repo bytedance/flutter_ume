@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_ume: ^0.2.0-dev.0
+  flutter_ume: '>=0.2.0-dev.0 <0.3.0'
   share: ^2.0.4
   vm_service: ^7.1.1
   string_scanner: ^1.1.0
