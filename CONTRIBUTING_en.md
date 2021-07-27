@@ -47,11 +47,16 @@ Or contact [author](mailto:zhaorui.dev@bytedance.com).
 
 1. Fork the repository.
 2. Clone your fork repository.
-3. Edit code.
-4. Edit test code in example project, and test it manually.
-5. Edit unit test in test directory.
-6. Commit your changes and push it. Please follow the [Commit Message specification](#commit-message-specification) to write the commit message.
-7. Create Pull Request in GitHub, and fill in the template.
+3. Checkout to the correct develop branch, and then create a new brnach based on the develop branch.
+4. Edit code.
+5. Edit test code in example project, and test it manually.
+6. Edit unit test in test directory.
+7. Commit your changes and push it. Please follow the [Commit Message specification](#commit-message-specification) to write the commit message.
+8. Create Pull Request in GitHub, and fill in the template.
+
+> Now, UME support null-safety and non-null-safety.
+> Null-safety version corresponds to `develop_nullsafety` branch, non-null-safety version corresponds to `develop` branch.
+> PR should be merged into the corresponding branch.
 
 ## Commit Message specification
 
