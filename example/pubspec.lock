@@ -135,6 +135,13 @@ packages:
       relative: true
     source: path
     version: "0.1.0"
+  flutter_ume_kit_show_code:
+    dependency: "direct dev"
+    description:
+      path: "../kits/flutter_ume_kit_show_code"
+      relative: true
+    source: path
+    version: "0.1.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter

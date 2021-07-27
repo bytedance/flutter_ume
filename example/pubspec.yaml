@@ -17,8 +17,8 @@ dependency_overrides:
   #   path: ../kits/flutter_ume_kit_ui
   flutter_ume_kit_perf:
     path: ../kits/flutter_ume_kit_perf
-  # flutter_ume_kit_show_code:
-  #   path: ../kits/flutter_ume_kit_show_code
+  flutter_ume_kit_show_code:
+    path: ../kits/flutter_ume_kit_show_code
   flutter_ume_kit_device:
     path: ../kits/flutter_ume_kit_device
   flutter_ume_kit_console:
@@ -33,8 +33,8 @@ dev_dependencies:
   #   path: ../kits/flutter_ume_kit_ui
   flutter_ume_kit_perf:
     path: ../kits/flutter_ume_kit_perf
-  # flutter_ume_kit_show_code:
-  #   path: ../kits/flutter_ume_kit_show_code
+  flutter_ume_kit_show_code:
+    path: ../kits/flutter_ume_kit_show_code
   flutter_ume_kit_device:
     path: ../kits/flutter_ume_kit_device
   flutter_ume_kit_console:

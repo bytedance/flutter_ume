@@ -22,7 +22,7 @@ void main() {
       final service = CodeDisplatService();
       final id = await service.getScriptIdWithFileName('c');
       expect(id, isNotNull);
-      final sourceCode = await service.getSourceCodeWithScriptId(id);
+      final sourceCode = await service.getSourceCodeWithScriptId(id!);
       expect(sourceCode, isNotNull);
     });
   });

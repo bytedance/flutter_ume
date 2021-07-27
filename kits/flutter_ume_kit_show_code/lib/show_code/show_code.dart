@@ -8,13 +8,13 @@ import 'package:flutter_ume_kit_show_code/show_code/icon.dart' as icon;
 import 'package:share/share.dart';
 
 class ShowCode extends StatefulWidget implements Pluggable {
-  const ShowCode({Key key}) : super(key: key);
+  const ShowCode({Key? key}) : super(key: key);
 
   @override
   ShowCodeState createState() => ShowCodeState();
 
   @override
-  Widget buildWidget(BuildContext context) => this;
+  Widget buildWidget(BuildContext? context) => this;
 
   @override
   ImageProvider<Object> get iconImageProvider =>
@@ -31,20 +31,20 @@ class ShowCode extends StatefulWidget implements Pluggable {
 }
 
 class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
-  PageInfoHelper pageInfoHelper;
-  String code;
-  String filePath;
+  late PageInfoHelper pageInfoHelper;
+  String? code;
+  String? filePath;
 
-  Map<String, String> _codeList;
-  bool showCodeList;
-  bool isSearching;
-  TextEditingController textEditingController;
+  Map<String?, String>? _codeList;
+  late bool showCodeList;
+  late bool isSearching;
+  TextEditingController? textEditingController;
 
   @override
   void initState() {
     pageInfoHelper = PageInfoHelper();
     filePath =
-        pageInfoHelper.packagePathConvertFromFilePath(pageInfoHelper.filePath);
+        pageInfoHelper.packagePathConvertFromFilePath(pageInfoHelper.filePath!);
     pageInfoHelper.getCode().then((c) {
       code = c;
       setState(() {});
@@ -57,7 +57,7 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
 
   Widget _codeView() {
     String codeContent = code ?? '';
-    if (_codeList != null && _codeList.isNotEmpty && codeContent.isEmpty) {
+    if (_codeList != null && _codeList!.isNotEmpty && codeContent.isEmpty) {
       codeContent = '已找到匹配项，请点击菜单选择';
     }
     double _textScaleFactor = 1.0;
@@ -109,19 +109,19 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
                       height: 22,
                       child: CircularProgressIndicator(),
                     ),
-                  if (showCodeList && _codeList != null && _codeList.isNotEmpty)
+                  if (showCodeList && _codeList != null && _codeList!.isNotEmpty)
                     PopupMenuButton<String>(
                       padding: EdgeInsets.zero,
                       icon: Icon(Icons.arrow_drop_down),
                       onSelected: (String codepath) {
                         debugPrint(codepath);
                         setState(() {
-                          code = _codeList[codepath];
+                          code = _codeList![codepath];
                           filePath = codepath;
-                          textEditingController.text = filePath;
+                          textEditingController!.text = filePath!;
                         });
                       },
-                      itemBuilder: (BuildContext context) => _codeList
+                      itemBuilder: (BuildContext context) => _codeList!
                           .map((codepath, codeid) {
                             return MapEntry(
                               codepath,
@@ -131,7 +131,7 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
                                     children: <Widget>[
                                       ListTile(
                                         title: Text(
-                                          codepath,
+                                          codepath!,
                                           style: TextStyle(
                                               color: Colors.teal, fontSize: 14),
                                         ),
@@ -150,7 +150,7 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
                           hintText: "请输入路径",
                           border: InputBorder.none,
                           suffixIcon: IconButton(
-                            onPressed: () => textEditingController.clear(),
+                            onPressed: () => textEditingController!.clear(),
                             icon: Icon(Icons.clear),
                           )),
                       controller: textEditingController,
@@ -217,9 +217,9 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
   }
 
   Future<void> _share() async {
-    if (code == null || code.isEmpty) {
+    if (code == null || code!.isEmpty) {
       return;
     }
-    return Share.share(code);
+    return Share.share(code!);
   }
 }

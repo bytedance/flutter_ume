@@ -12,11 +12,11 @@ class PageInfoHelper {
   final InspectorSelection selection =
       WidgetInspectorService.instance.selection;
 
-  RenderObject get renderObject => selection.current;
+  RenderObject? get renderObject => selection.current;
 
-  Element get element => selection.currentElement;
+  Element? get element => selection.currentElement;
 
-  String get filePath => _jsonInfo['creationLocation']['file'];
+  String? get filePath => _jsonInfo!['creationLocation']['file'];
 
   String packagePathConvertFromFilePath(String filePath) {
     final parts = filePath.split(r'/lib/');
@@ -28,28 +28,34 @@ class PageInfoHelper {
     return keyword;
   }
 
-  int get line => _jsonInfo['creationLocation']['line'];
+  int? get line => _jsonInfo!['creationLocation']['line'];
 
   dynamic _ignorePointer;
 
   String get message {
-    return '''${element.toStringShort()}\nsize: ${renderObject.paintBounds.size}\nfilePath: $filePath\nline: $line''';
+    return '''${element!.toStringShort()}\nsize: ${renderObject!.paintBounds.size}\nfilePath: $filePath\nline: $line''';
   }
 
-  Map get _jsonInfo {
+  Map? get _jsonInfo {
+    if (renderObject == null) return null;
+    final widgetId = WidgetInspectorService.instance
+        // ignore: invalid_use_of_protected_member
+        .toId(renderObject!.toDiagnosticsNode(), '');
+    if (widgetId == null) return null;
+
     String infoStr =
-        WidgetInspectorService.instance.getSelectedSummaryWidget(null, null);
+        WidgetInspectorService.instance.getSelectedSummaryWidget(widgetId, '');
     return json.decode(infoStr);
   }
 
   double _area(RenderObject object) {
-    final Size size = object.paintBounds?.size;
+    final Size size = object.paintBounds.size;
     return size == null ? double.maxFinite : size.width * size.height;
   }
 
   // Init selection of current page
   void _selectionInit() {
-    _ignorePointer = rootKey.currentContext.findRenderObject();
+    _ignorePointer = rootKey.currentContext!.findRenderObject();
     final RenderObject userRender = _ignorePointer.child;
     List<RenderObject> objectList = [];
 
@@ -59,7 +65,7 @@ class PageInfoHelper {
         DiagnosticsNode c = children[i];
         if (c.style == DiagnosticsTreeStyle.offstage || c.value is! RenderBox)
           continue;
-        RenderObject child = c.value;
+        RenderObject child = c.value as RenderObject;
         objectList.add(child);
         findAllRenderObject(child);
       }
@@ -74,20 +80,21 @@ class PageInfoHelper {
     selection.candidates = objectList;
   }
 
-  Future<String> getCode() async {
+  Future<String?> getCode() async {
     CodeDisplatService codeDisplatService = CodeDisplatService();
-    String targetFileName = filePath.split('/').last;
-    String scriptId =
+    String targetFileName = filePath!.split('/').last;
+    String? scriptId =
         await codeDisplatService.getScriptIdWithFileName(targetFileName);
-    String sourceCode =
+    if (scriptId == null) return null;
+    String? sourceCode =
         await codeDisplatService.getSourceCodeWithScriptId(scriptId);
     return sourceCode;
   }
 
-  Future<String> getCodeByFileName(String fileName) async {
+  Future<String?> getCodeByFileName(String fileName) async {
     CodeDisplatService codeDisplatService = CodeDisplatService();
-    String sourceCode;
-    String scriptId =
+    String? sourceCode;
+    String? scriptId =
         await codeDisplatService.getScriptIdWithFileName(fileName);
     if (scriptId != null) {
       sourceCode = await codeDisplatService.getSourceCodeWithScriptId(scriptId);
@@ -95,14 +102,14 @@ class PageInfoHelper {
     return sourceCode;
   }
 
-  Future<Map<String, String>> getCodeListByKeyword(String keyword) async {
+  Future<Map<String?, String>> getCodeListByKeyword(String keyword) async {
     CodeDisplatService codeDisplatService = CodeDisplatService();
-    Map<String, String> result = <String, String>{};
+    Map<String?, String> result = <String?, String>{};
     final scriptIds = await codeDisplatService.getScriptIdsWithKeyword(keyword);
-    if (scriptIds != null && scriptIds.isNotEmpty) {
+    if (scriptIds.isNotEmpty) {
       for (final entry in scriptIds.entries) {
         final code =
-            await codeDisplatService.getSourceCodeWithScriptId(entry.key);
+            await codeDisplatService.getSourceCodeWithScriptId(entry.key!);
         if (code != null && code.isNotEmpty) {
           result[entry.value] = code;
         }
