@@ -47,11 +47,16 @@
 
 1. Fork 本仓库
 2. 将你 fork 的仓库 clone 到本地
-3. 在本地修改代码
-4. 修改 example 工程的测试代码，并进行手工测试
-5. 在 test 目录下，修改单元测试
-6. 在本地提交改动并推送到你 fork 的仓库，commit message 格式请遵循本文 [Commit Message 规范](#commit-message) 部分
-7. 在 GitHub 上创建 Pull Request，在模板中填写对应信息
+3. 切换到对应开发分支，并 checkout 出新分支
+4. 在本地修改代码
+5. 修改 example 工程的测试代码，并进行手工测试
+6. 在 test 目录下，修改单元测试
+7. 在本地提交改动并推送到你 fork 的仓库，commit message 格式请遵循本文 [Commit Message 规范](#commit-message) 部分
+8. 在 GitHub 上创建 Pull Request，在模板中填写对应信息
+
+> 目前，UME 同时支持 null-safety 版本与非 null-safety 版本。
+> null-safety 版本开发分支为 `develop_nullsafety`，非 null-safety 版本开发分支为 `develop`。
+> PR 需要合入对应的开发分支中。
 
 ## Commit Message 规范
 
