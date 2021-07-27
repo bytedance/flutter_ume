@@ -140,9 +140,7 @@ class MemoryService with VMServiceWrapper {
 
     s(infoList);
     s(allClasses);
-    if (completion != null) {
-      completion();
-    }
+    completion();
   }
 
   String byteToString(int size) {
