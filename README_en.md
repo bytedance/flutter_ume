@@ -19,6 +19,7 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
     - [Compatibility](#compatibility)
     - [Coverage](#coverage)
     - [Version upgrade rules](#version-upgrade-rules)
+    - [Null-safety](#null-safety)
     - [Change log](#change-log)
   - [How to contribute](#how-to-contribute)
   - [LICENSE](#license)
@@ -30,12 +31,12 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
 
     ``` yaml
     dev_dependencies: # Don't use UME in release mode
-      flutter_ume: ^0.1.0
-      flutter_ume_kit_ui: ^0.1.0
-      flutter_ume_kit_device: ^0.1.0
-      flutter_ume_kit_perf: ^0.1.0
-      flutter_ume_kit_show_code: ^0.1.0
-      flutter_ume_kit_console: ^0.1.0
+      flutter_ume: ^0.1.0  # null-safety version: ^0.2.0-dev.0
+      flutter_ume_kit_ui: ^0.1.0  # null-safety version: ^0.2.0-dev.0
+      flutter_ume_kit_device: ^0.1.0  # null-safety version: ^0.2.0-dev.0
+      flutter_ume_kit_perf: ^0.1.0  # null-safety version: ^0.2.0-dev.0
+      flutter_ume_kit_show_code: ^0.1.0  # null-safety version: ^0.2.0-dev.0
+      flutter_ume_kit_console: ^0.1.0  # null-safety version: ^0.2.0-dev.0
     ```
 
 2. Run `flutter pub get`
@@ -210,24 +211,36 @@ There are 10 plugin kits built in the current open source version of UME.
 
 ### Compatibility
 
-| UME version | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.1 |
+| UME version | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.3 |
 | ---- | ---- | ---- | ---- | ---- |
 | 0.1.0 | ✅ | ✅ | ✅ | ✅ |
+| 0.2.0-dev.0 | ❌ | ❌ | ✅ | ✅ |
 
 ### Coverage
 
-| Package | master | develop |
-| ---- | ---- | ---- |
-| flutter_ume | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/coverage_badge.svg) |
-| flutter_ume_kit_device | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_device/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_device/coverage_badge.svg) |
-| flutter_ume_kit_perf | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_perf/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_perf/coverage_badge.svg) |
-| flutter_ume_kit_show_code | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_show_code/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_show_code/coverage_badge.svg) |
-| flutter_ume_kit_ui | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_ui/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_ui/coverage_badge.svg) |
-| flutter_ume_kit_console | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_console/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_console/coverage_badge.svg) |
+| Package | master | develop | develop_nullsafety |
+| ---- | ---- | ---- | ---- |
+| flutter_ume | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/coverage_badge.svg) |
+| flutter_ume_kit_device | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_device/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_device/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_device/coverage_badge.svg) |
+| flutter_ume_kit_perf | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_perf/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_perf/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_perf/coverage_badge.svg) |
+| flutter_ume_kit_show_code | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_show_code/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_show_code/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_show_code/coverage_badge.svg) |
+| flutter_ume_kit_ui | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_ui/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_ui/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_ui/coverage_badge.svg) |
+| flutter_ume_kit_console | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_console/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_console/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_console/coverage_badge.svg) |
 
 ### Version upgrade rules
 
 Please refer to [Semantic versions](https://dart.dev/tools/pub/versioning#semantic-versions) for details.
+
+### Null-safety
+
+| Package | null-safety version |
+| ---- | ---- |
+| flutter_ume | 0.2.0-dev.0 |
+| flutter_ume_kit_ui | 0.2.0-dev.0 |
+| flutter_ume_kit_device | 0.2.0-dev.0 |
+| flutter_ume_kit_perf | 0.2.0-dev.0 |
+| flutter_ume_kit_show_code | 0.2.0-dev.0 |
+| flutter_ume_kit_console | 0.2.0-dev.0 |
 
 ### Change log
 

@@ -19,6 +19,7 @@ Flutter 应用内调试工具平台
     - [兼容性](#兼容性)
     - [单测覆盖率](#单测覆盖率)
     - [版本号规则](#版本号规则)
+    - [Null-safety 版本](#null-safety-版本)
     - [更新日志](#更新日志)
   - [如何贡献](#如何贡献)
   - [开源协议](#开源协议)
@@ -30,12 +31,12 @@ Flutter 应用内调试工具平台
 
     ``` yaml
     dev_dependencies: # 请不要在 release 环境下使用 UME
-      flutter_ume: ^0.1.0
-      flutter_ume_kit_ui: ^0.1.0
-      flutter_ume_kit_device: ^0.1.0
-      flutter_ume_kit_perf: ^0.1.0
-      flutter_ume_kit_show_code: ^0.1.0
-      flutter_ume_kit_console: ^0.1.0
+      flutter_ume: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
+      flutter_ume_kit_ui: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
+      flutter_ume_kit_device: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
+      flutter_ume_kit_perf: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
+      flutter_ume_kit_show_code: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
+      flutter_ume_kit_console: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
     ```
 
 2. 执行 `flutter pub get`
@@ -210,24 +211,36 @@ showDialog(
 
 ### 兼容性
 
-| UME 版本 | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.1 |
+| UME 版本 | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.3 |
 | ---- | ---- | ---- | ---- | ---- |
 | 0.1.0 | ✅ | ✅ | ✅ | ✅ |
+| 0.2.0-dev.0 | ❌ | ❌ | ✅ | ✅ |
 
 ### 单测覆盖率
 
-| 包 | master | develop |
-| ---- | ---- | ---- |
-| flutter_ume | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/coverage_badge.svg) |
-| flutter_ume_kit_device | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_device/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_device/coverage_badge.svg) |
-| flutter_ume_kit_perf | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_perf/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_perf/coverage_badge.svg) |
-| flutter_ume_kit_show_code | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_show_code/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_show_code/coverage_badge.svg) |
-| flutter_ume_kit_ui | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_ui/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_ui/coverage_badge.svg) |
-| flutter_ume_kit_console | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_console/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_console/coverage_badge.svg) |
+| 包 | master | develop | develop_nullsafety |
+| ---- | ---- | ---- | ---- |
+| flutter_ume | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/coverage_badge.svg) |
+| flutter_ume_kit_device | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_device/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_device/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_device/coverage_badge.svg) |
+| flutter_ume_kit_perf | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_perf/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_perf/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_perf/coverage_badge.svg) |
+| flutter_ume_kit_show_code | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_show_code/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_show_code/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_show_code/coverage_badge.svg) |
+| flutter_ume_kit_ui | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_ui/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_ui/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_ui/coverage_badge.svg) |
+| flutter_ume_kit_console | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_console/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_console/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_console/coverage_badge.svg) |
 
 ### 版本号规则
 
 请参考 [Semantic versions](https://dart.dev/tools/pub/versioning#semantic-versions)
+
+### Null-safety 版本
+
+| 包 | null-safety 推荐版本号 |
+| ---- | ---- |
+| flutter_ume | 0.2.0-dev.0 |
+| flutter_ume_kit_ui | 0.2.0-dev.0 |
+| flutter_ume_kit_device | 0.2.0-dev.0 |
+| flutter_ume_kit_perf | 0.2.0-dev.0 |
+| flutter_ume_kit_show_code | 0.2.0-dev.0 |
+| flutter_ume_kit_console | 0.2.0-dev.0 |
 
 ### 更新日志
 

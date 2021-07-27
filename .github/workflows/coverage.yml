@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - develop
+      - develop_nullsafety
     paths:
       - 'lib/**'
       - 'kits/flutter_ume_kit_console/lib/**'
