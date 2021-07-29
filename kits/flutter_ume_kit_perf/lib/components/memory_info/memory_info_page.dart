@@ -293,9 +293,7 @@ class _PerRow extends StatelessWidget {
 
 class _MemoryDetail extends StatefulWidget {
   _MemoryDetail({Key? key, required this.detail, required this.service})
-      : assert(service != null),
-        assert(detail != null),
-        super(key: key);
+      : super(key: key);
 
   final _DetailModel detail;
 

@@ -59,7 +59,7 @@ Flutter 应用内调试工具平台
         PluginManager.instance                                 // 注册插件
           ..register(WidgetInfoInspector())
           ..register(WidgetDetailInspector())
-          ..register(ColorSucker())
+          ..register(ColorPicker())
           ..register(AlignRuler())
           ..register(Performance())
           ..register(ShowCode())
@@ -109,7 +109,7 @@ showDialog(
     <tr>
         <td width="33.33%" align="center"><img src="./screenshots/widget_info.png" width="100%" alt="Widget 信息" /></br>Widget 信息</td>
         <td width="33.33%" align="center"><img src="./screenshots/widget_detail.png" width="100%" alt="Widget 详情" /></br>Widget 详情</td>
-        <td width="33.33%" align="center"><img src="./screenshots/color_sucker.png" width="100%" alt="颜色吸管" /></br>颜色吸管</td>
+        <td width="33.33%" align="center"><img src="./screenshots/color_picker.png" width="100%" alt="颜色吸管" /></br>颜色吸管</td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="./screenshots/align_ruler.png" width="100%" alt="对齐标尺" /></br>对齐标尺</td>

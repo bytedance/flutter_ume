@@ -59,7 +59,7 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
         PluginManager.instance                                 // Register plugin kits
           ..register(WidgetInfoInspector())
           ..register(WidgetDetailInspector())
-          ..register(ColorSucker())
+          ..register(ColorPicker())
           ..register(AlignRuler())
           ..register(Performance())
           ..register(ShowCode())
@@ -109,7 +109,7 @@ There are 10 plugin kits built in the current open source version of UME.
     <tr>
         <td width="33.33%" align="center"><img src="./screenshots/widget_info.png" width="100%" alt="Widget Info" /></br>Widget Info</td>
         <td width="33.33%" align="center"><img src="./screenshots/widget_detail.png" width="100%" alt="Widget Detail" /></br>Widget Detail</td>
-        <td width="33.33%" align="center"><img src="./screenshots/color_sucker.png" width="100%" alt="Color Sucker" /></br>Color Sucker</td>
+        <td width="33.33%" align="center"><img src="./screenshots/color_picker.png" width="100%" alt="Color Sucker" /></br>Color Sucker</td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="./screenshots/align_ruler.png" width="100%" alt="Align Ruler" /></br>Align Ruler</td>

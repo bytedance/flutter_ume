@@ -200,9 +200,7 @@ class __ContentPageState extends State<_ContentPage> {
     MenuAction itemTapAction = (pluginData) {
       _currentSelected = pluginData;
       _handleAction(_context, pluginData!);
-      if (pluginData.onTrigger != null) {
-        pluginData.onTrigger();
-      }
+      pluginData.onTrigger();
     };
     _menuPage = MenuPage(
       action: itemTapAction,

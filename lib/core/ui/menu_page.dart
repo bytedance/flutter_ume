@@ -59,7 +59,7 @@ class _MenuPageState extends State<MenuPage>
 
   void _saveData(List<Pluggable?> data) {
     List l = data.map((f) => f!.name).toList();
-    if (l == null || l.isEmpty) {
+    if (l.isEmpty) {
       return;
     }
     Future.delayed(Duration(milliseconds: 500), () {

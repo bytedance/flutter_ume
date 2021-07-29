@@ -14,7 +14,7 @@ void main() {
     PluginManager.instance
       ..register(WidgetInfoInspector())
       ..register(WidgetDetailInspector())
-      ..register(ColorSucker())
+      ..register(ColorPicker())
       ..register(AlignRuler())
       ..register(Performance())
       ..register(ShowCode())

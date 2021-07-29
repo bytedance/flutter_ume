@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_ume/core/ui/global.dart';
-import 'package:flutter_ume_kit_ui/components/color_sucker/color_sucker.dart';
+import 'package:flutter_ume_kit_ui/components/color_picker/color_picker.dart';
 
 import '../../mock_classes.dart';
 
 void main() {
-  group('ColorSucker', () {
+  group('ColorPicker', () {
     test('Pluggable', () {
-      final pluggable = ColorSucker();
+      final pluggable = ColorPicker();
       final widget = pluggable.buildWidget(MockContext());
       final name = pluggable.name;
       final onTrigger = pluggable.onTrigger;
@@ -21,10 +21,10 @@ void main() {
       expect(onTrigger, isA<Function>());
       expect(imageProvider, isNotNull);
     });
-    testWidgets('ColorSucker pump widget', (tester) async {
+    testWidgets('ColorPicker pump widget', (tester) async {
       WidgetsFlutterBinding.ensureInitialized();
 
-      final colorSucker = ColorSucker();
+      final colorSucker = ColorPicker();
 
       await tester.pumpWidget(MaterialApp(
           key: rootKey,
@@ -36,10 +36,10 @@ void main() {
       expect(colorSucker, isNotNull);
     });
 
-    testWidgets('ColorSucker Pan the point', (tester) async {
+    testWidgets('ColorPicker Pan the point', (tester) async {
       WidgetsFlutterBinding.ensureInitialized();
 
-      final colorSucker = ColorSucker();
+      final colorSucker = ColorPicker();
 
       await tester.pumpWidget(MaterialApp(
           key: rootKey,
@@ -67,10 +67,10 @@ void main() {
       expect(colorSucker, isNotNull);
     });
 
-    testWidgets('ColorSucker Pan the toolbar', (tester) async {
+    testWidgets('ColorPicker Pan the toolbar', (tester) async {
       WidgetsFlutterBinding.ensureInitialized();
 
-      final colorSucker = ColorSucker();
+      final colorSucker = ColorPicker();
 
       await tester.pumpWidget(MaterialApp(
           key: rootKey,

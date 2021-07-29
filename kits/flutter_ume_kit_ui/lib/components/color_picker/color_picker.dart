@@ -7,27 +7,27 @@ import 'package:image/image.dart' as img;
 import 'package:flutter_ume/flutter_ume.dart';
 import 'icon.dart' as icon;
 
-class ColorSucker extends StatefulWidget implements Pluggable {
+class ColorPicker extends StatefulWidget implements Pluggable {
   final double scale;
   final Size size;
 
-  const ColorSucker({
+  const ColorPicker({
     Key? key,
     this.scale = 10.0,
     this.size = const Size(100, 100),
   }) : super(key: key);
 
   @override
-  _ColorSuckerState createState() => _ColorSuckerState();
+  _ColorPickerState createState() => _ColorPickerState();
 
   @override
   Widget buildWidget(BuildContext? context) => this;
 
   @override
-  String get name => 'ColorSucker';
+  String get name => 'ColorPicker';
 
   @override
-  String get displayName => 'ColorSucker';
+  String get displayName => 'ColorPicker';
 
   @override
   void onTrigger() {}
@@ -37,7 +37,7 @@ class ColorSucker extends StatefulWidget implements Pluggable {
       MemoryImage(base64Decode(icon.iconData));
 }
 
-class _ColorSuckerState extends State<ColorSucker> {
+class _ColorPickerState extends State<ColorPicker> {
   late Size _magnifierSize;
   double? _scale;
   BorderRadius? _radius;
@@ -62,7 +62,7 @@ class _ColorSuckerState extends State<ColorSucker> {
   }
 
   @override
-  void didUpdateWidget(ColorSucker oldWidget) {
+  void didUpdateWidget(ColorPicker oldWidget) {
     if (oldWidget.size != widget.size) {
       _magnifierSize = widget.size;
       _radius = BorderRadius.circular(_magnifierSize.longestSide);

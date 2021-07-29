@@ -109,7 +109,9 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
                       height: 22,
                       child: CircularProgressIndicator(),
                     ),
-                  if (showCodeList && _codeList != null && _codeList!.isNotEmpty)
+                  if (showCodeList &&
+                      _codeList != null &&
+                      _codeList!.isNotEmpty)
                     PopupMenuButton<String>(
                       padding: EdgeInsets.zero,
                       icon: Icon(Icons.arrow_drop_down),
@@ -172,7 +174,7 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
                         pageInfoHelper
                             .getCodeListByKeyword(value)
                             .then((codeList) {
-                          if (codeList != null && codeList.isNotEmpty) {
+                          if (codeList.isNotEmpty) {
                             showCodeList = true;
                             _codeList = codeList;
                           } else {
