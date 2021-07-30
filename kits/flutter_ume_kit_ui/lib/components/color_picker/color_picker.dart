@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:image/image.dart' as img;
 import 'package:flutter_ume/flutter_ume.dart';
 import 'icon.dart' as icon;
+import 'dart:math' as math;
 
 class ColorPicker extends StatefulWidget implements Pluggable {
   final double scale;
@@ -39,11 +40,13 @@ class ColorPicker extends StatefulWidget implements Pluggable {
 
 class _ColorPickerState extends State<ColorPicker> {
   late Size _magnifierSize;
+  late Size _handlerSize;
   double? _scale;
   BorderRadius? _radius;
   Color _currentColor = Colors.white;
   img.Image? _snapshot;
   Offset _magnifierPosition = Offset.zero;
+  Offset _handlerPosition = Offset.zero;
   double _toolBarY = 60.0;
   Matrix4 _matrix = Matrix4.identity();
   late Size _windowSize;
@@ -53,11 +56,14 @@ class _ColorPickerState extends State<ColorPicker> {
   void initState() {
     _windowSize = ui.window.physicalSize / ui.window.devicePixelRatio;
     _magnifierSize = widget.size;
+    _handlerSize = Size(_magnifierSize.width / 2.5, _magnifierSize.height / 2);
     _scale = widget.scale;
     _radius = BorderRadius.circular(_magnifierSize.longestSide);
     _matrix = Matrix4.identity()..scale(widget.scale);
     _magnifierPosition =
         _windowSize.center(Offset.zero) - _magnifierSize.center(Offset.zero);
+    _handlerPosition = _windowSize.center(Offset.zero) -
+        _handlerSize.center(Offset(-_handlerSize.width, -_handlerSize.height));
     super.initState();
   }
 
@@ -75,16 +81,18 @@ class _ColorPickerState extends State<ColorPicker> {
   }
 
   void _onPanUpdate(DragUpdateDetails dragDetails) {
-    _magnifierPosition =
-        dragDetails.globalPosition - _magnifierSize.center(Offset.zero);
-    double newX = dragDetails.globalPosition.dx;
-    double newY = dragDetails.globalPosition.dy;
+    _magnifierPosition = dragDetails.globalPosition -
+        _magnifierSize.center(Offset(_handlerSize.width, _handlerSize.height));
+    _handlerPosition =
+        dragDetails.globalPosition - _handlerSize.center(Offset.zero);
+    double newX = dragDetails.globalPosition.dx - _magnifierSize.width / 2;
+    double newY = dragDetails.globalPosition.dy - _magnifierSize.height / 2;
     final Matrix4 newMatrix = Matrix4.identity()
       ..translate(newX, newY)
       ..scale(_scale, _scale)
       ..translate(-newX, -newY);
     _matrix = newMatrix;
-    _searchPixel(dragDetails.globalPosition);
+    _searchPixel(Offset(newX, newY));
     setState(() {});
   }
 
@@ -146,8 +154,11 @@ class _ColorPickerState extends State<ColorPicker> {
   Widget build(BuildContext context) {
     if (_windowSize.isEmpty) {
       _windowSize = MediaQuery.of(context).size;
-      _magnifierPosition =
-          _windowSize.center(Offset.zero) - _magnifierSize.center(Offset.zero);
+      _magnifierPosition = _windowSize.center(Offset.zero) -
+          _magnifierSize
+              .center(Offset(_handlerSize.width, _handlerSize.height));
+      _handlerPosition =
+          _windowSize.center(Offset.zero) - _handlerSize.center(Offset.zero);
     }
     Widget toolBar = Container(
       width: MediaQuery.of(context).size.width - 32,
@@ -193,41 +204,65 @@ class _ColorPickerState extends State<ColorPicker> {
       alignment: Alignment.center,
       children: [
         Positioned(
-            left: 0,
-            top: _toolBarY,
-            child: GestureDetector(
-                onVerticalDragUpdate: _toolBarPanUpdate, child: toolBar)),
+          left: 0,
+          top: _toolBarY,
+          child: GestureDetector(
+            onVerticalDragUpdate: _toolBarPanUpdate,
+            child: toolBar,
+          ),
+        ),
+        Positioned(
+          left: _handlerPosition.dx,
+          top: _handlerPosition.dy,
+          child: Transform.rotate(
+            angle: -math.pi / 4,
+            child: ClipRect(
+              child: GestureDetector(
+                onPanStart: _onPanStart,
+                onPanEnd: _onPanEnd,
+                onPanUpdate: _onPanUpdate,
+                child: Container(
+                  height: _handlerSize.height,
+                  width: _handlerSize.width,
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.zero,
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 3,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
         Positioned(
           left: _magnifierPosition.dx,
           top: _magnifierPosition.dy,
           child: ClipRRect(
             borderRadius: _radius,
-            child: GestureDetector(
-              onPanStart: _onPanStart,
-              onPanEnd: _onPanEnd,
-              onPanUpdate: _onPanUpdate,
-              child: BackdropFilter(
-                filter: ui.ImageFilter.matrix(_matrix.storage,
-                    filterQuality: FilterQuality.none),
-                child: Container(
-                  child: Center(
-                    child: Container(
-                      height: 1,
-                      width: 1,
-                      decoration: const BoxDecoration(
-                          color: Colors.grey, shape: BoxShape.circle),
-                    ),
+            child: BackdropFilter(
+              filter: ui.ImageFilter.matrix(_matrix.storage,
+                  filterQuality: FilterQuality.none),
+              child: Container(
+                child: Center(
+                  child: Container(
+                    height: 5,
+                    width: 5,
+                    decoration: const BoxDecoration(
+                        color: Colors.red, shape: BoxShape.circle),
                   ),
-                  height: _magnifierSize.height,
-                  width: _magnifierSize.width,
-                  decoration: BoxDecoration(
-                      borderRadius: _radius,
-                      border: Border.all(color: Colors.grey, width: 3)),
                 ),
+                height: _magnifierSize.height,
+                width: _magnifierSize.width,
+                decoration: BoxDecoration(
+                    borderRadius: _radius,
+                    border: Border.all(color: Colors.grey, width: 3)),
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
