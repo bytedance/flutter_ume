@@ -1,7 +1,7 @@
 import 'package:vm_service/vm_service.dart';
 import 'package:flutter_ume/flutter_ume.dart';
 
-class CodeDisplatService with VMServiceWrapper {
+class CodeDisplayService with VMServiceWrapper {
   Future<String?> getIdWithClassName(String className) async {
     String? classId = '';
     final classList = await serviceWrapper.getClassList();
