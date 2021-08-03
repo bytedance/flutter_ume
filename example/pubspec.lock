@@ -141,28 +141,28 @@ packages:
       path: "../kits/flutter_ume_kit_device"
       relative: true
     source: path
-    version: "0.2.0-dev.0"
+    version: "0.1.0"
   flutter_ume_kit_perf:
     dependency: "direct dev"
     description:
       path: "../kits/flutter_ume_kit_perf"
       relative: true
     source: path
-    version: "0.2.0-dev.0"
+    version: "0.1.0"
   flutter_ume_kit_show_code:
     dependency: "direct dev"
     description:
       path: "../kits/flutter_ume_kit_show_code"
       relative: true
     source: path
-    version: "0.2.0-dev.0"
+    version: "0.1.0"
   flutter_ume_kit_ui:
     dependency: "direct dev"
     description:
       path: "../kits/flutter_ume_kit_ui"
       relative: true
     source: path
-    version: "0.2.0-dev.0"
+    version: "0.1.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
