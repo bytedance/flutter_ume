@@ -21,7 +21,7 @@ dev_dependencies:
   mockito: ^5.0.12
   flutter_coverage_badge:
     git:
-      url: https://github.com/amondnet/flutter_coverage_badge.git
+      url: https://github.com/smileShirely/flutter_coverage_badge.git
       ref: master
   
 flutter:
