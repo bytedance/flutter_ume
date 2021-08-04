@@ -128,6 +128,7 @@ showDialog(
 
 ## 为 UME 开发插件
 
+> UME 插件位于 `./kits` 目录下，每个插件包都是一个 `package`
 > 本小节示例可参考 [`./custom_plugin_example`](./custom_plugin_example/)
 
 1. `flutter create -t package custom_plugin` 创建一个插件包，可以是 `package`，也可以是 `plugin`

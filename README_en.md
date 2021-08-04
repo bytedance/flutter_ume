@@ -128,6 +128,7 @@ There are 10 plugin kits built in the current open source version of UME.
 
 ## Develop plugin kits for UME
 
+> UME plugins are located in the `./kits` directory, and each one is a `package`.
 > You can refer to the example in [`./custom_plugin_example`](./custom_plugin_example/) about this chapter.
 
 1. Run `flutter create -t package custom_plugin` to create your custom plugin kit, it could be `package` or `plugin`.
