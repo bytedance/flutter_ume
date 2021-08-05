@@ -1,7 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:example/ume_switch.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -53,16 +52,9 @@ class _HomePageState extends State<HomePage> {
                             child: const Text('OK'))
                       ],
                     ),
-                    // useRootNavigator: false
-                  ); // <===== It's very IMPORTANT!
+                  );
                 },
                 child: const Text('Show Dialog')),
-            TextButton(
-                onPressed: () {
-                  Get.defaultDialog(
-                      textCancel: 'Cancel', onCancel: () => Get.back());
-                },
-                child: const Text('GetX show dialog')),
             TextButton(
                 child: const Text('Awesome_dialog show dialog'),
                 onPressed: () {

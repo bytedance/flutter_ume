@@ -9,7 +9,6 @@ import 'package:flutter_ume_kit_perf/flutter_ume_kit_perf.dart';
 import 'package:flutter_ume_kit_show_code/flutter_ume_kit_show_code.dart';
 import 'package:flutter_ume_kit_device/flutter_ume_kit_device.dart';
 import 'package:flutter_ume_kit_console/flutter_ume_kit_console.dart';
-import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -42,7 +41,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       title: 'UME Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,

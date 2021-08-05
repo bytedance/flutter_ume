@@ -26,8 +26,7 @@ class DetailPage extends StatelessWidget {
                             child: const Text('OK'))
                       ],
                     ),
-                    // useRootNavigator: false
-                  ); // <===== It's very IMPORTANT!
+                  );
                 },
                 child: const Text('Show Dialog'))
           ],

@@ -9,7 +9,6 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.3
-  get: ^4.3.4
   awesome_dialog: ^2.1.0
   provider: ^5.0.0
 
