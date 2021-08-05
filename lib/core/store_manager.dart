@@ -13,7 +13,7 @@ class PluginStoreManager {
   }
 
   void storePlugins(List<String> plugins) async {
-    if (plugins == null || plugins.isEmpty) {
+    if (plugins.isEmpty) {
       return;
     }
     final SharedPreferences prefs = await _sharedPref;
@@ -26,9 +26,6 @@ class PluginStoreManager {
   }
 
   void storeMinimalToolbarSwitch(bool value) async {
-    if (value == null) {
-      return;
-    }
     final SharedPreferences prefs = await _sharedPref;
     await prefs.setBool(_minimalToolbarSwitch, value);
   }

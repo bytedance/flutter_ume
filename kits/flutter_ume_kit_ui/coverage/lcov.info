@@ -299,7 +299,7 @@ DA:244,2
 LF:100
 LH:62
 end_of_record
-SF:lib/components/color_sucker/color_sucker.dart
+SF:lib/components/color_picker/color_picker.dart
 DA:14,1
 DA:18,1
 DA:20,1

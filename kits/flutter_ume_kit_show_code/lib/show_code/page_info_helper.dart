@@ -50,7 +50,7 @@ class PageInfoHelper {
 
   double _area(RenderObject object) {
     final Size size = object.paintBounds.size;
-    return size == null ? double.maxFinite : size.width * size.height;
+    return size.width * size.height;
   }
 
   // Init selection of current page
