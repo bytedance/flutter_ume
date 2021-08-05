@@ -2,9 +2,14 @@
 
 [English](./README_en.md)
 
+Flutter 应用内调试工具平台
+
 <img src="./ume_logo_256.png" width = "128" height = "128" alt="banner" />
 
-Flutter 应用内调试工具平台
+<img src="./apk_qrcode.png" width = "256" height = "256" alt="banner" />
+
+扫码或点击链接下载 apk，快速体验 UME。
+https://github.com/bytedance/flutter_ume/releases/download/v0.1.0.4/app-debug.apk
 
 当前版本内置 10 个插件，
 开发者可以创建自己的插件，并集成进 UME 平台。
