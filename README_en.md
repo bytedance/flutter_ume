@@ -2,9 +2,14 @@
 
 [简体中文](./README.md)
 
+UME is an in-app debug kits platform for Flutter apps.
+
 <img src="./ume_logo_256.png" width = "128" height = "128" alt="banner" />
 
-UME is an in-app debug kits platform for Flutter apps.
+<img src="./apk_qrcode.png" width = "256" height = "256" alt="banner" />
+
+Scan QR code or click link to download apk. Try it now!
+https://github.com/bytedance/flutter_ume/releases/download/v0.1.0.4/app-debug.apk
 
 There are 10 plugin kits built in the current open source version of UME.
 Developer could create custom plugin kits, and integrate them into UME.
