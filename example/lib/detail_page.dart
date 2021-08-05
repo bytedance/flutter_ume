@@ -17,16 +17,17 @@ class DetailPage extends StatelessWidget {
             TextButton(
                 onPressed: () {
                   showDialog(
-                      context: context,
-                      builder: (ctx) => AlertDialog(
-                            title: const Text('Dialog'),
-                            actions: <Widget>[
-                              TextButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: const Text('OK'))
-                            ],
-                          ),
-                      useRootNavigator: false); // <===== It's very IMPORTANT!
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                      title: const Text('Dialog'),
+                      actions: <Widget>[
+                        TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('OK'))
+                      ],
+                    ),
+                    // useRootNavigator: false
+                  ); // <===== It's very IMPORTANT!
                 },
                 child: const Text('Show Dialog'))
           ],

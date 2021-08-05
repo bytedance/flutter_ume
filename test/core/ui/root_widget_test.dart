@@ -25,9 +25,7 @@ void main() {
           (injectUMEWidget(
             child: Container(),
             enable: false,
-          ) as StatelessWidget)
-              // ignore: invalid_use_of_protected_member
-              .build(MockBuildContext()),
+          ) as StatelessWidget),
           isInstanceOf<Container>());
     });
 
