@@ -29,7 +29,7 @@ ButtonStyle _buttonStyle(
   );
 }
 
-class DioPluggableState extends State<DioPluggable> {
+class DioPluggableState extends State<DioInspector> {
   @override
   void initState() {
     super.initState();

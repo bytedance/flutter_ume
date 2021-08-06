@@ -10,8 +10,10 @@ import 'package:flutter_ume/core/pluggable.dart';
 import 'widgets/icon.dart' as icon;
 import 'widgets/pluggable_state.dart';
 
-class DioPluggable extends StatefulWidget implements Pluggable {
-  const DioPluggable({Key? key}) : super(key: key);
+// TODO(Alex): Implement [PluggableStream] for dot features.
+/// Implement a [Pluggable] to integrate with UME.
+class DioInspector extends StatefulWidget implements Pluggable {
+  const DioInspector({Key? key}) : super(key: key);
 
   @override
   DioPluggableState createState() => DioPluggableState();

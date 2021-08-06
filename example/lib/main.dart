@@ -26,7 +26,7 @@ void main() {
       ..register(CpuInfoPage())
       ..register(DeviceInfoPanel())
       ..register(Console())
-      ..register(DioPluggable());
+      ..register(DioInspector());
     // Add an inspector for Dio.
     dio.interceptors.add(UMEDioInterceptor());
     runApp(injectUMEWidget(child: MyApp(), enable: true));
