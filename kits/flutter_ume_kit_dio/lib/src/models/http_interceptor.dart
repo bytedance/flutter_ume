@@ -4,15 +4,13 @@
 ///
 import 'package:dio/dio.dart';
 
+import '../constants/constants.dart';
 import '../instances.dart';
-
-const String _EXTRA_START_TIME = 'ume_start_time';
-const String _EXTRA_END_TIME = 'ume_end_time';
 
 class UMEDioInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.extra[_EXTRA_START_TIME] = DateTime.now();
+    options.extra[DIO_EXTRA_START_TIME] = DateTime.now();
     handler.next(options);
   }
 
@@ -21,7 +19,7 @@ class UMEDioInterceptor extends Interceptor {
     Response<dynamic> response,
     ResponseInterceptorHandler handler,
   ) {
-    response.requestOptions.extra[_EXTRA_END_TIME] = DateTime.now();
+    response.requestOptions.extra[DIO_EXTRA_END_TIME] = DateTime.now();
     InspectorInstance.httpContainer.addRequest(response);
     handler.next(response);
   }
@@ -29,7 +27,7 @@ class UMEDioInterceptor extends Interceptor {
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
     err.response ??= Response<dynamic>(requestOptions: err.requestOptions);
-    err.response!.requestOptions.extra[_EXTRA_END_TIME] = DateTime.now();
+    err.response!.requestOptions.extra[DIO_EXTRA_END_TIME] = DateTime.now();
     InspectorInstance.httpContainer.addRequest(err.response!);
     handler.next(err);
   }

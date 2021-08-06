@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
+import '../constants/constants.dart';
 import '../instances.dart';
 import '../pluggable.dart';
 
@@ -29,6 +30,28 @@ ButtonStyle _buttonStyle(
 }
 
 class DioPluggableState extends State<DioPluggable> {
+  @override
+  void initState() {
+    super.initState();
+    InspectorInstance.httpContainer.addListener(_listener);
+  }
+
+  @override
+  void dispose() {
+    InspectorInstance.httpContainer
+      ..removeListener(_listener)
+      ..resetPaging();
+    super.dispose();
+  }
+
+  void _listener() {
+    if (mounted &&
+        !context.debugDoingBuild &&
+        context.owner?.debugBuilding != true) {
+      setState(() {});
+    }
+  }
+
   // Widget _backdrop(BuildContext context) {
   //   return Positioned.fill(
   //     child: GestureDetector(
@@ -42,10 +65,7 @@ class DioPluggableState extends State<DioPluggable> {
 
   Widget _clearAllButton(BuildContext context) {
     return TextButton(
-      onPressed: () {
-        InspectorInstance.httpContainer.clearRequests();
-        setState(() {});
-      },
+      onPressed: InspectorInstance.httpContainer.clearRequests,
       style: _buttonStyle(
         context,
         padding: const EdgeInsets.symmetric(
@@ -64,16 +84,23 @@ class DioPluggableState extends State<DioPluggable> {
   }
 
   Widget _itemList(BuildContext context) {
-    final int length = InspectorInstance.httpContainer.requests.length;
+    final List<Response<dynamic>> requests =
+        InspectorInstance.httpContainer.pagedRequests;
+    final int length = requests.length;
     if (length > 0) {
       return CustomScrollView(
         slivers: <Widget>[
           SliverList(
             delegate: SliverChildBuilderDelegate(
-              (_, int index) => _ResponseCard(
-                key: ValueKey<int>(index),
-                response: InspectorInstance.httpContainer.requests[index],
-              ),
+              (_, int index) {
+                if (index == length - 2) {
+                  InspectorInstance.httpContainer.loadNextPage();
+                }
+                return _ResponseCard(
+                  key: ValueKey<int>(index),
+                  response: requests[index],
+                );
+              },
               childCount: length,
               findChildIndexCallback: (Key key) => (key as ValueKey<int>).value,
             ),
@@ -174,10 +201,10 @@ class _ResponseCardState extends State<_ResponseCard> {
   RequestOptions get request => response.requestOptions;
 
   /// 请求开始时间
-  DateTime get startTime => request.extra['startTime'] as DateTime;
+  DateTime get startTime => request.extra[DIO_EXTRA_START_TIME] as DateTime;
 
   /// 请求结束时间
-  DateTime get endTime => request.extra['endTime'] as DateTime;
+  DateTime get endTime => request.extra[DIO_EXTRA_END_TIME] as DateTime;
 
   /// 请求时长
   Duration get duration => endTime.difference(startTime);
