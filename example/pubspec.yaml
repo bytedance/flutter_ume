@@ -9,6 +9,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.3
+  # For Dio Kit
+  dio: ^4.0.0
 
 dependency_overrides:
   flutter_ume:
@@ -23,6 +25,8 @@ dependency_overrides:
     path: ../kits/flutter_ume_kit_device
   flutter_ume_kit_console:
     path: ../kits/flutter_ume_kit_console
+  flutter_ume_kit_dio:
+    path: ../kits/flutter_ume_kit_dio
 
 dev_dependencies:
   flutter_test:
@@ -39,6 +43,8 @@ dev_dependencies:
     path: ../kits/flutter_ume_kit_device
   flutter_ume_kit_console:
     path: ../kits/flutter_ume_kit_console
+  flutter_ume_kit_dio:
+    path: ../kits/flutter_ume_kit_dio
 
 flutter:
   uses-material-design: true

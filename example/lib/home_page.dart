@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'main.dart';
+
 class HomePage extends StatefulWidget {
-  HomePage({Key? key, this.title}) : super(key: key);
+  const HomePage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -44,7 +46,24 @@ class _HomePageState extends State<HomePage> {
                           ),
                       useRootNavigator: false); // <===== It's very IMPORTANT!
                 },
-                child: const Text('Show Dialog'))
+                child: const Text('Show Dialog')),
+            TextButton(
+              onPressed: () {
+                Future.wait<void>(
+                  List<Future<void>>.generate(
+                    10,
+                    (int i) => Future<void>.delayed(
+                      Duration(seconds: i),
+                      () => dio.get(
+                        'https://api.github.com'
+                        '/?_t=${DateTime.now().millisecondsSinceEpoch}&$i',
+                      ),
+                    ),
+                  ),
+                );
+              },
+              child: const Text('Make multiple network requests'),
+            ),
           ],
         )));
   }
