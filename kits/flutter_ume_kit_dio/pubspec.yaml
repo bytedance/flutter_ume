@@ -10,14 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  tuple: ^2.0.0
-  share: ^2.0.4
-  shared_preferences: ^2.0.6
   flutter_ume: '>=0.2.0-dev.0 <0.3.0'
 
   dio: ^4.0.0
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  mockito: ^5.0.12
