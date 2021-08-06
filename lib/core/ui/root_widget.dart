@@ -40,7 +40,7 @@ Widget injectUMEWidget({
   WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
     if (enable) {
       final overlayEntry = OverlayEntry(builder: (BuildContext context) {
-        return _FloatingWidget();
+        return const _FloatingWidget();
       });
       overlayKey.currentState?.insert(overlayEntry);
     }
@@ -57,11 +57,7 @@ Widget injectUMEWidget({
           child: Localizations(
             locale: supportedLocales?.first ?? Locale('en', 'US'),
             delegates: localizationsDelegates.toList(),
-            child: ScaffoldMessenger(
-              child: Overlay(
-                key: overlayKey,
-              ),
-            ),
+            child: ScaffoldMessenger(child: Overlay(key: overlayKey)),
           ),
         )
       ],
@@ -70,7 +66,7 @@ Widget injectUMEWidget({
 }
 
 class _FloatingWidget extends StatelessWidget {
-  _FloatingWidget({
+  const _FloatingWidget({
     Key? key,
     this.supportedLocales,
     this.localizationsDelegates,

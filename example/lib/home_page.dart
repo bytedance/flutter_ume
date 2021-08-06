@@ -16,18 +16,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title!),
-          actions: [
-            IconButton(
-                onPressed: () => context.read<UMESwitch>().trigger(),
-                icon: Icon(context.read<UMESwitch>().enable
-                    ? Icons.light
-                    : Icons.light_sharp))
-          ],
-        ),
-        body: Center(
-            child: Column(
+      appBar: AppBar(
+        title: Text(widget.title!),
+        actions: [
+          IconButton(
+            onPressed: () => context.read<UMESwitch>().trigger(),
+            icon: Icon(context.read<UMESwitch>().enable
+                ? Icons.light
+                : Icons.light_sharp),
+          ),
+        ],
+      ),
+      body: Center(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextButton(
@@ -41,39 +42,46 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: const Text('Push Detail Page')),
             TextButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (ctx) => AlertDialog(
-                      title: const Text('Dialog'),
-                      actions: <Widget>[
-                        TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text('OK'))
-                      ],
-                    ),
-                  );
-                },
-                child: const Text('Show Dialog')),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: const Text('Dialog'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.pop(ctx),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: const Text('Show Dialog'),
+            ),
             TextButton(
-                child: const Text('Awesome_dialog show dialog'),
-                onPressed: () {
-                  AwesomeDialog(
-                    context: context,
-                    dialogType: DialogType.INFO_REVERSED,
-                    borderSide: BorderSide(color: Colors.green, width: 2),
-                    width: 280,
-                    buttonsBorderRadius: BorderRadius.all(Radius.circular(2)),
-                    headerAnimationLoop: false,
-                    animType: AnimType.BOTTOMSLIDE,
-                    title: 'INFO',
-                    desc: 'Dialog description here...',
-                    showCloseIcon: true,
-                    btnCancelOnPress: () {},
-                    btnOkOnPress: () {},
-                  )..show();
-                }),
+              child: const Text('Awesome_dialog show dialog'),
+              onPressed: () {
+                AwesomeDialog(
+                  context: context,
+                  dialogType: DialogType.INFO_REVERSED,
+                  borderSide: BorderSide(color: Colors.green, width: 2),
+                  width: 280,
+                  buttonsBorderRadius: BorderRadius.all(
+                    Radius.circular(2),
+                  ),
+                  headerAnimationLoop: false,
+                  animType: AnimType.BOTTOMSLIDE,
+                  title: 'INFO',
+                  desc: 'Dialog description here...',
+                  showCloseIcon: true,
+                  btnCancelOnPress: () {},
+                  btnOkOnPress: () {},
+                )..show();
+              },
+            ),
           ],
-        )));
+        ),
+      ),
+    );
   }
 }

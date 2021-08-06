@@ -22,10 +22,10 @@ void main() {
   group('RootWidget', () {
     testWidgets('RootWidget assert constructor', (tester) async {
       expect(
-          (injectUMEWidget(
+          injectUMEWidget(
             child: Container(),
             enable: false,
-          ) as StatelessWidget),
+          ),
           isInstanceOf<Container>());
     });
 

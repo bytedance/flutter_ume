@@ -26,11 +26,15 @@ void main() {
       ..register(Console());
     runApp(MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => UMESwitch()),
+        ChangeNotifierProvider(
+          create: (_) => UMESwitch(),
+        ),
       ],
       builder: (ctx, child) {
         return injectUMEWidget(
-            child: MyApp(), enable: ctx.watch<UMESwitch>().enable);
+          child: MyApp(),
+          enable: ctx.watch<UMESwitch>().enable,
+        );
       },
     ));
   } else {
