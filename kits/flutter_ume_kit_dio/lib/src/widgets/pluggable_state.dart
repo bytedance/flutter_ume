@@ -7,7 +7,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
-import '../constants/constants.dart';
+import '../constants/extensions.dart';
 import '../instances.dart';
 import '../pluggable.dart';
 
@@ -39,8 +39,8 @@ class DioPluggableState extends State<DioInspector> {
   @override
   void dispose() {
     InspectorInstance.httpContainer
-      ..removeListener(_listener)
-      ..resetPaging();
+      ..removeListener(_listener) // First, remove refresh listener.
+      ..resetPaging(); // Then reset the paging field.
     super.dispose();
   }
 
@@ -51,17 +51,6 @@ class DioPluggableState extends State<DioInspector> {
       setState(() {});
     }
   }
-
-  // Widget _backdrop(BuildContext context) {
-  //   return Positioned.fill(
-  //     child: GestureDetector(
-  //       onTap: () {
-  //         InspectorInstance.fabKey.currentState?.switchPanel();
-  //       },
-  //       child: const ColoredBox(color: Colors.black26),
-  //     ),
-  //   );
-  // }
 
   Widget _clearAllButton(BuildContext context) {
     return TextButton(
@@ -76,7 +65,7 @@ class DioPluggableState extends State<DioInspector> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: const <Widget>[
-          Text('清空'),
+          Text('Clear'),
           Icon(Icons.cleaning_services, size: 14),
         ],
       ),
@@ -93,16 +82,21 @@ class DioPluggableState extends State<DioInspector> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (_, int index) {
+                final Response<dynamic> r = requests[index];
                 if (index == length - 2) {
                   InspectorInstance.httpContainer.loadNextPage();
                 }
                 return _ResponseCard(
-                  key: ValueKey<int>(index),
-                  response: requests[index],
+                  key: ValueKey<int>(r.startTimeMilliseconds),
+                  response: r,
                 );
               },
               childCount: length,
-              findChildIndexCallback: (Key key) => (key as ValueKey<int>).value,
+              // Use this callback to find the previous element.
+              findChildIndexCallback: (Key key) => requests.indexWhere(
+                (Response<dynamic> r) =>
+                    r.startTimeMilliseconds == (key as ValueKey<int>).value,
+              ),
             ),
           ),
         ],
@@ -201,10 +195,10 @@ class _ResponseCardState extends State<_ResponseCard> {
   RequestOptions get request => response.requestOptions;
 
   /// 请求开始时间
-  DateTime get startTime => request.extra[DIO_EXTRA_START_TIME] as DateTime;
+  DateTime get startTime => response.startTime;
 
   /// 请求结束时间
-  DateTime get endTime => request.extra[DIO_EXTRA_END_TIME] as DateTime;
+  DateTime get endTime => response.endTime;
 
   /// 请求时长
   Duration get duration => endTime.difference(startTime);
