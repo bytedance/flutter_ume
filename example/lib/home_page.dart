@@ -3,8 +3,10 @@ import 'package:example/ume_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'main.dart';
+
 class HomePage extends StatefulWidget {
-  HomePage({Key? key, this.title}) : super(key: key);
+  const HomePage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -78,6 +80,23 @@ class _HomePageState extends State<HomePage> {
                   btnOkOnPress: () {},
                 )..show();
               },
+            ),
+            TextButton(
+              onPressed: () {
+                Future.wait<void>(
+                  List<Future<void>>.generate(
+                    10,
+                    (int i) => Future<void>.delayed(
+                      Duration(seconds: i),
+                      () => dio.get(
+                        'https://api.github.com'
+                        '/?_t=${DateTime.now().millisecondsSinceEpoch}&$i',
+                      ),
+                    ),
+                  ),
+                );
+              },
+              child: const Text('Make multiple network requests'),
             ),
           ],
         ),

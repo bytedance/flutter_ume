@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:example/detail_page.dart';
 import 'package:example/home_page.dart';
 import 'package:example/ume_switch.dart';
@@ -10,6 +11,9 @@ import 'package:flutter_ume_kit_show_code/flutter_ume_kit_show_code.dart';
 import 'package:flutter_ume_kit_device/flutter_ume_kit_device.dart';
 import 'package:flutter_ume_kit_console/flutter_ume_kit_console.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_ume_kit_dio/flutter_ume_kit_dio.dart';
+
+final Dio dio = Dio()..options = BaseOptions(connectTimeout: 10000);
 
 void main() {
   if (kDebugMode) {
@@ -24,6 +28,7 @@ void main() {
       ..register(CpuInfoPage())
       ..register(DeviceInfoPanel())
       ..register(Console());
+      ..register(DioInspector(dio: dio));
     runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(
