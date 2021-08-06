@@ -1,3 +1,3 @@
-library flutter_ume_kit_network;
+library flutter_ume_kit_dio;
 
 export 'src/widgets/panel.dart';
