@@ -13,3 +13,8 @@ dependencies:
   flutter_ume: '>=0.2.0-dev.0 <0.3.0'
 
   dio: ^4.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mockito: ^5.0.12
