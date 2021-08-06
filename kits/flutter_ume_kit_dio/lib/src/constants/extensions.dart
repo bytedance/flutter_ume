@@ -3,7 +3,8 @@
 /// [Date] 2021/8/6 13:58
 ///
 import 'package:dio/dio.dart' show Response;
-import 'package:flutter_ume_kit_dio/src/constants/constants.dart';
+
+import 'constants.dart';
 
 extension ResponseExtension on Response<dynamic> {
   int get startTimeMilliseconds =>
