@@ -33,6 +33,7 @@ class DioPluggableState extends State<DioInspector> {
   @override
   void initState() {
     super.initState();
+    // Bind listener to refresh requests.
     InspectorInstance.httpContainer.addListener(_listener);
   }
 
@@ -44,6 +45,8 @@ class DioPluggableState extends State<DioInspector> {
     super.dispose();
   }
 
+  /// Using [setState] won't cause too much performance regression,
+  /// since we've implemented the list with `findChildIndexCallback`.
   void _listener() {
     if (mounted &&
         !context.debugDoingBuild &&
@@ -190,71 +193,59 @@ class _ResponseCardState extends State<_ResponseCard> {
     _isExpanded.value = !_isExpanded.value;
   }
 
-  Response<dynamic> get response => widget.response;
+  Response<dynamic> get _response => widget.response;
 
-  RequestOptions get request => response.requestOptions;
+  RequestOptions get _request => _response.requestOptions;
 
-  /// 请求开始时间
-  DateTime get startTime => response.startTime;
+  /// The start time for the [_request].
+  DateTime get _startTime => _response.startTime;
 
-  /// 请求结束时间
-  DateTime get endTime => response.endTime;
+  /// The end time for the [_response].
+  DateTime get _endTime => _response.endTime;
 
-  /// 请求时长
-  Duration get duration => endTime.difference(startTime);
+  /// The duration between the request and the response.
+  Duration get _duration => _endTime.difference(_startTime);
 
-  /// 状态码
-  int get statusCode => response.statusCode ?? 0;
+  /// Status code for the [_response].
+  int get _statusCode => _response.statusCode ?? 0;
 
-  /// 状态码对应的颜色
-  Color get statusColor {
-    if (statusCode >= 200 && statusCode < 300) {
+  /// Colors matching status.
+  Color get _statusColor {
+    if (_statusCode >= 200 && _statusCode < 300) {
       return Colors.lightGreen;
-    } else if (statusCode >= 300 && statusCode < 400) {
+    }
+    if (_statusCode >= 300 && _statusCode < 400) {
       return Colors.orangeAccent;
-    } else if (statusCode >= 400 && statusCode < 500) {
+    }
+    if (_statusCode >= 400 && _statusCode < 500) {
       return Colors.purple;
-    } else if (statusCode >= 500 && statusCode < 600) {
+    }
+    if (_statusCode >= 500 && _statusCode < 600) {
       return Colors.red;
     }
     return Colors.blueAccent;
   }
 
-  /// 请求方法
-  String get method => request.method;
+  /// The method that the [_request] used.
+  String get _method => _request.method;
 
-  /// 请求的 Uri
-  Uri get requestUri => request.uri;
+  /// The [Uri] that the [_request] requested.
+  Uri get _requestUri => _request.uri;
 
-  /// 重定向后的 Uri
-  Uri get realUri => response.realUri;
-
-  /// 返回内容长度
-  int get responseContentLength {
-    return int.tryParse(
-          response.headers[Headers.contentLengthHeader]?.elementAt(0) ?? '0',
-        ) ??
-        0;
-  }
-
-  /// 返回的内容类型
-  String get responseContentType {
-    return response.headers[Headers.contentTypeHeader]?.elementAt(0) ?? 'null';
-  }
-
-  /// 请求体内容
-  String? get requestDataBuilder {
-    if (request.data != null && request.data is Map) {
-      return _encoder.convert(request.data);
+  /// Data for the [_request].
+  String? get _requestDataBuilder {
+    if (_request.data is Map) {
+      return _encoder.convert(_request.data);
     }
-    return request.data?.toString();
+    return _request.data?.toString();
   }
 
-  String get responseDataBuilder {
-    if (response.data != null && response.data is Map) {
-      return _encoder.convert(response.data);
+  /// Data for the [_response].
+  String get _responseDataBuilder {
+    if (_response.data is Map) {
+      return _encoder.convert(_response.data);
     }
-    return response.data.toString();
+    return _response.data.toString();
   }
 
   Widget _detailButton(BuildContext context) {
@@ -262,7 +253,7 @@ class _ResponseCardState extends State<_ResponseCard> {
       onPressed: _switchExpand,
       style: _buttonStyle(context),
       child: const Text(
-        '查看详情🔍',
+        'Detail🔍',
         style: TextStyle(fontSize: 12, height: 1.2),
       ),
     );
@@ -271,7 +262,7 @@ class _ResponseCardState extends State<_ResponseCard> {
   Widget _infoContent(BuildContext context) {
     return Row(
       children: <Widget>[
-        Text(startTime.hms()),
+        Text(_startTime.hms()),
         const SizedBox(width: 6),
         Container(
           padding: const EdgeInsets.symmetric(
@@ -280,20 +271,20 @@ class _ResponseCardState extends State<_ResponseCard> {
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(3),
-            color: statusColor,
+            color: _statusColor,
           ),
           child: Text(
-            statusCode.toString(),
+            _statusCode.toString(),
             style: const TextStyle(color: Colors.white, fontSize: 12),
           ),
         ),
         const SizedBox(width: 6),
         Text(
-          method,
+          _method,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         const SizedBox(width: 6),
-        Text('${duration.inMilliseconds}ms'),
+        Text('${_duration.inMilliseconds}ms'),
         const Spacer(),
         _detailButton(context),
       ],
@@ -312,12 +303,12 @@ class _ResponseCardState extends State<_ResponseCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              if (requestDataBuilder != null)
-                _TagText(tag: 'Request data', content: requestDataBuilder!),
-              _TagText(tag: 'Response body', content: responseDataBuilder),
+              if (_requestDataBuilder != null)
+                _TagText(tag: 'Request data', content: _requestDataBuilder!),
+              _TagText(tag: 'Response body', content: _responseDataBuilder),
               _TagText(
                 tag: 'Response headers',
-                content: '\n${response.headers}',
+                content: '\n${_response.headers}',
               ),
             ],
           ),
@@ -339,7 +330,7 @@ class _ResponseCardState extends State<_ResponseCard> {
           children: <Widget>[
             _infoContent(context),
             const SizedBox(height: 10),
-            _TagText(tag: 'Uri', content: '$requestUri'),
+            _TagText(tag: 'Uri', content: '$_requestUri'),
             _detailedContent(context),
           ],
         ),

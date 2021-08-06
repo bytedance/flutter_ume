@@ -7,10 +7,14 @@ import 'dart:math' as math;
 import 'package:flutter/widgets.dart';
 import 'package:dio/dio.dart' show Response;
 
+/// Implements a [ChangeNotifier] to notify listeners when new responses
+/// were recorded. Use [page] to support paging.
 class HttpContainer extends ChangeNotifier {
+  /// Store all responses.
   List<Response<dynamic>> get requests => _requests;
   final List<Response<dynamic>> _requests = <Response<dynamic>>[];
 
+  /// Paging fields.
   int get page => _page;
   int _page = 1;
   final int _perPage = 10;
