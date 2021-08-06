@@ -1,3 +1,4 @@
 library flutter_ume_kit_dio;
 
-export 'src/widgets/panel.dart';
+export 'src/models/http_interceptor.dart';
+export 'src/pluggable.dart';
