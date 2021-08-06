@@ -9,6 +9,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.3
+  awesome_dialog: ^2.1.0
+  provider: ^5.0.0
   # For Dio Kit
   dio: ^4.0.0
 

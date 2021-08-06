@@ -22,12 +22,10 @@ void main() {
   group('RootWidget', () {
     testWidgets('RootWidget assert constructor', (tester) async {
       expect(
-          (injectUMEWidget(
+          injectUMEWidget(
             child: Container(),
             enable: false,
-          ) as StatelessWidget)
-              // ignore: invalid_use_of_protected_member
-              .build(MockBuildContext()),
+          ),
           isInstanceOf<Container>());
     });
 
