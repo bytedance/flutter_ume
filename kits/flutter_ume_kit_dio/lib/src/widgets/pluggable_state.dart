@@ -141,7 +141,7 @@ class DioPluggableState extends State<DioInspector> {
                     children: <Widget>[
                       const Spacer(),
                       Text(
-                        '网络请求',
+                        'Dio Requests',
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                       Expanded(
