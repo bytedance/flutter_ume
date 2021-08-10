@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1
+
+* null-safety 正式版本
+* 代码优化，修复 typo #11
+
+* Null-Safety formal version.
+* Optimization and fix typo #11
+
 ## 0.2.0-dev.0
 
 * 适配 null-safety

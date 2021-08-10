@@ -2,6 +2,10 @@
 
 [简体中文](./CHANGELOG.md)
 
+## [0.2.1]
+
+* Remove the extra MaterialApp Widget
+
 ## [0.2.0-dev.0]
 
 * Adapted Null-Safety.

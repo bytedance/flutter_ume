@@ -11,7 +11,7 @@ Flutter 应用内调试工具平台
 扫码或点击链接下载 apk，快速体验 UME。
 https://github.com/bytedance/flutter_ume/releases/download/v0.1.0.4/app-debug.apk
 
-当前版本内置 10 个插件，
+最新版本(0.2.1)内置 11 个插件，
 开发者可以创建自己的插件，并集成进 UME 平台。
 详见本文[为 UME 开发插件](#为-ume-开发插件)部分。
 
@@ -36,12 +36,13 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.1.0.4/app-debug.ap
 
     ``` yaml
     dev_dependencies: # 请不要在 release 环境下使用 UME
-      flutter_ume: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
-      flutter_ume_kit_ui: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
-      flutter_ume_kit_device: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
-      flutter_ume_kit_perf: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
-      flutter_ume_kit_show_code: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
-      flutter_ume_kit_console: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
+      flutter_ume: ^0.1.1  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_ui: ^0.1.1  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_device: ^0.1.1  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_perf: ^0.1.1  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_show_code: ^0.1.1  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_console: ^0.1.1  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_dio: ^0.2.0  # 仅支持 null-safety 版本
     ```
 
 2. 执行 `flutter pub get`
@@ -54,6 +55,7 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.1.0.4/app-debug.ap
     import 'package:flutter_ume_kit_show_code/flutter_ume_kit_show_code.dart'; // 代码查看插件包
     import 'package:flutter_ume_kit_device/flutter_ume_kit_device.dart'; // 设备信息插件包
     import 'package:flutter_ume_kit_console/flutter_ume_kit_console.dart'; // debugPrint 插件包
+    import 'package:flutter_ume_kit_dio/flutter_ume_kit_dio.dart'; // Dio 网络请求调试工具
     ```
 
 4. 修改程序入口，增加初始化方法及注册插件代码
@@ -71,7 +73,8 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.1.0.4/app-debug.ap
           ..register(MemoryInfoPage())
           ..register(CpuInfoPage())
           ..register(DeviceInfoPanel())
-          ..register(Console());
+          ..register(Console())
+          ..register(DioInspector(dio: dio));                  // 传入你的 Dio 实例
         runApp(injectUMEWidget(child: MyApp(), enable: true)); // 初始化
       } else {
         runApp(MyApp());
@@ -89,6 +92,11 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.1.0.4/app-debug.ap
 
 ## 特别说明
 
+**自 `0.1.1`/`0.2.1` 版本起，已经不需要设置 `useRootNavigator: false`。**
+以下部分仅适用于 `0.1.1`/`0.2.1` 之前的版本。
+
+<s>
+
 由于 UME 在顶层管理了路由栈，`showDialog` 等方法默认使用 `rootNavigator` 弹出，
 所以**必须**在 `showDialog`、`showGeneralDialog` 等弹窗方法，传入参数 `useRootNavigator: false` 避免路由栈错误。
 
@@ -105,6 +113,8 @@ showDialog(
       ),
   useRootNavigator: false); // <===== 非常重要
 ```
+
+</s>
 
 ## 功能介绍
 
@@ -128,6 +138,7 @@ showDialog(
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="./screenshots/device_info.png" width="100%" alt="设备信息" /></br>设备信息</td>
+        <td width="33.33%" align="center"><img src="./screenshots/dio_inspector.png" width="100%" alt="Dio 网络请求调试工具" /></br>Dio 网络请求调试工具</td>
     </tr>
 </table>
 
@@ -141,7 +152,7 @@ showDialog(
 
     ``` yaml
     dependencies:
-      flutter_ume: '>=0.1.0 <0.2.0'
+      flutter_ume: '>=0.2.0 <0.3.0'
     ```
 
 3. 创建插件配置，实现 `Pluggable` 虚类
@@ -219,8 +230,8 @@ showDialog(
 
 | UME 版本 | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.3 |
 | ---- | ---- | ---- | ---- | ---- |
-| 0.1.0 | ✅ | ✅ | ✅ | ✅ |
-| 0.2.0-dev.0 | ❌ | ❌ | ✅ | ✅ |
+| 0.1.x | ✅ | ✅ | ✅ | ✅ |
+| 0.2.x | ❌ | ❌ | ✅ | ✅ |
 
 ### 单测覆盖率
 
@@ -232,6 +243,7 @@ showDialog(
 | flutter_ume_kit_show_code | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_show_code/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_show_code/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_show_code/coverage_badge.svg) |
 | flutter_ume_kit_ui | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_ui/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_ui/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_ui/coverage_badge.svg) |
 | flutter_ume_kit_console | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_console/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_console/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_console/coverage_badge.svg) |
+| flutter_ume_kit_dio | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_dio/coverage_badge.svg) | N/A | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_dio/coverage_badge.svg) |
 
 ### 版本号规则
 
@@ -241,20 +253,29 @@ showDialog(
 
 | 包 | null-safety 推荐版本号 |
 | ---- | ---- |
-| flutter_ume | 0.2.0-dev.0 |
-| flutter_ume_kit_ui | 0.2.0-dev.0 |
-| flutter_ume_kit_device | 0.2.0-dev.0 |
-| flutter_ume_kit_perf | 0.2.0-dev.0 |
-| flutter_ume_kit_show_code | 0.2.0-dev.0 |
-| flutter_ume_kit_console | 0.2.0-dev.0 |
+| flutter_ume | 0.2.1 |
+| flutter_ume_kit_ui | 0.2.1 |
+| flutter_ume_kit_device | 0.2.1 |
+| flutter_ume_kit_perf | 0.2.1 |
+| flutter_ume_kit_show_code | 0.2.1 |
+| flutter_ume_kit_console | 0.2.1 |
+| flutter_ume_kit_console | 0.2.0 |
 
 ### 更新日志
 
 [Changelog](./CHANGELOG.md)
 
-## 如何贡献
+## 开源贡献
 
-[Contributing](./CONTRIBUTING.md)
+贡献文档：[Contributing](./CONTRIBUTING.md)
+
+感谢以下贡献者（排名不分先后）：
+
+|  |  |
+| ---- | ---- |
+| ![ShirelyC](https://avatars.githubusercontent.com/u/11439167?s=64&v=4) | [ShirelyC](https://github.com/smileShirely) |
+| ![lpylpyleo](https://avatars.githubusercontent.com/u/15264428?s=64&v=4) | [lpylpyleo](https://github.com/lpylpyleo) |
+| ![Alex Li](https://avatars.githubusercontent.com/u/15884415?s=64&v=4) | [Alex Li](https://github.com/AlexV525) |
 
 ## 开源协议
 

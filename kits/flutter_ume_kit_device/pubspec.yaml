@@ -1,16 +1,16 @@
 name: flutter_ume_kit_device
 description: Device info kit for flutter_ume.
-version: 0.2.0-dev.0
+version: 0.2.1
 homepage: https://github.com/bytedance/flutter_ume
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
-  flutter: ">=1.12.0"
+  flutter: ">=2.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_ume: '>=0.2.0-dev.0 <0.3.0'
+  flutter_ume: '>=0.2.0 <0.3.0'
   system_info: ^1.0.1
   device_info: ^2.0.2
   platform: ^3.0.0

@@ -29,7 +29,6 @@
 .pub-cache/
 .pub/
 build/
-*pubspec.lock
 
 # Android related
 **/android/**/gradle-wrapper.jar
@@ -61,6 +60,7 @@ build/
 **/ios/Flutter/Flutter.framework
 **/ios/Flutter/Flutter.podspec
 **/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral
 **/ios/Flutter/app.flx
 **/ios/Flutter/app.zip
 **/ios/Flutter/flutter_assets/
@@ -73,8 +73,3 @@ build/
 !**/ios/**/default.mode2v3
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
-!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
-
-# Coverage
-**/coverage/output/
-**/coverage/new_lcov.info

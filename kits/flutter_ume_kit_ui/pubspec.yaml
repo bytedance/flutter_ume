@@ -1,17 +1,17 @@
 name: flutter_ume_kit_ui
 description: UI Kits for flutter_ume.
-version: 0.2.0-dev.0
+version: 0.2.1
 homepage: https://github.com/bytedance/flutter_ume
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
-  flutter: ">=1.12.0"
+  flutter: ">=2.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   image: ^3.0.2
-  flutter_ume: '>=0.2.0-dev.0 <0.3.0'
+  flutter_ume: '>=0.2.0 <0.3.0'
 
 dev_dependencies:
   flutter_test:

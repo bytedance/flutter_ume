@@ -2,6 +2,10 @@
 
 [English](./CHANGELOG_en.md)
 
+## [0.2.1]
+
+* 移除独立的 MaterialApp Widget
+
 ## [0.2.0-dev.0]
 
 * 适配 null-safety

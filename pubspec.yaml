@@ -1,11 +1,11 @@
 name: flutter_ume
 description: UME is an in-app debug kits platform for Flutter apps. Produced by Flutter Infra team of ByteDance.
-version: 0.2.0-dev.0
+version: 0.2.1
 homepage: https://github.com/bytedance/flutter_ume
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
-  flutter: ">=1.12.0"
+  flutter: ">=2.0.0"
 
 dependencies:
   flutter:

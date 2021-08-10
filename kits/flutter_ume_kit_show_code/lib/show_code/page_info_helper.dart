@@ -23,7 +23,7 @@ class PageInfoHelper {
     final fileForwardPart = parts.sublist(1).join('/lib/');
     final packageName = parts.first.split('/').last;
     final keyword = "package:$packageName/$fileForwardPart";
-    CodeDisplatService().getScriptIdsWithKeyword(keyword);
+    CodeDisplayService().getScriptIdsWithKeyword(keyword);
     debugPrint(keyword);
     return keyword;
   }
@@ -81,35 +81,35 @@ class PageInfoHelper {
   }
 
   Future<String?> getCode() async {
-    CodeDisplatService codeDisplatService = CodeDisplatService();
+    CodeDisplayService codeDisplayService = CodeDisplayService();
     String targetFileName = filePath!.split('/').last;
     String? scriptId =
-        await codeDisplatService.getScriptIdWithFileName(targetFileName);
+        await codeDisplayService.getScriptIdWithFileName(targetFileName);
     if (scriptId == null) return null;
     String? sourceCode =
-        await codeDisplatService.getSourceCodeWithScriptId(scriptId);
+        await codeDisplayService.getSourceCodeWithScriptId(scriptId);
     return sourceCode;
   }
 
   Future<String?> getCodeByFileName(String fileName) async {
-    CodeDisplatService codeDisplatService = CodeDisplatService();
+    CodeDisplayService codeDisplayService = CodeDisplayService();
     String? sourceCode;
     String? scriptId =
-        await codeDisplatService.getScriptIdWithFileName(fileName);
+        await codeDisplayService.getScriptIdWithFileName(fileName);
     if (scriptId != null) {
-      sourceCode = await codeDisplatService.getSourceCodeWithScriptId(scriptId);
+      sourceCode = await codeDisplayService.getSourceCodeWithScriptId(scriptId);
     }
     return sourceCode;
   }
 
   Future<Map<String?, String>> getCodeListByKeyword(String keyword) async {
-    CodeDisplatService codeDisplatService = CodeDisplatService();
+    CodeDisplayService codeDisplayService = CodeDisplayService();
     Map<String?, String> result = <String?, String>{};
-    final scriptIds = await codeDisplatService.getScriptIdsWithKeyword(keyword);
+    final scriptIds = await codeDisplayService.getScriptIdsWithKeyword(keyword);
     if (scriptIds.isNotEmpty) {
       for (final entry in scriptIds.entries) {
         final code =
-            await codeDisplatService.getSourceCodeWithScriptId(entry.key!);
+            await codeDisplayService.getSourceCodeWithScriptId(entry.key!);
         if (code != null && code.isNotEmpty) {
           result[entry.value] = code;
         }

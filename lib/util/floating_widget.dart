@@ -9,22 +9,25 @@ import 'package:flutter_ume/util/store_mixin.dart';
 typedef ToolbarAction = void Function();
 
 class FloatingWidget extends StatefulWidget {
-  FloatingWidget(
-      {Key? key, this.contentWidget, this.closeAction, this.toolbarActions})
-      : super(key: key);
+  FloatingWidget({
+    Key? key,
+    this.contentWidget,
+    this.closeAction,
+    this.toolbarActions,
+    this.minimalHeight = 120,
+  }) : super(key: key);
 
   final Widget? contentWidget;
   final CloseAction? closeAction;
   final List<Tuple3<String, Widget, ToolbarAction>>? toolbarActions;
+  final double minimalHeight;
 
   @override
   _FloatingWidgetState createState() => _FloatingWidgetState();
 }
 
 const double _dragBarHeight = 32;
-const double _minimalHeight = 120;
 const double _toolBarHeight = 32;
-double get minimalHeight => _minimalHeight;
 
 class _FloatingWidgetState extends State<FloatingWidget> with StoreMixin {
   Size _windowSize = windowSize;
@@ -44,7 +47,10 @@ class _FloatingWidgetState extends State<FloatingWidget> with StoreMixin {
           _dy = value;
         });
     });
-    _dy = _windowSize.height - _minimalHeight - _dragBarHeight - toolBarHeight;
+    _dy = _windowSize.height -
+        widget.minimalHeight -
+        _dragBarHeight -
+        toolBarHeight;
     super.initState();
   }
 
@@ -53,7 +59,7 @@ class _FloatingWidgetState extends State<FloatingWidget> with StoreMixin {
     _dy = min(
         max(0, _dy),
         MediaQuery.of(context).size.height -
-            _minimalHeight -
+            widget.minimalHeight -
             _dragBarHeight -
             toolBarHeight -
             MediaQuery.of(context).padding.top -
@@ -80,6 +86,7 @@ class _FloatingWidgetState extends State<FloatingWidget> with StoreMixin {
             left: 0,
             top: _fullScreen ? 0 : _dy,
             child: _ToolBarContent(
+              minimalHeight: widget.minimalHeight,
               contentWidget: widget.contentWidget,
               dragCallback: _dragEvent,
               dragEnd: _dragEnd,
@@ -104,7 +111,8 @@ class _ToolBarContent extends StatefulWidget {
       this.dragEnd,
       this.maximalAction,
       this.closeAction,
-      this.toolbarActions})
+      this.toolbarActions,
+      required this.minimalHeight})
       : super(key: key);
 
   final Widget? contentWidget;
@@ -113,6 +121,7 @@ class _ToolBarContent extends StatefulWidget {
   final CloseAction? closeAction;
   final MaximalAction? maximalAction;
   final List<Tuple3<String, Widget, ToolbarAction>>? toolbarActions;
+  final double minimalHeight;
 
   @override
   __ToolBarContentState createState() => __ToolBarContentState();
@@ -147,7 +156,7 @@ class __ToolBarContentState extends State<_ToolBarContent> {
           width: MediaQuery.of(context).size.width,
           height: _fullScreen
               ? _windowSize.height
-              : _minimalHeight + _dragBarHeight + toolBarHeight,
+              : widget.minimalHeight + _dragBarHeight + toolBarHeight,
           child: Column(
             children: [
               Container(
@@ -215,7 +224,7 @@ class __ToolBarContentState extends State<_ToolBarContent> {
                         toolBarHeight -
                         MediaQuery.of(context).padding.top -
                         MediaQuery.of(context).padding.bottom
-                    : minimalHeight,
+                    : widget.minimalHeight,
                 child: widget.contentWidget,
               ),
               if (widget.toolbarActions != null &&
