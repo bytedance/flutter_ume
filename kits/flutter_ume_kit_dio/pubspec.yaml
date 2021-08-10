@@ -18,3 +18,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^5.0.12
+  flutter_coverage_badge:
+    git:
+      url: https://github.com/smileShirely/flutter_coverage_badge.git
+      ref: master
