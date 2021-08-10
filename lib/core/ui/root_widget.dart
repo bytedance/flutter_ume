@@ -23,6 +23,8 @@ const defaultLocalizationsDelegates = const [
   GlobalCupertinoLocalizations.delegate,
 ];
 
+final GlobalKey<OverlayState> overlayKey = GlobalKey<OverlayState>();
+
 /// Wrap your App widget. If [enable] is false, the function will return [child].
 Widget injectUMEWidget({
   @required Widget child,
@@ -34,27 +36,41 @@ Widget injectUMEWidget({
   enable
       ? PluggableMessageService().resetListener()
       : PluggableMessageService().clearListener();
-  return _FloatingWidget(
-      child: child,
-      enable: enable,
-      supportedLocales: supportedLocales,
-      localizationsDelegates: localizationsDelegates);
+  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    if (enable) {
+      final overlayEntry = OverlayEntry(builder: (BuildContext context) {
+        return const _FloatingWidget();
+      });
+      overlayKey.currentState?.insert(overlayEntry);
+    }
+    StaticVariableManager.hasAttached = enable;
+  });
+  if (!enable) return child;
+  return Directionality(
+    textDirection: TextDirection.ltr,
+    child: Stack(
+      children: <Widget>[
+        RepaintBoundary(child: child, key: rootKey),
+        MediaQuery(
+          data: MediaQueryData.fromWindow(WidgetsBinding.instance.window),
+          child: Localizations(
+            locale: supportedLocales?.first ?? Locale('en', 'US'),
+            delegates: localizationsDelegates.toList(),
+            child: ScaffoldMessenger(child: Overlay(key: overlayKey)),
+          ),
+        )
+      ],
+    ),
+  );
 }
 
 class _FloatingWidget extends StatelessWidget {
-  _FloatingWidget({
+  const _FloatingWidget({
     Key key,
-    @required this.enable,
-    @required this.child,
     this.supportedLocales,
     this.localizationsDelegates,
-  })  : assert(child != null),
-        assert(enable != null),
-        super(key: key);
-
-  final bool enable;
-
-  final Widget child;
+  }) : super(key: key);
 
   final Iterable<Locale> supportedLocales;
 
@@ -62,31 +78,7 @@ class _FloatingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _setVariable();
-
-    if (WidgetsApp.debugShowWidgetInspectorOverride || !enable) {
-      return child;
-    }
-
-    return MaterialApp(
-      navigatorKey: navigatorKey,
-      home: Scaffold(
-          resizeToAvoidBottomInset: false,
-          // resizeToAvoidBottomPadding: false,
-          body: Stack(alignment: Alignment.center, children: [
-            RepaintBoundary(
-              child: child,
-              key: rootKey,
-            ),
-            _ContentPage()
-          ])),
-      supportedLocales: supportedLocales ?? const <Locale>[Locale('en', 'US')],
-      localizationsDelegates: localizationsDelegates,
-    );
-  }
-
-  void _setVariable() {
-    StaticVariableManager.hasAttached = this.enable;
+    return Material(type: MaterialType.transparency, child: _ContentPage());
   }
 }
 
