@@ -26,3 +26,5 @@ jobs:
         working-directory: kits/flutter_ume_kit_ui
       - run: flutter test --enable-vmservice
         working-directory: kits/flutter_ume_kit_console
+      - run: flutter test --enable-vmservice
+        working-directory: kits/flutter_ume_kit_dio
