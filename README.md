@@ -270,7 +270,7 @@ showDialog(
 | ---- | ---- |
 | ![ShirelyC](https://avatars.githubusercontent.com/u/11439167?s=64&v=4) | [ShirelyC](https://github.com/smileShirely) |
 | ![lpylpyleo](https://avatars.githubusercontent.com/u/15264428?s=64&v=4) | [lpylpyleo](https://github.com/lpylpyleo) |
-| ![Alex Li](https://avatars.githubusercontent.com/u/15884415?s=88&v=4) | [Alex Li](https://github.com/AlexV525) |
+| ![Alex Li](https://avatars.githubusercontent.com/u/15884415?s=64&v=4) | [Alex Li](https://github.com/AlexV525) |
 
 ## 开源协议
 
