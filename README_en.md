@@ -12,6 +12,7 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
 
 - [flutter_ume](#flutter_ume)
   - [Quick Start](#quick-start)
+  - [IMPORTANT](#important)
   - [Features](#features)
   - [Develop plugin kits for UME](#develop-plugin-kits-for-ume)
   - [About version](#about-version)
@@ -79,6 +80,32 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
   >
   > Flutter 2.0.x, 2.2.x and other versions run on real devices, `flutter run` needs to add the `--disable-dds` parameter.
   > After [Pull Request #80900](https://github.com/flutter/flutter/pull/80900) merging, `--disable-dds` was renamed to `--no-dds`.
+
+## IMPORTANT
+
+**From `0.1.1`/`0.2.1` version，we don't need set `useRootNavigator: false`.**
+The following section only applies to versions before version `0.1.1`/`0.2.1` .
+
+<s>
+
+Since UME manages the routing stack at the top level, methods such as `showDialog` use `rootNavigator` to pop up by default,
+therefore **must** pass in the parameter `useRootNavigator: false` in `showDialog`, `showGeneralDialog` and other 'show dialog' methods to avoid navigator errors.
+
+``` dart
+showDialog(
+  context: context,
+  builder: (ctx) => AlertDialog(
+        title: const Text('Dialog'),
+        actions: <Widget>[
+          TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'))
+        ],
+      ),
+  useRootNavigator: false); // <===== It's very IMPORTANT!
+```
+
+</s>
 
 ## Features
 

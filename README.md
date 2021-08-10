@@ -12,6 +12,7 @@ Flutter 应用内调试工具平台
 
 - [flutter_ume](#flutter_ume)
   - [快速接入](#快速接入)
+  - [特别说明](#特别说明)
   - [功能介绍](#功能介绍)
   - [为 UME 开发插件](#为-ume-开发插件)
   - [版本说明](#版本说明)
@@ -79,6 +80,32 @@ Flutter 应用内调试工具平台
   >
   > Flutter 2.0.x、2.2.x 等版本在真机上运行，`flutter run` 需要添加 `--disable-dds` 参数。
   > 在 [Pull Request #80900](https://github.com/flutter/flutter/pull/80900) 合入之后，`--disable-dds` 参数被更名为 `--no-dds`。
+
+## 特别说明
+
+**自 `0.1.1`/`0.2.1` 版本起，已经不需要设置 `useRootNavigator: false`。**
+以下部分仅适用于 `0.1.1`/`0.2.1` 之前的版本。
+
+<s>
+
+由于 UME 在顶层管理了路由栈，`showDialog` 等方法默认使用 `rootNavigator` 弹出，
+所以**必须**在 `showDialog`、`showGeneralDialog` 等弹窗方法，传入参数 `useRootNavigator: false` 避免路由栈错误。
+
+``` dart
+showDialog(
+  context: context,
+  builder: (ctx) => AlertDialog(
+        title: const Text('Dialog'),
+        actions: <Widget>[
+          TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'))
+        ],
+      ),
+  useRootNavigator: false); // <===== 非常重要
+```
+
+</s>
 
 ## 功能介绍
 
