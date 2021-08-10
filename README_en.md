@@ -6,7 +6,7 @@
 
 UME is an in-app debug kits platform for Flutter apps.
 
-There are 10 plugin kits built in the current open source version of UME.
+There are 11 plugin kits built in the latest open source version of UME.
 Developer could create custom plugin kits, and integrate them into UME.
 Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more details.
 
@@ -21,7 +21,7 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
     - [Version upgrade rules](#version-upgrade-rules)
     - [Null-safety](#null-safety)
     - [Change log](#change-log)
-  - [How to contribute](#how-to-contribute)
+  - [Contributing](#contributing)
   - [LICENSE](#license)
   - [Contact the author](#contact-the-author)
 
@@ -37,6 +37,7 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
       flutter_ume_kit_perf: ^0.1.1  # null-safety version: ^0.2.1
       flutter_ume_kit_show_code: ^0.1.1  # null-safety version: ^0.2.1
       flutter_ume_kit_console: ^0.1.1  # null-safety version: ^0.2.1
+      flutter_ume_kit_dio: ^0.2.0 # Only support null-safety
     ```
 
 2. Run `flutter pub get`
@@ -49,6 +50,7 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
     import 'package:flutter_ume_kit_show_code/flutter_ume_kit_show_code.dart'; // Show Code
     import 'package:flutter_ume_kit_device/flutter_ume_kit_device.dart'; // Device info
     import 'package:flutter_ume_kit_console/flutter_ume_kit_console.dart'; // Show debugPrint
+    import 'package:flutter_ume_kit_dio/flutter_ume_kit_dio.dart'; // Dio Inspector
     ```
 
 4. Edit main method of your app, register plugin kits and initial UME
@@ -66,7 +68,8 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
           ..register(MemoryInfoPage())
           ..register(CpuInfoPage())
           ..register(DeviceInfoPanel())
-          ..register(Console());
+          ..register(Console())
+          ..register(DioInspector(dio: dio));                  // Pass in your Dio instance
         runApp(injectUMEWidget(child: MyApp(), enable: true)); // Initial UME
       } else {
         runApp(MyApp());
@@ -130,6 +133,7 @@ There are 10 plugin kits built in the current open source version of UME.
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="./screenshots/device_info.png" width="100%" alt="Device Info" /></br>Device Info</td>
+        <td width="33.33%" align="center"><img src="./screenshots/dio_inspector.png" width="100%" alt="Dio Inspector" /></br>Dio Inspector</td>
     </tr>
 </table>
 
@@ -234,6 +238,7 @@ There are 10 plugin kits built in the current open source version of UME.
 | flutter_ume_kit_show_code | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_show_code/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_show_code/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_show_code/coverage_badge.svg) |
 | flutter_ume_kit_ui | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_ui/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_ui/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_ui/coverage_badge.svg) |
 | flutter_ume_kit_console | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_console/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_console/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_console/coverage_badge.svg) |
+| flutter_ume_kit_dio | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_dio/coverage_badge.svg) | N/A | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_dio/coverage_badge.svg) |
 
 ### Version upgrade rules
 
@@ -249,14 +254,23 @@ Please refer to [Semantic versions](https://dart.dev/tools/pub/versioning#semant
 | flutter_ume_kit_perf | 0.2.1 |
 | flutter_ume_kit_show_code | 0.2.1 |
 | flutter_ume_kit_console | 0.2.1 |
+| flutter_ume_kit_dio | 0.2.0 |
 
 ### Change log
 
 [Changelog](./CHANGELOG_en.md)
 
-## How to contribute
+## Contributing
 
-[Contributing](./CONTRIBUTING_en.md)
+Contributing rules: [Contributing](./CONTRIBUTING_en.md)
+
+Thanks to the following contributors (names not listed in order)：
+
+|  |  |
+| ---- | ---- |
+| ![ShirelyC](https://avatars.githubusercontent.com/u/11439167?s=64&v=4) | [ShirelyC](https://github.com/smileShirely) |
+| ![lpylpyleo](https://avatars.githubusercontent.com/u/15264428?s=64&v=4) | [lpylpyleo](https://github.com/lpylpyleo) |
+| ![Alex Li](https://avatars.githubusercontent.com/u/15884415?s=88&v=4) | [Alex Li](https://github.com/AlexV525) |
 
 ## LICENSE
 

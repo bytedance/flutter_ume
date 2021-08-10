@@ -6,7 +6,7 @@
 
 Flutter 应用内调试工具平台
 
-当前版本内置 10 个插件，
+最新版本(0.2.1)内置 11 个插件，
 开发者可以创建自己的插件，并集成进 UME 平台。
 详见本文[为 UME 开发插件](#为-ume-开发插件)部分。
 
@@ -37,6 +37,7 @@ Flutter 应用内调试工具平台
       flutter_ume_kit_perf: ^0.1.1  # null-safety 版本: ^0.2.1
       flutter_ume_kit_show_code: ^0.1.1  # null-safety 版本: ^0.2.1
       flutter_ume_kit_console: ^0.1.1  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_dio: ^0.2.0  # 仅支持 null-safety 版本
     ```
 
 2. 执行 `flutter pub get`
@@ -49,6 +50,7 @@ Flutter 应用内调试工具平台
     import 'package:flutter_ume_kit_show_code/flutter_ume_kit_show_code.dart'; // 代码查看插件包
     import 'package:flutter_ume_kit_device/flutter_ume_kit_device.dart'; // 设备信息插件包
     import 'package:flutter_ume_kit_console/flutter_ume_kit_console.dart'; // debugPrint 插件包
+    import 'package:flutter_ume_kit_dio/flutter_ume_kit_dio.dart'; // Dio 网络请求调试工具
     ```
 
 4. 修改程序入口，增加初始化方法及注册插件代码
@@ -66,7 +68,8 @@ Flutter 应用内调试工具平台
           ..register(MemoryInfoPage())
           ..register(CpuInfoPage())
           ..register(DeviceInfoPanel())
-          ..register(Console());
+          ..register(Console())
+          ..register(DioInspector(dio: dio));                  // 传入你的 Dio 实例
         runApp(injectUMEWidget(child: MyApp(), enable: true)); // 初始化
       } else {
         runApp(MyApp());
@@ -130,6 +133,7 @@ showDialog(
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="./screenshots/device_info.png" width="100%" alt="设备信息" /></br>设备信息</td>
+        <td width="33.33%" align="center"><img src="./screenshots/dio_inspector.png" width="100%" alt="Dio 网络请求调试工具" /></br>Dio 网络请求调试工具</td>
     </tr>
 </table>
 
@@ -234,6 +238,7 @@ showDialog(
 | flutter_ume_kit_show_code | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_show_code/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_show_code/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_show_code/coverage_badge.svg) |
 | flutter_ume_kit_ui | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_ui/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_ui/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_ui/coverage_badge.svg) |
 | flutter_ume_kit_console | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_console/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop/kits/flutter_ume_kit_console/coverage_badge.svg) | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_console/coverage_badge.svg) |
+| flutter_ume_kit_dio | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/master/kits/flutter_ume_kit_dio/coverage_badge.svg) | N/A | ![Coverage](https://raw.githubusercontent.com/bytedance/flutter_ume/develop_nullsafety/kits/flutter_ume_kit_dio/coverage_badge.svg) |
 
 ### 版本号规则
 
@@ -249,14 +254,23 @@ showDialog(
 | flutter_ume_kit_perf | 0.2.1 |
 | flutter_ume_kit_show_code | 0.2.1 |
 | flutter_ume_kit_console | 0.2.1 |
+| flutter_ume_kit_console | 0.2.0 |
 
 ### 更新日志
 
 [Changelog](./CHANGELOG.md)
 
-## 如何贡献
+## 开源贡献
 
-[Contributing](./CONTRIBUTING.md)
+贡献文档：[Contributing](./CONTRIBUTING.md)
+
+感谢以下贡献者（排名不分先后）：
+
+|  |  |
+| ---- | ---- |
+| ![ShirelyC](https://avatars.githubusercontent.com/u/11439167?s=64&v=4) | [ShirelyC](https://github.com/smileShirely) |
+| ![lpylpyleo](https://avatars.githubusercontent.com/u/15264428?s=64&v=4) | [lpylpyleo](https://github.com/lpylpyleo) |
+| ![Alex Li](https://avatars.githubusercontent.com/u/15884415?s=88&v=4) | [Alex Li](https://github.com/AlexV525) |
 
 ## 开源协议
 
