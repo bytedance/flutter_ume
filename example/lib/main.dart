@@ -27,7 +27,7 @@ void main() {
       ..register(MemoryInfoPage())
       ..register(CpuInfoPage())
       ..register(DeviceInfoPanel())
-      ..register(Console());
+      ..register(Console())
       ..register(DioInspector(dio: dio));
     runApp(MultiProvider(
       providers: [
