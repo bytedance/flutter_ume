@@ -64,21 +64,15 @@ class _HomePageState extends State<HomePage> {
               child: const Text('Awesome_dialog show dialog'),
               onPressed: () {
                 AwesomeDialog(
-                  context: context,
-                  dialogType: DialogType.INFO_REVERSED,
-                  borderSide: BorderSide(color: Colors.green, width: 2),
-                  width: 280,
-                  buttonsBorderRadius: BorderRadius.all(
-                    Radius.circular(2),
-                  ),
-                  headerAnimationLoop: false,
-                  animType: AnimType.BOTTOMSLIDE,
-                  title: 'INFO',
-                  desc: 'Dialog description here...',
-                  showCloseIcon: true,
-                  btnCancelOnPress: () {},
-                  btnOkOnPress: () {},
-                )..show();
+                    context: context,
+                    animType: AnimType.BOTTOMSLIDE,
+                    headerAnimationLoop: true,
+                    dialogType: DialogType.INFO,
+                    body: Text("这条帖子将被永久删除，任何人都不会再看到这条帖子，包括你自己。是否继续？"),
+                    btnOkOnPress: () {},
+                    btnOkText: "取消",
+                    useRootNavigator: false)
+                  ..show();
               },
             ),
             TextButton(
