@@ -31,12 +31,12 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
 
     ``` yaml
     dev_dependencies: # Don't use UME in release mode
-      flutter_ume: ^0.1.0  # null-safety version: ^0.2.0-dev.0
-      flutter_ume_kit_ui: ^0.1.0  # null-safety version: ^0.2.0-dev.0
-      flutter_ume_kit_device: ^0.1.0  # null-safety version: ^0.2.0-dev.0
-      flutter_ume_kit_perf: ^0.1.0  # null-safety version: ^0.2.0-dev.0
-      flutter_ume_kit_show_code: ^0.1.0  # null-safety version: ^0.2.0-dev.0
-      flutter_ume_kit_console: ^0.1.0  # null-safety version: ^0.2.0-dev.0
+      flutter_ume: ^0.1.1  # null-safety version: ^0.2.1
+      flutter_ume_kit_ui: ^0.1.1  # null-safety version: ^0.2.1
+      flutter_ume_kit_device: ^0.1.1  # null-safety version: ^0.2.1
+      flutter_ume_kit_perf: ^0.1.1  # null-safety version: ^0.2.1
+      flutter_ume_kit_show_code: ^0.1.1  # null-safety version: ^0.2.1
+      flutter_ume_kit_console: ^0.1.1  # null-safety version: ^0.2.1
     ```
 
 2. Run `flutter pub get`
@@ -84,6 +84,11 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
 
 ## IMPORTANT
 
+**From `0.1.1`/`0.2.1` version，we don't need set `useRootNavigator: false`.**
+The following section only applies to versions before version `0.1.1`/`0.2.1` .
+
+<s>
+
 Since UME manages the routing stack at the top level, methods such as `showDialog` use `rootNavigator` to pop up by default,
 therefore **must** pass in the parameter `useRootNavigator: false` in `showDialog`, `showGeneralDialog` and other 'show dialog' methods to avoid navigator errors.
 
@@ -100,6 +105,8 @@ showDialog(
       ),
   useRootNavigator: false); // <===== It's very IMPORTANT!
 ```
+
+</s>
 
 ## Features
 
@@ -136,7 +143,7 @@ There are 10 plugin kits built in the current open source version of UME.
 
     ``` yaml
     dependencies:
-      flutter_ume: '>=0.1.0 <0.2.0'
+      flutter_ume: '>=0.2.0 <0.3.0'
     ```
 
 3. Create the class of the plugin kit which should implement `Pluggable`.
@@ -214,8 +221,8 @@ There are 10 plugin kits built in the current open source version of UME.
 
 | UME version | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.3 |
 | ---- | ---- | ---- | ---- | ---- |
-| 0.1.0 | ✅ | ✅ | ✅ | ✅ |
-| 0.2.0-dev.0 | ❌ | ❌ | ✅ | ✅ |
+| 0.1.x | ✅ | ✅ | ✅ | ✅ |
+| 0.2.x | ❌ | ❌ | ✅ | ✅ |
 
 ### Coverage
 
@@ -234,14 +241,14 @@ Please refer to [Semantic versions](https://dart.dev/tools/pub/versioning#semant
 
 ### Null-safety
 
-| Package | null-safety version |
+| Package | Suggest version |
 | ---- | ---- |
-| flutter_ume | 0.2.0-dev.0 |
-| flutter_ume_kit_ui | 0.2.0-dev.0 |
-| flutter_ume_kit_device | 0.2.0-dev.0 |
-| flutter_ume_kit_perf | 0.2.0-dev.0 |
-| flutter_ume_kit_show_code | 0.2.0-dev.0 |
-| flutter_ume_kit_console | 0.2.0-dev.0 |
+| flutter_ume | 0.2.1 |
+| flutter_ume_kit_ui | 0.2.1 |
+| flutter_ume_kit_device | 0.2.1 |
+| flutter_ume_kit_perf | 0.2.1 |
+| flutter_ume_kit_show_code | 0.2.1 |
+| flutter_ume_kit_console | 0.2.1 |
 
 ### Change log
 

@@ -31,12 +31,12 @@ Flutter 应用内调试工具平台
 
     ``` yaml
     dev_dependencies: # 请不要在 release 环境下使用 UME
-      flutter_ume: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
-      flutter_ume_kit_ui: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
-      flutter_ume_kit_device: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
-      flutter_ume_kit_perf: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
-      flutter_ume_kit_show_code: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
-      flutter_ume_kit_console: ^0.1.0  # null-safety 版本: ^0.2.0-dev.0
+      flutter_ume: ^0.1.1  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_ui: ^0.1.1  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_device: ^0.1.1  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_perf: ^0.1.1  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_show_code: ^0.1.1  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_console: ^0.1.1  # null-safety 版本: ^0.2.1
     ```
 
 2. 执行 `flutter pub get`
@@ -84,6 +84,11 @@ Flutter 应用内调试工具平台
 
 ## 特别说明
 
+**自 `0.1.1`/`0.2.1` 版本起，已经不需要设置 `useRootNavigator: false`。**
+以下部分仅适用于 `0.1.1`/`0.2.1` 之前的版本。
+
+<s>
+
 由于 UME 在顶层管理了路由栈，`showDialog` 等方法默认使用 `rootNavigator` 弹出，
 所以**必须**在 `showDialog`、`showGeneralDialog` 等弹窗方法，传入参数 `useRootNavigator: false` 避免路由栈错误。
 
@@ -100,6 +105,8 @@ showDialog(
       ),
   useRootNavigator: false); // <===== 非常重要
 ```
+
+</s>
 
 ## 功能介绍
 
@@ -136,7 +143,7 @@ showDialog(
 
     ``` yaml
     dependencies:
-      flutter_ume: '>=0.1.0 <0.2.0'
+      flutter_ume: '>=0.2.0 <0.3.0'
     ```
 
 3. 创建插件配置，实现 `Pluggable` 虚类
@@ -214,8 +221,8 @@ showDialog(
 
 | UME 版本 | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.3 |
 | ---- | ---- | ---- | ---- | ---- |
-| 0.1.0 | ✅ | ✅ | ✅ | ✅ |
-| 0.2.0-dev.0 | ❌ | ❌ | ✅ | ✅ |
+| 0.1.x | ✅ | ✅ | ✅ | ✅ |
+| 0.2.x | ❌ | ❌ | ✅ | ✅ |
 
 ### 单测覆盖率
 
@@ -236,12 +243,12 @@ showDialog(
 
 | 包 | null-safety 推荐版本号 |
 | ---- | ---- |
-| flutter_ume | 0.2.0-dev.0 |
-| flutter_ume_kit_ui | 0.2.0-dev.0 |
-| flutter_ume_kit_device | 0.2.0-dev.0 |
-| flutter_ume_kit_perf | 0.2.0-dev.0 |
-| flutter_ume_kit_show_code | 0.2.0-dev.0 |
-| flutter_ume_kit_console | 0.2.0-dev.0 |
+| flutter_ume | 0.2.1 |
+| flutter_ume_kit_ui | 0.2.1 |
+| flutter_ume_kit_device | 0.2.1 |
+| flutter_ume_kit_perf | 0.2.1 |
+| flutter_ume_kit_show_code | 0.2.1 |
+| flutter_ume_kit_console | 0.2.1 |
 
 ### 更新日志
 
