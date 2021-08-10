@@ -4,6 +4,8 @@
 
 UME is an in-app debug kits platform for Flutter apps.
 
+[![platforms](https://img.shields.io/badge/platforms-ios%20%7C%20android%20%7C%20web%20%7C%20macos%20%7C%20windows%20%7C%20linux-lightgrey)](https://pub.dev/packages/flutter_ume) [![license](https://img.shields.io/github/license/bytedance/flutter_ume.svg)](https://github.com/bytedance/flutter_ume/blob/master/LICENSE) [![latest](https://img.shields.io/pub/vpre/flutter_ume.svg)](https://pub.dev/packages/flutter_ume) [![likes](https://badges.bar/flutter_ume/likes)](https://pub.dev/packages/flutter_ume/score) [![popularity](https://badges.bar/flutter_ume/popularity)](https://pub.dev/packages/flutter_ume/score) [![pub points](https://badges.bar/flutter_ume/pub%20points)](https://pub.dev/packages/flutter_ume/score)
+
 <img src="./ume_logo_256.png" width = "128" height = "128" alt="banner" />
 
 <img src="./apk_qrcode.png" width = "256" height = "256" alt="banner" />
