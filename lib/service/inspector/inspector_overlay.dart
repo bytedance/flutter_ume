@@ -78,6 +78,8 @@ class _RenderInspectorOverlay extends RenderBox {
   }
 }
 
+_InspectorOverlayRenderState? _lastState;
+
 class _InspectorOverlayLayer extends Layer {
   _InspectorOverlayLayer({
     required this.overlayRect,
@@ -94,8 +96,6 @@ class _InspectorOverlayLayer extends Layer {
   final bool needEdges;
 
   final Rect overlayRect;
-
-  _InspectorOverlayRenderState? _lastState;
 
   late ui.Picture _picture;
 
