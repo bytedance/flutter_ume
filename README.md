@@ -39,11 +39,11 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
     ``` yaml
     dev_dependencies: # 请不要在 release 环境下使用 UME
       flutter_ume: ^0.1.1  # null-safety 版本: ^0.2.1
-      flutter_ume_kit_ui: ^0.1.1  # null-safety 版本: ^0.2.1
-      flutter_ume_kit_device: ^0.1.1  # null-safety 版本: ^0.2.1
-      flutter_ume_kit_perf: ^0.1.1  # null-safety 版本: ^0.2.1
-      flutter_ume_kit_show_code: ^0.1.1  # null-safety 版本: ^0.2.1
-      flutter_ume_kit_console: ^0.1.1  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_ui: ^0.1.0  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_device: ^0.1.0  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_perf: ^0.1.0  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_show_code: ^0.1.0  # null-safety 版本: ^0.2.1
+      flutter_ume_kit_console: ^0.1.0  # null-safety 版本: ^0.2.1
       flutter_ume_kit_dio: ^0.2.0  # 仅支持 null-safety 版本
     ```
 
