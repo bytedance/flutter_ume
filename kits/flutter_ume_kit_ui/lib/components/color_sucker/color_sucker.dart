@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
@@ -85,7 +86,7 @@ class _ColorSuckerState extends State<ColorSucker> {
 
     if (newY + (_magnifierSize.height / 2) < 0) {
       newY = 0;
-    } else if (newY + (_magnifierSize.height / 2) > _windowSize.height) {
+    } else if (newY  >= _windowSize.height) {
       newY = _windowSize.height - 1;
     }
 
@@ -103,7 +104,7 @@ class _ColorSuckerState extends State<ColorSucker> {
 
   void _toolBarPanUpdate(DragUpdateDetails dragDetails) {
     _toolBarY = dragDetails.globalPosition.dy - 40;
-    if (_toolBarY <= 0) _toolBarY = 0;
+    _toolBarY = max(0, _toolBarY);
     setState(() {});
   }
 
