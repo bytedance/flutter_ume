@@ -53,4 +53,4 @@ jobs:
           arch: x86_64
           profile: Pixel 4
           script: flutter drive --target=test_driver/app.dart
-        working-directory: example
+          working-directory: ./example
