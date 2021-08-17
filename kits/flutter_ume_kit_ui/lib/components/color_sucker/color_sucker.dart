@@ -14,8 +14,8 @@ class ColorSucker extends StatefulWidget implements Pluggable {
 
   const ColorSucker({
     Key? key,
-    this.scale = 10.0,
-    this.size = const Size(100, 100),
+    this.scale = 8.0,
+    this.size = const Size(110, 110),
   }) : super(key: key);
 
   @override
@@ -49,6 +49,7 @@ class _ColorSuckerState extends State<ColorSucker> {
   Matrix4 _matrix = Matrix4.identity();
   late Size _windowSize;
   bool _excuting = false;
+  bool _dark = false;
 
   @override
   void initState() {
@@ -86,7 +87,7 @@ class _ColorSuckerState extends State<ColorSucker> {
 
     if (newY + (_magnifierSize.height / 2) < 0) {
       newY = 0;
-    } else if (newY  >= _windowSize.height) {
+    } else if (newY >= _windowSize.height) {
       newY = _windowSize.height - 1;
     }
 
@@ -149,6 +150,7 @@ class _ColorSuckerState extends State<ColorSucker> {
     int pixel32 = _snapshot!.getPixelSafe(px.toInt(), py.toInt());
     int hex = _abgrToArgb(pixel32);
     _currentColor = Color(hex);
+    _dark = Color(hex).computeLuminance() > 0.5;
   }
 
   int _abgrToArgb(int argbColor) {
@@ -225,19 +227,11 @@ class _ColorSuckerState extends State<ColorSucker> {
                 filter: ui.ImageFilter.matrix(_matrix.storage,
                     filterQuality: FilterQuality.none),
                 child: Container(
-                  child: Center(
-                    child: Container(
-                      height: 1,
-                      width: 1,
-                      decoration: const BoxDecoration(
-                          color: Colors.grey, shape: BoxShape.circle),
-                    ),
-                  ),
                   height: _magnifierSize.height,
                   width: _magnifierSize.width,
-                  decoration: BoxDecoration(
-                      borderRadius: _radius,
-                      border: Border.all(color: Colors.grey, width: 3)),
+                  child: CustomPaint(
+                      painter: FrontSightPainter(
+                          selectedColor: _currentColor, dark: _dark)),
                 ),
               ),
             ),
@@ -246,4 +240,50 @@ class _ColorSuckerState extends State<ColorSucker> {
       ],
     );
   }
+}
+
+class FrontSightPainter extends CustomPainter {
+  final Color selectedColor;
+  final bool dark;
+  double strokeWidth = 32.0;
+  double spaceWidth = 2.0;
+
+  FrontSightPainter({required this.selectedColor, required this.dark});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final radius = size.width / 2;
+    final center = Offset(radius, radius);
+    var paint = Paint()
+      ..isAntiAlias = true
+      ..strokeWidth = strokeWidth
+      ..style = PaintingStyle.stroke
+      ..color = selectedColor
+      ..invertColors = false;
+
+    canvas.drawCircle(center, radius, paint);
+
+    paint
+      ..strokeWidth = 0.6
+      ..color = dark ? Colors.black54 : Colors.white;
+
+    canvas.drawCircle(center, radius - strokeWidth / 2, paint);
+    canvas.drawCircle(center, radius - 0.3, paint);
+
+    /// frontSight
+    paint.strokeWidth = 1.6;
+    canvas.drawLine(Offset(radius - spaceWidth - 4, radius),
+        Offset(radius - spaceWidth, radius), paint);
+    canvas.drawLine(Offset(radius + spaceWidth, radius),
+        Offset(radius + spaceWidth + 4, radius), paint);
+
+    canvas.drawLine(Offset(radius, radius - spaceWidth - 4),
+        Offset(radius, radius - spaceWidth), paint);
+    canvas.drawLine(Offset(radius, radius + spaceWidth),
+        Offset(radius, radius + spaceWidth + 4), paint);
+  }
+
+  @override
+  bool shouldRepaint(FrontSightPainter old) =>
+      old.selectedColor != selectedColor;
 }
