@@ -77,29 +77,31 @@ class _ColorSuckerState extends State<ColorSucker> {
   }
 
   void _onPanUpdate(DragUpdateDetails dragDetails) {
-    double newX = dragDetails.globalPosition.dx;
-    double newY = dragDetails.globalPosition.dy;
+    double newX = _magnifierPosition.dx + dragDetails.delta.dx;
+    double newY = _magnifierPosition.dy + dragDetails.delta.dy;
     if (newX + (_magnifierSize.width / 2) < 0) {
-      newX = 0;
-    } else if (newX >= _windowSize.width) {
-      newX = _windowSize.width - 1;
+      newX = -(_magnifierSize.width / 2);
+    } else if (newX + (_magnifierSize.width / 2) >= _windowSize.width) {
+      newX = _windowSize.width - (_magnifierSize.width / 2) - 1;
     }
 
     if (newY + (_magnifierSize.height / 2) < 0) {
-      newY = 0;
-    } else if (newY >= _windowSize.height) {
-      newY = _windowSize.height - 1;
+      newY = -(_magnifierSize.height / 2);
+    } else if (newY + (_magnifierSize.height / 2) >= _windowSize.height) {
+      newY = _windowSize.height - (_magnifierSize.height / 2) - 1;
     }
 
-    _magnifierPosition =
-        Offset(newX, newY) - _magnifierSize.center(Offset.zero);
+    _magnifierPosition = Offset(newX, newY);
+
+    double centerX = newX + (_magnifierSize.width / 2);
+    double centerY = newY + (_magnifierSize.height / 2);
 
     final Matrix4 newMatrix = Matrix4.identity()
-      ..translate(newX, newY)
+      ..translate(centerX, centerY)
       ..scale(_scale, _scale)
-      ..translate(-newX, -newY);
+      ..translate(-centerX, -centerY);
     _matrix = newMatrix;
-    _searchPixel(Offset(newX, newY));
+    _searchPixel(Offset(centerX, centerY));
     setState(() {});
   }
 
@@ -226,7 +228,7 @@ class _ColorSuckerState extends State<ColorSucker> {
               child: BackdropFilter(
                 filter: ui.ImageFilter.matrix(_matrix.storage,
                     filterQuality: FilterQuality.none),
-                child: Container(
+                child: SizedBox(
                   height: _magnifierSize.height,
                   width: _magnifierSize.width,
                   child: CustomPaint(
