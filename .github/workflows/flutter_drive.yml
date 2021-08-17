@@ -45,11 +45,11 @@ jobs:
           flutter-version: '2.2.x'
           channel: 'stable'
       - name: Run Flutter Driver tests
-        uses: reactivecircus/android-emulator-runner@v1
-        working-directory: ./example
+        uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
           target: ${{ matrix.target }}
           arch: x86_64
           profile: Nexus 6
           script: flutter drive --target=test_driver/app.dart
+          working-directory: ./example
