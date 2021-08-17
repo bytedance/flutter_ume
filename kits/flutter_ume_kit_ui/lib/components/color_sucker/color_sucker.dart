@@ -252,7 +252,7 @@ class FrontSightPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final radius = size.width / 2;
+    final radius = size.shortestSide / 2;
     final center = Offset(radius, radius);
     var paint = Paint()
       ..isAntiAlias = true
