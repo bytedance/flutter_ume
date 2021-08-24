@@ -14,6 +14,8 @@ on:
       - 'kits/flutter_ume_kit_show_code/lib/**'
       - 'kits/flutter_ume_kit_ui/lib/**'
       - 'kits/flutter_ume_kit_dio/lib/**'
+    tags:
+      - 'coverage-*'
 
 jobs:
   build:
