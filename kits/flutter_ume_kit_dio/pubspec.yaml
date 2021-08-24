@@ -21,4 +21,4 @@ dev_dependencies:
   flutter_coverage_badge:
     git:
       url: https://github.com/smileShirely/flutter_coverage_badge.git
-      ref: d0929b7d322bbc7e8a79e4369eb922f3a3b77716
+      ref: 59b7580f406bb712e9d9049c8c99212946e34f65
