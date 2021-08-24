@@ -9,7 +9,6 @@ import 'package:flutter_ume/core/red_dot.dart';
 import 'package:flutter_ume/core/store_manager.dart';
 import 'package:flutter_ume/core/ui/toolbar_widget.dart';
 import 'package:flutter_ume/core/pluggable.dart';
-import 'package:flutter_ume/core/variable_manager.dart';
 import 'package:flutter_ume/util/constants.dart';
 import './menu_page.dart';
 import 'package:flutter_ume/util/flutter_logo.dart';
@@ -44,7 +43,6 @@ Widget injectUMEWidget({
       });
       overlayKey.currentState?.insert(overlayEntry);
     }
-    StaticVariableManager.hasAttached = enable;
   });
   if (!enable) return child;
   return Directionality(
