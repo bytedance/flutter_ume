@@ -3,7 +3,7 @@ import 'package:flutter_ume/flutter_ume.dart';
 import 'custom_log.dart';
 
 void main() {
-  runApp(injectUMEWidget(child: MyApp(), enable: true));
+  runApp(UMEWidget(child: MyApp()));
   PluginManager.instance..register(CustomLog());
 }
 
