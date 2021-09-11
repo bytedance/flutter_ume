@@ -21,12 +21,13 @@ void main() {
 
   group('RootWidget', () {
     testWidgets('RootWidget assert constructor', (tester) async {
-      expect(
-          UMEWidget(
-            child: Container(),
-            enable: false,
-          ),
-          isInstanceOf<Container>());
+      await tester.pumpWidget(UMEWidget(
+        child: Container(),
+        enable: false,
+      ));
+      expect(find.byType(UMEWidget), isOnstage);
+      expect(find.byType(Container), isOnstage);
+      expect(find.byType(Overlay), findsNothing);
     });
 
     testWidgets('RootWidget pump widget', (tester) async {
