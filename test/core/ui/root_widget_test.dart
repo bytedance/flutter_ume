@@ -22,7 +22,7 @@ void main() {
   group('RootWidget', () {
     testWidgets('RootWidget assert constructor', (tester) async {
       expect(
-          injectUMEWidget(
+          UMEWidget(
             child: Container(),
             enable: false,
           ),
@@ -32,7 +32,7 @@ void main() {
     testWidgets('RootWidget pump widget', (tester) async {
       PluginManager.instance
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
-      final umeRoot = injectUMEWidget(
+      final umeRoot = UMEWidget(
           child: MaterialApp(
               home: Scaffold(
             body: Container(),
@@ -64,7 +64,7 @@ void main() {
 
       PluginManager.instance
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
-      final umeRoot = injectUMEWidget(
+      final umeRoot = UMEWidget(
           child: MaterialApp(
               home: Scaffold(
             body: Container(),
@@ -80,7 +80,7 @@ void main() {
     testWidgets('RootWidget flutter logo drag', (tester) async {
       PluginManager.instance
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
-      final umeRoot = injectUMEWidget(
+      final umeRoot = UMEWidget(
           child: MaterialApp(
               home: Scaffold(
             body: Container(),
@@ -103,7 +103,7 @@ void main() {
     testWidgets('RootWidget flutter logo drag', (tester) async {
       PluginManager.instance
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
-      final umeRoot = injectUMEWidget(
+      final umeRoot = UMEWidget(
           child: MaterialApp(
               home: Scaffold(
             body: Container(),
@@ -123,7 +123,7 @@ void main() {
     testWidgets('RootWidget flutter logo tap', (tester) async {
       PluginManager.instance
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
-      final umeRoot = injectUMEWidget(
+      final umeRoot = UMEWidget(
           child: MaterialApp(
               home: Scaffold(
             body: Container(),
@@ -150,7 +150,7 @@ void main() {
       PluginManager.instance
           .registerAll([MockPluggable(), MockPluggableWithStream()]);
 
-      final umeRoot = injectUMEWidget(
+      final umeRoot = UMEWidget(
           child: MaterialApp(
               home: Scaffold(
             body: Container(),
