@@ -100,7 +100,10 @@ class _UMEWidgetState extends State<UMEWidget> {
   @override
   void didUpdateWidget(UMEWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.enable != oldWidget.enable || widget.child != oldWidget.child) {
+    if (widget.enabled != oldWidget.enabled && widget.enabled) {
+      _injectOverlay();
+    }
+    if (widget.child != oldWidget.child) {
       _replaceChild();
     }
   }
