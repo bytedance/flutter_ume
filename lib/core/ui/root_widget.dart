@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart'
@@ -25,6 +27,10 @@ const defaultLocalizationsDelegates = const [
 final GlobalKey<OverlayState> overlayKey = GlobalKey<OverlayState>();
 
 /// Wrap your App widget. If [enable] is false, the function will return [child].
+@Deprecated(
+  'injectUMEWidget has been deprecated since 0.3.0. '
+  'Use UMEWidget instead.',
+)
 Widget injectUMEWidget({
   required Widget child,
   required bool enable,
@@ -61,6 +67,82 @@ Widget injectUMEWidget({
       ],
     ),
   );
+}
+
+class UMEWidget extends StatefulWidget {
+  const UMEWidget({
+    Key? key,
+    required this.child,
+    this.enable = true,
+    this.supportedLocales,
+    this.localizationsDelegates = defaultLocalizationsDelegates,
+  }) : super(key: key);
+
+  final Widget child;
+  final bool enable;
+  final Iterable<Locale>? supportedLocales;
+  final Iterable<LocalizationsDelegate> localizationsDelegates;
+
+  @override
+  _UMEWidgetState createState() => _UMEWidgetState();
+}
+
+class _UMEWidgetState extends State<UMEWidget> {
+  late Widget _child;
+
+  @override
+  void initState() {
+    super.initState();
+    _replaceChild();
+    _injectOverlay();
+  }
+
+  @override
+  void didUpdateWidget(UMEWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.enable != oldWidget.enable && widget.enable) {
+      _injectOverlay();
+    }
+    if (widget.child != oldWidget.child) {
+      _replaceChild();
+    }
+  }
+
+  void _replaceChild() {
+    _child = RepaintBoundary(key: rootKey, child: widget.child);
+  }
+
+  void _injectOverlay() {
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      if (widget.enable) {
+        final overlayEntry = OverlayEntry(
+          builder: (_) => const _FloatingWidget(),
+        );
+        overlayKey.currentState?.insert(overlayEntry);
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!widget.enable) {
+      return _child;
+    }
+    return Stack(
+      textDirection: TextDirection.ltr,
+      children: <Widget>[
+        _child,
+        MediaQuery(
+          data: MediaQueryData.fromWindow(ui.window),
+          child: Localizations(
+            locale: widget.supportedLocales?.first ?? Locale('en', 'US'),
+            delegates: widget.localizationsDelegates.toList(),
+            child: ScaffoldMessenger(child: Overlay(key: overlayKey)),
+          ),
+        )
+      ],
+    );
+  }
 }
 
 class _FloatingWidget extends StatelessWidget {
