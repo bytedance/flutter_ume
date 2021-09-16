@@ -28,3 +28,12 @@ jobs:
           files: example/build/app/outputs/apk/debug/app-debug.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: action-feishu
+        uses: xiachufang/actions-feishu@1.3.1
+        with:
+          webhook: ${{ secrets.FEISHU_WEBHOOK_URL }}
+          title: Release done
+          content: |
+            https://github.com/bytedance/flutter_ume/releases
+            from: ${{ github.repository }}
+    
