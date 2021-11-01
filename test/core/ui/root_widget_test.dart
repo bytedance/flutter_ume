@@ -225,6 +225,6 @@ void main() {
       await tester.pumpAndSettle();
 
       await tester.tapAt(flutterLogoPosition);
-    });、
+    });
   });
 }
