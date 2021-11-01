@@ -12,6 +12,11 @@ dependencies:
     sdk: flutter
   image: ^3.0.2
   flutter_ume: '>=0.2.0 <0.3.0'
+  cyclop:
+    git:
+      url: https://github.com/talisk/cyclop.git
+      ref: 7dab960c09c21c6311327a425002edca4159d9fe
+  touch_indicator: 2.0.0
 
 dev_dependencies:
   flutter_test:

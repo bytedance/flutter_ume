@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide FlutterLogo;
+import 'package:flutter_ume/core/pluggable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_ume/util/flutter_logo.dart' as flutterLogo;
 import 'package:flutter/services.dart';
@@ -27,7 +28,7 @@ void main() {
       ));
       expect(find.byType(UMEWidget), isOnstage);
       expect(find.byType(Container), isOnstage);
-      expect(find.byType(Overlay), findsNothing);
+      expect(find.byType(Overlay), findsOneWidget);
     });
 
     testWidgets('RootWidget pump widget', (tester) async {
@@ -63,8 +64,11 @@ void main() {
           return null;
       });
 
-      PluginManager.instance
-          .registerAll([MockPluggable(), MockPluggableWithStream()]);
+      PluginManager.instance.registerAll([
+        MockPluggable(),
+        MockPluggableWithStream(),
+        MockPluggableWithNestedWidget()
+      ]);
       final umeRoot = UMEWidget(
           child: MaterialApp(
               home: Scaffold(
@@ -197,6 +201,30 @@ void main() {
       }));
       await tester.tapAt(closeBtnPosition);
       await tester.pump(Duration(seconds: 1));
+    });
+
+    testWidgets('Build nested widget', (tester) async {
+      PluginManager.instance.registerAll([MockPluggableWithNestedWidget()]);
+      final umeRoot = UMEWidget(
+          child: MaterialApp(
+              home: Scaffold(
+            body: Container(),
+          )),
+          enable: true);
+      await tester.pumpWidget(umeRoot);
+      await tester.pump(Duration(seconds: 1));
+      await tester.pumpAndSettle();
+
+      final Offset flutterLogoPosition =
+          tester.getCenter(find.byType(flutterLogo.FlutterLogo));
+      await tester.tapAt(flutterLogoPosition);
+      await tester.pump();
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('MockPluggableWithNestedWidget'));
+      await tester.pumpAndSettle();
+
+      await tester.tapAt(flutterLogoPosition);
     });
   });
 }

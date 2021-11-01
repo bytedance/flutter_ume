@@ -8,6 +8,9 @@ class PluginManager {
 
   Map<String, Pluggable?> _pluginsMap = {};
 
+  Pluggable? _activatedPluggable;
+  String? get activatedPluggableName => _activatedPluggable?.name;
+
   static PluginManager get instance {
     if (_instance == null) {
       _instance = PluginManager._();
@@ -30,6 +33,16 @@ class PluginManager {
     for (final plugin in plugins) {
       assert(plugin is Pluggable);
       register(plugin);
+    }
+  }
+
+  void activatePluggable(Pluggable pluggable) {
+    _activatedPluggable = pluggable;
+  }
+
+  void deactivatePluggable(Pluggable pluggable) {
+    if (_activatedPluggable?.name == pluggable.name) {
+      _activatedPluggable = null;
     }
   }
 }
