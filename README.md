@@ -28,7 +28,7 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
     - [版本号规则](#版本号规则)
     - [Null-safety 版本](#null-safety-版本)
     - [更新日志](#更新日志)
-  - [如何贡献](#如何贡献)
+  - [开源贡献](#开源贡献)
   - [开源协议](#开源协议)
   - [联系开发者](#联系开发者)
 
@@ -278,6 +278,7 @@ showDialog(
 | ![ShirelyC](https://avatars.githubusercontent.com/u/11439167?s=64&v=4) | [ShirelyC](https://github.com/smileShirely) |
 | ![lpylpyleo](https://avatars.githubusercontent.com/u/15264428?s=64&v=4) | [lpylpyleo](https://github.com/lpylpyleo) |
 | ![Alex Li](https://avatars.githubusercontent.com/u/15884415?s=64&v=4) | [Alex Li](https://github.com/AlexV525) |
+| ![Swain](https://avatars.githubusercontent.com/u/7621572?s=64&v=4) | [Swain](https://github.com/talisk) |
 
 ## 开源协议
 
@@ -302,4 +303,4 @@ showDialog(
 
 欢迎[加入字节跳动 Flutter 交流群](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=67au2f75-3783-41b0-8868-0fc0178f1fd8)
 
-或随时[联系开发者](mailto:zhaorui.dev@bytedance.com)
+或随时[联系开发者](mailto:sunkai.dev@bytedance.com)

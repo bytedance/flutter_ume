@@ -14,6 +14,6 @@ If you need help, consider [Join ing the ByteDance Flutter Exchange Group](https
 
 如有任何问题，可以[加入字节跳动 Flutter 交流群](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=67au2f75-3783-41b0-8868-0fc0178f1fd8)。
 
-Or contact [author](mailto:zhaorui.dev@bytedance.com).
+Or contact [author](mailto:sunkai.dev@bytedance.com).
 
-或随时[联系开发者](mailto:zhaorui.dev@bytedance.com)。
+或随时[联系开发者](mailto:sunkai.dev@bytedance.com)。

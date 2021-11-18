@@ -302,4 +302,4 @@ You can [submit an issue](./CONTRIBUTING_en.md#how-to-raise-an-issue) in any of 
 
 Welcome to [Join the ByteDance Flutter Exchange Group](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=67au2f75-3783-41b0-8868-0fc0178f1fd8).
 
-Or contact [author](mailto:zhaorui.dev@bytedance.com).
+Or contact [author](mailto:sunkai.dev@bytedance.com).

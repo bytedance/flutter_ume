@@ -32,7 +32,7 @@ You can [submit an issue](#how-to-raise-an-issue) in any of the above situations
 
 Welcome to [Join the ByteDance Flutter Exchange Group](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=b07u55bb-68f0-4a4b-871d-687637766a68).
 
-Or contact [author](mailto:zhaorui.dev@bytedance.com).
+Or contact [author](mailto:sunkai.dev@bytedance.com).
 
 ## How to raise an Issue
 
