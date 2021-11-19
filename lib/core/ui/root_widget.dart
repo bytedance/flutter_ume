@@ -48,6 +48,8 @@ class _UMEWidgetState extends State<UMEWidget> {
 
   VoidCallback? _onMetricsChanged;
 
+  OverlayEntry _overlayEntry = OverlayEntry(builder: (ctx) => Container());
+
   @override
   void initState() {
     super.initState();
@@ -84,6 +86,9 @@ class _UMEWidgetState extends State<UMEWidget> {
     if (widget.child != oldWidget.child) {
       _replaceChild();
     }
+    if (!widget.enable) {
+      _removeOverlay();
+    }
   }
 
   void _replaceChild() {
@@ -104,7 +109,6 @@ class _UMEWidgetState extends State<UMEWidget> {
     }
     _child =
         Directionality(textDirection: TextDirection.ltr, child: layoutChild);
-    // _child = RepaintBoundary(key: rootKey, child: widget.child);
   }
 
   Stack _buildLayout(Widget child, Iterable<Locale>? supportedLocales,
@@ -124,10 +128,12 @@ class _UMEWidgetState extends State<UMEWidget> {
     );
   }
 
+  void _removeOverlay() => _overlayEntry.remove();
+
   void _injectOverlay() {
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       if (widget.enable) {
-        final overlayEntry = OverlayEntry(
+        _overlayEntry = OverlayEntry(
             builder: (_) => Material(
                 type: MaterialType.transparency,
                 child: _ContentPage(
@@ -136,7 +142,7 @@ class _UMEWidgetState extends State<UMEWidget> {
                     setState(() {});
                   },
                 )));
-        overlayKey.currentState?.insert(overlayEntry);
+        overlayKey.currentState?.insert(_overlayEntry);
       }
     });
   }
