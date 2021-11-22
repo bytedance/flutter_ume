@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
@@ -75,21 +76,35 @@ class _ColorSuckerState extends State<ColorSucker> {
   }
 
   void _onPanUpdate(DragUpdateDetails dragDetails) {
-    _magnifierPosition =
-        dragDetails.globalPosition - _magnifierSize.center(Offset.zero);
     double newX = dragDetails.globalPosition.dx;
     double newY = dragDetails.globalPosition.dy;
+    if (newX + (_magnifierSize.width / 2) < 0) {
+      newX = 0;
+    } else if (newX >= _windowSize.width) {
+      newX = _windowSize.width - 1;
+    }
+
+    if (newY + (_magnifierSize.height / 2) < 0) {
+      newY = 0;
+    } else if (newY  >= _windowSize.height) {
+      newY = _windowSize.height - 1;
+    }
+
+    _magnifierPosition =
+        Offset(newX, newY) - _magnifierSize.center(Offset.zero);
+
     final Matrix4 newMatrix = Matrix4.identity()
       ..translate(newX, newY)
       ..scale(_scale, _scale)
       ..translate(-newX, -newY);
     _matrix = newMatrix;
-    _searchPixel(dragDetails.globalPosition);
+    _searchPixel(Offset(newX, newY));
     setState(() {});
   }
 
   void _toolBarPanUpdate(DragUpdateDetails dragDetails) {
     _toolBarY = dragDetails.globalPosition.dy - 40;
+    _toolBarY = max(0, _toolBarY);
     setState(() {});
   }
 
