@@ -365,7 +365,7 @@ Please refer to [Semantic versions](https://dart.dev/tools/pub/versioning#semant
 
 ### Change log
 
-[Changelog](./CHANGELOG_en.md)
+[Changelog](./CHANGELOG.md)
 
 ## Contributing
 

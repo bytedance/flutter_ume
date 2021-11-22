@@ -365,7 +365,7 @@ showDialog(
 
 ### 更新日志
 
-[Changelog](./CHANGELOG.md)
+[Changelog](./CHANGELOG_cn.md)
 
 ## 开源贡献
 
