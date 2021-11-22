@@ -30,6 +30,8 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
     - [Null-safety 版本](#null-safety-版本)
     - [更新日志](#更新日志)
   - [开源贡献](#开源贡献)
+    - [贡献者](#贡献者)
+    - [第三方开源项目说明](#第三方开源项目说明)
   - [开源协议](#开源协议)
   - [联系开发者](#联系开发者)
 
@@ -357,6 +359,8 @@ showDialog(
 
 贡献文档：[Contributing](./CONTRIBUTING.md)
 
+### 贡献者
+
 感谢以下贡献者（排名不分先后）：
 
 |  |  |
@@ -365,6 +369,11 @@ showDialog(
 | ![lpylpyleo](https://avatars.githubusercontent.com/u/15264428?s=64&v=4) | [lpylpyleo](https://github.com/lpylpyleo) |
 | ![Alex Li](https://avatars.githubusercontent.com/u/15884415?s=64&v=4) | [Alex Li](https://github.com/AlexV525) |
 | ![Swain](https://avatars.githubusercontent.com/u/7621572?s=64&v=4) | [Swain](https://github.com/talisk) |
+
+### 第三方开源项目说明
+
+- 触控标记使用了 [touch_indicator](https://pub.dev/packages/touch_indicator)，颜色吸管插件使用了 [cyclop](https://pub.dev/packages/cyclop)。
+- 对 [cyclop](https://pub.dev/packages/cyclop) 进行了 [fork](https://github.com/talisk/cyclop) 并修改代码以满足需要。
 
 ## 开源协议
 

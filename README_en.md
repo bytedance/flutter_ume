@@ -30,6 +30,8 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
     - [Null-safety](#null-safety)
     - [Change log](#change-log)
   - [Contributing](#contributing)
+    - [Contributors](#contributors)
+    - [About the third-party opensource project dependencies](#about-the-third-party-opensource-project-dependencies)
   - [LICENSE](#license)
   - [Contact the author](#contact-the-author)
 
@@ -320,6 +322,7 @@ In order to use in Release/Profile mode, the details that need to be adjusted in
 | 0.3.x | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ⚠️ means the version has not been fully tested for compatibility.
+
 ### Coverage
 
 | Package | master | develop | develop_nullsafety |
@@ -356,6 +359,8 @@ Please refer to [Semantic versions](https://dart.dev/tools/pub/versioning#semant
 
 Contributing rules: [Contributing](./CONTRIBUTING_en.md)
 
+### Contributors
+
 Thanks to the following contributors (names not listed in order)：
 
 |  |  |
@@ -363,6 +368,12 @@ Thanks to the following contributors (names not listed in order)：
 | ![ShirelyC](https://avatars.githubusercontent.com/u/11439167?s=64&v=4) | [ShirelyC](https://github.com/smileShirely) |
 | ![lpylpyleo](https://avatars.githubusercontent.com/u/15264428?s=64&v=4) | [lpylpyleo](https://github.com/lpylpyleo) |
 | ![Alex Li](https://avatars.githubusercontent.com/u/15884415?s=64&v=4) | [Alex Li](https://github.com/AlexV525) |
+| ![Swain](https://avatars.githubusercontent.com/u/7621572?s=64&v=4) | [Swain](https://github.com/talisk) |
+
+### About the third-party opensource project dependencies
+
+- The TouchIndicator use the pub [touch_indicator](https://pub.dev/packages/touch_indicator), the ColorPicker use the pub [cyclop](https://pub.dev/packages/cyclop).
+- We [fork](https://github.com/talisk/cyclop) the package [cyclop](https://pub.dev/packages/cyclop) and modify some code meet our functional needs.
 
 ## LICENSE
 
