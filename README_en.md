@@ -4,14 +4,14 @@
 
 UME is an in-app debug kits platform for Flutter apps.
 
-[![license](https://img.shields.io/github/license/bytedance/flutter_ume.svg)](https://github.com/bytedance/flutter_ume/blob/master/LICENSE) [![latest](https://img.shields.io/pub/vpre/flutter_ume.svg)](https://pub.dev/packages/flutter_ume) [![likes](https://badges.bar/flutter_ume/likes)](https://pub.dev/packages/flutter_ume/score) [![popularity](https://badges.bar/flutter_ume/popularity)](https://pub.dev/packages/flutter_ume/score) [![pub points](https://badges.bar/flutter_ume/pub%20points)](https://pub.dev/packages/flutter_ume/score)
+[![platforms](https://img.shields.io/badge/platforms-ios%20%7C%20android%20%7C%20web%20%7C%20macos%20%7C%20windows%20%7C%20linux-lightgrey)](https://pub.dev/packages/flutter_ume) [![license](https://img.shields.io/github/license/bytedance/flutter_ume.svg)](https://github.com/bytedance/flutter_ume/blob/master/LICENSE) [![latest](https://img.shields.io/pub/vpre/flutter_ume.svg)](https://pub.dev/packages/flutter_ume) [![likes](https://badges.bar/flutter_ume/likes)](https://pub.dev/packages/flutter_ume/score) [![popularity](https://badges.bar/flutter_ume/popularity)](https://pub.dev/packages/flutter_ume/score) [![pub points](https://badges.bar/flutter_ume/pub%20points)](https://pub.dev/packages/flutter_ume/score)
 
 <img src="./ume_logo_256.png" width = "128" height = "128" alt="banner" />
 
 <img src="./apk_qrcode.png" width = "256" height = "256" alt="banner" />
 
 Scan QR code or click link to download apk. Try it now!
-https://github.com/bytedance/flutter_ume/releases/download/v0.1.0.4/app-debug.apk
+https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.apk
 
 There are 13 plugin kits built in the latest open source version of UME.
 Developer could create custom plugin kits, and integrate them into UME.
@@ -372,4 +372,4 @@ You can [submit an issue](./CONTRIBUTING_en.md#how-to-raise-an-issue) in any of 
 
 Welcome to [Join the ByteDance Flutter Exchange Group](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=67au2f75-3783-41b0-8868-0fc0178f1fd8).
 
-Or contact [author](mailto:zhaorui.dev@bytedance.com).
+Or contact [author](mailto:sunkai.dev@bytedance.com).

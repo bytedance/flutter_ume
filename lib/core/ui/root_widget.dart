@@ -324,38 +324,42 @@ class __ContentPageState extends State<_ContentPage> {
           Positioned(
             left: _dx,
             top: _dy,
-            child: GestureDetector(
-              onTap: onTap,
-              onVerticalDragEnd: dragEnd,
-              onHorizontalDragEnd: dragEnd,
-              onHorizontalDragUpdate: dragEvent,
-              onVerticalDragUpdate: dragEvent,
-              child: Container(
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                    boxShadow: [
-                      const BoxShadow(
-                          color: Colors.black12,
-                          offset: Offset(0.0, 0.0),
-                          blurRadius: 2.0,
-                          spreadRadius: 1.0)
-                    ]),
-                width: dotSize.width,
-                height: dotSize.height,
-                child: Stack(
-                  children: [
-                    Center(
-                      child: _logoWidget(),
-                    ),
-                    Positioned(
-                        right: 6,
-                        top: 8,
-                        child: RedDot(
-                          pluginDatas:
-                              PluginManager.instance.pluginsMap.values.toList(),
-                        ))
-                  ],
+            child: Tooltip(
+              message: 'Open ume panel',
+              child: GestureDetector(
+                onTap: onTap,
+                onVerticalDragEnd: dragEnd,
+                onHorizontalDragEnd: dragEnd,
+                onHorizontalDragUpdate: dragEvent,
+                onVerticalDragUpdate: dragEvent,
+                child: Container(
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                      boxShadow: [
+                        const BoxShadow(
+                            color: Colors.black12,
+                            offset: Offset(0.0, 0.0),
+                            blurRadius: 2.0,
+                            spreadRadius: 1.0)
+                      ]),
+                  width: dotSize.width,
+                  height: dotSize.height,
+                  child: Stack(
+                    children: [
+                      Center(
+                        child: _logoWidget(),
+                      ),
+                      Positioned(
+                          right: 6,
+                          top: 8,
+                          child: RedDot(
+                            pluginDatas: PluginManager
+                                .instance.pluginsMap.values
+                                .toList(),
+                          ))
+                    ],
+                  ),
                 ),
               ),
             ),
