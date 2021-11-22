@@ -385,7 +385,7 @@ showDialog(
 ### 第三方开源项目说明
 
 - 触控标记使用了 [touch_indicator](https://pub.dev/packages/touch_indicator)，颜色吸管插件使用了 [cyclop](https://pub.dev/packages/cyclop)。
-- 对 [cyclop](https://pub.dev/packages/cyclop) 进行了 [fork](https://github.com/talisk/cyclop) 并修改代码以满足需要。
+- 对 [cyclop](https://pub.dev/packages/cyclop) 进行了 [fork](https://github.com/talisk/cyclop) 并修改代码以满足需要。当 [PR](https://github.com/rxlabz/cyclop/pull/11) 合入后，我们将通过 pub 的形式依赖。
 
 ## 开源协议
 
