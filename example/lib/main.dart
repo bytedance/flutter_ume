@@ -22,6 +22,8 @@ void main() {
       ..register(WidgetDetailInspector())
       ..register(ColorSucker())
       ..register(AlignRuler())
+      ..register(ColorPicker())
+      ..register(TouchIndicator())
       ..register(Performance())
       ..register(ShowCode())
       ..register(MemoryInfoPage())
@@ -29,19 +31,17 @@ void main() {
       ..register(DeviceInfoPanel())
       ..register(Console())
       ..register(DioInspector(dio: dio));
-    runApp(MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => UMESwitch(),
-        ),
-      ],
-      builder: (ctx, child) {
-        return injectUMEWidget(
-          child: MyApp(),
+    runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => UMESwitch()),
+        ],
+        builder: (ctx, child) => UMEWidget(
           enable: ctx.watch<UMESwitch>().enable,
-        );
-      },
-    ));
+          child: MyApp(),
+        ),
+      ),
+    );
   } else {
     runApp(MyApp());
   }

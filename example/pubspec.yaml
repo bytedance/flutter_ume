@@ -3,7 +3,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -13,6 +13,13 @@ dependencies:
   provider: ^5.0.0
   # For Dio Kit
   dio: ^4.0.0
+  flutter_ume: 0.2.1
+  flutter_ume_kit_ui: 0.2.1
+  flutter_ume_kit_perf: 0.2.1
+  flutter_ume_kit_show_code: 0.2.1
+  flutter_ume_kit_device: 0.2.1
+  flutter_ume_kit_console: 0.2.1
+  flutter_ume_kit_dio: 0.2.0
 
 dependency_overrides:
   flutter_ume:

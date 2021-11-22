@@ -14,6 +14,8 @@ on:
       - 'kits/flutter_ume_kit_show_code/lib/**'
       - 'kits/flutter_ume_kit_ui/lib/**'
       - 'kits/flutter_ume_kit_dio/lib/**'
+    tags:
+      - 'coverage-*'
 
 jobs:
   build:
@@ -32,7 +34,7 @@ jobs:
           channel: stable
       - run: |
           flutter pub get
-          flutter pub run flutter_coverage_badge
+          flutter pub run flutter_coverage_badge --exclude lib/util/flutter_logo.dart
       - run: |
           flutter pub get
           flutter pub run flutter_coverage_badge
@@ -43,7 +45,7 @@ jobs:
         working-directory: kits/flutter_ume_kit_perf
       - run: |
           flutter pub get
-          flutter pub run flutter_coverage_badge
+          flutter pub run flutter_coverage_badge --exclude lib/show_code/syntax_highlighter.dart
         working-directory: kits/flutter_ume_kit_show_code
       - run: |
           flutter pub get

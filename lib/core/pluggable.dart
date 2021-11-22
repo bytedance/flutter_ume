@@ -14,3 +14,7 @@ abstract class PluggableWithStream extends Pluggable {
   Stream get stream;
   StreamFilter get streamFilter;
 }
+
+abstract class PluggableWithNestedWidget extends Pluggable {
+  Widget buildNestedWidget(Widget child);
+}
