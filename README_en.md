@@ -147,7 +147,7 @@ There are 13 plugin kits built in the current open source version of UME.
 
 <table border="1" width="100%">
     <tr>
-        <td width="33.33%" align="center"><p>UI kits</p></td>
+        <td width="100%" align="center"><p>UI kits</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/widget_info.png" width="100%" alt="Widget Info" /></br>Widget Info</td>
@@ -160,33 +160,48 @@ There are 13 plugin kits built in the current open source version of UME.
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/touch_indicator.png" width="100%" alt="Touch Indicator" /></br>Touch Indicator</td>
     </tr>
     <tr>
-        <td width="33.33%" align="center"><p>Performance Kits</p></td>
+        <td width="100%" align="center"></td>
+    </tr>
+    <tr>
+        <td width="100%" align="center"><p>Performance Kits</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/memory_info.png" width="100%" alt="Memory Info" /></br>Memory Info</td>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/perf_overlay.png" width="100%" alt="Perf Overlay" /></br>Perf Overlay</td>
     </tr>
     <tr>
-        <td width="33.33%" align="center"><p>Device Info Kits</p></td>
+        <td width="100%" align="center"></td>
+    </tr>
+    <tr>
+        <td width="100%" align="center"><p>Device Info Kits</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/cpu_info.png" width="100%" alt="CPU Info" /></br>CPU Info</td>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/device_info.png" width="100%" alt="Device Info" /></br>Device Info</td>
     </tr>
     <tr>
-        <td width="33.33%" align="center"><p>Show Code</p></td>
+        <td width="100%" align="center"></td>
+    </tr>
+    <tr>
+        <td width="100%" align="center"><p>Show Code</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/show_code.png" width="100%" alt="Show Code" /></br>Show Code</td>
     </tr>
     <tr>
-        <td width="33.33%" align="center"><p>Console</p></td>
+        <td width="100%" align="center"></td>
+    </tr>
+    <tr>
+        <td width="100%" align="center"><p>Console</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/console.png" width="100%" alt="Console" /></br>Console</td>
     </tr>
     <tr>
-        <td width="33.33%" align="center"><p>Dio Inspector</p></td>
+        <td width="100%" align="center"></td>
+    </tr>
+    <tr>
+        <td width="100%" align="center"><p>Dio Inspector</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/dio_inspector.png" width="100%" alt="Dio Inspector" /></br>Dio Inspector</td>
