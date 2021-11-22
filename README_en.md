@@ -22,6 +22,7 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
   - [IMPORTANT](#important)
   - [Features](#features)
   - [Develop plugin kits for UME](#develop-plugin-kits-for-ume)
+    - [Access the nested widget debug kits quickly](#access-the-nested-widget-debug-kits-quickly)
   - [How to use UME in Release/Profile mode](#how-to-use-ume-in-releaseprofile-mode)
   - [About version](#about-version)
     - [Compatibility](#compatibility)
@@ -31,7 +32,7 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
     - [Change log](#change-log)
   - [Contributing](#contributing)
     - [Contributors](#contributors)
-    - [About the third-party opensource project dependencies](#about-the-third-party-opensource-project-dependencies)
+    - [About the third-party open-source project dependencies](#about-the-third-party-open-source-project-dependencies)
   - [LICENSE](#license)
   - [Contact the author](#contact-the-author)
 
@@ -292,6 +293,17 @@ There are 13 plugin kits built in the current open source version of UME.
 
 6. Run your app
 
+### Access the nested widget debug kits quickly
+
+We introduce the `PluggableWithNestedWidget` from `0.3.0`. It is used to insert nested Widgets in the Widget tree and quickly access embedded kits with nested widget.
+
+For more details, see [./kits/flutter_ume_kit_ui/lib/components/color_picker/color_picker.dart](https://github.com/bytedance/flutter_ume/blob/master/kits/flutter_ume_kit_ui/lib/components/color_picker/color_picker.dart) and [./kits/flutter_ume_kit_ui/lib/components/touch_indicator/touch_indicator.dart](https://github.com/bytedance/flutter_ume/blob/master/kits/flutter_ume_kit_ui/lib/components/touch_indicator/touch_indicator.dart).
+
+The key steps are as follows:
+
+1. The class of your plugin should implement `PluggableWithNestedWidget`.
+2. Implements `Widget buildNestedWidget(Widget child)`. Handling the nested widgets and returning the new Widget.
+
 ## How to use UME in Release/Profile mode
 
 **Once you use flutter_ume in Release/Profile mode, you agree that you will**
@@ -370,7 +382,7 @@ Thanks to the following contributors (names not listed in order)：
 | ![Alex Li](https://avatars.githubusercontent.com/u/15884415?s=64&v=4) | [Alex Li](https://github.com/AlexV525) |
 | ![Swain](https://avatars.githubusercontent.com/u/7621572?s=64&v=4) | [Swain](https://github.com/talisk) |
 
-### About the third-party opensource project dependencies
+### About the third-party open-source project dependencies
 
 - The TouchIndicator use the pub [touch_indicator](https://pub.dev/packages/touch_indicator), the ColorPicker use the pub [cyclop](https://pub.dev/packages/cyclop).
 - We [fork](https://github.com/talisk/cyclop) the package [cyclop](https://pub.dev/packages/cyclop) and modify some code meet our functional needs.

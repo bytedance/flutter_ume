@@ -22,6 +22,7 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
   - [特别说明](#特别说明)
   - [功能介绍](#功能介绍)
   - [为 UME 开发插件](#为-ume-开发插件)
+    - [快速集成嵌入式插件](#快速集成嵌入式插件)
   - [如何在 Release/Profile mode 下使用 UME](#如何在-releaseprofile-mode-下使用-ume)
   - [版本说明](#版本说明)
     - [兼容性](#兼容性)
@@ -90,8 +91,8 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
           ..register(WidgetDetailInspector())
           ..register(ColorSucker())
           ..register(AlignRuler())
-          ..register(ColorPicker())                            // New feature
-          ..register(TouchIndicator())                         // New feature
+          ..register(ColorPicker())                            // 新插件
+          ..register(TouchIndicator())                         // 新插件
           ..register(Performance())
           ..register(ShowCode())
           ..register(MemoryInfoPage())
@@ -291,6 +292,17 @@ showDialog(
     ```
 
 6. 运行代码
+
+### 快速集成嵌入式插件
+
+自 `0.3.0` 版本起引入了 `PluggableWithNestedWidget`，用以实现在 Widget tree 中插入嵌套 Widget，快速接入嵌入式插件。
+
+可参考 [./kits/flutter_ume_kit_ui/lib/components/color_picker/color_picker.dart](https://github.com/bytedance/flutter_ume/blob/master/kits/flutter_ume_kit_ui/lib/components/color_picker/color_picker.dart) 与 [./kits/flutter_ume_kit_ui/lib/components/touch_indicator/touch_indicator.dart](https://github.com/bytedance/flutter_ume/blob/master/kits/flutter_ume_kit_ui/lib/components/touch_indicator/touch_indicator.dart)。
+
+集成重点如下：
+
+1. 插件主体类实现 `PluggableWithNestedWidget`
+2. 实现 `Widget buildNestedWidget(Widget child)`，在该方法中处理嵌套结构并返回 Widget
 
 ## 如何在 Release/Profile mode 下使用 UME
 
