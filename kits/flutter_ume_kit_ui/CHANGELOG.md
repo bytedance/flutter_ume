@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0
+
+* 新增 UI 调试插件：cyclop、touch_indicator
+
+* Add new kits: cyclop, touch_indicator
+
 ## 0.2.1
 
 * null-safety 正式版本

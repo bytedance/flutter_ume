@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0
+
+* 修复分页错误 #28
+
+* Fix DioInspector paging issue #28
+
 ## 0.2.1
 
 * null-safety 正式版本
