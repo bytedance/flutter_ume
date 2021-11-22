@@ -147,7 +147,7 @@ showDialog(
 
 <table border="1" width="100%">
     <tr>
-        <td width="100%" align="center"><p>UI 工具包</p></td>
+        <td width="33.33%" align="center"><p>UI 工具包</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/widget_info.png" width="100%" alt="Widget 信息" /></br>Widget 信息</td>
@@ -163,7 +163,7 @@ showDialog(
         <td width="100%" align="center"></td>
     </tr>
     <tr>
-        <td width="100%" align="center"><p>性能工具包</p></td>
+        <td width="33.33%" align="center"><p>性能工具包</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/memory_info.png" width="100%" alt="内存信息" /></br>内存信息</td>
@@ -173,7 +173,7 @@ showDialog(
         <td width="100%" align="center"></td>
     </tr>
     <tr>
-        <td width="100%" align="center"><p>设备信息工具包</p></td>
+        <td width="33.33%" align="center"><p>设备信息工具包</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/cpu_info.png" width="100%" alt="CPU 信息" /></br>CPU 信息</td>
@@ -183,7 +183,7 @@ showDialog(
         <td width="100%" align="center"></td>
     </tr>
     <tr>
-        <td width="100%" align="center"><p>代码查看</p></td>
+        <td width="33.33%" align="center"><p>代码查看</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/show_code.png" width="100%" alt="代码查看" /></br>代码查看</td>
@@ -192,7 +192,7 @@ showDialog(
         <td width="100%" align="center"></td>
     </tr>
     <tr>
-        <td width="100%" align="center"><p>日志展示</p></td>
+        <td width="33.33%" align="center"><p>日志展示</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/console.png" width="100%" alt="日志展示" /></br>日志展示</td>
@@ -201,7 +201,7 @@ showDialog(
         <td width="100%" align="center"></td>
     </tr>
     <tr>
-        <td width="100%" align="center"><p>Dio 网络请求调试工具</p></td>
+        <td width="33.33%" align="center"><p>Dio 网络请求调试工具</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/dio_inspector.png" width="100%" alt="Dio 网络请求调试工具" /></br>Dio 网络请求调试工具</td>
