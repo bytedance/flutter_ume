@@ -47,8 +47,8 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
 
     ``` yaml
     dev_dependencies: # Don't use UME in release mode
-      flutter_ume: ^0.3.0
-      flutter_ume_kit_ui: ^0.3.0
+      flutter_ume: ^0.3.0+1
+      flutter_ume_kit_ui: ^0.3.0+1
       flutter_ume_kit_device: ^0.3.0
       flutter_ume_kit_perf: ^0.3.0
       flutter_ume_kit_show_code: ^0.3.0
@@ -327,7 +327,7 @@ In order to use in Release/Profile mode, the details that need to be adjusted in
 
 ### Compatibility
 
-| UME version | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.3 | Flutter 2.2.5 |
+| UME version | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.3 | Flutter 2.5.3 |
 | ---- | ---- | ---- | ---- | ---- | ---- |
 | 0.1.x | ✅ | ✅ | ✅ | ✅ | ⚠️ |
 | 0.2.x | ❌ | ❌ | ✅ | ✅ | ✅ |
@@ -355,8 +355,8 @@ Please refer to [Semantic versions](https://dart.dev/tools/pub/versioning#semant
 
 | Package | Suggest version |
 | ---- | ---- |
-| flutter_ume | 0.3.0 |
-| flutter_ume_kit_ui | 0.3.0 |
+| flutter_ume | 0.3.0+1 |
+| flutter_ume_kit_ui | 0.3.0+1 |
 | flutter_ume_kit_device | 0.3.0 |
 | flutter_ume_kit_perf | 0.3.0 |
 | flutter_ume_kit_show_code | 0.3.0 |

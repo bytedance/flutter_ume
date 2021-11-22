@@ -13,7 +13,7 @@ Flutter 应用内调试工具平台
 扫码或点击链接下载 apk，快速体验 UME。
 https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.apk
 
-最新版本(0.3.0)内置 13 个插件，
+最新版本(0.3.0+1)内置 13 个插件，
 开发者可以创建自己的插件，并集成进 UME 平台。
 详见本文[为 UME 开发插件](#为-ume-开发插件)部分。
 
@@ -47,8 +47,8 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
 
     ``` yaml
     dev_dependencies: # Don't use UME in release mode
-      flutter_ume: ^0.3.0
-      flutter_ume_kit_ui: ^0.3.0
+      flutter_ume: ^0.3.0+1
+      flutter_ume_kit_ui: ^0.3.0+1
       flutter_ume_kit_device: ^0.3.0
       flutter_ume_kit_perf: ^0.3.0
       flutter_ume_kit_show_code: ^0.3.0
@@ -327,7 +327,7 @@ showDialog(
 
 ### 兼容性
 
-| UME 版本 | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.3 | Flutter 2.2.5 |
+| UME 版本 | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.3 | Flutter 2.5.3 |
 | ---- | ---- | ---- | ---- | ---- | ---- |
 | 0.1.x | ✅ | ✅ | ✅ | ✅ | ⚠️ |
 | 0.2.x | ❌ | ❌ | ✅ | ✅ | ✅ |
@@ -355,8 +355,8 @@ showDialog(
 
 | 包 | null-safety 推荐版本号 |
 | ---- | ---- |
-| flutter_ume | 0.3.0 |
-| flutter_ume_kit_ui | 0.3.0 |
+| flutter_ume | 0.3.0+1 |
+| flutter_ume_kit_ui | 0.3.0+1 |
 | flutter_ume_kit_device | 0.3.0 |
 | flutter_ume_kit_perf | 0.3.0 |
 | flutter_ume_kit_show_code | 0.3.0 |
