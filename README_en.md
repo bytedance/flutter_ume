@@ -160,7 +160,7 @@ There are 13 plugin kits built in the current open source version of UME.
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/touch_indicator.png" width="100%" alt="Touch Indicator" /></br>Touch Indicator</td>
     </tr>
     <tr>
-        <td width="100%" align="center"></td>
+        <td width="33.33%" align="center"></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><p>Performance Kits</p></td>
@@ -170,7 +170,7 @@ There are 13 plugin kits built in the current open source version of UME.
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/perf_overlay.png" width="100%" alt="Perf Overlay" /></br>Perf Overlay</td>
     </tr>
     <tr>
-        <td width="100%" align="center"></td>
+        <td width="33.33%" align="center"></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><p>Device Info Kits</p></td>
@@ -180,7 +180,7 @@ There are 13 plugin kits built in the current open source version of UME.
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/device_info.png" width="100%" alt="Device Info" /></br>Device Info</td>
     </tr>
     <tr>
-        <td width="100%" align="center"></td>
+        <td width="33.33%" align="center"></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><p>Show Code</p></td>
@@ -189,7 +189,7 @@ There are 13 plugin kits built in the current open source version of UME.
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/show_code.png" width="100%" alt="Show Code" /></br>Show Code</td>
     </tr>
     <tr>
-        <td width="100%" align="center"></td>
+        <td width="33.33%" align="center"></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><p>Console</p></td>
@@ -198,7 +198,7 @@ There are 13 plugin kits built in the current open source version of UME.
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/console.png" width="100%" alt="Console" /></br>Console</td>
     </tr>
     <tr>
-        <td width="100%" align="center"></td>
+        <td width="33.33%" align="center"></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><p>Dio Inspector</p></td>
