@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
@@ -13,8 +14,8 @@ class ColorSucker extends StatefulWidget implements Pluggable {
 
   const ColorSucker({
     Key? key,
-    this.scale = 10.0,
-    this.size = const Size(100, 100),
+    this.scale = 8.0,
+    this.size = const Size(110, 110),
   }) : super(key: key);
 
   @override
@@ -48,6 +49,7 @@ class _ColorSuckerState extends State<ColorSucker> {
   Matrix4 _matrix = Matrix4.identity();
   late Size _windowSize;
   bool _excuting = false;
+  bool _dark = false;
 
   @override
   void initState() {
@@ -75,21 +77,37 @@ class _ColorSuckerState extends State<ColorSucker> {
   }
 
   void _onPanUpdate(DragUpdateDetails dragDetails) {
-    _magnifierPosition =
-        dragDetails.globalPosition - _magnifierSize.center(Offset.zero);
-    double newX = dragDetails.globalPosition.dx;
-    double newY = dragDetails.globalPosition.dy;
+    double newX = _magnifierPosition.dx + dragDetails.delta.dx;
+    double newY = _magnifierPosition.dy + dragDetails.delta.dy;
+    if (newX + (_magnifierSize.width / 2) < 0) {
+      newX = -(_magnifierSize.width / 2);
+    } else if (newX + (_magnifierSize.width / 2) >= _windowSize.width) {
+      newX = _windowSize.width - (_magnifierSize.width / 2) - 1;
+    }
+
+    if (newY + (_magnifierSize.height / 2) < 0) {
+      newY = -(_magnifierSize.height / 2);
+    } else if (newY + (_magnifierSize.height / 2) >= _windowSize.height) {
+      newY = _windowSize.height - (_magnifierSize.height / 2) - 1;
+    }
+
+    _magnifierPosition = Offset(newX, newY);
+
+    double centerX = newX + (_magnifierSize.width / 2);
+    double centerY = newY + (_magnifierSize.height / 2);
+
     final Matrix4 newMatrix = Matrix4.identity()
-      ..translate(newX, newY)
+      ..translate(centerX, centerY)
       ..scale(_scale, _scale)
-      ..translate(-newX, -newY);
+      ..translate(-centerX, -centerY);
     _matrix = newMatrix;
-    _searchPixel(dragDetails.globalPosition);
+    _searchPixel(Offset(centerX, centerY));
     setState(() {});
   }
 
   void _toolBarPanUpdate(DragUpdateDetails dragDetails) {
     _toolBarY = dragDetails.globalPosition.dy - 40;
+    _toolBarY = max(0, _toolBarY);
     setState(() {});
   }
 
@@ -134,6 +152,7 @@ class _ColorSuckerState extends State<ColorSucker> {
     int pixel32 = _snapshot!.getPixelSafe(px.toInt(), py.toInt());
     int hex = _abgrToArgb(pixel32);
     _currentColor = Color(hex);
+    _dark = Color(hex).computeLuminance() > 0.5;
   }
 
   int _abgrToArgb(int argbColor) {
@@ -209,20 +228,12 @@ class _ColorSuckerState extends State<ColorSucker> {
               child: BackdropFilter(
                 filter: ui.ImageFilter.matrix(_matrix.storage,
                     filterQuality: FilterQuality.none),
-                child: Container(
-                  child: Center(
-                    child: Container(
-                      height: 1,
-                      width: 1,
-                      decoration: const BoxDecoration(
-                          color: Colors.grey, shape: BoxShape.circle),
-                    ),
-                  ),
+                child: SizedBox(
                   height: _magnifierSize.height,
                   width: _magnifierSize.width,
-                  decoration: BoxDecoration(
-                      borderRadius: _radius,
-                      border: Border.all(color: Colors.grey, width: 3)),
+                  child: CustomPaint(
+                      painter: FrontSightPainter(
+                          selectedColor: _currentColor, dark: _dark)),
                 ),
               ),
             ),
@@ -231,4 +242,50 @@ class _ColorSuckerState extends State<ColorSucker> {
       ],
     );
   }
+}
+
+class FrontSightPainter extends CustomPainter {
+  final Color selectedColor;
+  final bool dark;
+  double strokeWidth = 32.0;
+  double spaceWidth = 2.0;
+
+  FrontSightPainter({required this.selectedColor, required this.dark});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final radius = size.shortestSide / 2;
+    final center = Offset(radius, radius);
+    var paint = Paint()
+      ..isAntiAlias = true
+      ..strokeWidth = strokeWidth
+      ..style = PaintingStyle.stroke
+      ..color = selectedColor
+      ..invertColors = false;
+
+    canvas.drawCircle(center, radius, paint);
+
+    paint
+      ..strokeWidth = 0.6
+      ..color = dark ? Colors.black54 : Colors.white;
+
+    canvas.drawCircle(center, radius - strokeWidth / 2, paint);
+    canvas.drawCircle(center, radius - 0.3, paint);
+
+    /// frontSight
+    paint.strokeWidth = 1.6;
+    canvas.drawLine(Offset(radius - spaceWidth - 4, radius),
+        Offset(radius - spaceWidth, radius), paint);
+    canvas.drawLine(Offset(radius + spaceWidth, radius),
+        Offset(radius + spaceWidth + 4, radius), paint);
+
+    canvas.drawLine(Offset(radius, radius - spaceWidth - 4),
+        Offset(radius, radius - spaceWidth), paint);
+    canvas.drawLine(Offset(radius, radius + spaceWidth),
+        Offset(radius, radius + spaceWidth + 4), paint);
+  }
+
+  @override
+  bool shouldRepaint(FrontSightPainter old) =>
+      old.selectedColor != selectedColor;
 }
