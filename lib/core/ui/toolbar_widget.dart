@@ -27,32 +27,62 @@ const double _dragBarHeight = 32;
 const double _minimalHeight = 80;
 
 class _ToolBarWidgetState extends State<ToolBarWidget> {
+  static bool _isWideScreen = false;
+
   Size _windowSize = windowSize;
   double _dy = 0;
+  double _mediaQueryHeight = 0;
 
   @override
   void initState() {
-    _dy = _windowSize.height - dotSize.height - bottomDistance;
+    _dy = (_ToolBarWidgetState._isWideScreen
+            ? _windowSize.width
+            : _windowSize.height) -
+        dotSize.height -
+        bottomDistance;
     super.initState();
   }
 
   void _dragEvent(DragUpdateDetails details) {
-    _dy += details.delta.dy;
-    _dy = min(max(0, _dy),
-        MediaQuery.of(context).size.height - _minimalHeight - _dragBarHeight);
+    _dy += (_ToolBarWidgetState._isWideScreen
+        ? details.delta.dx
+        : details.delta.dy);
+    _dy = min(
+        max(0, _dy),
+        (_ToolBarWidgetState._isWideScreen
+                ? MediaQuery.of(context).size.width
+                : MediaQuery.of(context).size.height) -
+            _minimalHeight -
+            _dragBarHeight);
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_windowSize.isEmpty) {
-      _dy =
-          MediaQuery.of(context).size.height - dotSize.height - bottomDistance;
-      _windowSize = MediaQuery.of(context).size;
+    if (MediaQuery.of(context).size.aspectRatio >= 1) {
+      _ToolBarWidgetState._isWideScreen = true;
+      if (_windowSize.isEmpty ||
+          _mediaQueryHeight != MediaQuery.of(context).size.width) {
+        _mediaQueryHeight = MediaQuery.of(context).size.width;
+        _dy =
+            MediaQuery.of(context).size.width - dotSize.height - bottomDistance;
+        _windowSize = MediaQuery.of(context).size;
+      }
+    } else {
+      _ToolBarWidgetState._isWideScreen = false;
+      if (_windowSize.isEmpty ||
+          _mediaQueryHeight != MediaQuery.of(context).size.height) {
+        _mediaQueryHeight = MediaQuery.of(context).size.height;
+        _dy = MediaQuery.of(context).size.height -
+            dotSize.height -
+            bottomDistance;
+        _windowSize = MediaQuery.of(context).size;
+      }
     }
+
     return Positioned(
-      left: 0,
-      top: _dy,
+      left: _ToolBarWidgetState._isWideScreen ? _dy : 0,
+      top: _ToolBarWidgetState._isWideScreen ? 0 : _dy,
       child: _ToolBarContent(
         action: widget.action,
         dragCallback: _dragEvent,
@@ -85,6 +115,7 @@ class __ToolBarContentState extends State<_ToolBarContent> {
   PluginStoreManager _storeManager = PluginStoreManager();
 
   List<Pluggable?> _dataList = [];
+
   @override
   void initState() {
     super.initState();
@@ -93,79 +124,157 @@ class __ToolBarContentState extends State<_ToolBarContent> {
 
   @override
   Widget build(BuildContext context) {
+    // const value
     const cornerRadius = Radius.circular(10);
+    const wideScreenRadius =
+        BorderRadius.only(bottomLeft: cornerRadius, topLeft: cornerRadius);
+    const verticalScreenRadius =
+        BorderRadius.only(topLeft: cornerRadius, topRight: cornerRadius);
+    const toolBarHeightOrWidth = _minimalHeight + _dragBarHeight;
+
+    // build the ToolBar body
     return Material(
-      borderRadius:
-          BorderRadius.only(topLeft: cornerRadius, topRight: cornerRadius),
+      borderRadius: _ToolBarWidgetState._isWideScreen
+          ? wideScreenRadius
+          : verticalScreenRadius,
       elevation: 20,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius:
-              BorderRadius.only(topLeft: cornerRadius, topRight: cornerRadius),
+          borderRadius: _ToolBarWidgetState._isWideScreen
+              ? wideScreenRadius
+              : verticalScreenRadius,
           color: Color(0xffd0d0d0),
         ),
-        width: MediaQuery.of(context).size.width,
-        height: _minimalHeight + _dragBarHeight,
-        child: Column(
-          children: [
-            Container(
-              height: _dragBarHeight,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8),
-                child: Row(
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          if (widget.closeAction != null) {
-                            widget.closeAction!();
-                          }
-                        },
-                        child: const CircleAvatar(
-                          radius: 10,
-                          backgroundColor: const Color(0xffff5a52),
-                        )),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    InkWell(
-                        onTap: () {
-                          if (widget.maximalAction != null) {
-                            widget.maximalAction!();
-                          }
-                        },
-                        child: const CircleAvatar(
-                          radius: 10,
-                          backgroundColor: const Color(0xff53c22b),
-                        )),
-                    Expanded(
-                      child: GestureDetector(
-                        onVerticalDragUpdate: (details) =>
-                            _dragCallback(details),
-                        child: Container(
-                          height: _dragBarHeight,
-                          color: const Color(0xffd0d0d0),
-                          child: Center(
-                            child: Text(
-                              'UME',
-                              style: const TextStyle(
-                                  color: Color(0xff575757),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600),
+        width: _ToolBarWidgetState._isWideScreen
+            ? toolBarHeightOrWidth
+            : MediaQuery.of(context).size.width,
+        height: _ToolBarWidgetState._isWideScreen
+            ? MediaQuery.of(context).size.height
+            : toolBarHeightOrWidth,
+        child: _ToolBarWidgetState._isWideScreen
+            ? Row(
+                children: [
+                  Container(
+                    width: _dragBarHeight,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 8, bottom: 8),
+                      child: Column(
+                        children: [
+                          InkWell(
+                              onTap: () {
+                                if (widget.closeAction != null) {
+                                  widget.closeAction!();
+                                }
+                              },
+                              child: const CircleAvatar(
+                                radius: 10,
+                                backgroundColor: const Color(0xffff5a52),
+                              )),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          InkWell(
+                              onTap: () {
+                                if (widget.maximalAction != null) {
+                                  widget.maximalAction!();
+                                }
+                              },
+                              child: const CircleAvatar(
+                                radius: 10,
+                                backgroundColor: const Color(0xff53c22b),
+                              )),
+                          Expanded(
+                            child: GestureDetector(
+                              onHorizontalDragUpdate: (details) =>
+                                  _dragCallback(details),
+                              child: Container(
+                                // height: _dragBarHeight,
+                                width: _dragBarHeight,
+                                color: const Color(0xffd0d0d0),
+                                child: Center(
+                                  child: Text(
+                                    'UME',
+                                    style: const TextStyle(
+                                        color: Color(0xff575757),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  _PluginScrollContainer(
+                    dataList: _dataList,
+                    action: widget.action,
+                  ),
+                ],
+              )
+            : Column(
+                children: [
+                  Container(
+                    height: _dragBarHeight,
+                    child: Padding(
+                      padding: _ToolBarWidgetState._isWideScreen
+                          ? const EdgeInsets.only(top: 8, bottom: 8)
+                          : const EdgeInsets.only(left: 8, right: 8),
+                      child: Row(
+                        children: [
+                          InkWell(
+                              onTap: () {
+                                if (widget.closeAction != null) {
+                                  widget.closeAction!();
+                                }
+                              },
+                              child: const CircleAvatar(
+                                radius: 10,
+                                backgroundColor: const Color(0xffff5a52),
+                              )),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          InkWell(
+                              onTap: () {
+                                if (widget.maximalAction != null) {
+                                  widget.maximalAction!();
+                                }
+                              },
+                              child: const CircleAvatar(
+                                radius: 10,
+                                backgroundColor: const Color(0xff53c22b),
+                              )),
+                          Expanded(
+                            child: GestureDetector(
+                              onVerticalDragUpdate: (details) =>
+                                  _dragCallback(details),
+                              child: Container(
+                                height: _dragBarHeight,
+                                color: const Color(0xffd0d0d0),
+                                child: Center(
+                                  child: Text(
+                                    'UME',
+                                    style: const TextStyle(
+                                        color: Color(0xff575757),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  _PluginScrollContainer(
+                    dataList: _dataList,
+                    action: widget.action,
+                  ),
+                ],
               ),
-            ),
-            _PluginScrollContainer(
-              dataList: _dataList,
-              action: widget.action,
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -219,20 +328,37 @@ class _PluginScrollContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: _minimalHeight,
-        width: MediaQuery.of(context).size.width,
+        height: _ToolBarWidgetState._isWideScreen
+            ? MediaQuery.of(context).size.height
+            : _minimalHeight,
+        width: _ToolBarWidgetState._isWideScreen
+            ? _minimalHeight
+            : MediaQuery.of(context).size.width,
         child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: dataList
-                  .map(
-                    (data) => _MenuCell(
-                      pluginData: data,
-                      action: action,
-                    ),
+            scrollDirection: _ToolBarWidgetState._isWideScreen
+                ? Axis.vertical
+                : Axis.horizontal,
+            child: _ToolBarWidgetState._isWideScreen
+                ? Column(
+                    children: dataList
+                        .map(
+                          (data) => _MenuCell(
+                            pluginData: data,
+                            action: action,
+                          ),
+                        )
+                        .toList(),
                   )
-                  .toList(),
-            )));
+                : Row(
+                    children: dataList
+                        .map(
+                          (data) => _MenuCell(
+                            pluginData: data,
+                            action: action,
+                          ),
+                        )
+                        .toList(),
+                  )));
   }
 }
 

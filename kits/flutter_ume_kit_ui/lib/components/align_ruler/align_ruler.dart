@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -53,8 +54,13 @@ class _AlignRulerState extends State<AlignRuler> {
   }
 
   void _onPanUpdate(DragUpdateDetails dragDetails) {
+    final mediaQuerySize = MediaQuery.of(context).size;
+    final position = Offset(
+      max(0, min(mediaQuerySize.width, dragDetails.globalPosition.dx)),
+      max(0, min(mediaQuerySize.height, dragDetails.globalPosition.dy)),
+    );
     setState(() {
-      _dotPosition = dragDetails.globalPosition;
+      _dotPosition = position;
     });
   }
 
@@ -119,7 +125,7 @@ class _AlignRulerState extends State<AlignRuler> {
 
   @override
   Widget build(BuildContext context) {
-    if (_windowSize.isEmpty) {
+    if (_windowSize.isEmpty || _windowSize != MediaQuery.of(context).size) {
       _windowSize = MediaQuery.of(context).size;
       _dotPosition = _windowSize.center(Offset.zero);
     }
@@ -207,7 +213,7 @@ class _AlignRulerState extends State<AlignRuler> {
     return Container(
       color: Colors.transparent,
       height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
       child: Stack(
         alignment: Alignment.center,
         children: [

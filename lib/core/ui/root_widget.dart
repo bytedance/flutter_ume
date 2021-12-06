@@ -304,15 +304,18 @@ class __ContentPageState extends State<_ContentPage> {
     _currentWidget = _empty;
   }
 
+  Size _mediaQuerySize = Size.zero;
+
   @override
   Widget build(BuildContext context) {
     _context = context;
-    // ugly code .. because in release mode, WidgetsBinding.instance.window.physicalSize's value is zero...What the Fuck!!!
-    if (_windowSize.isEmpty) {
+    if (_windowSize.isEmpty ||
+        _mediaQuerySize.height != MediaQuery.of(context).size.height ||
+        _mediaQuerySize.width != MediaQuery.of(context).size.width) {
       _dx = MediaQuery.of(context).size.width - dotSize.width - margin * 4;
       _dy =
           MediaQuery.of(context).size.height - dotSize.height - bottomDistance;
-      _windowSize = MediaQuery.of(context).size;
+      _windowSize = _mediaQuerySize = MediaQuery.of(context).size;
     }
     return Container(
       width: _windowSize.width,
