@@ -1,0 +1,8 @@
+{
+    "deluxePlugins": "丰富的插件",
+    "deluxePluginsDescription": "官方提供 13 款插件，帮助 Flutter 开发者在应用内完成诊断，帮助产品设计师与测试人员在应用内验收功能，从应用开发全周期加快产品迭代速度。",
+    "openPlatform": "开放的平台",
+    "openPlatformDescription": "一行代码即可接入的同时，UME 提供了便捷而强大的扩展能力，开发者可自行开发业务插件、功能插件，实现快速将调试功能引入产品。",
+    "opensource": "开源的代码",
+    "opensourceDescription": "UME 框架与所有官方提供的插件均可在 GitHub 上看到源码，与 ByteDance Flutter Infra 团队一同为 Flutter 开发者生态添砖加瓦。"
+}

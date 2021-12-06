@@ -1,0 +1,8 @@
+{
+    "deluxePlugins": "Deluxe Plugins",
+    "deluxePluginsDescription": "We offer 13 plugins with different functions to help Flutter developers complete diagnosis in app. Help product designers and testers accept functions in the application, and speed up product iteration from the whole application development cycle.",
+    "openPlatform": "Open Platform",
+    "openPlatformDescription": "Accessing UME only need one line of code, and UME provides convenient and powerful expansion capabilities. Developers can write business plugins and function plugins to quickly introduce debugging functions into their products.",
+    "opensource": "Open Soure",
+    "opensourceDescription": "The UME framework and all officially provided plugins can review the code on GitHub. Let's work with the Flutter Infra team of ByteDance to contribute to the Flutter ecosystem."
+}
