@@ -94,7 +94,7 @@ class _WidgetInfoInspectorState extends State<WidgetInfoInspector>
     children.add(gesture);
     children.add(InspectorOverlay(selection: selection));
     if (selection.active &&
-        PluggableCommunicationService().pluginImageWithKey('ShowCode') != null)
+        PluggableCommunicationService().isAvailableKey('ShowCode'))
       children.add(Positioned(
           left: _lastPointerLocation?.dx,
           top: _lastPointerLocation?.dy,

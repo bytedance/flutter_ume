@@ -212,9 +212,6 @@ class __ContentPageState extends State<_ContentPage> {
 
   void onTap() {
     if (_currentSelected != null) {
-      if (_currentSelected is PluggableLifeCycle) {
-        (_currentSelected as PluggableLifeCycle).onDeactivate();
-      }
       PluginManager.instance.deactivatePluggable(_currentSelected!);
       if (widget.refreshChildLayout != null) {
         widget.refreshChildLayout!();
@@ -277,9 +274,6 @@ class __ContentPageState extends State<_ContentPage> {
     MenuAction itemTapAction = (pluginData) {
       _currentSelected = pluginData;
       if (_currentSelected != null) {
-        if (_currentSelected is PluggableLifeCycle) {
-          (_currentSelected as PluggableLifeCycle).onActivate();
-        }
         PluginManager.instance.activatePluggable(_currentSelected!);
       }
       _handleAction(_context, pluginData!);
@@ -319,9 +313,6 @@ class __ContentPageState extends State<_ContentPage> {
     _pluggableChangedEventSubscription =
         umeEventBus.on<PluggableChangedEvent>().listen((event) {
       if (_currentSelected != null) {
-        if (_currentSelected is PluggableLifeCycle) {
-          (_currentSelected as PluggableLifeCycle).onDeactivate();
-        }
         PluginManager.instance.deactivatePluggable(_currentSelected!);
       }
       (PluginManager.instance.pluginsMap[event.pluggableKey] as Communicable)

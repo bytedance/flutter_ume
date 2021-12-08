@@ -111,8 +111,7 @@ class _ColorPickerState extends State<ColorPicker> {
                       ),
                       if (_color != null &&
                           PluggableCommunicationService()
-                                  .pluginImageWithKey('Palette') !=
-                              null)
+                              .isAvailableKey('Palette'))
                         IconButton(
                           onPressed: () {
                             PluggableCommunicationService().callWithKey(
