@@ -4,6 +4,7 @@ import 'package:flutter_ume_kit_ui/third_party/cyclop/lib/cyclop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ume/flutter_ume.dart';
 import 'icon.dart' as icon;
+import '../palette/icon.dart' as paletteIcon;
 
 class ColorPicker extends StatefulWidget implements PluggableWithNestedWidget {
   const ColorPicker({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class ColorPicker extends StatefulWidget implements PluggableWithNestedWidget {
   String get name => 'ColorPicker';
 
   @override
-  String get displayName => 'TouchIndicator';
+  String get displayName => 'ColorPicker';
 
   @override
   void onTrigger() {}
@@ -108,7 +109,17 @@ class _ColorPickerState extends State<ColorPicker> {
                                     color: Colors.blue)),
                           ])),
                         ),
-                      )
+                      ),
+                      if (_color != null)
+                        IconButton(
+                          onPressed: () {
+                            PluggableCommunicationService().callWithKey(
+                                'Palette',
+                                {'initialColor': _color ?? Colors.white});
+                          },
+                          icon:
+                              Image.memory(base64Decode(paletteIcon.iconData)),
+                        ),
                     ],
                   )),
             )),
