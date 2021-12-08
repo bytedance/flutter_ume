@@ -93,7 +93,8 @@ class _WidgetInfoInspectorState extends State<WidgetInfoInspector>
     );
     children.add(gesture);
     children.add(InspectorOverlay(selection: selection));
-    if (selection.active)
+    if (selection.active &&
+        PluggableCommunicationService().pluginImageWithKey('ShowCode') != null)
       children.add(Positioned(
           left: _lastPointerLocation?.dx,
           top: _lastPointerLocation?.dy,
@@ -103,9 +104,10 @@ class _WidgetInfoInspectorState extends State<WidgetInfoInspector>
                     PluggableCommunicationService().callWithKey('ShowCode',
                         {'launchKey': SelectionInfo(selection).filePath!});
                   },
-                  icon: Icon(
-                    Icons.zoom_in,
-                  )))));
+                  icon: Image(
+                      color: Colors.white,
+                      image: PluggableCommunicationService()
+                          .pluginImageWithKey('ShowCode')!)))));
     return Stack(children: children, textDirection: TextDirection.ltr);
   }
 }

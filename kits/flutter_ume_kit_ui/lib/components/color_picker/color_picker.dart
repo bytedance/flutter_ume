@@ -4,7 +4,6 @@ import 'package:flutter_ume_kit_ui/third_party/cyclop/lib/cyclop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ume/flutter_ume.dart';
 import 'icon.dart' as icon;
-import '../palette/icon.dart' as paletteIcon;
 
 class ColorPicker extends StatefulWidget implements PluggableWithNestedWidget {
   const ColorPicker({Key? key}) : super(key: key);
@@ -110,15 +109,19 @@ class _ColorPickerState extends State<ColorPicker> {
                           ])),
                         ),
                       ),
-                      if (_color != null)
+                      if (_color != null &&
+                          PluggableCommunicationService()
+                                  .pluginImageWithKey('Palette') !=
+                              null)
                         IconButton(
                           onPressed: () {
                             PluggableCommunicationService().callWithKey(
                                 'Palette',
                                 {'initialColor': _color ?? Colors.white});
                           },
-                          icon:
-                              Image.memory(base64Decode(paletteIcon.iconData)),
+                          icon: Image(
+                              image: PluggableCommunicationService()
+                                  .pluginImageWithKey('Palette')!),
                         ),
                     ],
                   )),

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_ume/core/plugin_manager.dart';
 import 'package:flutter_ume/util/exception_factory.dart';
 
@@ -14,6 +15,16 @@ class PluggableCommunicationService {
     return _instance;
   }
   PluggableCommunicationService._internal();
+
+  bool isAvailableKey(String pluggableKey) {
+    return PluginManager.instance.pluginsMap.containsKey(pluggableKey) &&
+        PluginManager.instance.pluginsMap[pluggableKey] is Communicable;
+  }
+
+  ImageProvider? pluginImageWithKey(String pluggableKey) {
+    if (!isAvailableKey(pluggableKey)) return null;
+    return PluginManager.instance.pluginsMap[pluggableKey]!.iconImageProvider;
+  }
 
   void callWithKey(String pluggableKey, dynamic params) {
     if (!PluginManager.instance.pluginsMap.containsKey(pluggableKey)) {
