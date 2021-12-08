@@ -17,6 +17,7 @@ dependencies:
   vm_service: ^7.1.1
   string_scanner: ^1.1.0
   tuple: ^2.0.0
+  event_bus: ^2.0.0
 
 dev_dependencies:
   flutter_test:

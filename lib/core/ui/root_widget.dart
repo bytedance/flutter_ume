@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart'
     hide FlutterLogo, FlutterLogoDecoration, FlutterLogoStyle;
+import 'package:flutter_ume/core/pluggable_communication_service.dart';
 import 'package:flutter_ume/core/pluggable_message_service.dart';
 import 'package:flutter_ume/core/ui/panel_action_define.dart';
 import 'package:flutter_ume/core/plugin_manager.dart';
@@ -14,6 +17,7 @@ import './menu_page.dart';
 import 'package:flutter_ume/util/flutter_logo.dart';
 import 'global.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:event_bus/event_bus.dart';
 
 const defaultLocalizationsDelegates = const [
   GlobalMaterialLocalizations.delegate,
@@ -175,6 +179,14 @@ class __ContentPageState extends State<_ContentPage> {
   bool _minimalContent = true;
   Widget? _toolbarWidget;
 
+  StreamSubscription? _pluggableChangedEventSubscription;
+
+  @override
+  void dispose() {
+    _pluggableChangedEventSubscription?.cancel();
+    super.dispose();
+  }
+
   void dragEvent(DragUpdateDetails details) {
     _dx = details.globalPosition.dx - dotSize.width / 2;
     _dy = details.globalPosition.dy - dotSize.height / 2;
@@ -200,6 +212,9 @@ class __ContentPageState extends State<_ContentPage> {
 
   void onTap() {
     if (_currentSelected != null) {
+      if (_currentSelected is PluggableLifeCycle) {
+        (_currentSelected as PluggableLifeCycle).onDeactivate();
+      }
       PluginManager.instance.deactivatePluggable(_currentSelected!);
       if (widget.refreshChildLayout != null) {
         widget.refreshChildLayout!();
@@ -242,11 +257,6 @@ class __ContentPageState extends State<_ContentPage> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   void initState() {
     super.initState();
     _storeManager.fetchFloatingDotPos().then((value) {
@@ -267,6 +277,9 @@ class __ContentPageState extends State<_ContentPage> {
     MenuAction itemTapAction = (pluginData) {
       _currentSelected = pluginData;
       if (_currentSelected != null) {
+        if (_currentSelected is PluggableLifeCycle) {
+          (_currentSelected as PluggableLifeCycle).onDeactivate();
+        }
         PluginManager.instance.activatePluggable(_currentSelected!);
       }
       _handleAction(_context, pluginData!);
@@ -302,6 +315,19 @@ class __ContentPageState extends State<_ContentPage> {
       },
     );
     _currentWidget = _empty;
+
+    _pluggableChangedEventSubscription =
+        umeEventBus.on<PluggableChangedEvent>().listen((event) {
+      if (_currentSelected != null) {
+        if (_currentSelected is PluggableLifeCycle) {
+          (_currentSelected as PluggableLifeCycle).onDeactivate();
+        }
+        PluginManager.instance.deactivatePluggable(_currentSelected!);
+      }
+      (PluginManager.instance.pluginsMap[event.pluggableKey] as Communicable)
+          .handleParams(event.params);
+      itemTapAction(PluginManager.instance.pluginsMap[event.pluggableKey]);
+    });
   }
 
   @override

@@ -2,13 +2,17 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ume/flutter_ume.dart';
+import 'package:flutter_ume_kit_show_code/flutter_ume_kit_show_code.dart';
 import 'package:flutter_ume_kit_show_code/show_code/page_info_helper.dart';
 import 'package:flutter_ume_kit_show_code/show_code/syntax_highlighter.dart';
 import 'package:flutter_ume_kit_show_code/show_code/icon.dart' as icon;
 import 'package:share/share.dart';
 
-class ShowCode extends StatefulWidget implements Pluggable {
-  const ShowCode({Key? key}) : super(key: key);
+class ShowCode extends StatefulWidget
+    implements Pluggable, Communicable, PluggableLifeCycle {
+  String? launchKey;
+
+  ShowCode({Key? key}) : super(key: key);
 
   @override
   ShowCodeState createState() => ShowCodeState();
@@ -28,6 +32,21 @@ class ShowCode extends StatefulWidget implements Pluggable {
 
   @override
   void onTrigger() {}
+
+  @override
+  void handleParams(dynamic params) {
+    if (params is Map && params.containsKey('launchKey')) {
+      launchKey = params['launchKey'];
+    }
+  }
+
+  @override
+  void onDeactivate() {
+    launchKey = null;
+  }
+
+  @override
+  void onActivate() {}
 }
 
 class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
@@ -43,9 +62,15 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
   @override
   void initState() {
     pageInfoHelper = PageInfoHelper();
-    filePath =
-        pageInfoHelper.packagePathConvertFromFilePath(pageInfoHelper.filePath!);
-    pageInfoHelper.getCode().then((c) {
+    if (widget.launchKey != null) {
+      filePath =
+          pageInfoHelper.packagePathConvertFromFilePath(widget.launchKey!);
+    } else {
+      filePath = pageInfoHelper
+          .packagePathConvertFromFilePath(pageInfoHelper.filePath!);
+    }
+
+    pageInfoHelper.getCode(path: filePath).then((c) {
       code = c;
       setState(() {});
     });
@@ -109,7 +134,9 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
                       height: 22,
                       child: CircularProgressIndicator(),
                     ),
-                  if (showCodeList && _codeList != null && _codeList!.isNotEmpty)
+                  if (showCodeList &&
+                      _codeList != null &&
+                      _codeList!.isNotEmpty)
                     PopupMenuButton<String>(
                       padding: EdgeInsets.zero,
                       icon: Icon(Icons.arrow_drop_down),
@@ -194,25 +221,27 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _share(),
-        child: Icon(Icons.share),
+    return MaterialApp(
+      home: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _share(),
+          child: Icon(Icons.share),
+        ),
+        body: Container(
+            color: Colors.white,
+            child: SafeArea(
+                child: Column(
+              children: <Widget>[
+                _infoView(),
+                Divider(),
+                Expanded(
+                  flex: 1,
+                  child: _codeView(),
+                )
+              ],
+            ))),
       ),
-      body: Container(
-          color: Colors.white,
-          child: SafeArea(
-              child: Column(
-            children: <Widget>[
-              _infoView(),
-              Divider(),
-              Expanded(
-                flex: 1,
-                child: _codeView(),
-              )
-            ],
-          ))),
     );
   }
 

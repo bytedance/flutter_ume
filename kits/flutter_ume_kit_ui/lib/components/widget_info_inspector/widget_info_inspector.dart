@@ -1,7 +1,10 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_ume/flutter_ume.dart';
+import 'package:flutter_ume/core/pluggable_communication_service.dart';
+import 'package:flutter_ume/service/inspector/inspector_overlay.dart';
 import 'package:flutter_ume_kit_ui/components/hit_test.dart';
 import 'icon.dart' as icon;
 
@@ -90,6 +93,19 @@ class _WidgetInfoInspectorState extends State<WidgetInfoInspector>
     );
     children.add(gesture);
     children.add(InspectorOverlay(selection: selection));
+    if (selection.active)
+      children.add(Positioned(
+          left: _lastPointerLocation?.dx,
+          top: _lastPointerLocation?.dy,
+          child: CircleAvatar(
+              child: IconButton(
+                  onPressed: () {
+                    PluggableCommunicationService().callWithKey('ShowCode',
+                        {'launchKey': SelectionInfo(selection).filePath!});
+                  },
+                  icon: Icon(
+                    Icons.zoom_in,
+                  )))));
     return Stack(children: children, textDirection: TextDirection.ltr);
   }
 }
