@@ -253,8 +253,14 @@ class __ContentPageState extends State<_ContentPage> {
       if (value == null || value.split(',').length != 2) {
         return;
       }
-      _dx = double.parse(value.split(',').first);
-      _dy = double.parse(value.split(',').last);
+      final x = double.parse(value.split(',').first);
+      final y = double.parse(value.split(',').last);
+      if (MediaQuery.of(context).size.height - dotSize.height < y ||
+          MediaQuery.of(context).size.width - dotSize.width < x) {
+        return;
+      }
+      _dx = x;
+      _dy = y;
       setState(() {});
     });
     _storeManager.fetchMinimalToolbarSwitch().then((value) {
