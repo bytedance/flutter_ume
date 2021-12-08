@@ -278,7 +278,7 @@ class __ContentPageState extends State<_ContentPage> {
       _currentSelected = pluginData;
       if (_currentSelected != null) {
         if (_currentSelected is PluggableLifeCycle) {
-          (_currentSelected as PluggableLifeCycle).onDeactivate();
+          (_currentSelected as PluggableLifeCycle).onActivate();
         }
         PluginManager.instance.activatePluggable(_currentSelected!);
       }
