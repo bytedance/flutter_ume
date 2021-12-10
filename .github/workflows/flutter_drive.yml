@@ -51,6 +51,5 @@ jobs:
           target: ${{ matrix.target }}
           arch: x86_64
           profile: Nexus 6
-          ndk: 21.0.6113669
           script: flutter drive --target=test_driver/app.dart
           working-directory: ./example
