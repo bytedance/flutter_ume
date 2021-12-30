@@ -25,6 +25,9 @@ class PluginManager {
     if (plugin.name.isEmpty) {
       return;
     }
+    if (plugin is Communicable) {
+      PluggableCommunicationService().registerKeys(plugin.name);
+    }
     _pluginsMap[plugin.name] = plugin;
   }
 
@@ -37,11 +40,17 @@ class PluginManager {
   }
 
   void activatePluggable(Pluggable pluggable) {
+    if (pluggable is PluggableLifeCycle) {
+      (pluggable as PluggableLifeCycle).onActivate();
+    }
     _activatedPluggable = pluggable;
   }
 
   void deactivatePluggable(Pluggable pluggable) {
     if (_activatedPluggable?.name == pluggable.name) {
+      if (pluggable is PluggableLifeCycle) {
+        (pluggable as PluggableLifeCycle).onDeactivate();
+      }
       _activatedPluggable = null;
     }
   }

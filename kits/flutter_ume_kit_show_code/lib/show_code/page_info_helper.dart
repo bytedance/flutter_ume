@@ -24,7 +24,6 @@ class PageInfoHelper {
     final packageName = parts.first.split('/').last;
     final keyword = "package:$packageName/$fileForwardPart";
     CodeDisplayService().getScriptIdsWithKeyword(keyword);
-    debugPrint(keyword);
     return keyword;
   }
 
@@ -80,9 +79,9 @@ class PageInfoHelper {
     selection.candidates = objectList;
   }
 
-  Future<String?> getCode() async {
+  Future<String?> getCode({String? path}) async {
     CodeDisplayService codeDisplayService = CodeDisplayService();
-    String targetFileName = filePath!.split('/').last;
+    String targetFileName = (path ?? filePath!).split('/').last;
     String? scriptId =
         await codeDisplayService.getScriptIdWithFileName(targetFileName);
     if (scriptId == null) return null;

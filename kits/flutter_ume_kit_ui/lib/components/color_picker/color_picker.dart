@@ -18,7 +18,7 @@ class ColorPicker extends StatefulWidget implements PluggableWithNestedWidget {
   String get name => 'ColorPicker';
 
   @override
-  String get displayName => 'TouchIndicator';
+  String get displayName => 'ColorPicker';
 
   @override
   void onTrigger() {}
@@ -108,7 +108,20 @@ class _ColorPickerState extends State<ColorPicker> {
                                     color: Colors.blue)),
                           ])),
                         ),
-                      )
+                      ),
+                      if (_color != null &&
+                          PluggableCommunicationService()
+                              .isAvailableKey('Palette'))
+                        IconButton(
+                          onPressed: () {
+                            PluggableCommunicationService().callWithKey(
+                                'Palette',
+                                {'initialColor': _color ?? Colors.white});
+                          },
+                          icon: Image(
+                              image: PluggableCommunicationService()
+                                  .pluginImageWithKey('Palette')!),
+                        ),
                     ],
                   )),
             )),

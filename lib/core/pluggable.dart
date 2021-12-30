@@ -8,6 +8,11 @@ abstract class Pluggable {
   ImageProvider get iconImageProvider;
 }
 
+abstract class PluggableLifeCycle {
+  void onActivate();
+  void onDeactivate();
+}
+
 typedef StreamFilter = bool Function(dynamic);
 
 abstract class PluggableWithStream extends Pluggable {

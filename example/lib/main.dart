@@ -23,6 +23,7 @@ void main() {
       ..register(ColorSucker())
       ..register(AlignRuler())
       ..register(ColorPicker())
+      ..register(Palette())
       ..register(TouchIndicator())
       ..register(Performance())
       ..register(ShowCode())

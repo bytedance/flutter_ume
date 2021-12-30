@@ -106,7 +106,7 @@ class _InspectorOverlayLayer extends Layer {
   void addToScene(ui.SceneBuilder builder, [Offset layerOffset = Offset.zero]) {
     if (!selection.active) return;
 
-    final _SelectionInfo info = _SelectionInfo(selection);
+    final SelectionInfo info = SelectionInfo(selection);
     final RenderObject? selected = info.renderObject;
     final List<_TransformedRect> candidates = <_TransformedRect>[];
     for (RenderObject candidate in selection.candidates) {
@@ -248,8 +248,8 @@ class _InspectorOverlayLayer extends Layer {
   }
 }
 
-class _SelectionInfo {
-  const _SelectionInfo(this.selection) : assert(selection != null);
+class SelectionInfo {
+  const SelectionInfo(this.selection) : assert(selection != null);
   final InspectorSelection selection;
 
   RenderObject? get renderObject => selection.current;
@@ -299,7 +299,7 @@ class _InspectorOverlayRenderState {
   final _TransformedRect selected;
   final List<_TransformedRect> candidates;
   final TextDirection textDirection;
-  final _SelectionInfo selectionInfo;
+  final SelectionInfo selectionInfo;
 
   @override
   bool operator ==(dynamic other) {
