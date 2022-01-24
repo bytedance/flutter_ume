@@ -270,18 +270,33 @@ class __ContentPageState extends State<_ContentPage> {
     });
     _dx = _windowSize.width - dotSize.width - margin * 4;
     _dy = _windowSize.height - dotSize.height - bottomDistance;
-    MenuAction itemTapAction = (pluginData) {
-      _currentSelected = pluginData;
-      if (_currentSelected != null) {
-        PluginManager.instance.activatePluggable(_currentSelected!);
-      }
-      _handleAction(_context, pluginData!);
-      if (widget.refreshChildLayout != null) {
-        widget.refreshChildLayout!();
-      }
-      if (pluginData.onTrigger != null) {
+    MenuAction itemTapAction = (pluginData) async {
+      if (pluginData is PluggableWithAnywhereDoor) {
+        // pluginData.navigator.push(route)
+        var result;
+        if (pluginData.routeNameAndArgs != null) {
+          print('talisk++${pluginData.routeNameAndArgs!.item2}');
+          result = await pluginData.navigator.pushNamed(
+              pluginData.routeNameAndArgs!.item1,
+              arguments: pluginData.routeNameAndArgs!.item2);
+        } else if (pluginData.route != null) {
+          result = await pluginData.navigator.push(pluginData.route!);
+        }
+        pluginData.popResultReceive(result);
+      } else {
+        _currentSelected = pluginData;
+        if (_currentSelected != null) {
+          PluginManager.instance.activatePluggable(_currentSelected!);
+        }
+        _handleAction(_context, pluginData!);
+        if (widget.refreshChildLayout != null) {
+          widget.refreshChildLayout!();
+        }
         pluginData.onTrigger();
       }
+      // if (pluginData.onTrigger != null) {
+      //   pluginData.onTrigger();
+      // }
     };
     _menuPage = MenuPage(
       action: itemTapAction,
