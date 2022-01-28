@@ -4,12 +4,14 @@
 ///
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_ume_kit_dio/src/widgets/send_robot_button.dart';
 
 import '../constants/extensions.dart';
 import '../instances.dart';
 import '../pluggable.dart';
+import 'custom_message_page.dart';
 
 const JsonEncoder _encoder = JsonEncoder.withIndent('  ');
 
@@ -29,12 +31,16 @@ ButtonStyle _buttonStyle(
   );
 }
 
-class DioPluggableState extends State<DioInspector> {
+class DioPluggableState extends State<DioInspector>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
   @override
   void initState() {
     super.initState();
     // Bind listener to refresh requests.
     InspectorInstance.httpContainer.addListener(_listener);
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -150,10 +156,22 @@ class DioPluggableState extends State<DioInspector> {
                     ],
                   ),
                 ),
+                TabBar(
+                  tabs: [
+                    Tab(
+                      text: 'request',
+                    ),
+                    Tab(text: 'custom message')
+                  ],
+                  controller: _tabController,
+                  labelColor: Colors.black,
+                ),
                 Expanded(
                   child: ColoredBox(
                     color: Theme.of(context).canvasColor,
-                    child: _itemList(context),
+                    child: TabBarView(
+                        controller: _tabController,
+                        children: [_itemList(context), CustomMessagePage()]),
                   ),
                 ),
               ],
@@ -326,6 +344,15 @@ class _ResponseCardState extends State<_ResponseCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _infoContent(context),
+            SendRobotButton(
+              uri: '$_requestUri',
+              requestData: _requestDataBuilder ?? '',
+              responseBody: _responseDataBuilder,
+              requestHeader: '${_request.headers}',
+              duration: '${_duration.inMilliseconds}ms',
+              statusCode: _statusCode.toStringAsFixed(0),
+              method: _method,
+            ),
             const SizedBox(height: 10),
             _TagText(tag: 'Uri', content: '$_requestUri'),
             _detailedContent(context),
@@ -384,3 +411,25 @@ extension _DateTimeExtension on DateTime {
       '${'$minute'.padLeft(2, '0')}$separator'
       '${'$second'.padLeft(2, '0')}';
 }
+
+// void main() {
+//   runApp(MaterialApp(
+//     home: Scaffold(
+//       appBar: AppBar(
+//         title: Text('flutter ume kit dio'),
+//       ),
+//       body: _ResponseCard(
+//         key: ValueKey<int>(1664),
+//         response: Response<Map<String, dynamic>>(
+//             requestOptions: RequestOptions(baseUrl: 'https://google.com', path: 'test/path',
+//                 queryParameters: {'page':
+//             1}),
+//             data: {
+//               'total': 1,
+//               'items': [{'name': 'test', 'time': DateTime.now().millisecondsSinceEpoch}]
+//             },
+//         ),
+//       ),
+//     ),
+//   ));
+// }
