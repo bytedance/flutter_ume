@@ -10,6 +10,7 @@ class DioManager {
   static DioManager? _instance;
 
   late Dio _dio;
+  // 是否使用发送到webhook功能
   bool useBot = false;
 
   RequestBodyBuilder? requestBodyBuilder;
@@ -25,6 +26,7 @@ class DioManager {
 
   static DioManager get instance => _instance ??= DioManager._internal();
 
+  // 自定义请求体构造器
   void setRequestBodyBuilder(RequestBodyBuilder? builder) {
     if (builder == null) return;
     requestBodyBuilder = builder;
@@ -37,6 +39,7 @@ class DioManager {
     initRequestBodyBuilder(url);
   }
 
+  // 发送response到webhook
   Future<bool> sendResponse({
     required String uri,
     required String requestData,
@@ -59,6 +62,7 @@ class DioManager {
     }
   }
 
+  // 发送自定义信息到webhook
   Future<void> sendCustomText(String content) async {
     try {
       await _dio.post('', data: requestBodyBuilder!('not dio:\n $content'));
@@ -67,6 +71,7 @@ class DioManager {
     }
   }
 
+  // 构造对应webhook的请求体格式
   void initRequestBodyBuilder(String url) {
     if (url.startsWith(dingTalk) || url.startsWith(weiXin)) {
       //钉钉或微信机器人
