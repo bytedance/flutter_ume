@@ -411,25 +411,3 @@ extension _DateTimeExtension on DateTime {
       '${'$minute'.padLeft(2, '0')}$separator'
       '${'$second'.padLeft(2, '0')}';
 }
-
-// void main() {
-//   runApp(MaterialApp(
-//     home: Scaffold(
-//       appBar: AppBar(
-//         title: Text('flutter ume kit dio'),
-//       ),
-//       body: _ResponseCard(
-//         key: ValueKey<int>(1664),
-//         response: Response<Map<String, dynamic>>(
-//             requestOptions: RequestOptions(baseUrl: 'https://google.com', path: 'test/path',
-//                 queryParameters: {'page':
-//             1}),
-//             data: {
-//               'total': 1,
-//               'items': [{'name': 'test', 'time': DateTime.now().millisecondsSinceEpoch}]
-//             },
-//         ),
-//       ),
-//     ),
-//   ));
-// }

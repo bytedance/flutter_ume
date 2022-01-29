@@ -10,7 +10,8 @@ class DioManager {
   static DioManager? _instance;
 
   late Dio _dio;
-  // 是否使用发送到webhook功能
+
+  // whether use webhook or not
   bool useBot = false;
 
   RequestBodyBuilder? requestBodyBuilder;
@@ -26,7 +27,7 @@ class DioManager {
 
   static DioManager get instance => _instance ??= DioManager._internal();
 
-  // 自定义请求体构造器
+  // custom request body builder
   void setRequestBodyBuilder(RequestBodyBuilder? builder) {
     if (builder == null) return;
     requestBodyBuilder = builder;
@@ -39,7 +40,7 @@ class DioManager {
     initRequestBodyBuilder(url);
   }
 
-  // 发送response到webhook
+  // send response to webhook
   Future<bool> sendResponse({
     required String uri,
     required String requestData,
@@ -62,8 +63,9 @@ class DioManager {
     }
   }
 
-  // 发送自定义信息到webhook
+  // send custom message to webhook
   Future<void> sendCustomText(String content) async {
+    if (!useBot) return;
     try {
       await _dio.post('', data: requestBodyBuilder!('not dio:\n $content'));
     } catch (error) {
@@ -71,17 +73,17 @@ class DioManager {
     }
   }
 
-  // 构造对应webhook的请求体格式
+  // build specific webhook request body
   void initRequestBodyBuilder(String url) {
     if (url.startsWith(dingTalk) || url.startsWith(weiXin)) {
-      //钉钉或微信机器人
+      //dingTalk or wechat
       requestBodyBuilder = (content) => {
             "msgtype": "text",
             "text": {"content": content}
           };
       useBot = true;
     } else if (url.startsWith(feiShu)) {
-      //飞书机器人
+      //feiShu
       requestBodyBuilder = (content) => {
             "msg_type": "text",
             "content": {"text": content}

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ume_kit_dio/src/net/dio_manager.dart';
 
-// 自定义信息输入页面
+/// custom message input page
 class CustomMessagePage extends StatelessWidget {
   final TextEditingController _controller = TextEditingController();
 
