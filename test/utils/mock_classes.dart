@@ -91,4 +91,21 @@ class MockPluggable extends Mock implements Pluggable {
       base64Decode('R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='));
 }
 
+class MockPluggableWithNestedWidget extends Mock
+    implements PluggableWithNestedWidget {
+  @override
+  String get name => 'MockPluggableWithNestedWidget';
+  @override
+  String get displayName => 'MockPluggableWithNestedWidget';
+  @override
+  Widget buildWidget(BuildContext? context) => Container();
+  @override
+  ImageProvider<Object> get iconImageProvider => MemoryImage(
+      base64Decode('R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='));
+  @override
+  Widget buildNestedWidget(Widget child) => Container(
+        child: child,
+      );
+}
+
 class MockStoreMixinCls extends Mock with StoreMixin implements Object {}

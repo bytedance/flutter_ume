@@ -32,7 +32,7 @@
 
 欢迎[加入字节跳动 Flutter 交流群](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=b07u55bb-68f0-4a4b-871d-687637766a68)
 
-或随时[联系开发者](mailto:zhaorui.dev@bytedance.com)
+或随时[联系开发者](mailto:sunkai.dev@bytedance.com)
 
 ## 如何提 Issue
 

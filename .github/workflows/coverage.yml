@@ -7,13 +7,15 @@ on:
       - develop
       - develop_nullsafety
     paths:
-      - 'lib/**'
-      - 'kits/flutter_ume_kit_console/lib/**'
-      - 'kits/flutter_ume_kit_device/lib/**'
-      - 'kits/flutter_ume_kit_perf/lib/**'
-      - 'kits/flutter_ume_kit_show_code/lib/**'
-      - 'kits/flutter_ume_kit_ui/lib/**'
-      - 'kits/flutter_ume_kit_dio/lib/**'
+      - "lib/**"
+      - "kits/flutter_ume_kit_console/lib/**"
+      - "kits/flutter_ume_kit_device/lib/**"
+      - "kits/flutter_ume_kit_perf/lib/**"
+      - "kits/flutter_ume_kit_show_code/lib/**"
+      - "kits/flutter_ume_kit_ui/lib/**"
+      - "kits/flutter_ume_kit_dio/lib/**"
+    tags:
+      - "coverage-*"
 
 jobs:
   build:
@@ -24,15 +26,15 @@ jobs:
           ref: ${{ env.GITHUB_REF }}
       - uses: actions/setup-java@v1
         with:
-          java-version: '12.x'
+          java-version: "12.x"
       - name: Flutter action
         uses: subosito/flutter-action@v1.5.3
         with:
-          flutter-version: '2.2.x'
+          flutter-version: "2.2.x"
           channel: stable
       - run: |
           flutter pub get
-          flutter pub run flutter_coverage_badge
+          flutter pub run flutter_coverage_badge --exclude lib/util/flutter_logo.dart
       - run: |
           flutter pub get
           flutter pub run flutter_coverage_badge
@@ -43,11 +45,11 @@ jobs:
         working-directory: kits/flutter_ume_kit_perf
       - run: |
           flutter pub get
-          flutter pub run flutter_coverage_badge
+          flutter pub run flutter_coverage_badge --exclude lib/show_code/syntax_highlighter.dart
         working-directory: kits/flutter_ume_kit_show_code
       - run: |
           flutter pub get
-          flutter pub run flutter_coverage_badge
+          flutter pub run flutter_coverage_badge --exclude lib/third_party/cyclop
         working-directory: kits/flutter_ume_kit_ui
       - run: |
           flutter pub get

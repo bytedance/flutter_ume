@@ -9,7 +9,6 @@ import 'package:flutter_ume/core/red_dot.dart';
 import 'package:flutter_ume/core/store_manager.dart';
 import 'package:flutter_ume/core/ui/toolbar_widget.dart';
 import 'package:flutter_ume/core/pluggable.dart';
-import 'package:flutter_ume/core/variable_manager.dart';
 import 'package:flutter_ume/util/constants.dart';
 import './menu_page.dart';
 import 'package:flutter_ume/util/flutter_logo.dart';
@@ -26,66 +25,136 @@ const defaultLocalizationsDelegates = const [
 final GlobalKey<OverlayState> overlayKey = GlobalKey<OverlayState>();
 
 /// Wrap your App widget. If [enable] is false, the function will return [child].
-Widget injectUMEWidget({
-  required Widget child,
-  required bool enable,
-  Iterable<Locale>? supportedLocales,
-  Iterable<LocalizationsDelegate> localizationsDelegates =
-      defaultLocalizationsDelegates,
-}) {
-  enable
-      ? PluggableMessageService().resetListener()
-      : PluggableMessageService().clearListener();
-  WidgetsFlutterBinding.ensureInitialized();
-  WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-    if (enable) {
-      final overlayEntry = OverlayEntry(builder: (BuildContext context) {
-        return const _FloatingWidget();
-      });
-      overlayKey.currentState?.insert(overlayEntry);
+class UMEWidget extends StatefulWidget {
+  const UMEWidget({
+    Key? key,
+    required this.child,
+    this.enable = true,
+    this.supportedLocales,
+    this.localizationsDelegates = defaultLocalizationsDelegates,
+  }) : super(key: key);
+
+  final Widget child;
+  final bool enable;
+  final Iterable<Locale>? supportedLocales;
+  final Iterable<LocalizationsDelegate> localizationsDelegates;
+
+  @override
+  _UMEWidgetState createState() => _UMEWidgetState();
+}
+
+class _UMEWidgetState extends State<UMEWidget> {
+  late Widget _child;
+
+  VoidCallback? _onMetricsChanged;
+
+  OverlayEntry _overlayEntry = OverlayEntry(builder: (ctx) => Container());
+
+  @override
+  void initState() {
+    super.initState();
+    _replaceChild();
+    _injectOverlay();
+
+    _onMetricsChanged = WidgetsBinding.instance!.window.onMetricsChanged;
+    WidgetsBinding.instance!.window.onMetricsChanged = () {
+      if (_onMetricsChanged != null) {
+        _onMetricsChanged!();
+        _replaceChild();
+        setState(() {});
+      }
+    };
+  }
+
+  @override
+  void dispose() {
+    if (_onMetricsChanged != null) {
+      WidgetsBinding.instance!.window.onMetricsChanged = _onMetricsChanged;
     }
-    StaticVariableManager.hasAttached = enable;
-  });
-  if (!enable) return child;
-  return Directionality(
-    textDirection: TextDirection.ltr,
-    child: Stack(
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(UMEWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    widget.enable
+        ? PluggableMessageService().resetListener()
+        : PluggableMessageService().clearListener();
+    if (widget.enable != oldWidget.enable && widget.enable) {
+      _injectOverlay();
+    }
+    if (widget.child != oldWidget.child) {
+      _replaceChild();
+    }
+    if (!widget.enable) {
+      _removeOverlay();
+    }
+  }
+
+  void _replaceChild() {
+    final nestedWidgets =
+        PluginManager.instance.pluginsMap.values.where((value) {
+      return value != null && value is PluggableWithNestedWidget;
+    }).toList();
+    Widget layoutChild = _buildLayout(
+        widget.child, widget.supportedLocales, widget.localizationsDelegates);
+    for (var item in nestedWidgets) {
+      if (item!.name != PluginManager.instance.activatedPluggableName) {
+        continue;
+      }
+      if (item is PluggableWithNestedWidget) {
+        layoutChild = item.buildNestedWidget(layoutChild);
+        break;
+      }
+    }
+    _child =
+        Directionality(textDirection: TextDirection.ltr, child: layoutChild);
+  }
+
+  Stack _buildLayout(Widget child, Iterable<Locale>? supportedLocales,
+      Iterable<LocalizationsDelegate> delegates) {
+    return Stack(
       children: <Widget>[
         RepaintBoundary(child: child, key: rootKey),
         MediaQuery(
           data: MediaQueryData.fromWindow(WidgetsBinding.instance!.window),
           child: Localizations(
             locale: supportedLocales?.first ?? Locale('en', 'US'),
-            delegates: localizationsDelegates.toList(),
+            delegates: delegates.toList(),
             child: ScaffoldMessenger(child: Overlay(key: overlayKey)),
           ),
-        )
+        ),
       ],
-    ),
-  );
-}
+    );
+  }
 
-class _FloatingWidget extends StatelessWidget {
-  const _FloatingWidget({
-    Key? key,
-    this.supportedLocales,
-    this.localizationsDelegates,
-  }) : super(key: key);
+  void _removeOverlay() => _overlayEntry.remove();
 
-  final Iterable<Locale>? supportedLocales;
-
-  final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
+  void _injectOverlay() {
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      if (widget.enable) {
+        _overlayEntry = OverlayEntry(
+            builder: (_) => Material(
+                type: MaterialType.transparency,
+                child: _ContentPage(
+                  refreshChildLayout: () {
+                    _replaceChild();
+                    setState(() {});
+                  },
+                )));
+        overlayKey.currentState?.insert(_overlayEntry);
+      }
+    });
+  }
 
   @override
-  Widget build(BuildContext context) {
-    return Material(type: MaterialType.transparency, child: _ContentPage());
-  }
+  Widget build(BuildContext context) => _child;
 }
 
 class _ContentPage extends StatefulWidget {
-  _ContentPage({
-    Key? key,
-  }) : super(key: key);
+  _ContentPage({Key? key, this.refreshChildLayout}) : super(key: key);
+
+  final VoidCallback? refreshChildLayout;
 
   @override
   __ContentPageState createState() => __ContentPageState();
@@ -131,6 +200,10 @@ class __ContentPageState extends State<_ContentPage> {
 
   void onTap() {
     if (_currentSelected != null) {
+      PluginManager.instance.deactivatePluggable(_currentSelected!);
+      if (widget.refreshChildLayout != null) {
+        widget.refreshChildLayout!();
+      }
       _currentSelected = null;
       _currentWidget = _empty;
       if (_minimalContent) {
@@ -180,8 +253,14 @@ class __ContentPageState extends State<_ContentPage> {
       if (value == null || value.split(',').length != 2) {
         return;
       }
-      _dx = double.parse(value.split(',').first);
-      _dy = double.parse(value.split(',').last);
+      final x = double.parse(value.split(',').first);
+      final y = double.parse(value.split(',').last);
+      if (MediaQuery.of(context).size.height - dotSize.height < y ||
+          MediaQuery.of(context).size.width - dotSize.width < x) {
+        return;
+      }
+      _dx = x;
+      _dy = y;
       setState(() {});
     });
     _storeManager.fetchMinimalToolbarSwitch().then((value) {
@@ -193,7 +272,13 @@ class __ContentPageState extends State<_ContentPage> {
     _dy = _windowSize.height - dotSize.height - bottomDistance;
     MenuAction itemTapAction = (pluginData) {
       _currentSelected = pluginData;
+      if (_currentSelected != null) {
+        PluginManager.instance.activatePluggable(_currentSelected!);
+      }
       _handleAction(_context, pluginData!);
+      if (widget.refreshChildLayout != null) {
+        widget.refreshChildLayout!();
+      }
       if (pluginData.onTrigger != null) {
         pluginData.onTrigger();
       }
@@ -245,38 +330,42 @@ class __ContentPageState extends State<_ContentPage> {
           Positioned(
             left: _dx,
             top: _dy,
-            child: GestureDetector(
-              onTap: onTap,
-              onVerticalDragEnd: dragEnd,
-              onHorizontalDragEnd: dragEnd,
-              onHorizontalDragUpdate: dragEvent,
-              onVerticalDragUpdate: dragEvent,
-              child: Container(
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                    boxShadow: [
-                      const BoxShadow(
-                          color: Colors.black12,
-                          offset: Offset(0.0, 0.0),
-                          blurRadius: 2.0,
-                          spreadRadius: 1.0)
-                    ]),
-                width: dotSize.width,
-                height: dotSize.height,
-                child: Stack(
-                  children: [
-                    Center(
-                      child: _logoWidget(),
-                    ),
-                    Positioned(
-                        right: 6,
-                        top: 8,
-                        child: RedDot(
-                          pluginDatas:
-                              PluginManager.instance.pluginsMap.values.toList(),
-                        ))
-                  ],
+            child: Tooltip(
+              message: 'Open ume panel',
+              child: GestureDetector(
+                onTap: onTap,
+                onVerticalDragEnd: dragEnd,
+                onHorizontalDragEnd: dragEnd,
+                onHorizontalDragUpdate: dragEvent,
+                onVerticalDragUpdate: dragEvent,
+                child: Container(
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                      boxShadow: [
+                        const BoxShadow(
+                            color: Colors.black12,
+                            offset: Offset(0.0, 0.0),
+                            blurRadius: 2.0,
+                            spreadRadius: 1.0)
+                      ]),
+                  width: dotSize.width,
+                  height: dotSize.height,
+                  child: Stack(
+                    children: [
+                      Center(
+                        child: _logoWidget(),
+                      ),
+                      Positioned(
+                          right: 6,
+                          top: 8,
+                          child: RedDot(
+                            pluginDatas: PluginManager
+                                .instance.pluginsMap.values
+                                .toList(),
+                          ))
+                    ],
+                  ),
                 ),
               ),
             ),
