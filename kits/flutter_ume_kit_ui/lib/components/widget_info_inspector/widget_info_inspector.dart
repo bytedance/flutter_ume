@@ -1,9 +1,12 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_ume/flutter_ume.dart';
 import 'package:flutter_ume_kit_ui/components/hit_test.dart';
 import 'icon.dart' as icon;
+import 'package:flutter/rendering.dart';
+import 'package:flutter_ume/util/constants.dart';
 
 class WidgetInfoInspector extends StatefulWidget implements Pluggable {
   const WidgetInfoInspector({Key? key}) : super(key: key);
@@ -36,6 +39,7 @@ class _WidgetInfoInspectorState extends State<WidgetInfoInspector>
   final window = WidgetsBinding.instance!.window;
 
   Offset? _lastPointerLocation;
+  OverlayEntry _overlayEntry = OverlayEntry(builder: (ctx) => Container());
 
   final InspectorSelection selection;
 
@@ -73,6 +77,10 @@ class _WidgetInfoInspectorState extends State<WidgetInfoInspector>
   void initState() {
     super.initState();
     selection.clear();
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      _overlayEntry = OverlayEntry(builder: (_) => _DebugPaintButton());
+      overlayKey.currentState?.insert(_overlayEntry);
+    });
   }
 
   @override
@@ -91,5 +99,77 @@ class _WidgetInfoInspectorState extends State<WidgetInfoInspector>
     children.add(gesture);
     children.add(InspectorOverlay(selection: selection));
     return Stack(children: children, textDirection: TextDirection.ltr);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    if (_overlayEntry.mounted) {
+      _overlayEntry.remove();
+    }
+  }
+}
+
+class _DebugPaintButton extends StatefulWidget {
+  const _DebugPaintButton({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _DebugPaintButtonState();
+}
+
+class _DebugPaintButtonState extends State<_DebugPaintButton> {
+  double _dx = windowSize.width - dotSize.width - margin * 2;
+  double _dy = windowSize.width - dotSize.width - bottomDistance;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: _dx,
+      top: _dy,
+      child: Container(
+        width: dotSize.width,
+        height: dotSize.width,
+        child: GestureDetector(
+            onPanUpdate: _buttonPanUpdate,
+            child: FloatingActionButton(
+              elevation: 10,
+              child: new Icon(Icons.all_out_sharp),
+              onPressed: _showAllSize,
+            )),
+      ),
+    );
+  }
+
+  void _buttonPanUpdate(DragUpdateDetails details) {
+    setState(() {
+      _dx = details.globalPosition.dx - dotSize.width / 2;
+      _dy = details.globalPosition.dy - dotSize.width / 2;
+    });
+  }
+
+  void _showAllSize() async {
+    debugPaintSizeEnabled = !debugPaintSizeEnabled;
+    setState(() {
+      late RenderObjectVisitor visitor;
+      visitor = (RenderObject child) {
+        child.markNeedsPaint();
+        child.visitChildren(visitor);
+      };
+      RendererBinding.instance?.renderView.visitChildren(visitor);
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    debugPaintSizeEnabled = false;
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      late RenderObjectVisitor visitor;
+      visitor = (RenderObject child) {
+        child.markNeedsPaint();
+        child.visitChildren(visitor);
+      };
+      RendererBinding.instance?.renderView.visitChildren(visitor);
+    });
   }
 }
