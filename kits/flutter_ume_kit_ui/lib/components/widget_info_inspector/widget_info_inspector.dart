@@ -86,7 +86,7 @@ class _WidgetInfoInspectorState extends State<WidgetInfoInspector>
       child: IgnorePointer(
           child: Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height)),
+              height: MediaQuery.of(context).size.width)),
     );
     children.add(gesture);
     children.add(InspectorOverlay(selection: selection));
