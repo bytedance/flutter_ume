@@ -6,25 +6,15 @@ jobs:
     strategy:
       matrix:
         device:
-        - "iPhone 8 Simulator (15.2)"
-        - "iPhone 13 Pro Max Simulator (15.2)"
+        - "iPhone 8"
+        - "iPhone 13 Pro Max"
       fail-fast: false
     runs-on: macOS-latest
     steps:
     - name: "List all simulators"
-      run: "xcrun xctrace list devices"
+      run: xcrun xctrace list devices
     - name: "Start Simulator"
-      run: |
-        all_devices=$(xcrun xctrace list devices)
-        echo $all_devices
-        UDID=$(
-          xcrun xctrace list devices |
-          awk \
-            -F ' *[][]' \
-            -v 'device=${{ matrix.device }}' \
-            '$1 == device { print $2 }'
-        )
-        xcrun simctl boot "${UDID:?No Simulator with this name found}"
+      run: xcrun simctl boot "${{ matrix.device }}"
     - uses: actions/checkout@v2
     - uses: subosito/flutter-action@v1.5.3
       with:
