@@ -8,6 +8,10 @@ Flutter 应用内调试工具平台
 
 <img src="https://github.com/bytedance/flutter_ume/raw/master/ume_logo_256.png" width = "128" height = "128" alt="banner" />
 
+**UME 插件开发竞赛活动正在火热进行中！** 丰富的奖品在等着你！
+
+详情请见：https://mp.weixin.qq.com/s/RuwiiQAdrGqI00fDhUO77g 。
+
 <img src="https://github.com/bytedance/flutter_ume/raw/master/apk_qrcode.png" width = "256" height = "256" alt="banner" />
 
 扫码或点击链接下载 apk，快速体验 UME。
