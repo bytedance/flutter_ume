@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import 'package:tuple/tuple.dart';
@@ -24,8 +22,7 @@ class Console extends StatefulWidget implements PluggableWithStream {
   Widget buildWidget(BuildContext? context) => this;
 
   @override
-  ImageProvider<Object> get iconImageProvider =>
-      MemoryImage(base64Decode(icon.iconData));
+  ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 
   @override
   String get name => 'Console';

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_ume_kit_ui/components/hit_test.dart';
@@ -22,8 +21,7 @@ class WidgetDetailInspector extends StatelessWidget implements Pluggable {
   Widget buildWidget(BuildContext? context) => this;
 
   @override
-  ImageProvider<Object> get iconImageProvider =>
-      MemoryImage(base64Decode(icon.iconData));
+  ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 
   @override
   String get name => 'WidgetDetail';
