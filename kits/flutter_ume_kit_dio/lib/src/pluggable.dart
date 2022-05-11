@@ -2,7 +2,6 @@
 /// [Author] Alex (https://github.com/AlexV525)
 /// [Date] 2021/8/6 11:24
 ///
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart' show Dio;
@@ -25,8 +24,7 @@ class DioInspector extends StatefulWidget implements Pluggable {
   DioPluggableState createState() => DioPluggableState();
 
   @override
-  ImageProvider<Object> get iconImageProvider =>
-      MemoryImage(base64Decode(icon.iconData));
+  ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 
   @override
   String get name => 'DioInspector';

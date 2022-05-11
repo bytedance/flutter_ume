@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
@@ -33,8 +32,7 @@ class ColorSucker extends StatefulWidget implements Pluggable {
   void onTrigger() {}
 
   @override
-  ImageProvider<Object> get iconImageProvider =>
-      MemoryImage(base64Decode(icon.iconData));
+  ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 }
 
 class _ColorSuckerState extends State<ColorSucker> {

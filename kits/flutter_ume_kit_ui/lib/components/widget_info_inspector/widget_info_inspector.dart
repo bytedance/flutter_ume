@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_ume/flutter_ume.dart';
 import 'package:flutter_ume_kit_ui/components/hit_test.dart';
 import 'icon.dart' as icon;
@@ -27,8 +26,7 @@ class WidgetInfoInspector extends StatefulWidget implements Pluggable {
   void onTrigger() {}
 
   @override
-  ImageProvider<Object> get iconImageProvider =>
-      MemoryImage(base64Decode(icon.iconData));
+  ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 }
 
 class _WidgetInfoInspectorState extends State<WidgetInfoInspector>
