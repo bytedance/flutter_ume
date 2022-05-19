@@ -146,8 +146,7 @@ class _SearchInputState extends State<SearchBar> {
         autofocus: widget.autofocus,
         maxLines: 1,
         onSubmitted: _inputSubmitHandle,
-        // ignore: deprecated_member_use
-        maxLengthEnforced: false,
+        maxLengthEnforcement: MaxLengthEnforcement.none,
         style: TextStyle(
           fontSize: 15.0,
           color: Colors.black,
