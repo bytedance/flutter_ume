@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'binding_ambiguate.dart';
+
 const Size dotSize = Size(65.0, 65.0);
 
 const double margin = 10.0;
@@ -22,6 +24,8 @@ const Color kHighlightedRenderObjectBorderColor =
 
 const Color kTipTextColor = Color(0xFFFFFFFF);
 
-final double ratio = WidgetsBinding.instance!.window.devicePixelRatio;
+final double ratio =
+    bindingAmbiguate(WidgetsBinding.instance)!.window.devicePixelRatio;
 
-final Size windowSize = WidgetsBinding.instance!.window.physicalSize / ratio;
+final Size windowSize =
+    bindingAmbiguate(WidgetsBinding.instance)!.window.physicalSize / ratio;
