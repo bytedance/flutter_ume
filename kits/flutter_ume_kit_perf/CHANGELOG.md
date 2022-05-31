@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0-dev.0
+
+* 适配 Flutter 3
+
+* Adapt Flutter 3
+
 ## 0.3.0
 
 * 修复分页错误 #28
