@@ -8,9 +8,7 @@ Flutter 应用内调试工具平台
 
 <img src="https://github.com/bytedance/flutter_ume/raw/master/ume_logo_256.png" width = "128" height = "128" alt="banner" />
 
-**UME 插件开发竞赛活动正在火热进行中！** 丰富的奖品在等着你！
-
-详情请见：https://mp.weixin.qq.com/s/RuwiiQAdrGqI00fDhUO77g 。
+**Flutter 3.0 适配进行中，预览版本为 `^1.0.0-dev.0`，详见后文[快速接入]部分。**
 
 <img src="https://github.com/bytedance/flutter_ume/raw/master/apk_qrcode.png" width = "256" height = "256" alt="banner" />
 
@@ -47,10 +45,23 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
 
 1. 修改 `pubspec.yaml`，添加依赖
 
+    **自 `1.0.0-dev.0` 版本开始适配 Flutter 3。**
+
+    ``` yaml
+    dev_dependencies:
+      flutter_ume: ^1.0.0-dev.0
+      flutter_ume_kit_ui: ^1.0.0-dev.0
+      flutter_ume_kit_device: ^1.0.0-dev.0
+      flutter_ume_kit_perf: ^1.0.0-dev.0
+      flutter_ume_kit_show_code: ^1.0.0-dev.0
+      flutter_ume_kit_console: ^1.0.0-dev.0
+      flutter_ume_kit_dio: ^1.0.0-dev.0
+    ```
+
     **↓ Null-safety 版本，适用于 Flutter 2.x**
 
     ``` yaml
-    dev_dependencies: # Don't use UME in release mode
+    dev_dependencies:
       flutter_ume: ^0.3.0+1
       flutter_ume_kit_ui: ^0.3.0+1
       flutter_ume_kit_device: ^0.3.0
@@ -63,7 +74,7 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
     **↓ 非 Null-safety 版本，适用于 Flutter 1.x**
 
     ``` yaml
-    dev_dependencies: # 请不要在 release 环境下使用 UME
+    dev_dependencies:
       flutter_ume: ^0.1.1
       flutter_ume_kit_ui: ^0.1.1
       flutter_ume_kit_device: ^0.1.1
@@ -331,11 +342,12 @@ showDialog(
 
 ### 兼容性
 
-| UME 版本 | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.3 | Flutter 2.5.3 |
+| UME 版本 | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.3 | Flutter 2.5.3 | 2.8.0 | 3.0.1 |
 | ---- | ---- | ---- | ---- | ---- | ---- |
-| 0.1.x | ✅ | ✅ | ✅ | ✅ | ⚠️ |
-| 0.2.x | ❌ | ❌ | ✅ | ✅ | ✅ |
-| 0.3.x | ❌ | ❌ | ✅ | ✅ | ✅ |
+| 0.1.x | ✅ | ✅ | ✅ | ✅ | ⚠️ | ⚠️ | ❌ |
+| 0.2.x | ❌ | ❌ | ✅ | ✅ | ✅ | ⚠️ | ❌ |
+| 0.3.x | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| 1.0.x | ❌ | ❌ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | ✅ |
 
 ⚠️ 意为未经过完整的兼容性测试，不建议使用。
 
