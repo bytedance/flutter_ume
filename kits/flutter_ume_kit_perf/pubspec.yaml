@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   vm_service: ^7.1.1
-  flutter_ume: ">=0.3.0 <0.4.0"
+  flutter_ume: ">=1.0.0 <2.0.0"
 
 dev_dependencies:
   flutter_test:

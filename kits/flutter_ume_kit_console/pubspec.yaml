@@ -13,7 +13,7 @@ dependencies:
   tuple: ^2.0.0
   share: ^2.0.4
   shared_preferences: ^2.0.6
-  flutter_ume: ">=0.3.0 <0.4.0"
+  flutter_ume: ">=1.0.0 <2.0.0"
 
 dev_dependencies:
   flutter_test:

@@ -34,13 +34,13 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
   test: ^1.16.6
-  flutter_ume: ^0.3.0+1
-  flutter_ume_kit_ui: ^0.3.0+1
-  flutter_ume_kit_perf: ^0.3.0
-  flutter_ume_kit_show_code: ^0.3.0
-  flutter_ume_kit_device: ^0.3.0
-  flutter_ume_kit_console: ^0.3.0
-  flutter_ume_kit_dio: ^0.3.0
+  flutter_ume: ^1.0.0-dev.0
+  flutter_ume_kit_ui: ^1.0.0-dev.0
+  flutter_ume_kit_perf: ^1.0.0-dev.0
+  flutter_ume_kit_show_code: ^1.0.0-dev.0
+  flutter_ume_kit_device: ^1.0.0-dev.0
+  flutter_ume_kit_console: ^1.0.0-dev.0
+  flutter_ume_kit_dio: ^1.0.0-dev.0
 
 flutter:
   uses-material-design: true
