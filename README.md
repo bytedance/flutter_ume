@@ -385,7 +385,8 @@ showDialog(
 | ![lpylpyleo](https://avatars.githubusercontent.com/u/15264428?s=64&v=4) | [lpylpyleo](https://github.com/lpylpyleo) |
 | ![Alex Li](https://avatars.githubusercontent.com/u/15884415?s=64&v=4) | [Alex Li](https://github.com/AlexV525) |
 | ![Swain](https://avatars.githubusercontent.com/u/7621572?s=64&v=4) | [Swain](https://github.com/talisk) |
-| ![harbor](https://avatars.githubusercontent.com/u/58758250?v=4) | [harbor](https://github.com/zzm990321) |
+| ![harbor](https://avatars.githubusercontent.com/u/58758250?s=64&v=4) | [harbor](https://github.com/zzm990321) |
+| ![LAIIIHZ](https://avatars.githubusercontent.com/u/35956195?s=64&v=4) | [LAIIIHZ](https://github.com/laiiihz |
 
 ### 第三方开源项目说明
 
