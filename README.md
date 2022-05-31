@@ -6,14 +6,18 @@ Flutter 应用内调试工具平台
 
 [![platforms](https://img.shields.io/badge/platforms-ios%20%7C%20android%20%7C%20web%20%7C%20macos%20%7C%20windows%20%7C%20linux-lightgrey)](https://pub.dev/packages/flutter_ume) [![license](https://img.shields.io/github/license/bytedance/flutter_ume.svg)](https://github.com/bytedance/flutter_ume/blob/master/LICENSE) [![latest](https://img.shields.io/pub/vpre/flutter_ume.svg)](https://pub.dev/packages/flutter_ume) [![likes](https://badges.bar/flutter_ume/likes)](https://pub.dev/packages/flutter_ume/score) [![popularity](https://badges.bar/flutter_ume/popularity)](https://pub.dev/packages/flutter_ume/score) [![pub points](https://badges.bar/flutter_ume/pub%20points)](https://pub.dev/packages/flutter_ume/score)
 
-<img src="./ume_logo_256.png" width = "128" height = "128" alt="banner" />
+<img src="https://github.com/bytedance/flutter_ume/raw/master/ume_logo_256.png" width = "128" height = "128" alt="banner" />
 
-<img src="./apk_qrcode.png" width = "256" height = "256" alt="banner" />
+**UME 插件开发竞赛活动正在火热进行中！** 丰富的奖品在等着你！
+
+详情请见：https://mp.weixin.qq.com/s/RuwiiQAdrGqI00fDhUO77g 。
+
+<img src="https://github.com/bytedance/flutter_ume/raw/master/apk_qrcode.png" width = "256" height = "256" alt="banner" />
 
 扫码或点击链接下载 apk，快速体验 UME。
 https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.apk
 
-最新版本(0.3.0)内置 13 个插件，
+最新版本(0.3.0+1)内置 13 个插件，
 开发者可以创建自己的插件，并集成进 UME 平台。
 详见本文[为 UME 开发插件](#为-ume-开发插件)部分。
 
@@ -22,6 +26,7 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
   - [特别说明](#特别说明)
   - [功能介绍](#功能介绍)
   - [为 UME 开发插件](#为-ume-开发插件)
+    - [快速集成嵌入式插件](#快速集成嵌入式插件)
   - [如何在 Release/Profile mode 下使用 UME](#如何在-releaseprofile-mode-下使用-ume)
   - [版本说明](#版本说明)
     - [兼容性](#兼容性)
@@ -30,6 +35,8 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
     - [Null-safety 版本](#null-safety-版本)
     - [更新日志](#更新日志)
   - [开源贡献](#开源贡献)
+    - [贡献者](#贡献者)
+    - [第三方开源项目说明](#第三方开源项目说明)
   - [开源协议](#开源协议)
   - [联系开发者](#联系开发者)
 
@@ -44,8 +51,8 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
 
     ``` yaml
     dev_dependencies: # Don't use UME in release mode
-      flutter_ume: ^0.3.0
-      flutter_ume_kit_ui: ^0.3.0
+      flutter_ume: ^0.3.0+1
+      flutter_ume_kit_ui: ^0.3.0+1
       flutter_ume_kit_device: ^0.3.0
       flutter_ume_kit_perf: ^0.3.0
       flutter_ume_kit_show_code: ^0.3.0
@@ -88,8 +95,8 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
           ..register(WidgetDetailInspector())
           ..register(ColorSucker())
           ..register(AlignRuler())
-          ..register(ColorPicker())                            // New feature
-          ..register(TouchIndicator())                         // New feature
+          ..register(ColorPicker())                            // 新插件
+          ..register(TouchIndicator())                         // 新插件
           ..register(Performance())
           ..register(ShowCode())
           ..register(MemoryInfoPage())
@@ -147,7 +154,7 @@ showDialog(
 
 <table border="1" width="100%">
     <tr>
-        <p>UI 工具包</p>
+        <td width="33.33%" align="center"><p>UI 工具包</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/widget_info.png" width="100%" alt="Widget 信息" /></br>Widget 信息</td>
@@ -160,33 +167,48 @@ showDialog(
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/touch_indicator.png" width="100%" alt="触控标记" /></br>触控标记</td>
     </tr>
     <tr>
-        <p>性能工具包</p>
+        <td width="33.33%" align="center"></td>
+    </tr>
+    <tr>
+        <td width="33.33%" align="center"><p>性能工具包</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/memory_info.png" width="100%" alt="内存信息" /></br>内存信息</td>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/perf_overlay.png" width="100%" alt="性能浮层" /></br>性能浮层</td>
     </tr>
     <tr>
-        <p>设备信息工具包</p>
+        <td width="33.33%" align="center"></td>
+    </tr>
+    <tr>
+        <td width="33.33%" align="center"><p>设备信息工具包</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/cpu_info.png" width="100%" alt="CPU 信息" /></br>CPU 信息</td>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/device_info.png" width="100%" alt="设备信息" /></br>设备信息</td>
     </tr>
     <tr>
-        <p>代码查看</p>
+        <td width="33.33%" align="center"></td>
+    </tr>
+    <tr>
+        <td width="33.33%" align="center"><p>代码查看</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/show_code.png" width="100%" alt="代码查看" /></br>代码查看</td>
     </tr>
     <tr>
-        <p>日志展示</p>
+        <td width="33.33%" align="center"></td>
+    </tr>
+    <tr>
+        <td width="33.33%" align="center"><p>日志展示</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/console.png" width="100%" alt="日志展示" /></br>日志展示</td>
     </tr>
     <tr>
-        <p>Dio 网络请求调试工具</p>
+        <td width="33.33%" align="center"></td>
+    </tr>
+    <tr>
+        <td width="33.33%" align="center"><p>Dio 网络请求调试工具</p></td>
     </tr>
     <tr>
         <td width="33.33%" align="center"><img src="https://github.com/bytedance/flutter_ume/raw/master/screenshots/dio_inspector.png" width="100%" alt="Dio 网络请求调试工具" /></br>Dio 网络请求调试工具</td>
@@ -263,7 +285,7 @@ showDialog(
       PluginManager.instance
         ..register(CustomPlugin());
       runApp(
-        injectUMEWidget(
+        UMEWidget(
           child: MyApp(), 
           enable: true
         )
@@ -274,6 +296,17 @@ showDialog(
     ```
 
 6. 运行代码
+
+### 快速集成嵌入式插件
+
+自 `0.3.0` 版本起引入了 `PluggableWithNestedWidget`，用以实现在 Widget tree 中插入嵌套 Widget，快速接入嵌入式插件。
+
+可参考 [./kits/flutter_ume_kit_ui/lib/components/color_picker/color_picker.dart](https://github.com/bytedance/flutter_ume/blob/master/kits/flutter_ume_kit_ui/lib/components/color_picker/color_picker.dart) 与 [./kits/flutter_ume_kit_ui/lib/components/touch_indicator/touch_indicator.dart](https://github.com/bytedance/flutter_ume/blob/master/kits/flutter_ume_kit_ui/lib/components/touch_indicator/touch_indicator.dart)。
+
+集成重点如下：
+
+1. 插件主体类实现 `PluggableWithNestedWidget`
+2. 实现 `Widget buildNestedWidget(Widget child)`，在该方法中处理嵌套结构并返回 Widget
 
 ## 如何在 Release/Profile mode 下使用 UME
 
@@ -298,7 +331,7 @@ showDialog(
 
 ### 兼容性
 
-| UME 版本 | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.3 | Flutter 2.2.5 |
+| UME 版本 | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.3 | Flutter 2.5.3 |
 | ---- | ---- | ---- | ---- | ---- | ---- |
 | 0.1.x | ✅ | ✅ | ✅ | ✅ | ⚠️ |
 | 0.2.x | ❌ | ❌ | ✅ | ✅ | ✅ |
@@ -326,8 +359,8 @@ showDialog(
 
 | 包 | null-safety 推荐版本号 |
 | ---- | ---- |
-| flutter_ume | 0.3.0 |
-| flutter_ume_kit_ui | 0.3.0 |
+| flutter_ume | 0.3.0+1 |
+| flutter_ume_kit_ui | 0.3.0+1 |
 | flutter_ume_kit_device | 0.3.0 |
 | flutter_ume_kit_perf | 0.3.0 |
 | flutter_ume_kit_show_code | 0.3.0 |
@@ -336,11 +369,13 @@ showDialog(
 
 ### 更新日志
 
-[Changelog](./CHANGELOG.md)
+[Changelog](./CHANGELOG_cn.md)
 
 ## 开源贡献
 
 贡献文档：[Contributing](./CONTRIBUTING.md)
+
+### 贡献者
 
 感谢以下贡献者（排名不分先后）：
 
@@ -350,6 +385,12 @@ showDialog(
 | ![lpylpyleo](https://avatars.githubusercontent.com/u/15264428?s=64&v=4) | [lpylpyleo](https://github.com/lpylpyleo) |
 | ![Alex Li](https://avatars.githubusercontent.com/u/15884415?s=64&v=4) | [Alex Li](https://github.com/AlexV525) |
 | ![Swain](https://avatars.githubusercontent.com/u/7621572?s=64&v=4) | [Swain](https://github.com/talisk) |
+| ![harbor](https://avatars.githubusercontent.com/u/58758250?v=4) | [harbor](https://github.com/zzm990321) |
+
+### 第三方开源项目说明
+
+- 触控标记使用了 [touch_indicator](https://pub.dev/packages/touch_indicator)，颜色吸管插件使用了 [cyclop](https://pub.dev/packages/cyclop)。
+- 对 [cyclop](https://pub.dev/packages/cyclop) 进行了 [fork](https://github.com/talisk/cyclop) 并修改代码以满足需要。当 [PR](https://github.com/rxlabz/cyclop/pull/11) 合入后，我们将通过 pub 的形式依赖。
 
 ## 开源协议
 

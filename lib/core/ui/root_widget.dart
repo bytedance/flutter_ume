@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart'
     hide FlutterLogo, FlutterLogoDecoration, FlutterLogoStyle;
 import 'package:flutter_ume/core/pluggable_message_service.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_ume/core/red_dot.dart';
 import 'package:flutter_ume/core/store_manager.dart';
 import 'package:flutter_ume/core/ui/toolbar_widget.dart';
 import 'package:flutter_ume/core/pluggable.dart';
+import 'package:flutter_ume/util/binding_ambiguate.dart';
 import 'package:flutter_ume/util/constants.dart';
 import './menu_page.dart';
 import 'package:flutter_ume/util/flutter_logo.dart';
@@ -56,8 +56,9 @@ class _UMEWidgetState extends State<UMEWidget> {
     _replaceChild();
     _injectOverlay();
 
-    _onMetricsChanged = WidgetsBinding.instance!.window.onMetricsChanged;
-    WidgetsBinding.instance!.window.onMetricsChanged = () {
+    _onMetricsChanged =
+        bindingAmbiguate(WidgetsBinding.instance)!.window.onMetricsChanged;
+    bindingAmbiguate(WidgetsBinding.instance)!.window.onMetricsChanged = () {
       if (_onMetricsChanged != null) {
         _onMetricsChanged!();
         _replaceChild();
@@ -69,7 +70,8 @@ class _UMEWidgetState extends State<UMEWidget> {
   @override
   void dispose() {
     if (_onMetricsChanged != null) {
-      WidgetsBinding.instance!.window.onMetricsChanged = _onMetricsChanged;
+      bindingAmbiguate(WidgetsBinding.instance)!.window.onMetricsChanged =
+          _onMetricsChanged;
     }
     super.dispose();
   }
@@ -117,7 +119,8 @@ class _UMEWidgetState extends State<UMEWidget> {
       children: <Widget>[
         RepaintBoundary(child: child, key: rootKey),
         MediaQuery(
-          data: MediaQueryData.fromWindow(WidgetsBinding.instance!.window),
+          data: MediaQueryData.fromWindow(
+              bindingAmbiguate(WidgetsBinding.instance)!.window),
           child: Localizations(
             locale: supportedLocales?.first ?? Locale('en', 'US'),
             delegates: delegates.toList(),
@@ -131,7 +134,8 @@ class _UMEWidgetState extends State<UMEWidget> {
   void _removeOverlay() => _overlayEntry.remove();
 
   void _injectOverlay() {
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    bindingAmbiguate(WidgetsBinding.instance)!
+        .addPostFrameCallback((timeStamp) {
       if (widget.enable) {
         _overlayEntry = OverlayEntry(
             builder: (_) => Material(
@@ -253,8 +257,14 @@ class __ContentPageState extends State<_ContentPage> {
       if (value == null || value.split(',').length != 2) {
         return;
       }
-      _dx = double.parse(value.split(',').first);
-      _dy = double.parse(value.split(',').last);
+      final x = double.parse(value.split(',').first);
+      final y = double.parse(value.split(',').last);
+      if (MediaQuery.of(context).size.height - dotSize.height < y ||
+          MediaQuery.of(context).size.width - dotSize.width < x) {
+        return;
+      }
+      _dx = x;
+      _dy = y;
       setState(() {});
     });
     _storeManager.fetchMinimalToolbarSwitch().then((value) {

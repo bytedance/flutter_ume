@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:touch_indicator/touch_indicator.dart' as ti;
 import 'package:flutter/material.dart';
 import 'package:flutter_ume/flutter_ume.dart';
@@ -22,8 +20,7 @@ class TouchIndicator extends StatelessWidget
   void onTrigger() {}
 
   @override
-  ImageProvider<Object> get iconImageProvider =>
-      MemoryImage(base64Decode(icon.iconData));
+  ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 
   @override
   Widget buildNestedWidget(Widget child) {

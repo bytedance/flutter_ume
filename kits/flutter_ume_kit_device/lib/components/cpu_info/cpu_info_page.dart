@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:system_info/system_info.dart';
-import 'dart:convert';
 import 'package:flutter_ume/flutter_ume.dart';
 import 'icon.dart' as icon;
 import 'package:platform/platform.dart';
@@ -29,8 +28,7 @@ class CpuInfoPage extends StatefulWidget implements Pluggable {
   void onTrigger() {}
 
   @override
-  ImageProvider<Object> get iconImageProvider =>
-      MemoryImage(base64Decode(icon.iconData));
+  ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 }
 
 class _CpuInfoPageState extends State<CpuInfoPage> {
