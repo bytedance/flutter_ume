@@ -13,14 +13,16 @@ dependencies:
   provider: ^5.0.0
   # For Dio Kit
   dio: ^4.0.0
+  flutter_ume: 0.2.1
+  flutter_ume_kit_ui: 0.2.1
+  flutter_ume_kit_perf: 0.2.1
+  flutter_ume_kit_show_code: 0.2.1
+  flutter_ume_kit_device: 0.2.1
+  flutter_ume_kit_console: 0.2.1
+  flutter_ume_kit_dio: 0.2.0
 
 dependency_overrides:
   vm_service: ^6.2.0
-
-dev_dependencies:
-  flutter_driver:
-    sdk: flutter
-  test: ^1.16.6
   flutter_ume: ^0.3.0+1
   flutter_ume_kit_ui: ^0.3.0+1
   flutter_ume_kit_perf: ^0.3.0
@@ -29,5 +31,10 @@ dev_dependencies:
   flutter_ume_kit_console: ^0.3.0
   flutter_ume_kit_dio: ^0.3.0
 
+dev_dependencies:
+  flutter_driver:
+    sdk: flutter
+  test: ^1.16.6
+  
 flutter:
   uses-material-design: true

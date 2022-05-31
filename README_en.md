@@ -339,6 +339,7 @@ In order to use in Release/Profile mode, the details that need to be adjusted in
 
 ⚠️ means the version has not been fully tested for compatibility.
 
+⚠️ means the version has not been fully tested for compatibility.
 ### Coverage
 
 | Package | master | develop | develop_nullsafety |
