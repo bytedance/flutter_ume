@@ -17,8 +17,6 @@ import 'package:flutter_ume_kit_dio/flutter_ume_kit_dio.dart';
 
 final Dio dio = Dio()..options = BaseOptions(connectTimeout: 10000);
 
-final customNavigator = CustomRouterPluggable();
-
 final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
@@ -37,7 +35,7 @@ void main() {
       ..register(DeviceInfoPanel())
       ..register(Console())
       ..register(DioInspector(dio: dio))
-      ..register(customNavigator);
+      ..register(CustomRouterPluggable());
     runApp(
       MultiProvider(
         providers: [
@@ -64,7 +62,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((_) {
-      customNavigator.nav = navigatorKey.currentState;
+      CustomRouterPluggable().navKey = navigatorKey;
     });
   }
 

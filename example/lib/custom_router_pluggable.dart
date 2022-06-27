@@ -1,13 +1,21 @@
 import 'dart:convert';
 
-import 'package:example/detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ume/flutter_ume.dart';
 import 'package:tuple/tuple.dart';
 import 'icon.dart' as icon;
 
 class CustomRouterPluggable implements PluggableWithAnywhereDoor {
-  NavigatorState? nav;
+  static final CustomRouterPluggable _instance =
+      CustomRouterPluggable._internal();
+
+  factory CustomRouterPluggable() {
+    return _instance;
+  }
+
+  CustomRouterPluggable._internal();
+
+  GlobalKey<NavigatorState>? navKey;
 
   @override
   Widget? buildWidget(BuildContext? context) {
@@ -25,7 +33,7 @@ class CustomRouterPluggable implements PluggableWithAnywhereDoor {
   String get name => 'ToDetail';
 
   @override
-  NavigatorState get navigator => nav!;
+  NavigatorState? get navigator => navKey?.currentState;
 
   @override
   void onTrigger() {}

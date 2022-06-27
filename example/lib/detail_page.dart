@@ -5,12 +5,7 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final arg =
-    //     (ModalRoute.of(context)!.settings.arguments as Map<String, String>?)
-    //         .toString(); //?['arg'];
     final args = ModalRoute.of(context)!.settings.arguments;
-
-    print('talisk++$args');
     return WillPopScope(
       onWillPop: () async {
         Navigator.pop(context, 'Pop result from ${this.runtimeType}');

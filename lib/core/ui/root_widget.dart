@@ -272,15 +272,14 @@ class __ContentPageState extends State<_ContentPage> {
     _dy = _windowSize.height - dotSize.height - bottomDistance;
     MenuAction itemTapAction = (pluginData) async {
       if (pluginData is PluggableWithAnywhereDoor) {
-        // pluginData.navigator.push(route)
         var result;
         if (pluginData.routeNameAndArgs != null) {
           print('talisk++${pluginData.routeNameAndArgs!.item2}');
-          result = await pluginData.navigator.pushNamed(
+          result = await pluginData.navigator?.pushNamed(
               pluginData.routeNameAndArgs!.item1,
               arguments: pluginData.routeNameAndArgs!.item2);
         } else if (pluginData.route != null) {
-          result = await pluginData.navigator.push(pluginData.route!);
+          result = await pluginData.navigator?.push(pluginData.route!);
         }
         pluginData.popResultReceive(result);
       } else {
@@ -294,9 +293,6 @@ class __ContentPageState extends State<_ContentPage> {
         }
         pluginData.onTrigger();
       }
-      // if (pluginData.onTrigger != null) {
-      //   pluginData.onTrigger();
-      // }
     };
     _menuPage = MenuPage(
       action: itemTapAction,
@@ -328,7 +324,6 @@ class __ContentPageState extends State<_ContentPage> {
   @override
   Widget build(BuildContext context) {
     _context = context;
-    // ugly code .. because in release mode, WidgetsBinding.instance.window.physicalSize's value is zero...What the Fuck!!!
     if (_windowSize.isEmpty) {
       _dx = MediaQuery.of(context).size.width - dotSize.width - margin * 4;
       _dy =

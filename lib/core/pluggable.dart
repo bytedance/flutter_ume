@@ -21,7 +21,7 @@ abstract class PluggableWithNestedWidget extends Pluggable {
 }
 
 abstract class PluggableWithAnywhereDoor extends Pluggable {
-  NavigatorState get navigator;
+  NavigatorState? get navigator;
 
   Tuple2<String, Object?>? get routeNameAndArgs;
   Route? get route;
