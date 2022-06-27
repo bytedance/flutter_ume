@@ -15,7 +15,7 @@ Flutter 应用内调试工具平台
 扫码或点击链接下载 apk，快速体验 UME。
 https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.apk
 
-最新版本(1.0.0)内置 13 个插件，
+最新版本(1.0.1)内置 13 个插件，
 开发者可以创建自己的插件，并集成进 UME 平台。
 详见本文[为 UME 开发插件](#为-ume-开发插件)部分。
 
@@ -49,7 +49,7 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
 
     ``` yaml
     dev_dependencies:
-      flutter_ume: ^1.0.0
+      flutter_ume: ^1.0.1
       flutter_ume_kit_ui: ^1.0.0
       flutter_ume_kit_device: ^1.0.0
       flutter_ume_kit_perf: ^1.0.0

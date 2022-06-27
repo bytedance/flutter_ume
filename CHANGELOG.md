@@ -2,6 +2,10 @@
 
 [简体中文](./CHANGELOG_cn.md)
 
+## [1.0.1]
+
+* Fix error in pubspec.yaml in example
+
 ## [1.0.0]
 
 * Normal version with adaption of Flutter 3.

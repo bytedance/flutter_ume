@@ -49,7 +49,7 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
 
     ``` yaml
     dev_dependencies:
-      flutter_ume: ^1.0.0
+      flutter_ume: ^1.0.1
       flutter_ume_kit_ui: ^1.0.0
       flutter_ume_kit_device: ^1.0.0
       flutter_ume_kit_perf: ^1.0.0
@@ -77,7 +77,7 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
     ``` yaml
     dev_dependencies: # Don't use UME in release mode
       flutter_ume: ^0.1.1
-      flutter_ume_kit_ui: ^0.1.1.1
+      flutter_ume_kit_ui: ^0.1.1
       flutter_ume_kit_device: ^0.1.1
       flutter_ume_kit_perf: ^0.1.1
       flutter_ume_kit_show_code: ^0.1.1
