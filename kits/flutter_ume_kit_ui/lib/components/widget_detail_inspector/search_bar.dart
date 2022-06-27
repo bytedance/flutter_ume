@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_ume_kit_ui/util/binding_ambiguate.dart';
 import 'icon.dart' as icon;
-import 'dart:convert';
 
 typedef void OnSubmitHandle(String text);
 typedef void OnChangeHandle(String text);
@@ -103,7 +103,7 @@ class _SearchInputState extends State<SearchBar> {
     return Container(
         margin: const EdgeInsets.only(right: 11.0),
         child: Image.memory(
-          base64.decode(icon.searchIconData),
+          icon.iconBytes,
           width: 16,
           height: 16,
         ));
@@ -115,7 +115,7 @@ class _SearchInputState extends State<SearchBar> {
     }
     return GestureDetector(
       onTap: () {
-        WidgetsBinding.instance!.addPostFrameCallback((_) {
+        bindingAmbiguate(WidgetsBinding.instance)!.addPostFrameCallback((_) {
           _inputController.clear();
           _focus();
         });
@@ -123,8 +123,7 @@ class _SearchInputState extends State<SearchBar> {
       },
       child: Container(
           margin: EdgeInsets.only(left: 16.0),
-          child: Image.memory(base64.decode(icon.searchClearIconData),
-              width: 16, height: 16)),
+          child: Image.memory(icon.iconBytes, width: 16, height: 16)),
     );
   }
 
@@ -148,8 +147,7 @@ class _SearchInputState extends State<SearchBar> {
         autofocus: widget.autofocus,
         maxLines: 1,
         onSubmitted: _inputSubmitHandle,
-        // ignore: deprecated_member_use
-        maxLengthEnforced: false,
+        maxLengthEnforcement: MaxLengthEnforcement.none,
         style: TextStyle(
           fontSize: 15.0,
           color: Colors.black,

@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_ume_kit_ui/components/hit_test.dart';
 import 'package:flutter_ume/flutter_ume.dart';
+import 'package:flutter_ume_kit_ui/util/binding_ambiguate.dart';
 import 'search_bar.dart';
 import 'icon.dart' as icon;
 
@@ -22,8 +22,7 @@ class WidgetDetailInspector extends StatelessWidget implements Pluggable {
   Widget buildWidget(BuildContext? context) => this;
 
   @override
-  ImageProvider<Object> get iconImageProvider =>
-      MemoryImage(base64Decode(icon.iconData));
+  ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 
   @override
   String get name => 'WidgetDetail';
@@ -45,7 +44,7 @@ class _DetailPage extends StatefulWidget {
 class _DetailPageState extends State<_DetailPage> with WidgetsBindingObserver {
   _DetailPageState() : selection = WidgetInspectorService.instance.selection;
 
-  final window = WidgetsBinding.instance!.window;
+  final window = bindingAmbiguate(WidgetsBinding.instance)!.window;
 
   Offset? _lastPointerLocation;
 
