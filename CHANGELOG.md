@@ -2,6 +2,15 @@
 
 [简体中文](./CHANGELOG_cn.md)
 
+## [1.0.0]
+
+* Normal version with adaption of Flutter 3.
+* Feature: Anywhere door (Route)
+
+## [1.0.0-dev.0]
+
+* Adapt Flutter 3.
+
 ## [0.3.0+1]
 
 * Fix the version error

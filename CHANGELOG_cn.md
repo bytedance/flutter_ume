@@ -2,6 +2,15 @@
 
 [English](./CHANGELOG.md)
 
+## [1.0.0]
+
+* 适配 Flutter 3 正式版
+* 新功能：任意门（Route）
+
+## [1.0.0-dev.0]
+
+* 适配 Flutter 3
+
 ## [0.3.0+1]
 
 * 修复版本号错误

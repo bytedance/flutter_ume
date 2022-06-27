@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_ume/flutter_ume.dart';
 import 'package:flutter_ume_kit_ui/components/hit_test.dart';
+import 'package:flutter_ume_kit_ui/util/binding_ambiguate.dart';
 import 'icon.dart' as icon;
 import 'package:flutter/rendering.dart';
 import 'package:flutter_ume/util/constants.dart';
@@ -34,7 +33,7 @@ class _WidgetInfoInspectorState extends State<WidgetInfoInspector>
   _WidgetInfoInspectorState()
       : selection = WidgetInspectorService.instance.selection;
 
-  final window = WidgetsBinding.instance!.window;
+  final window = bindingAmbiguate(WidgetsBinding.instance)!.window;
 
   Offset? _lastPointerLocation;
   OverlayEntry _overlayEntry = OverlayEntry(builder: (ctx) => Container());
@@ -75,7 +74,8 @@ class _WidgetInfoInspectorState extends State<WidgetInfoInspector>
   void initState() {
     super.initState();
     selection.clear();
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    bindingAmbiguate(WidgetsBinding.instance)
+        ?.addPostFrameCallback((timeStamp) {
       _overlayEntry = OverlayEntry(builder: (_) => _DebugPaintButton());
       overlayKey.currentState?.insert(_overlayEntry);
     });
@@ -153,7 +153,9 @@ class _DebugPaintButtonState extends State<_DebugPaintButton> {
         child.markNeedsPaint();
         child.visitChildren(visitor);
       };
-      RendererBinding.instance?.renderView.visitChildren(visitor);
+      bindingAmbiguate(RendererBinding.instance)
+          ?.renderView
+          .visitChildren(visitor);
     });
   }
 
@@ -161,13 +163,16 @@ class _DebugPaintButtonState extends State<_DebugPaintButton> {
   void dispose() {
     super.dispose();
     debugPaintSizeEnabled = false;
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    bindingAmbiguate(WidgetsBinding.instance)
+        ?.addPostFrameCallback((timeStamp) {
       late RenderObjectVisitor visitor;
       visitor = (RenderObject child) {
         child.markNeedsPaint();
         child.visitChildren(visitor);
       };
-      RendererBinding.instance?.renderView.visitChildren(visitor);
+      bindingAmbiguate(RendererBinding.instance)
+          ?.renderView
+          .visitChildren(visitor);
     });
   }
 }

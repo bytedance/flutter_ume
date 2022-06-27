@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:example/custom_router_pluggable.dart';
 import 'package:example/detail_page.dart';
 import 'package:example/home_page.dart';
 import 'package:example/ume_switch.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_ume/flutter_ume.dart';
 import 'package:flutter_ume_kit_ui/flutter_ume_kit_ui.dart';
 import 'package:flutter_ume_kit_perf/flutter_ume_kit_perf.dart';
@@ -14,6 +16,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_ume_kit_dio/flutter_ume_kit_dio.dart';
 
 final Dio dio = Dio()..options = BaseOptions(connectTimeout: 10000);
+
+final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
   if (kDebugMode) {
@@ -30,7 +34,8 @@ void main() {
       ..register(CpuInfoPage())
       ..register(DeviceInfoPanel())
       ..register(Console())
-      ..register(DioInspector(dio: dio));
+      ..register(DioInspector(dio: dio))
+      ..register(CustomRouterPluggable());
     runApp(
       MultiProvider(
         providers: [
@@ -47,10 +52,24 @@ void main() {
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      CustomRouterPluggable().navKey = navigatorKey;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       title: 'UME Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,

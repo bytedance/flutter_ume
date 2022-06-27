@@ -6,6 +6,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import 'package:flutter_ume_kit_ui/util/binding_ambiguate.dart';
 import '../theme.dart';
 import '../utils.dart';
 import 'color_picker.dart';
@@ -64,7 +65,7 @@ class _ColorButtonState extends State<ColorButton> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     color = widget.color;
-    WidgetsBinding.instance!.addObserver(this);
+    bindingAmbiguate(WidgetsBinding.instance)!.addObserver(this);
   }
 
   @override
@@ -75,7 +76,7 @@ class _ColorButtonState extends State<ColorButton> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
+    bindingAmbiguate(WidgetsBinding.instance)!.removeObserver(this);
     super.dispose();
   }
 

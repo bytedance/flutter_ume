@@ -8,9 +8,7 @@ UME is an in-app debug kits platform for Flutter apps.
 
 <img src="https://github.com/bytedance/flutter_ume/raw/master/ume_logo_256.png" width = "128" height = "128" alt="banner" />
 
-**UME Kits competition is in full swing!** Rich prizes are waiting for you.
-
-See https://mp.weixin.qq.com/s/RuwiiQAdrGqI00fDhUO77g for more details.
+**Since `^1.0.0`, flutter_ume starts adapting to the Flutter 3. See [Quick Start] to learn more.**
 
 <img src="https://github.com/bytedance/flutter_ume/raw/master/apk_qrcode.png" width = "256" height = "256" alt="banner" />
 
@@ -46,6 +44,20 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
 **plug-ins of UME, and users can access them according to demand**
 
 1. Edit `pubspec.yaml`, and add dependencies.
+
+    **Compatible with Flutter 3 since version `1.0.0`.**
+
+    ``` yaml
+    dev_dependencies:
+      flutter_ume: ^1.0.0
+      flutter_ume_kit_ui: ^1.0.0
+      flutter_ume_kit_device: ^1.0.0
+      flutter_ume_kit_perf: ^1.0.0
+      flutter_ume_kit_show_code: ^1.0.0
+      flutter_ume_kit_console: ^1.0.0
+      flutter_ume_kit_dio: ^1.0.0
+    ```
+
 
     **↓ Null-safety version, compatible with Flutter 2.x**
 
@@ -331,11 +343,12 @@ In order to use in Release/Profile mode, the details that need to be adjusted in
 
 ### Compatibility
 
-| UME version | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.3 | Flutter 2.5.3 |
+| UME version | 1.12.13 | 1.22.3 | 2.0.1 | 2.2.3 | 2.5.3 | 2.8.0 | 3.0.1 |
 | ---- | ---- | ---- | ---- | ---- | ---- |
-| 0.1.x | ✅ | ✅ | ✅ | ✅ | ⚠️ |
-| 0.2.x | ❌ | ❌ | ✅ | ✅ | ✅ |
-| 0.3.x | ❌ | ❌ | ✅ | ✅ | ✅ |
+| 0.1.x | ✅ | ✅ | ✅ | ✅ | ⚠️ | ⚠️ | ❌ |
+| 0.2.x | ❌ | ❌ | ✅ | ✅ | ✅ | ⚠️ | ❌ |
+| 0.3.x | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| 1.0.x | ❌ | ❌ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | ✅ |
 
 ⚠️ means the version has not been fully tested for compatibility.
 

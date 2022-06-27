@@ -274,16 +274,27 @@ class __ContentPageState extends State<_ContentPage> {
     });
     _dx = _windowSize.width - dotSize.width - margin * 4;
     _dy = _windowSize.height - dotSize.height - bottomDistance;
-    MenuAction itemTapAction = (pluginData) {
-      _currentSelected = pluginData;
-      if (_currentSelected != null) {
-        PluginManager.instance.activatePluggable(_currentSelected!);
-      }
-      _handleAction(_context, pluginData!);
-      if (widget.refreshChildLayout != null) {
-        widget.refreshChildLayout!();
-      }
-      if (pluginData.onTrigger != null) {
+    MenuAction itemTapAction = (pluginData) async {
+      if (pluginData is PluggableWithAnywhereDoor) {
+        var result;
+        if (pluginData.routeNameAndArgs != null) {
+          print('talisk++${pluginData.routeNameAndArgs!.item2}');
+          result = await pluginData.navigator?.pushNamed(
+              pluginData.routeNameAndArgs!.item1,
+              arguments: pluginData.routeNameAndArgs!.item2);
+        } else if (pluginData.route != null) {
+          result = await pluginData.navigator?.push(pluginData.route!);
+        }
+        pluginData.popResultReceive(result);
+      } else {
+        _currentSelected = pluginData;
+        if (_currentSelected != null) {
+          PluginManager.instance.activatePluggable(_currentSelected!);
+        }
+        _handleAction(_context, pluginData!);
+        if (widget.refreshChildLayout != null) {
+          widget.refreshChildLayout!();
+        }
         pluginData.onTrigger();
       }
     };
@@ -317,7 +328,6 @@ class __ContentPageState extends State<_ContentPage> {
   @override
   Widget build(BuildContext context) {
     _context = context;
-    // ugly code .. because in release mode, WidgetsBinding.instance.window.physicalSize's value is zero...What the Fuck!!!
     if (_windowSize.isEmpty) {
       _dx = MediaQuery.of(context).size.width - dotSize.width - margin * 4;
       _dy =
