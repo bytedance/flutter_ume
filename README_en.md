@@ -352,6 +352,7 @@ In order to use in Release/Profile mode, the details that need to be adjusted in
 
 ⚠️ means the version has not been fully tested for compatibility.
 
+⚠️ means the version has not been fully tested for compatibility.
 ### Coverage
 
 | Package | master | develop | develop_nullsafety |
@@ -399,7 +400,7 @@ Thanks to the following contributors (names not listed in order)：
 | ![Alex Li](https://avatars.githubusercontent.com/u/15884415?s=64&v=4) | [Alex Li](https://github.com/AlexV525) |
 | ![Swain](https://avatars.githubusercontent.com/u/7621572?s=64&v=4) | [Swain](https://github.com/talisk) |
 | ![harbor](https://avatars.githubusercontent.com/u/58758250?s=64&v=4) | [harbor](https://github.com/zzm990321) |
-| ![LAIIIHZ](https://avatars.githubusercontent.com/u/35956195?s=64&v=4) | [LAIIIHZ](https://github.com/laiiihz |
+| ![LAIIIHZ](https://avatars.githubusercontent.com/u/35956195?s=64&v=4) | [LAIIIHZ](https://github.com/laiiihz) |
 
 ### About the third-party open-source project dependencies
 
