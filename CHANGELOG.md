@@ -4,7 +4,8 @@
 
 ## [1.0.0]
 
-* Normal version.
+* Normal version with adaption of Flutter 3.
+* Feature: Anywhere door (Route)
 
 ## [1.0.0-dev.0]
 
