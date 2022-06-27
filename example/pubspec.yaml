@@ -1,6 +1,6 @@
 name: example
 description: A new Flutter project.
-version: 1.0.0-dev.0
+version: 1.0.0
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -34,13 +34,13 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
   test: ^1.16.6
-  flutter_ume: ^1.0.0-dev.0
-  flutter_ume_kit_ui: ^1.0.0-dev.0
-  flutter_ume_kit_perf: ^1.0.0-dev.0
-  flutter_ume_kit_show_code: ^1.0.0-dev.0
-  flutter_ume_kit_device: ^1.0.0-dev.0
-  flutter_ume_kit_console: ^1.0.0-dev.0
-  flutter_ume_kit_dio: ^1.0.0-dev.0
+  flutter_ume: ^1.0.0
+  flutter_ume_kit_ui: ^1.0.0
+  flutter_ume_kit_perf: ^1.0.0
+  flutter_ume_kit_show_code: ^1.0.0
+  flutter_ume_kit_device: ^1.0.0
+  flutter_ume_kit_console: ^1.0.0
+  flutter_ume_kit_dio: ^1.0.0
 
 flutter:
   uses-material-design: true

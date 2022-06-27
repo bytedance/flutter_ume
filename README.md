@@ -8,7 +8,7 @@ Flutter 应用内调试工具平台
 
 <img src="https://github.com/bytedance/flutter_ume/raw/master/ume_logo_256.png" width = "128" height = "128" alt="banner" />
 
-**Flutter 3.0 适配进行中，预览版本为 `^1.0.0-dev.0`，详见后文[快速接入]部分。**
+**从 `^1.0.0` 起适配 Flutter 3.0，详见后文[快速接入]部分。**
 
 <img src="https://github.com/bytedance/flutter_ume/raw/master/apk_qrcode.png" width = "256" height = "256" alt="banner" />
 
@@ -45,17 +45,17 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
 
 1. 修改 `pubspec.yaml`，添加依赖
 
-    **自 `1.0.0-dev.0` 版本开始适配 Flutter 3。**
+    **自 `1.0.0` 版本开始适配 Flutter 3。**
 
     ``` yaml
     dev_dependencies:
-      flutter_ume: ^1.0.0-dev.0
-      flutter_ume_kit_ui: ^1.0.0-dev.0
-      flutter_ume_kit_device: ^1.0.0-dev.0
-      flutter_ume_kit_perf: ^1.0.0-dev.0
-      flutter_ume_kit_show_code: ^1.0.0-dev.0
-      flutter_ume_kit_console: ^1.0.0-dev.0
-      flutter_ume_kit_dio: ^1.0.0-dev.0
+      flutter_ume: ^1.0.0
+      flutter_ume_kit_ui: ^1.0.0
+      flutter_ume_kit_device: ^1.0.0
+      flutter_ume_kit_perf: ^1.0.0
+      flutter_ume_kit_show_code: ^1.0.0
+      flutter_ume_kit_console: ^1.0.0
+      flutter_ume_kit_dio: ^1.0.0
     ```
 
     **↓ Null-safety 版本，适用于 Flutter 2.x**

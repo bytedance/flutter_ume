@@ -2,6 +2,10 @@
 
 [English](./CHANGELOG.md)
 
+## [1.0.0]
+
+* 正式版
+
 ## [1.0.0-dev.0]
 
 * 适配 Flutter 3

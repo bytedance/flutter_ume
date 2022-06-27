@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0
+
+* 正式版
+
+* Normal version.
+
 ## 1.0.0-dev.0
 
 * 适配 Flutter 3

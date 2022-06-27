@@ -8,7 +8,7 @@ UME is an in-app debug kits platform for Flutter apps.
 
 <img src="https://github.com/bytedance/flutter_ume/raw/master/ume_logo_256.png" width = "128" height = "128" alt="banner" />
 
-**We are adapting to the Flutter 3. `^1.0.0-dev.0` is the latest preview version of flutter_ume. See [Quick Start] to learn more.**
+**Since `^1.0.0`, flutter_ume starts adapting to the Flutter 3. See [Quick Start] to learn more.**
 
 <img src="https://github.com/bytedance/flutter_ume/raw/master/apk_qrcode.png" width = "256" height = "256" alt="banner" />
 
@@ -45,17 +45,17 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
 
 1. Edit `pubspec.yaml`, and add dependencies.
 
-    **Compatible with Flutter 3 since version `1.0.0-dev.0`.**
+    **Compatible with Flutter 3 since version `1.0.0`.**
 
     ``` yaml
     dev_dependencies:
-      flutter_ume: ^1.0.0-dev.0
-      flutter_ume_kit_ui: ^1.0.0-dev.0
-      flutter_ume_kit_device: ^1.0.0-dev.0
-      flutter_ume_kit_perf: ^1.0.0-dev.0
-      flutter_ume_kit_show_code: ^1.0.0-dev.0
-      flutter_ume_kit_console: ^1.0.0-dev.0
-      flutter_ume_kit_dio: ^1.0.0-dev.0
+      flutter_ume: ^1.0.0
+      flutter_ume_kit_ui: ^1.0.0
+      flutter_ume_kit_device: ^1.0.0
+      flutter_ume_kit_perf: ^1.0.0
+      flutter_ume_kit_show_code: ^1.0.0
+      flutter_ume_kit_console: ^1.0.0
+      flutter_ume_kit_dio: ^1.0.0
     ```
 
 
