@@ -40,8 +40,7 @@ class _RenderInspectorOverlay extends RenderBox {
     required InspectorSelection selection,
     required this.needDescription,
     required this.needEdges,
-  })  : _selection = selection,
-        assert(selection != null);
+  })  : _selection = selection;
 
   final bool needDescription;
   final bool needEdges;
@@ -84,8 +83,7 @@ class _InspectorOverlayLayer extends Layer {
     required this.selection,
     required this.needDescription,
     required this.needEdges,
-  })  : assert(overlayRect != null),
-        assert(selection != null);
+  });
 
   InspectorSelection selection;
 
@@ -249,7 +247,7 @@ class _InspectorOverlayLayer extends Layer {
 }
 
 class _SelectionInfo {
-  const _SelectionInfo(this.selection) : assert(selection != null);
+  const _SelectionInfo(this.selection);
   final InspectorSelection selection;
 
   RenderObject? get renderObject => selection.current;

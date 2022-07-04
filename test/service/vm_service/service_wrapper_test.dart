@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_ume/service/vm_service/service_wrapper.dart';
-import 'package:mockito/mockito.dart';
 
 void main() {
   group('ServiceWrapper', () {

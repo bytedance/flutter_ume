@@ -27,6 +27,6 @@ mixin StoreMixin {
   Future<dynamic> fetchWithKey(String key) async {
     final SharedPreferences prefs = await _sharedPref;
     final savedKey = 'ume_${runtimeType.toString}_$key';
-    return await prefs.get(savedKey);
+    return prefs.get(savedKey);
   }
 }
