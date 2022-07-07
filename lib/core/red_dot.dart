@@ -51,7 +51,7 @@ class _RedDotState extends State<RedDot> {
 
   @override
   Widget build(BuildContext context) {
-    if (_count == null || _count == 0) {
+    if (_count == 0) {
       return Container();
     }
     return Container(
