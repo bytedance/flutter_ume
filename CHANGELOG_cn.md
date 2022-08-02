@@ -2,6 +2,10 @@
 
 [English](./CHANGELOG.md)
 
+## [1.0.2]
+
+* 修复静态分析错误
+
 ## [1.0.1]
 
 * 修复 example 工程的 pubspec.yaml 错误

@@ -2,6 +2,10 @@
 
 [简体中文](./CHANGELOG_cn.md)
 
+## [1.0.2]
+
+* Fix error in code static analysis.
+
 ## [1.0.1]
 
 * Fix error in pubspec.yaml in example
