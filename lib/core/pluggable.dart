@@ -1,7 +1,14 @@
 import 'package:flutter/widgets.dart';
 import 'package:tuple/tuple.dart';
 
-abstract class Pluggable {
+abstract class PluggableInterface {
+  String get name;
+  void onTrigger();
+  Widget? buildWidget(BuildContext? context);
+  ImageProvider get iconImageProvider;
+}
+
+abstract class Pluggable extends PluggableInterface {
   String get name;
   String get displayName;
   void onTrigger();
