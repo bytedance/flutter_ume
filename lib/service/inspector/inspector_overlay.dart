@@ -40,7 +40,7 @@ class _RenderInspectorOverlay extends RenderBox {
     required InspectorSelection selection,
     required this.needDescription,
     required this.needEdges,
-  })  : _selection = selection;
+  }) : _selection = selection;
 
   final bool needDescription;
   final bool needEdges;
