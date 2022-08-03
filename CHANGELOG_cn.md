@@ -2,6 +2,10 @@
 
 [English](./CHANGELOG.md)
 
+## [1.0.2+1]
+
+* Dart format
+
 ## [1.0.2]
 
 * 修复静态分析错误
