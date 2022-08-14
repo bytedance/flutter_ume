@@ -2,6 +2,27 @@
 
 [English](./CHANGELOG.md)
 
+## [1.0.2+1]
+
+* Dart format
+
+## [1.0.2]
+
+* 修复静态分析错误
+
+## [1.0.1]
+
+* 修复 example 工程的 pubspec.yaml 错误
+
+## [1.0.0]
+
+* 适配 Flutter 3 正式版
+* 新功能：任意门（Route）
+
+## [1.0.0-dev.0]
+
+* 适配 Flutter 3
+
 ## [0.3.0+1]
 
 * 修复版本号错误

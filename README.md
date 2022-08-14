@@ -8,12 +8,14 @@ Flutter 应用内调试工具平台
 
 <img src="https://github.com/bytedance/flutter_ume/raw/master/ume_logo_256.png" width = "128" height = "128" alt="banner" />
 
+**从 `^1.0.0` 起适配 Flutter 3.0，详见后文[快速接入]部分。**
+
 <img src="https://github.com/bytedance/flutter_ume/raw/master/apk_qrcode.png" width = "256" height = "256" alt="banner" />
 
 扫码或点击链接下载 apk，快速体验 UME。
 https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.apk
 
-最新版本(0.3.0+1)内置 13 个插件，
+最新版本(1.0.1)内置 13 个插件，
 开发者可以创建自己的插件，并集成进 UME 平台。
 详见本文[为 UME 开发插件](#为-ume-开发插件)部分。
 
@@ -43,10 +45,23 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
 
 1. 修改 `pubspec.yaml`，添加依赖
 
+    **自 `1.0.0` 版本开始适配 Flutter 3。**
+
+    ``` yaml
+    dev_dependencies:
+      flutter_ume: ^1.0.1
+      flutter_ume_kit_ui: ^1.0.0
+      flutter_ume_kit_device: ^1.0.0
+      flutter_ume_kit_perf: ^1.0.0
+      flutter_ume_kit_show_code: ^1.0.0
+      flutter_ume_kit_console: ^1.0.0
+      flutter_ume_kit_dio: ^1.0.0
+    ```
+
     **↓ Null-safety 版本，适用于 Flutter 2.x**
 
     ``` yaml
-    dev_dependencies: # Don't use UME in release mode
+    dev_dependencies:
       flutter_ume: ^0.3.0+1
       flutter_ume_kit_ui: ^0.3.0+1
       flutter_ume_kit_device: ^0.3.0
@@ -59,7 +74,7 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
     **↓ 非 Null-safety 版本，适用于 Flutter 1.x**
 
     ``` yaml
-    dev_dependencies: # 请不要在 release 环境下使用 UME
+    dev_dependencies:
       flutter_ume: ^0.1.1
       flutter_ume_kit_ui: ^0.1.1
       flutter_ume_kit_device: ^0.1.1
@@ -327,11 +342,12 @@ showDialog(
 
 ### 兼容性
 
-| UME 版本 | Flutter 1.12.13 | Flutter 1.22.3 | Flutter 2.0.1 | Flutter 2.2.3 | Flutter 2.5.3 |
-| ---- | ---- | ---- | ---- | ---- | ---- |
-| 0.1.x | ✅ | ✅ | ✅ | ✅ | ⚠️ |
-| 0.2.x | ❌ | ❌ | ✅ | ✅ | ✅ |
-| 0.3.x | ❌ | ❌ | ✅ | ✅ | ✅ |
+| UME 版本 | 1.12.13 | 1.22.3 | 2.0.1 | 2.2.3 | 2.5.3 | 2.8.0 | 3.0.1 |
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| 0.1.x | ✅ | ✅ | ✅ | ✅ | ⚠️ | ⚠️ | ❌ |
+| 0.2.x | ❌ | ❌ | ✅ | ✅ | ✅ | ⚠️ | ❌ |
+| 0.3.x | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| 1.0.x | ❌ | ❌ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | ✅ |
 
 ⚠️ 意为未经过完整的兼容性测试，不建议使用。
 
@@ -381,6 +397,8 @@ showDialog(
 | ![lpylpyleo](https://avatars.githubusercontent.com/u/15264428?s=64&v=4) | [lpylpyleo](https://github.com/lpylpyleo) |
 | ![Alex Li](https://avatars.githubusercontent.com/u/15884415?s=64&v=4) | [Alex Li](https://github.com/AlexV525) |
 | ![Swain](https://avatars.githubusercontent.com/u/7621572?s=64&v=4) | [Swain](https://github.com/talisk) |
+| ![harbor](https://avatars.githubusercontent.com/u/58758250?s=64&v=4) | [harbor](https://github.com/zzm990321) |
+| ![LAIIIHZ](https://avatars.githubusercontent.com/u/35956195?s=64&v=4) | [LAIIIHZ](https://github.com/laiiihz) |
 
 ### 第三方开源项目说明
 

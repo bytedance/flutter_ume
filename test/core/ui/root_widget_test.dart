@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart' hide FlutterLogo;
-import 'package:flutter_ume/core/pluggable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_ume/util/flutter_logo.dart' as flutterLogo;
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_ume/core/plugin_manager.dart';
 import 'package:flutter_ume/core/ui/root_widget.dart';

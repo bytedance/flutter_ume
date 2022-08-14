@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_ume/flutter_ume.dart';
 import 'memory_service.dart';
@@ -20,8 +18,7 @@ class MemoryInfoPage extends StatelessWidget implements Pluggable {
   Widget buildWidget(BuildContext? context) => this;
 
   @override
-  ImageProvider<Object> get iconImageProvider =>
-      MemoryImage(base64Decode(icon.iconData));
+  ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 
   @override
   String get name => 'MemoryInfo';

@@ -1,6 +1,6 @@
 name: example
 description: A new Flutter project.
-version: 1.0.0+1
+version: 1.0.1
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -9,25 +9,38 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.3
-  awesome_dialog: ^2.1.0
-  provider: ^5.0.0
+  provider: ^6.0.3
   # For Dio Kit
   dio: ^4.0.0
 
 dependency_overrides:
   vm_service: ^6.2.0
+  # flutter_ume: 
+  #   path: ../
+  # flutter_ume_kit_ui:
+  #   path: ../kits/flutter_ume_kit_ui
+  # flutter_ume_kit_perf:
+  #   path: ../kits/flutter_ume_kit_perf
+  # flutter_ume_kit_show_code:
+  #   path: ../kits/flutter_ume_kit_show_code
+  # flutter_ume_kit_device:
+  #   path: ../kits/flutter_ume_kit_device
+  # flutter_ume_kit_console:
+  #   path: ../kits/flutter_ume_kit_console
+  # flutter_ume_kit_dio:
+  #   path: ../kits/flutter_ume_kit_dio
 
 dev_dependencies:
   flutter_driver:
     sdk: flutter
   test: ^1.16.6
-  flutter_ume: ^0.3.0+1
-  flutter_ume_kit_ui: ^0.3.0+1
-  flutter_ume_kit_perf: ^0.3.0
-  flutter_ume_kit_show_code: ^0.3.0
-  flutter_ume_kit_device: ^0.3.0
-  flutter_ume_kit_console: ^0.3.0
-  flutter_ume_kit_dio: ^0.3.0
-
+  flutter_ume: ^1.0.1
+  flutter_ume_kit_ui: ^1.0.0
+  flutter_ume_kit_perf: ^1.0.0
+  flutter_ume_kit_show_code: ^1.0.0
+  flutter_ume_kit_device: ^1.0.0
+  flutter_ume_kit_console: ^1.0.0
+  flutter_ume_kit_dio: ^1.0.0
+  
 flutter:
   uses-material-design: true

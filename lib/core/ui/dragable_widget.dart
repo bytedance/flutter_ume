@@ -24,10 +24,7 @@ class DragableGridView<T> extends StatefulWidget {
     this.dragCompletion,
     required this.itemBuilder,
     required this.canAccept,
-  })  : assert(itemBuilder != null),
-        assert(canAccept != null),
-        assert(dataList != null && dataList.length >= 0),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _DragableGridViewState<T>();
