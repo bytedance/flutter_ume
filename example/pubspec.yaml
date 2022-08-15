@@ -41,6 +41,8 @@ dev_dependencies:
   flutter_ume_kit_device: ^1.0.0
   flutter_ume_kit_console: ^1.0.0
   flutter_ume_kit_dio: ^1.0.0
+  flutter_ume_kit_channel_monitor:
+    path: ../kits/flutter_ume_kit_channel_monitor
   
 flutter:
   uses-material-design: true
