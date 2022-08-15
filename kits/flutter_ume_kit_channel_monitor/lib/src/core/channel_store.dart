@@ -21,7 +21,7 @@ class _ChannelStore {
   }
 
   void getChannelByName(String name, Sink sink) {
-    if(name == ''){
+    if (name == '') {
       return;
     }
     sink.add(_orderedChannelEvents[name]);

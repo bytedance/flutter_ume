@@ -51,7 +51,6 @@ class _ChannelPagesState extends State<ChannelPages> {
         currentIndex = 2;
         currentModel = model;
         setState(() {});
-
       },
     );
   }
@@ -156,9 +155,10 @@ class ChannelInfoPage extends StatelessWidget {
           border: TableBorder.all(color: Colors.black),
           children: [
             buildCell('Channel Name', model.channelName),
+            buildCell('Channel Type',
+                '${model.type.toString().substring(12)} channel'),
             buildCell(
-                'Channel Type', '${model.type.toString().substring(12)} channel'),
-            buildCell('Is System Channel', model.isSystemChannel ? 'yes' : 'no'),
+                'Is System Channel', model.isSystemChannel ? 'yes' : 'no'),
             buildCell(
                 'Trans Direction', model.direction.toString().substring(15)),
             buildCell('Time Cost \n(millisecond)',
@@ -178,20 +178,21 @@ class ChannelInfoPage extends StatelessWidget {
     );
   }
 
-  List<TableRow> buildDataTable( String title,dynamic data) {
+  List<TableRow> buildDataTable(String title, dynamic data) {
     if (data is Map) {
       return (data.keys
           .map((keyword) => TableRow(children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Align(
-              alignment: Alignment.centerLeft, child: Text(keyword.toString())),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(data[keyword].toString()),
-        ),
-      ]))
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(keyword.toString())),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(data[keyword].toString()),
+                ),
+              ]))
           .toList())
         ..insert(0, buildCell(title, ''));
     }

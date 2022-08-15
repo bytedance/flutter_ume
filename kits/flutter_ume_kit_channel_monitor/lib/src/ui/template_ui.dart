@@ -20,15 +20,20 @@ class TemplatePageWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: MediaQuery.of(context).padding.top),
-          if(onBackPressed != null) GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: onBackPressed,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 4),
-              child: Icon(Icons.navigate_before_rounded, size: 42,),
+          if (onBackPressed != null)
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: onBackPressed,
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4),
+                child: Icon(
+                  Icons.navigate_before_rounded,
+                  size: 42,
+                ),
+              ),
             ),
-          ),
-          Expanded(child: Container(
+          Expanded(
+              child: Container(
             width: double.infinity,
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -76,11 +81,11 @@ class TemplateItemWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 8),
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: ()=>onTap(),
+        onTap: () => onTap(),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(child: Text(title,overflow: TextOverflow.clip)),
+            Expanded(child: Text(title, overflow: TextOverflow.clip)),
             const Icon(
               Icons.navigate_next_rounded,
               color: Colors.grey,

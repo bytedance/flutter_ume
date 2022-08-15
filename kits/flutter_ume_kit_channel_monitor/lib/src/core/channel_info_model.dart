@@ -42,4 +42,4 @@ class ChannelInfoModel {
 }
 
 enum TransDirection { flutterToNative, nativeToFlutter }
-enum ChannelType { event, method, basic}
+enum ChannelType { event, method, basic }
