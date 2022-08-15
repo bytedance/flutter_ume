@@ -1,6 +1,3 @@
-import 'package:flutter_test/flutter_test.dart';
-
-import 'package:flutter_ume_kit_channel_monitor/flutter_ume_kit_channel_monitor.dart';
 
 void main() {
   // test('adds one to input values', () {

@@ -193,9 +193,9 @@ class ChannelInfoPage extends StatelessWidget {
         ),
       ]))
           .toList())
-        ..insert(0, TableRow(children: [Text(title), Container()]));
+        ..insert(0, buildCell(title, ''));
     }
-    return [buildCell('Receive Data', data.toString())];
+    return [buildCell(title, data.toString())];
   }
 
   TableRow buildCell(String type, String desc) {

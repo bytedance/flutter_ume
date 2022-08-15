@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_ume/flutter_ume.dart';
 import 'package:flutter_ume_kit_channel_monitor/src/ui/channel_pages.dart';
 import 'dart:convert';
