@@ -14,6 +14,7 @@ import 'package:flutter_ume_kit_device/flutter_ume_kit_device.dart';
 import 'package:flutter_ume_kit_console/flutter_ume_kit_console.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_ume_kit_dio/flutter_ume_kit_dio.dart';
+import 'package:flutter_ume_kit_channel_monitor/flutter_ume_kit_channel_monitor.dart';
 
 final Dio dio = Dio()..options = BaseOptions(connectTimeout: 10000);
 
@@ -35,7 +36,8 @@ void main() {
       ..register(DeviceInfoPanel())
       ..register(Console())
       ..register(DioInspector(dio: dio))
-      ..register(CustomRouterPluggable());
+      ..register(CustomRouterPluggable())
+      ..register(ChannelPlugin());
     runApp(
       MultiProvider(
         providers: [
