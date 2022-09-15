@@ -48,11 +48,13 @@ class DioPluggableState extends State<DioInspector> {
   /// Using [setState] won't cause too much performance regression,
   /// since we've implemented the list with `findChildIndexCallback`.
   void _listener() {
-    if (mounted &&
-        !context.debugDoingBuild &&
-        context.owner?.debugBuilding != true) {
-      setState(() {});
-    }
+    Future.microtask(() {
+      if (mounted &&
+          !context.debugDoingBuild &&
+          context.owner?.debugBuilding != true) {
+        setState(() {});
+      }
+    });
   }
 
   Widget _clearAllButton(BuildContext context) {
@@ -95,11 +97,6 @@ class DioPluggableState extends State<DioInspector> {
                 );
               },
               childCount: length,
-              // Use this callback to find the previous element.
-              findChildIndexCallback: (Key key) => requests.indexWhere(
-                (Response<dynamic> r) =>
-                    r.startTimeMilliseconds == (key as ValueKey<int>).value,
-              ),
             ),
           ),
         ],

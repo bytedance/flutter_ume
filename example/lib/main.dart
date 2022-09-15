@@ -22,6 +22,8 @@ void main() {
       ..register(WidgetDetailInspector())
       ..register(ColorSucker())
       ..register(AlignRuler())
+      ..register(ColorPicker())
+      ..register(TouchIndicator())
       ..register(Performance())
       ..register(ShowCode())
       ..register(MemoryInfoPage())

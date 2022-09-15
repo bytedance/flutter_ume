@@ -1,0 +1,21 @@
+name: notify
+
+on:
+  push:
+    tags:
+      - "notify*"
+
+jobs:
+  release-to-gitHub:
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: action-feishu
+        uses: xiachufang/actions-feishu@v1.3.1
+        with:
+          webhook: ${{ secrets.FEISHU_WEBHOOK_URL }}
+          title: Notify
+          content: |
+            https://github.com/bytedance/flutter_ume/releases
+            from: ${{ github.repository }}
+    

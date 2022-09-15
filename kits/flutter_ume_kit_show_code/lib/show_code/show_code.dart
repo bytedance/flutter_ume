@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_ume/flutter_ume.dart';
 import 'package:flutter_ume_kit_show_code/show_code/page_info_helper.dart';
@@ -17,8 +15,7 @@ class ShowCode extends StatefulWidget implements Pluggable {
   Widget buildWidget(BuildContext? context) => this;
 
   @override
-  ImageProvider<Object> get iconImageProvider =>
-      MemoryImage(base64Decode(icon.iconData));
+  ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 
   @override
   String get name => 'ShowCode';
@@ -109,7 +106,9 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
                       height: 22,
                       child: CircularProgressIndicator(),
                     ),
-                  if (showCodeList && _codeList != null && _codeList!.isNotEmpty)
+                  if (showCodeList &&
+                      _codeList != null &&
+                      _codeList!.isNotEmpty)
                     PopupMenuButton<String>(
                       padding: EdgeInsets.zero,
                       icon: Icon(Icons.arrow_drop_down),
