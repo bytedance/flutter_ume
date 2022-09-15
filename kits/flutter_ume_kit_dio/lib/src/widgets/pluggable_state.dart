@@ -229,6 +229,20 @@ class _ResponseCardState extends State<_ResponseCard> {
   /// The [Uri] that the [_request] requested.
   Uri get _requestUri => _request.uri;
 
+  String? get _requestHeadersBuilder {
+    final Map<String, List<String>> map = _request.headers.map(
+      (key, value) => MapEntry(
+        key,
+        value is Iterable ? value.map((v) => v.toString()).toList() : [value],
+      ),
+    );
+    final Headers headers = Headers.fromMap(map);
+    if (!headers.isEmpty) {
+      return '$headers';
+    }
+    return null;
+  }
+
   /// Data for the [_request].
   String? get _requestDataBuilder {
     if (_request.data is Map) {
@@ -295,18 +309,24 @@ class _ResponseCardState extends State<_ResponseCard> {
         if (!value) {
           return const SizedBox.shrink();
         }
-        return Container(
+        return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              if (_requestHeadersBuilder != null)
+                _TagText(
+                  tag: 'Request headers',
+                  content: _requestHeadersBuilder!,
+                ),
               if (_requestDataBuilder != null)
                 _TagText(tag: 'Request data', content: _requestDataBuilder!),
               _TagText(tag: 'Response body', content: _responseDataBuilder),
-              _TagText(
-                tag: 'Response headers',
-                content: '\n${_response.headers}',
-              ),
+              if (!_response.headers.isEmpty)
+                _TagText(
+                  tag: 'Response headers',
+                  content: '\n${_response.headers}',
+                ),
             ],
           ),
         );
@@ -341,12 +361,10 @@ class _TagText extends StatelessWidget {
     Key? key,
     required this.tag,
     required this.content,
-    this.selectable = true,
   }) : super(key: key);
 
   final String tag;
   final String content;
-  final bool selectable;
 
   TextSpan get span {
     return TextSpan(
@@ -362,15 +380,9 @@ class _TagText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget text;
-    if (selectable) {
-      text = SelectableText.rich(span);
-    } else {
-      text = Text.rich(span);
-    }
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
-      child: text,
+      child: SelectableText.rich(span),
     );
   }
 }
