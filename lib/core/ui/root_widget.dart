@@ -39,15 +39,41 @@ class UMEWidget extends StatefulWidget {
   final Iterable<Locale>? supportedLocales;
   final Iterable<LocalizationsDelegate> localizationsDelegates;
 
+  /// Close the activated plugin if any.
+  ///
+  /// The method does not have side-effects whether the [UMEWidget]
+  /// is not enabled or no plugin has been activated.
+  static void closeActivatedPlugin() {
+    final _ContentPageState? state =
+        _umeWidgetState?._contentPageKey.currentState;
+    if (state?._currentSelected != null) {
+      state?._closeActivatedPluggable();
+    }
+  }
+
   @override
   _UMEWidgetState createState() => _UMEWidgetState();
 }
 
+/// Hold the [_UMEWidgetState] as a global variable.
+_UMEWidgetState? _umeWidgetState;
+
 class _UMEWidgetState extends State<UMEWidget> {
+  _UMEWidgetState() {
+    // Make sure only a single `UMEWidget` is being used.
+    assert(
+      _umeWidgetState == null,
+      'Only one `UMEWidget` can be used at the same time.',
+    );
+    if (_umeWidgetState != null) {
+      throw StateError('Only one `UMEWidget` can be used at the same time.');
+    }
+    _umeWidgetState = this;
+  }
+
+  final GlobalKey<_ContentPageState> _contentPageKey = GlobalKey();
   late Widget _child;
-
   VoidCallback? _onMetricsChanged;
-
   OverlayEntry _overlayEntry = OverlayEntry(builder: (ctx) => Container());
 
   @override
@@ -74,6 +100,8 @@ class _UMEWidgetState extends State<UMEWidget> {
           _onMetricsChanged;
     }
     super.dispose();
+    // Do the cleaning at last.
+    _umeWidgetState = null;
   }
 
   @override
@@ -141,6 +169,7 @@ class _UMEWidgetState extends State<UMEWidget> {
             builder: (_) => Material(
                 type: MaterialType.transparency,
                 child: _ContentPage(
+                  key: _contentPageKey,
                   refreshChildLayout: () {
                     _replaceChild();
                     setState(() {});
@@ -156,15 +185,15 @@ class _UMEWidgetState extends State<UMEWidget> {
 }
 
 class _ContentPage extends StatefulWidget {
-  _ContentPage({Key? key, this.refreshChildLayout}) : super(key: key);
+  const _ContentPage({Key? key, this.refreshChildLayout}) : super(key: key);
 
   final VoidCallback? refreshChildLayout;
 
   @override
-  __ContentPageState createState() => __ContentPageState();
+  _ContentPageState createState() => _ContentPageState();
 }
 
-class __ContentPageState extends State<_ContentPage> {
+class _ContentPageState extends State<_ContentPage> {
   PluginStoreManager _storeManager = PluginStoreManager();
   Size _windowSize = windowSize;
   double _dx = 0;
@@ -204,21 +233,25 @@ class __ContentPageState extends State<_ContentPage> {
 
   void onTap() {
     if (_currentSelected != null) {
-      PluginManager.instance.deactivatePluggable(_currentSelected!);
-      if (widget.refreshChildLayout != null) {
-        widget.refreshChildLayout!();
-      }
-      _currentSelected = null;
-      _currentWidget = _empty;
-      if (_minimalContent) {
-        _currentWidget = _toolbarWidget;
-        _showedMenu = true;
-      }
-      setState(() {});
+      _closeActivatedPluggable();
       return;
     }
     _showedMenu = !_showedMenu;
     _updatePanelWidget();
+  }
+
+  void _closeActivatedPluggable() {
+    PluginManager.instance.deactivatePluggable(_currentSelected!);
+    if (widget.refreshChildLayout != null) {
+      widget.refreshChildLayout!();
+    }
+    _currentSelected = null;
+    _currentWidget = _empty;
+    if (_minimalContent) {
+      _currentWidget = _toolbarWidget;
+      _showedMenu = true;
+    }
+    setState(() {});
   }
 
   void _updatePanelWidget() {
