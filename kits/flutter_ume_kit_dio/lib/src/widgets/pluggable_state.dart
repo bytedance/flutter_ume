@@ -238,7 +238,7 @@ class _ResponseCardState extends State<_ResponseCard> {
     );
     final Headers headers = Headers.fromMap(map);
     if (!headers.isEmpty) {
-      return '$headers';
+      return '\n$headers';
     }
     return null;
   }
