@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        api-level: [21, 33]
+        api-level: [21, 31]
         target: [default]
     steps:
       - uses: actions/checkout@v3
