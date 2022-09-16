@@ -24,6 +24,7 @@ jobs:
           ref: ${{ env.GITHUB_REF }}
       - uses: actions/setup-java@v2
         with:
+          distribution: "adopt"
           java-version: "11"
       - name: Flutter action
         uses: subosito/flutter-action@v2
