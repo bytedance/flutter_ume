@@ -10,43 +10,66 @@ on:
 
 jobs:
   drive_ios:
+    runs-on: macos-latest
     strategy:
       matrix:
-        device:
-        - "iPhone 8"
-        - "iPhone 13 Pro Max"
+        device: ["iPhone 8", "iPhone 13 Pro Max"]
       fail-fast: false
-    runs-on: macos-latest
     steps:
-    - name: List all simulators
-      run: xcrun xctrace list devices
-    - name: Start Simulator
-      run: xcrun simctl boot "${{ matrix.device }}"
-    - uses: actions/checkout@v2
-    - uses: subosito/flutter-action@v2
-      with:
-        channel: "stable"
-    - name: Run Flutter Driver tests
-      run: flutter drive --target=test_driver/app.dart
-      working-directory: example
+      - uses: actions/checkout@v3
+      - name: List all simulators
+        run: xcrun xctrace list devices
+
+      - name: Start Simulator
+        run: xcrun simctl boot "${{ matrix.device }}"
+      - uses: actions/checkout@v2
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2.7.1
+        with:
+          channel: "stable"
+          architecture: x64
+
+      - name: Run Flutter Driver tests
+        run: flutter drive --target=test_driver/app.dart
+        working-directory: example
 
   drive_android:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     strategy:
       matrix:
-        api-level: [21, 30]
+        api-level: [21, 31]
+        arch: ["x86_64"]
         target: [default]
     steps:
       - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2
+      - uses: actions/setup-java@v2
+        with:
+          distribution: "adopt"
+          java-version: "11"
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2.7.1
         with:
           channel: "stable"
+
+      - name: Gradle cache
+        uses: gradle/gradle-build-action@v2.3.0
+
+      - name: AVD cache
+        uses: actions/cache@v3
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ matrix.api-level }}
+
       - name: Run Flutter Driver tests
-        uses: ReactiveCircus/android-emulator-runner@v2.25.0
+        uses: reactiveCircus/android-emulator-runner@v2.25.0
         with:
           api-level: ${{ matrix.api-level }}
-          target: ${{ matrix.target }}
-          arch: x86_64
-          profile: Nexus 6
+          arch: ${{ matrix.arch }}
           script: flutter drive --target=test_driver/app.dart
+          target: ${{ matrix.target }}
           working-directory: ./example
