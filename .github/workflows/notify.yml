@@ -18,4 +18,3 @@ jobs:
           content: |
             https://github.com/bytedance/flutter_ume/releases
             from: ${{ github.repository }}
-    

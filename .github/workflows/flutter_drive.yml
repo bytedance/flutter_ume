@@ -1,5 +1,12 @@
-name: flutter drive
-on: [push, pull_request]
+name: Flutter drive
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   drive_ios:
@@ -9,35 +16,33 @@ jobs:
         - "iPhone 8"
         - "iPhone 13 Pro Max"
       fail-fast: false
-    runs-on: macOS-latest
+    runs-on: macos-latest
     steps:
-    - name: "List all simulators"
+    - name: List all simulators
       run: xcrun xctrace list devices
-    - name: "Start Simulator"
+    - name: Start Simulator
       run: xcrun simctl boot "${{ matrix.device }}"
     - uses: actions/checkout@v2
-    - uses: subosito/flutter-action@v1.5.3
+    - uses: subosito/flutter-action@v2
       with:
-        channel: 'stable'
-        flutter-version: '2.2.x'
-    - name: "Run Flutter Driver tests"
-      run: "flutter drive --target=test_driver/app.dart"
+        channel: "stable"
+    - name: Run Flutter Driver tests
+      run: flutter drive --target=test_driver/app.dart
       working-directory: example
 
   drive_android:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        api-level: [21, 29]
+        api-level: [21, 30]
         target: [default]
     steps:
-      - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v1.5.3
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '2.2.x'
-          channel: 'stable'
+          channel: "stable"
       - name: Run Flutter Driver tests
-        uses: reactivecircus/android-emulator-runner@v2
+        uses: ReactiveCircus/android-emulator-runner@v2.25.0
         with:
           api-level: ${{ matrix.api-level }}
           target: ${{ matrix.target }}
