@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart'
     hide FlutterLogo, FlutterLogoDecoration, FlutterLogoStyle;
 import 'package:flutter_ume/core/pluggable_message_service.dart';
@@ -18,7 +17,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 const defaultLocalizationsDelegates = const [
   GlobalMaterialLocalizations.delegate,
   GlobalWidgetsLocalizations.delegate,
-  DefaultCupertinoLocalizations.delegate,
   GlobalCupertinoLocalizations.delegate,
 ];
 

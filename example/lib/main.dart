@@ -5,7 +5,6 @@ import 'package:example/home_page.dart';
 import 'package:example/ume_switch.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_ume/flutter_ume.dart';
 import 'package:flutter_ume_kit_ui/flutter_ume_kit_ui.dart';
 import 'package:flutter_ume_kit_perf/flutter_ume_kit_perf.dart';
@@ -80,8 +79,7 @@ class _MyAppState extends State<MyApp> {
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case 'detail':
-            return MaterialPageRoute(
-                builder: (BuildContext context) => DetailPage());
+            return MaterialPageRoute(builder: (_) => const DetailPage());
           default:
             return null;
         }
