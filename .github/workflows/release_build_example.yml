@@ -15,7 +15,7 @@ jobs:
         with:
           distribution: "adopt"
           java-version: "11"
-      - uses: subosito/flutter-action@v1.5.3
+      - uses: subosito/flutter-action@v2.7.1
         with:
           channel: "stable"
       - run: flutter pub get
