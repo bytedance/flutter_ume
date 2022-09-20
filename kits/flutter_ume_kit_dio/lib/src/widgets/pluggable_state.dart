@@ -355,7 +355,7 @@ class _TagText extends StatelessWidget {
           text: '$tag: ',
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        TextSpan(text: content.notBreak),
+        TextSpan(text: content),
       ],
     );
   }
@@ -373,10 +373,6 @@ class _TagText extends StatelessWidget {
       child: text,
     );
   }
-}
-
-extension _StringExtension on String {
-  String get notBreak => Characters(this).toList().join('\u{200B}');
 }
 
 extension _DateTimeExtension on DateTime {
