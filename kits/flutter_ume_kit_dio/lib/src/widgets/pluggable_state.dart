@@ -237,10 +237,10 @@ class _ResponseCardState extends State<_ResponseCard> {
       ),
     );
     final Headers headers = Headers.fromMap(map);
-    if (!headers.isEmpty) {
-      return '\n$headers';
+    if (headers.isEmpty) {
+      return null;
     }
-    return null;
+    return '$headers';
   }
 
   /// Data for the [_request].
@@ -252,11 +252,22 @@ class _ResponseCardState extends State<_ResponseCard> {
   }
 
   /// Data for the [_response].
-  String get _responseDataBuilder {
+  String? get _responseDataBuilder {
+    final data = _response.data;
+    if (data == null) {
+      return null;
+    }
     if (_response.data is Map) {
       return _encoder.convert(_response.data);
     }
     return _response.data.toString();
+  }
+
+  String? get _responseHeadersBuilder {
+    if (_response.headers.isEmpty) {
+      return null;
+    }
+    return '${_response.headers}';
   }
 
   Widget _detailButton(BuildContext context) {
@@ -314,19 +325,22 @@ class _ResponseCardState extends State<_ResponseCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              if (_requestHeadersBuilder != null)
-                _TagText(
-                  tag: 'Request headers',
-                  content: _requestHeadersBuilder!,
-                ),
-              if (_requestDataBuilder != null)
-                _TagText(tag: 'Request data', content: _requestDataBuilder!),
-              _TagText(tag: 'Response body', content: _responseDataBuilder),
-              if (!_response.headers.isEmpty)
-                _TagText(
-                  tag: 'Response headers',
-                  content: '\n${_response.headers}',
-                ),
+              _TagText(
+                tag: 'Request headers',
+                content: _requestHeadersBuilder,
+              ),
+              _TagText(
+                tag: 'Request data',
+                content: _requestDataBuilder,
+              ),
+              _TagText(
+                tag: 'Response body',
+                content: _responseDataBuilder,
+              ),
+              _TagText(
+                tag: 'Response headers',
+                content: _responseHeadersBuilder,
+              ),
             ],
           ),
         );
@@ -347,7 +361,11 @@ class _ResponseCardState extends State<_ResponseCard> {
           children: <Widget>[
             _infoContent(context),
             const SizedBox(height: 10),
-            _TagText(tag: 'Uri', content: '$_requestUri'),
+            _TagText(
+              tag: 'Uri',
+              content: '$_requestUri',
+              shouldStartFromNewLine: false,
+            ),
             _detailedContent(context),
           ],
         ),
@@ -360,11 +378,13 @@ class _TagText extends StatelessWidget {
   const _TagText({
     Key? key,
     required this.tag,
-    required this.content,
+    this.content,
+    this.shouldStartFromNewLine = true,
   }) : super(key: key);
 
   final String tag;
-  final String content;
+  final String? content;
+  final bool shouldStartFromNewLine;
 
   TextSpan get span {
     return TextSpan(
@@ -373,13 +393,17 @@ class _TagText extends StatelessWidget {
           text: '$tag: ',
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        TextSpan(text: content.notBreak),
+        if (shouldStartFromNewLine) TextSpan(text: '\n'),
+        TextSpan(text: content!.notBreak),
       ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    if (content == null) {
+      return const SizedBox.shrink();
+    }
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: SelectableText.rich(span),
