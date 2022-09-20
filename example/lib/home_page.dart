@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:example/ume_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -69,6 +70,9 @@ class _HomePageState extends State<HomePage> {
                       () => dio.get(
                         'https://api.github.com'
                         '/?_t=${DateTime.now().millisecondsSinceEpoch}&$i',
+                        options: Options(
+                          headers: {'UME-Test': 'This is UME Dio kit.'},
+                        ),
                       ),
                     ),
                   ),
