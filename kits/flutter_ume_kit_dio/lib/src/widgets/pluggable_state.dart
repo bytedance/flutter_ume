@@ -394,7 +394,7 @@ class _TagText extends StatelessWidget {
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         if (shouldStartFromNewLine) TextSpan(text: '\n'),
-        TextSpan(text: content!.notBreak),
+        TextSpan(text: content!),
       ],
     );
   }
@@ -409,10 +409,6 @@ class _TagText extends StatelessWidget {
       child: SelectableText.rich(span),
     );
   }
-}
-
-extension _StringExtension on String {
-  String get notBreak => Characters(this).toList().join('\u{200B}');
 }
 
 extension _DateTimeExtension on DateTime {
