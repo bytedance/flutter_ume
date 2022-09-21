@@ -72,7 +72,11 @@ class _UMEWidgetState extends State<UMEWidget> {
   final GlobalKey<_ContentPageState> _contentPageKey = GlobalKey();
   late Widget _child;
   VoidCallback? _onMetricsChanged;
-  OverlayEntry _overlayEntry = OverlayEntry(builder: (ctx) => Container());
+
+  bool _overlayEntryInserted = false;
+  OverlayEntry _overlayEntry = OverlayEntry(
+    builder: (_) => const SizedBox.shrink(),
+  );
 
   @override
   void initState() {
@@ -157,23 +161,33 @@ class _UMEWidgetState extends State<UMEWidget> {
     );
   }
 
-  void _removeOverlay() => _overlayEntry.remove();
+  void _removeOverlay() {
+    // Call `remove` only when the entry has been inserted.
+    if (_overlayEntryInserted) {
+      _overlayEntry.remove();
+      _overlayEntryInserted = false;
+    }
+  }
 
   void _injectOverlay() {
-    bindingAmbiguate(WidgetsBinding.instance)!
-        .addPostFrameCallback((timeStamp) {
+    bindingAmbiguate(WidgetsBinding.instance)?.addPostFrameCallback((_) {
+      if (_overlayEntryInserted) {
+        return;
+      }
       if (widget.enable) {
         _overlayEntry = OverlayEntry(
-            builder: (_) => Material(
-                type: MaterialType.transparency,
-                child: _ContentPage(
-                  key: _contentPageKey,
-                  refreshChildLayout: () {
-                    _replaceChild();
-                    setState(() {});
-                  },
-                )));
+          builder: (_) => Material(
+            type: MaterialType.transparency,
+            child: _ContentPage(
+              refreshChildLayout: () {
+                _replaceChild();
+                setState(() {});
+              },
+            ),
+          ),
+        );
         overlayKey.currentState?.insert(_overlayEntry);
+        _overlayEntryInserted = true;
       }
     });
   }

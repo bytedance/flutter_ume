@@ -19,62 +19,47 @@ final Dio dio = Dio()..options = BaseOptions(connectTimeout: 10000);
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
-void main() {
-  if (kDebugMode) {
-    PluginManager.instance
-      ..register(WidgetInfoInspector())
-      ..register(WidgetDetailInspector())
-      ..register(ColorSucker())
-      ..register(AlignRuler())
-      ..register(ColorPicker())
-      ..register(TouchIndicator())
-      ..register(Performance())
-      ..register(ShowCode())
-      ..register(MemoryInfoPage())
-      ..register(CpuInfoPage())
-      ..register(DeviceInfoPanel())
-      ..register(Console())
-      ..register(DioInspector(dio: dio))
-      ..register(CustomRouterPluggable())
-      ..register(ChannelPlugin());
-    runApp(
-      MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => UMESwitch()),
-        ],
-        builder: (ctx, child) => UMEWidget(
-          enable: ctx.watch<UMESwitch>().enable,
-          child: MyApp(),
-        ),
-      ),
-    );
-  } else {
-    runApp(MyApp());
-  }
-}
+void main() => runApp(const UMEApp());
 
-class MyApp extends StatefulWidget {
+class UMEApp extends StatefulWidget {
+  const UMEApp({Key? key}) : super(key: key);
+
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<UMEApp> createState() => _UMEAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _UMEAppState extends State<UMEApp> {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       CustomRouterPluggable().navKey = navigatorKey;
     });
+    if (kDebugMode) {
+      PluginManager.instance
+        ..register(WidgetInfoInspector())
+        ..register(WidgetDetailInspector())
+        ..register(ColorSucker())
+        ..register(AlignRuler())
+        ..register(ColorPicker())
+        ..register(TouchIndicator())
+        ..register(Performance())
+        ..register(ShowCode())
+        ..register(MemoryInfoPage())
+        ..register(CpuInfoPage())
+        ..register(DeviceInfoPanel())
+        ..register(Console())
+        ..register(DioInspector(dio: dio))
+        ..register(CustomRouterPluggable())
+        ..register(ChannelPlugin());
+    }
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildApp(BuildContext context) {
     return MaterialApp(
       navigatorKey: navigatorKey,
       title: 'UME Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: HomePage(title: 'UME Demo Home Page'),
       onGenerateRoute: (settings) {
         switch (settings.name) {
@@ -85,5 +70,22 @@ class _MyAppState extends State<MyApp> {
         }
       },
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final Widget body = _buildApp(context);
+    if (kDebugMode) {
+      return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => UMESwitch()),
+        ],
+        builder: (BuildContext context, _) => UMEWidget(
+          enable: context.watch<UMESwitch>().enable,
+          child: body,
+        ),
+      );
+    }
+    return body;
   }
 }
