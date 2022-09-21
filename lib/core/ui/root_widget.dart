@@ -179,6 +179,7 @@ class _UMEWidgetState extends State<UMEWidget> {
           builder: (_) => Material(
             type: MaterialType.transparency,
             child: _ContentPage(
+              key: _contentPageKey,
               refreshChildLayout: () {
                 _replaceChild();
                 setState(() {});
