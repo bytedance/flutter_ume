@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:example/ume_switch.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ume/flutter_ume.dart';
 import 'package:provider/provider.dart';
 
 import 'main.dart';
@@ -34,15 +35,21 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextButton(
-                onPressed: () {
-                  debugPrint('statement');
-                },
-                child: const Text('debugPrint')),
+              onPressed: () => UMEWidget.closeActivatedPlugin(),
+              child: const Text('Close activated plugin'),
+            ),
             TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('detail');
-                },
-                child: const Text('Push Detail Page')),
+              onPressed: () {
+                debugPrint('statement');
+              },
+              child: const Text('debugPrint'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('detail');
+              },
+              child: const Text('Push Detail Page'),
+            ),
             TextButton(
               onPressed: () {
                 showDialog(

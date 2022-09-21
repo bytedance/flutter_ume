@@ -64,9 +64,7 @@ class _UMEAppState extends State<UMEApp> {
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case 'detail':
-            return MaterialPageRoute(
-              builder: (BuildContext context) => DetailPage(),
-            );
+            return MaterialPageRoute(builder: (_) => const DetailPage());
           default:
             return null;
         }
