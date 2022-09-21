@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_ume/core/ui/global.dart';
 import 'package:flutter_ume_kit_device/components/device_info/device_info_panel.dart';

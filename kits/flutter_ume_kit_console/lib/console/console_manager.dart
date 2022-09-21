@@ -1,13 +1,16 @@
 import 'dart:async';
 import 'dart:collection';
+
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
 const int maxLine = 1000;
 
 class ConsoleManager {
+  const ConsoleManager._();
+
   static final Queue<Tuple2<DateTime, String>> _logData = Queue();
+
   // ignore: close_sinks
   static StreamController? _logStreamController;
 

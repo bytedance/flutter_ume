@@ -7,15 +7,17 @@ import '../../../utils.dart';
 import 'channel_slider.dart';
 
 class HSLSliders extends StatefulWidget {
+  const HSLSliders({
+    required this.color,
+    required this.onColorChanged,
+    Key? key,
+  }) : super(key: key);
+
   final Color color;
   final ValueChanged<Color> onColorChanged;
 
-  const HSLSliders(
-      {required this.color, required this.onColorChanged, Key? key})
-      : super(key: key);
-
   @override
-  _HSLSlidersState createState() => _HSLSlidersState();
+  State<HSLSliders> createState() => _HSLSlidersState();
 }
 
 class _HSLSlidersState extends State<HSLSliders> {

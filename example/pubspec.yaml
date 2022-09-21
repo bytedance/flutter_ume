@@ -9,9 +9,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  provider: ^6.0.3
+
+  bindings_compatible: ^1.0.1
   # For Dio Kit
   dio: ^4.0.0
+  provider: ^6.0.3
 
 dependency_overrides:
   vm_service: ^9.4.0

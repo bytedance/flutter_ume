@@ -4,14 +4,6 @@ import 'package:flutter/services.dart';
 import '../../utils.dart';
 
 class HexColorField extends StatefulWidget {
-  final bool withAlpha;
-
-  final Color color;
-
-  final FocusNode hexFocus;
-
-  final ValueChanged<Color> onColorChanged;
-
   const HexColorField({
     required this.withAlpha,
     required this.color,
@@ -20,8 +12,13 @@ class HexColorField extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
+  final bool withAlpha;
+  final Color color;
+  final FocusNode hexFocus;
+  final ValueChanged<Color> onColorChanged;
+
   @override
-  _HexColorFieldState createState() => _HexColorFieldState();
+  State<HexColorField> createState() => _HexColorFieldState();
 }
 
 class _HexColorFieldState extends State<HexColorField> {

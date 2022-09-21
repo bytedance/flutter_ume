@@ -1,3 +1,4 @@
+import 'package:bindings_compatible/bindings_compatible.dart';
 import 'package:dio/dio.dart';
 import 'package:example/custom_router_pluggable.dart';
 import 'package:example/detail_page.dart';
@@ -32,7 +33,7 @@ class _UMEAppState extends State<UMEApp> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    useWidgetsBinding().addPostFrameCallback((_) {
       CustomRouterPluggable().navKey = navigatorKey;
     });
     if (kDebugMode) {

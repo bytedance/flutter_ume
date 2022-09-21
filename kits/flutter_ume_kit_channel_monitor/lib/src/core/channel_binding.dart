@@ -4,8 +4,9 @@ import 'package:flutter_ume_kit_channel_monitor/src/core/ume_binary_messenger.da
 
 class ChannelBinding extends WidgetsFlutterBinding {
   static WidgetsBinding? ensureInitialized() {
+    // ignore: unnecessary_null_comparison
     if (WidgetsBinding.instance == null) {
-      // make sure init this before WidgetsFlutterBinding ensureInitialized called
+      // Ensure `WidgetsFlutterBinding.ensureInitialized` is not called.
       ChannelBinding();
     }
     return WidgetsBinding.instance;

@@ -26,16 +26,18 @@ class ColorPicker extends StatefulWidget implements PluggableWithNestedWidget {
 
   @override
   Widget buildNestedWidget(Widget child) {
-    return EyeDrop(child: child);
+    return UMEEyeDropper(child: child);
   }
 }
 
 class _ColorPickerState extends State<ColorPicker> {
   final colorTextStyle = TextStyle(
-      fontFamily: "Monospace", fontWeight: FontWeight.bold, fontSize: 20);
+    fontFamily: "Monospace",
+    fontWeight: FontWeight.bold,
+    fontSize: 20,
+  );
 
   Color? _color;
-
   bool _panelDown = true;
 
   @override
@@ -43,8 +45,10 @@ class _ColorPickerState extends State<ColorPicker> {
     return Listener(
       onPointerDown: (downEvent) {},
       onPointerMove: (moveEvent) {
-        setState(() => _panelDown =
-            moveEvent.position.dy < MediaQuery.of(context).size.height * 0.5);
+        setState(
+          () => _panelDown =
+              moveEvent.position.dy < MediaQuery.of(context).size.height * 0.5,
+        );
       },
       child: Container(
         width: MediaQuery.of(context).size.width,

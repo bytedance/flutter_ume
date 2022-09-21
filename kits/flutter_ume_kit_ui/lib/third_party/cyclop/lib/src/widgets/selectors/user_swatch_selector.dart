@@ -5,11 +5,6 @@ import 'package:quiver/collection.dart';
 const _maxSwatch = 50;
 
 class SwatchLibrary extends StatefulWidget {
-  final Set<Color> colors;
-  final Color currentColor;
-  final ValueChanged<Color> onColorSelected;
-  final ValueChanged<Set<Color>>? onSwatchesUpdate;
-
   const SwatchLibrary({
     required this.currentColor,
     required this.onColorSelected,
@@ -18,10 +13,15 @@ class SwatchLibrary extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
+  final Set<Color> colors;
+  final Color currentColor;
+  final ValueChanged<Color> onColorSelected;
+  final ValueChanged<Set<Color>>? onSwatchesUpdate;
+
   bool get canAdd => !colors.contains(currentColor);
 
   @override
-  _SwatchLibraryState createState() => _SwatchLibraryState();
+  State<SwatchLibrary> createState() => _SwatchLibraryState();
 }
 
 class _SwatchLibraryState extends State<SwatchLibrary> {

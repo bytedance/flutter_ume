@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'eye_dropper_layer.dart';
 
 /// an eyeDropper standalone button
-/// should be used with a context [EyeDrop] available
+/// should be used with a context [UMEEyeDropper] available
 class EyedropperButton extends StatelessWidget {
   /// customisable icon ( default : [Icons.colorize] )
   final IconData icon;
@@ -44,7 +44,7 @@ class EyedropperButton extends StatelessWidget {
 
   void _onEyeDropperRequest(BuildContext context) {
     try {
-      EyeDrop.of(context).capture(context, onColor, onColorChanged);
+      UMEEyeDropper.of(context).capture(context, onColor, onColorChanged);
     } catch (err) {
       throw Exception('EyeDrop capture error : $err');
     }

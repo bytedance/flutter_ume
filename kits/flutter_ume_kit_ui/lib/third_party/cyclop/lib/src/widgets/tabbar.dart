@@ -6,14 +6,8 @@ import '../theme.dart';
 
 const _kTabWidth = 86.0;
 
-/// custom Tabbar component
+/// Custom [TabBar] component.
 class Tabs extends StatefulWidget {
-  final int selectedIndex;
-
-  final List<String> labels;
-
-  final List<Widget> views;
-
   const Tabs({
     required this.labels,
     required this.views,
@@ -21,8 +15,12 @@ class Tabs extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
+  final int selectedIndex;
+  final List<String> labels;
+  final List<Widget> views;
+
   @override
-  _TabsState createState() => _TabsState();
+  State<Tabs> createState() => _TabsState();
 }
 
 class _TabsState extends State<Tabs> {

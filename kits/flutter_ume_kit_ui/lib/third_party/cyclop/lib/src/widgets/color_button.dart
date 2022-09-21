@@ -1,12 +1,9 @@
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
-import 'package:flutter_ume_kit_ui/util/binding_ambiguate.dart';
+import '../../../../../util/binding_ambiguate.dart';
 import '../theme.dart';
 import '../utils.dart';
 import 'color_picker.dart';
@@ -46,7 +43,7 @@ class ColorButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ColorButtonState createState() => _ColorButtonState();
+  State<ColorButton> createState() => _ColorButtonState();
 }
 
 class _ColorButtonState extends State<ColorButton> with WidgetsBindingObserver {
@@ -173,12 +170,12 @@ class _ColorButtonState extends State<ColorButton> with WidgetsBindingObserver {
   void _showEyeDropperOverlay(BuildContext context) {
     hidden = true;
     try {
-      EyeDrop.of(context).capture(context, (value) {
+      UMEEyeDropper.of(context).capture(context, (value) {
         hidden = false;
         _onEyePick(value);
       }, null);
     } catch (err) {
-      print('ERROR !!! _buildPickerOverlay $err');
+      debugPrint('ERROR !!! _buildPickerOverlay $err');
     }
   }
 

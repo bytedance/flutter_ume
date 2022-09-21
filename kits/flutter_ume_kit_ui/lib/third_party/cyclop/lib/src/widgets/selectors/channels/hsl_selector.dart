@@ -10,16 +10,17 @@ typedef ChannelValueGetter = double Function(Color value);
 typedef ValueLabelGetter = String Function(Color value);
 
 class ChannelSliders extends StatefulWidget {
-  final Color selectedColor;
+  const ChannelSliders({
+    Key? key,
+    required this.selectedColor,
+    required this.onChange,
+  }) : super(key: key);
 
+  final Color selectedColor;
   final ValueChanged<Color> onChange;
 
-  const ChannelSliders(
-      {required this.selectedColor, required this.onChange, Key? key})
-      : super(key: key);
-
   @override
-  _ChannelSlidersState createState() => _ChannelSlidersState();
+  State<ChannelSliders> createState() => _ChannelSlidersState();
 }
 
 class _ChannelSlidersState extends State<ChannelSliders> {

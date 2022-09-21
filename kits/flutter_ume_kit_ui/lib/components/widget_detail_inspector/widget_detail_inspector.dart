@@ -107,12 +107,15 @@ class _DetailModel {
     Random().nextInt(256)
   ];
   Element element;
+
   _DetailModel(this.element);
 }
 
 class _InfoPage extends StatefulWidget {
-  const _InfoPage({Key? key, required this.elements})
-      : assert(elements != null),
+  const _InfoPage({
+    Key? key,
+    required this.elements,
+  })  : assert(elements != null),
         super(key: key);
 
   final List<Element> elements;
@@ -242,8 +245,10 @@ class __InfoPageState extends State<_InfoPage> {
 }
 
 class _DetailContent extends StatelessWidget {
-  const _DetailContent({Key? key, required this.element})
-      : assert(element != null),
+  const _DetailContent({
+    Key? key,
+    required this.element,
+  })  : assert(element != null),
         super(key: key);
 
   final Element element;

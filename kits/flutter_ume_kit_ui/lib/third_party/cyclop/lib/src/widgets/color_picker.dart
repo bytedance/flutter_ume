@@ -62,7 +62,7 @@ class ColorPicker extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ColorPickerState createState() => _ColorPickerState();
+  State<ColorPicker> createState() => _ColorPickerState();
 }
 
 class _ColorPickerState extends State<ColorPicker> {

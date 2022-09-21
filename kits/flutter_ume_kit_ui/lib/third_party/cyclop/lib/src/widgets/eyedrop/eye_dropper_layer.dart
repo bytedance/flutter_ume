@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image/image.dart' as img;
@@ -10,7 +9,7 @@ import 'eye_dropper_overlay.dart';
 
 final captureKey = GlobalKey();
 
-class _EyeDropperModel {
+class UMEEyeDropperModel {
   /// based on PointerEvent.kind
   bool touchable = false;
 
@@ -30,14 +29,16 @@ class _EyeDropperModel {
 
   ValueChanged<Color>? onColorChanged;
 
-  _EyeDropperModel();
+  UMEEyeDropperModel();
 }
 
-class EyeDrop extends InheritedWidget {
-  static _EyeDropperModel data = _EyeDropperModel();
+class UMEEyeDropper extends InheritedWidget {
+  static UMEEyeDropperModel data = UMEEyeDropperModel();
 
-  EyeDrop({required Widget child, Key? key})
-      : super(
+  UMEEyeDropper({
+    required Widget child,
+    Key? key,
+  }) : super(
           key: key,
           child: RepaintBoundary(
             key: captureKey,
@@ -56,11 +57,13 @@ class EyeDrop extends InheritedWidget {
           ),
         );
 
-  static EyeDrop of(BuildContext context) {
-    final eyeDrop = context.dependOnInheritedWidgetOfExactType<EyeDrop>();
+  static UMEEyeDropper of(BuildContext context) {
+    final eyeDrop = context.dependOnInheritedWidgetOfExactType<UMEEyeDropper>();
     if (eyeDrop == null) {
       throw Exception(
-          'No EyeDrop found. You must wrap your application within an EyeDrop widget.');
+        'No UMEEyeDropper found. '
+        'You must wrap your application within an UMEEyeDropper widget.',
+      );
     }
     return eyeDrop;
   }
@@ -100,8 +103,11 @@ class EyeDrop extends InheritedWidget {
     }
   }
 
-  void capture(BuildContext context, ValueChanged<Color> onColorSelected,
-      ValueChanged<Color>? onColorChanged) async {
+  void capture(
+    BuildContext context,
+    ValueChanged<Color> onColorSelected,
+    ValueChanged<Color>? onColorChanged,
+  ) async {
     final renderer =
         captureKey.currentContext?.findRenderObject() as RenderRepaintBoundary?;
 
@@ -109,7 +115,6 @@ class EyeDrop extends InheritedWidget {
 
     data.onColorSelected = onColorSelected;
     data.onColorChanged = onColorChanged;
-
     data.snapshot = await repaintBoundaryToImage(renderer);
 
     if (data.snapshot == null) return;
@@ -121,11 +126,12 @@ class EyeDrop extends InheritedWidget {
         cursorPosition: data.cursorPosition,
       ),
     );
+    // ignore: use_build_context_synchronously
     Overlay.of(context)?.insert(data.eyeOverlayEntry!);
   }
 
   @override
-  bool updateShouldNotify(EyeDrop oldWidget) {
+  bool updateShouldNotify(UMEEyeDropper oldWidget) {
     return true;
   }
 }

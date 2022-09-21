@@ -3,7 +3,6 @@
 /// [Date] 2021/8/6 17:28
 ///
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_ume/flutter_ume.dart';

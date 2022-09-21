@@ -1,3 +1,4 @@
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
 
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class EyedropperButton extends StatelessWidget {
 
   void _onEyeDropperRequest(BuildContext context) {
     try {
-      EyeDrop.of(context).capture(context, onColor, onColorChanged);
+      UMEEyeDropper.of(context).capture(context, onColor, onColorChanged);
     } catch (err) {
       throw Exception('EyeDrop capture error : $err');
     }
