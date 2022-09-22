@@ -399,8 +399,9 @@ Thanks to the following contributors (names not listed in order)：
 | ![lpylpyleo](https://avatars.githubusercontent.com/u/15264428?s=64&v=4) | [lpylpyleo](https://github.com/lpylpyleo) |
 | ![Alex Li](https://avatars.githubusercontent.com/u/15884415?s=64&v=4) | [Alex Li](https://github.com/AlexV525) |
 | ![Swain](https://avatars.githubusercontent.com/u/7621572?s=64&v=4) | [Swain](https://github.com/talisk) |
-| ![harbor](https://avatars.githubusercontent.com/u/58758250?s=64&v=4) | [harbor](https://github.com/zzm990321) |
+| ![mengdouer](https://avatars.githubusercontent.com/u/58758250?s=64&v=4) | [mengdouer](https://github.com/mengdouer) |
 | ![LAIIIHZ](https://avatars.githubusercontent.com/u/35956195?s=64&v=4) | [LAIIIHZ](https://github.com/laiiihz) |
+| ![XinLei](https://avatars.githubusercontent.com/u/23734225?s=64&v=4) | [XinLei](https://github.com/Vadaski) |
 
 ### About the third-party open-source project dependencies
 
