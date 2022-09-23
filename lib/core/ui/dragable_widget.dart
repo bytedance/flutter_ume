@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-typedef bool CanAccept(int oldIndex, int newIndex);
+typedef CanAccept = bool Function(int oldIndex, int newIndex);
 
-typedef void DragCompletion<T>(List<T?>? data);
+typedef DragCompletion<T> = void Function(List<T?>? data);
 
-typedef Widget DataWidgetBuilder<T>(BuildContext context, T data);
+typedef DataWidgetBuilder<T> = Widget Function(BuildContext context, T data);
 
 class DragableGridView<T> extends StatefulWidget {
   final DataWidgetBuilder<T> itemBuilder;

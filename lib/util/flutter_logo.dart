@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 import 'dart:math' as math;
-import 'dart:typed_data';
 import 'dart:ui' as ui show Gradient, TextBox, lerpDouble, Color;
 
 import 'package:flutter/foundation.dart';
@@ -292,7 +291,7 @@ class FlutterLogoDecoration extends Decoration {
   @override
   int get hashCode {
     assert(debugAssertIsValid());
-    return hashValues(
+    return Object.hash(
       lightColor,
       darkColor,
       textColor,
@@ -307,9 +306,10 @@ class FlutterLogoDecoration extends Decoration {
     properties
         .add(DiagnosticsNode.message('$lightColor/$darkColor on $textColor'));
     properties.add(EnumProperty<FlutterLogoStyle>('style', style));
-    if (_inTransition)
+    if (_inTransition) {
       properties.add(DiagnosticsNode.message(
           'transition ${debugFormatDouble(_position)}:${debugFormatDouble(_opacity)}'));
+    }
   }
 }
 

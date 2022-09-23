@@ -42,10 +42,11 @@ class _FloatingWidgetState extends State<FloatingWidget> with StoreMixin {
   @override
   void initState() {
     fetchWithKey('floating_widget').then((value) {
-      if (value != null)
+      if (value != null) {
         setState(() {
           _dy = value;
         });
+      }
     });
     _dy = _windowSize.height -
         widget.minimalHeight -

@@ -58,8 +58,9 @@ void main() {
             'MinimalToolbarSwitch': true,
             'FloatingDotPos': '123,123',
           };
-        } else
+        } else {
           return null;
+        }
       });
 
       PluginManager.instance.registerAll([
