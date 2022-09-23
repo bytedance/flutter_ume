@@ -2,6 +2,12 @@
 
 [简体中文](./CHANGELOG_cn.md)
 
+## [1.1.0]
+
+* #76 Introduce `UMEWidget.closeActivatedPlugin()`. Issue #35
+* #75 Remove overlay entry only when it's been inserted. Issue #65
+* #72 [Android] Migrate the example to the v2 embedding
+
 ## [1.0.2+1]
 
 * Dart format.

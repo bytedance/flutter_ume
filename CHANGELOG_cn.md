@@ -2,6 +2,12 @@
 
 [English](./CHANGELOG.md)
 
+## [1.1.0]
+
+* #76 新增 `UMEWidget.closeActivatedPlugin()`。 Issue #35
+* #75 修复重复插入 Overlay 的问题。 Issue #65
+* #72 [Android] 迁移 example 到 v2 embedding。
+
 ## [1.0.2+1]
 
 * Dart format
