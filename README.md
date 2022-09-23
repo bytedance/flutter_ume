@@ -349,16 +349,16 @@ In order to use in Release/Profile mode, the details that need to be adjusted in
 
 ### Compatibility
 
-| UME version | 1.12.13 | 1.22.3 | 2.0.1 | 2.2.3 | 2.5.3 | 2.8.0 | 3.0.1 |
-| ---- | ---- | ---- | ---- | ---- | ---- |
-| 0.1.x | ✅ | ✅ | ✅ | ✅ | ⚠️ | ⚠️ | ❌ |
-| 0.2.x | ❌ | ❌ | ✅ | ✅ | ✅ | ⚠️ | ❌ |
-| 0.3.x | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ |
-| 1.0.x | ❌ | ❌ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | ✅ |
+| UME version | 1.12.13 | 1.22.3 | 2.0.1 | 2.2.3 | 2.5.3 | 2.8.0 | 3.0.5 | 3.3.1
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| 0.1.x | ✅ | ✅ | ✅ | ✅ | ⚠️ | ⚠️ | ❌ | ❌ |
+| 0.2.x | ❌ | ❌ | ✅ | ✅ | ✅ | ⚠️ | ❌ | ❌ |
+| 0.3.x | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
+| 1.0.x | ❌ | ❌ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | ✅ | ✅ |
+| 1.1.x | ❌ | ❌ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | ✅ | ✅ |
 
 ⚠️ means the version has not been fully tested for compatibility.
 
-⚠️ means the version has not been fully tested for compatibility.
 ### Coverage
 
 | Package | master | develop | develop_nullsafety |
