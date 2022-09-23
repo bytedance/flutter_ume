@@ -2,6 +2,10 @@
 
 [简体中文](./CHANGELOG_cn.md)
 
+## [1.1.0+1]
+
+* Fix static analyze issues.
+
 ## [1.1.0]
 
 * #76 Introduce `UMEWidget.closeActivatedPlugin()`. Issue #35

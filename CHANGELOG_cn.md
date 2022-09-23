@@ -2,6 +2,10 @@
 
 [English](./CHANGELOG.md)
 
+## [1.1.0+1]
+
+* 修复静态分析问题
+
 ## [1.1.0]
 
 * #76 新增 `UMEWidget.closeActivatedPlugin()`。 Issue #35
