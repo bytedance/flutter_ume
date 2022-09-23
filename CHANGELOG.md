@@ -2,6 +2,10 @@
 
 [简体中文](./CHANGELOG_cn.md)
 
+## [1.1.0+3]
+
+* Fix static analyze issues.
+
 ## [1.1.0+2]
 
 * Fix static analyze issues.
