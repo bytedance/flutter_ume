@@ -310,7 +310,8 @@ class _InspectorOverlayRenderState {
   }
 
   @override
-  int get hashCode => Object.hash(overlayRect, selected, Object.hashAll(candidates));
+  int get hashCode =>
+      Object.hash(overlayRect, selected, Object.hashAll(candidates));
 }
 
 class _TransformedRect {

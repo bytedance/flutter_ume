@@ -322,9 +322,8 @@ class _ContentPageState extends State<_ContentPage> {
     _dy = _windowSize.height - dotSize.height - bottomDistance;
     MenuAction itemTapAction = (pluginData) async {
       if (pluginData is PluggableWithAnywhereDoor) {
-        var result = null;
+        dynamic result;
         if (pluginData.routeNameAndArgs != null) {
-          print('talisk++${pluginData.routeNameAndArgs!.item2}');
           result = await pluginData.navigator?.pushNamed(
               pluginData.routeNameAndArgs!.item1,
               arguments: pluginData.routeNameAndArgs!.item2);
