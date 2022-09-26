@@ -2,6 +2,10 @@
 
 [English](./CHANGELOG.md)
 
+## [1.1.1+1]
+
+* 更新依赖版本
+
 ## [1.1.1]
 
 * #66 [fix] toolbar initial position is incorrect
