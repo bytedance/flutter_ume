@@ -401,6 +401,7 @@ showDialog(
 | ![mengdouer](https://avatars.githubusercontent.com/u/58758250?s=64&v=4) | [mengdouer](https://github.com/mengdouer) |
 | ![LAIIIHZ](https://avatars.githubusercontent.com/u/35956195?s=64&v=4) | [LAIIIHZ](https://github.com/laiiihz) |
 | ![XinLei](https://avatars.githubusercontent.com/u/23734225?s=64&v=4) | [XinLei](https://github.com/Vadaski) |
+| ![suli](https://avatars.githubusercontent.com/u/5837645?s=64&v=4) | [suli](https://github.com/suli1) |
 
 ### 第三方开源项目说明
 

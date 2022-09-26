@@ -2,6 +2,10 @@
 
 [简体中文](./CHANGELOG_cn.md)
 
+## [1.1.1]
+
+* #66 [fix] toolbar initial position is incorrect
+
 ## [1.1.0+3]
 
 * Fix static analyze issues.
