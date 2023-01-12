@@ -16,7 +16,7 @@ dependencies:
   # for Cyclop
   image: ^3.0.5
   quiver: ^3.0.1
-  basics: ^0.6.0
+  basics: ">=0.6.0 <0.10.0"
 
 dev_dependencies:
   flutter_test:
