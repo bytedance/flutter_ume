@@ -32,7 +32,7 @@ class _UMEAppState extends State<UMEApp> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       CustomRouterPluggable().navKey = navigatorKey;
     });
     if (kDebugMode) {
