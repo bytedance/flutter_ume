@@ -1,0 +1,19 @@
+# melos_managed_dependency_overrides: vm_service,flutter_ume,flutter_ume_kit_channel_monitor,flutter_ume_kit_console,flutter_ume_kit_device,flutter_ume_kit_dio,flutter_ume_kit_perf,flutter_ume_kit_show_code,flutter_ume_kit_ui
+dependency_overrides:
+  vm_service: ^9.4.0
+  flutter_ume:
+    path: ../
+  flutter_ume_kit_channel_monitor:
+    path: ../kits/flutter_ume_kit_channel_monitor
+  flutter_ume_kit_console:
+    path: ../kits/flutter_ume_kit_console
+  flutter_ume_kit_device:
+    path: ../kits/flutter_ume_kit_device
+  flutter_ume_kit_dio:
+    path: ../kits/flutter_ume_kit_dio
+  flutter_ume_kit_perf:
+    path: ../kits/flutter_ume_kit_perf
+  flutter_ume_kit_show_code:
+    path: ../kits/flutter_ume_kit_show_code
+  flutter_ume_kit_ui:
+    path: ../kits/flutter_ume_kit_ui
