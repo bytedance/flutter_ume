@@ -4,13 +4,17 @@
 
 Flutter 应用内调试工具平台
 
-[![platforms](https://img.shields.io/badge/platforms-ios%20%7C%20android%20%7C%20web%20%7C%20macos%20%7C%20windows%20%7C%20linux-lightgrey)](https://pub.dev/packages/flutter_ume) [![license](https://img.shields.io/github/license/bytedance/flutter_ume.svg)](https://github.com/bytedance/flutter_ume/blob/master/LICENSE) [![latest](https://img.shields.io/pub/vpre/flutter_ume.svg)](https://pub.dev/packages/flutter_ume) [![likes](https://badges.bar/flutter_ume/likes)](https://pub.dev/packages/flutter_ume/score) [![popularity](https://badges.bar/flutter_ume/popularity)](https://pub.dev/packages/flutter_ume/score) [![pub points](https://badges.bar/flutter_ume/pub%20points)](https://pub.dev/packages/flutter_ume/score)
+[![platforms](https://img.shields.io/badge/platforms-ios%20%7C%20android%20%7C%20web%20%7C%20macos%20%7C%20windows%20%7C%20linux-lightgrey)](https://pub.dev/packages/flutter_ume) [![license](https://img.shields.io/github/license/bytedance/flutter_ume.svg)](https://github.com/bytedance/flutter_ume/blob/master/LICENSE)
 
-<img src="https://github.com/bytedance/flutter_ume/raw/master/ume_logo_256.png" width = "128" height = "128" alt="banner" />
+[![pub package](https://img.shields.io/pub/v/flutter_ume.svg)](https://pub.dev/packages/flutter_ume)
+[![pub package](https://img.shields.io/pub/likes/flutter_ume.svg)](https://pub.dev/packages/flutter_ume)
+[![pub package](https://img.shields.io/pub/points/flutter_ume.svg)](https://pub.dev/packages/flutter_ume)
+[![pub package](https://img.shields.io/pub/popularity/flutter_ume.svg)](https://pub.dev/packages/flutter_ume)
+[![pub package](https://img.shields.io/pub/publisher/flutter_ume.svg)](https://pub.dev/packages/flutter_ume)
 
-**从 `^1.0.0` 起适配 Flutter 3.0，详见后文[快速接入]部分。**
+**Since `^1.0.0`, flutter_ume starts adapting to the Flutter 3. See [Quick Start] to learn more.**
 
-<img src="https://github.com/bytedance/flutter_ume/raw/master/apk_qrcode.png" width = "256" height = "256" alt="banner" />
+<img src="https://github.com/bytedance/flutter_ume/raw/master/apk_qrcode.png" width = "128" height = "128" alt="banner" />
 
 扫码或点击链接下载 apk，快速体验 UME。
 https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.apk
@@ -18,6 +22,8 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
 最新版本(1.0.1)内置 13 个插件，
 开发者可以创建自己的插件，并集成进 UME 平台。
 详见本文[为 UME 开发插件](#为-ume-开发插件)部分。
+
+**更多开源社区贡献的调试插件，请见[社区插件](#社区插件)部分。**
 
 - [flutter_ume](#flutter_ume)
   - [快速接入](#快速接入)
@@ -34,6 +40,7 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
     - [更新日志](#更新日志)
   - [开源贡献](#开源贡献)
     - [贡献者](#贡献者)
+    - [社区插件](#社区插件)
     - [第三方开源项目说明](#第三方开源项目说明)
   - [开源协议](#开源协议)
   - [联系开发者](#联系开发者)
@@ -402,6 +409,42 @@ showDialog(
 | ![LAIIIHZ](https://avatars.githubusercontent.com/u/35956195?s=64&v=4) | [LAIIIHZ](https://github.com/laiiihz) |
 | ![XinLei](https://avatars.githubusercontent.com/u/23734225?s=64&v=4) | [XinLei](https://github.com/Vadaski) |
 | ![suli](https://avatars.githubusercontent.com/u/5837645?s=64&v=4) | [suli](https://github.com/suli1) |
+
+### 社区插件
+
+- [flutter_ume_kit_channel_monitor](https://pub.dev/packages/flutter_ume_kit_channel_monitor)
+  - channel 通信监控工具
+  - 源代码托管于 https://github.com/bytedance/flutter_ume/tree/master/kits/flutter_ume_kit_channel_monitor
+- [flutter_ume_kit_slow_animation](https://pub.dev/packages/flutter_ume_kit_slow_animation)
+  - 动画速度调节插件
+  - 源代码托管于 https://github.com/cfug/flutter_ume_kits
+- [flutter_ume_kit_shared_preferences](https://pub.dev/packages/flutter_ume_kit_shared_preferences)
+  - shared_preferences 调试工具
+  - 源代码托管于 https://github.com/cfug/flutter_ume_kits
+- [flutter_ume_kit_designer_check](https://pub.dev/packages/)
+  - 设计稿比对工具
+  - 源代码托管于 https://github.com/cfug/flutter_ume_kits
+- [flutter_ume_kit_clean_local_data](https://pub.dev/packages/flutter_ume_kit_clean_local_data)
+  - 清理本地数据插件
+  - 源代码托管于 https://github.com/cfug/flutter_ume_kits 。
+- [flutter_ume_kit_database_kit](https://pub.dev/packages/flutter_ume_kit_database_kit)
+  - 数据库调试插件
+  - 源代码托管于 https://github.com/cfug/flutter_ume_kits 。
+- [ume_kit_monitor](https://pub.dev/packages/ume_kit_monitor)
+  - 参数监控插件
+  - 源代码托管于 https://github.com/fastcode555/ume_kit_monitor 。
+- [json2dart_viewerffi](https://pub.dev/packages/json2dart_viewerffi)
+  - 数据库调试插件
+  - 源代码托管于 https://github.com/fastcode555/Json2Dart_Null_Safety 。
+- [json2dart_viewer](https://pub.dev/packages/json2dart_viewer)
+  - 数据库调试插件
+  - 源代码托管于 https://github.com/fastcode555/Json2Dart_Null_Safety 。
+- [memory_detector_of_kit](https://github.com/bladeofgod/memory_detector_of_kit)
+  - 内存泄漏检测插件
+- [channel_observer_of_kit](https://github.com/bladeofgod/channel_observer_of_kit)
+  - channel 调用记录监控插件
+- [flutter-ume-kit-dio-enhance](https://github.com/linversion/flutter-ume-kit-dio-enhance)
+  - 基于 flutter_ume_kit_dio 扩展了一些功能的插件
 
 ### 第三方开源项目说明
 

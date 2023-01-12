@@ -12,11 +12,9 @@ UME is an in-app debug kits platform for Flutter apps.
 [![pub package](https://img.shields.io/pub/popularity/flutter_ume.svg)](https://pub.dev/packages/flutter_ume)
 [![pub package](https://img.shields.io/pub/publisher/flutter_ume.svg)](https://pub.dev/packages/flutter_ume)
 
-<img src="https://github.com/bytedance/flutter_ume/raw/master/ume_logo_256.png" width = "128" height = "128" alt="banner" />
-
 **Since `^1.0.0`, flutter_ume starts adapting to the Flutter 3. See [Quick Start] to learn more.**
 
-<img src="https://github.com/bytedance/flutter_ume/raw/master/apk_qrcode.png" width = "256" height = "256" alt="banner" />
+<img src="https://github.com/bytedance/flutter_ume/raw/master/apk_qrcode.png" width = "128" height = "128" alt="banner" />
 
 Scan QR code or click link to download apk. Try it now!
 https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.apk
@@ -24,6 +22,8 @@ https://github.com/bytedance/flutter_ume/releases/download/v0.2.1.0/app-debug.ap
 There are 13 plugin kits built in the latest open source version of UME.
 Developer could create custom plugin kits, and integrate them into UME.
 Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more details.
+
+**Please see [Plugins from community](#plugins-from-community) to make flutter_ume stronger.**
 
 - [flutter_ume](#flutter_ume)
   - [Quick Start](#quick-start)
@@ -40,6 +40,7 @@ Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more detai
     - [Change log](#change-log)
   - [Contributing](#contributing)
     - [Contributors](#contributors)
+    - [Plugins from community](#plugins-from-community)
     - [About the third-party open-source project dependencies](#about-the-third-party-open-source-project-dependencies)
   - [LICENSE](#license)
   - [Contact the author](#contact-the-author)
@@ -409,6 +410,42 @@ Thanks to the following contributors (names not listed in order)：
 | ![LAIIIHZ](https://avatars.githubusercontent.com/u/35956195?s=64&v=4) | [LAIIIHZ](https://github.com/laiiihz) |
 | ![XinLei](https://avatars.githubusercontent.com/u/23734225?s=64&v=4) | [XinLei](https://github.com/Vadaski) |
 | ![suli](https://avatars.githubusercontent.com/u/5837645?s=64&v=4) | [suli](https://github.com/suli1) |
+
+### Plugins from community
+
+- [flutter_ume_kit_channel_monitor](https://pub.dev/packages/flutter_ume_kit_channel_monitor)
+  - Channel communication monitor
+  - Cource code: https://github.com/bytedance/flutter_ume/tree/master/kits/flutter_ume_kit_channel_monitor
+- [flutter_ume_kit_slow_animation](https://pub.dev/packages/flutter_ume_kit_slow_animation)
+  - Animation speed control
+  - Cource code: https://github.com/cfug/flutter_ume_kits
+- [flutter_ume_kit_shared_preferences](https://pub.dev/packages/flutter_ume_kit_shared_preferences)
+  - shared_preferences tool
+  - Cource code: https://github.com/cfug/flutter_ume_kits
+- [flutter_ume_kit_designer_check](https://pub.dev/packages/)
+  - Comparing tool for Design UI and real UI
+  - Cource code: https://github.com/cfug/flutter_ume_kits
+- [flutter_ume_kit_clean_local_data](https://pub.dev/packages/flutter_ume_kit_clean_local_data)
+  - Clean local data
+  - Cource code: https://github.com/cfug/flutter_ume_kits 。
+- [flutter_ume_kit_database_kit](https://pub.dev/packages/flutter_ume_kit_database_kit)
+  - DB tool
+  - Cource code: https://github.com/cfug/flutter_ume_kits 。
+- [ume_kit_monitor](https://pub.dev/packages/ume_kit_monitor)
+  - Parameters monitor tools
+  - Cource code: https://github.com/fastcode555/ume_kit_monitor 。
+- [json2dart_viewerffi](https://pub.dev/packages/json2dart_viewerffi)
+  - DB tool
+  - Cource code: https://github.com/fastcode555/Json2Dart_Null_Safety 。
+- [json2dart_viewer](https://pub.dev/packages/json2dart_viewer)
+  - DB tool
+  - Cource code: https://github.com/fastcode555/Json2Dart_Null_Safety 。
+- [memory_detector_of_kit](https://github.com/bladeofgod/memory_detector_of_kit)
+  - Leaks tool
+- [channel_observer_of_kit](https://github.com/bladeofgod/channel_observer_of_kit)
+  - Channel communication monitor
+- [flutter-ume-kit-dio-enhance](https://github.com/linversion/flutter-ume-kit-dio-enhance)
+  - Plugin base on flutter_ume_kit_dio
 
 ### About the third-party open-source project dependencies
 
