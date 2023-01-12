@@ -2,6 +2,10 @@
 
 [简体中文](./CHANGELOG_cn.md)
 
+## [1.1.2]
+
+* #82 Fix flutter_logo.dart error in Flutter 3.0.5 
+
 ## [1.1.1+1]
 
 * Update latest dependencies.

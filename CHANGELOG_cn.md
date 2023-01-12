@@ -2,6 +2,10 @@
 
 [English](./CHANGELOG.md)
 
+## [1.1.2]
+
+* #82 修复 flutter_logo.dart 在 Flutter 3.0.5 上的错误
+
 ## [1.1.1+1]
 
 * 更新依赖版本
