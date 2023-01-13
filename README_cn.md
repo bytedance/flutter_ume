@@ -409,6 +409,7 @@ showDialog(
 | ![LAIIIHZ](https://avatars.githubusercontent.com/u/35956195?s=64&v=4) | [LAIIIHZ](https://github.com/laiiihz) |
 | ![XinLei](https://avatars.githubusercontent.com/u/23734225?s=64&v=4) | [XinLei](https://github.com/Vadaski) |
 | ![suli](https://avatars.githubusercontent.com/u/5837645?s=64&v=4) | [suli](https://github.com/suli1) |
+| ![wei-spring](https://avatars.githubusercontent.com/u/8155092?s=64&v=4) | [wei-spring](https://github.com/wei-spring) |
 
 ### 社区插件
 
