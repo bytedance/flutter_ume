@@ -23,7 +23,7 @@ There are 13 plugin kits built in the latest open source version of UME.
 Developer could create custom plugin kits, and integrate them into UME.
 Visit [Develop plugin kits for UME](#develop-plugin-kits-for-ume) for more details.
 
-**Please see [Plugins from community](#plugins-from-community) to make flutter_ume stronger.**
+**Please see [Plugins from community](#plugins-from-community) to make your flutter_ume stronger.**
 
 - [flutter_ume](#flutter_ume)
   - [Quick Start](#quick-start)
