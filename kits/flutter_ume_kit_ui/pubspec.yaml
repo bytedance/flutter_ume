@@ -14,7 +14,7 @@ dependencies:
   touch_indicator: ^2.0.0
 
   # for Cyclop
-  image: ^3.0.5
+  image: ">=3.0.5 <5.0.0"
   quiver: ^3.0.1
   basics: ">=0.6.0 <0.10.0"
 
