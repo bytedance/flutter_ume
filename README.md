@@ -360,6 +360,10 @@ In order to use in Release/Profile mode, the details that need to be adjusted in
 
 ⚠️ means the version has not been fully tested for compatibility.
 
+### Special case
+
+- Please use `flutter_ume_kit_ui: ^1.1.0` and above version when you are using Flutter 3.7 and above.
+
 ### Coverage
 
 | Package | master | develop | develop_nullsafety |
@@ -375,18 +379,6 @@ In order to use in Release/Profile mode, the details that need to be adjusted in
 ### Version upgrade rules
 
 Please refer to [Semantic versions](https://dart.dev/tools/pub/versioning#semantic-versions) for details.
-
-### Null-safety
-
-| Package | Suggest version |
-| ---- | ---- |
-| flutter_ume | 0.3.0+1 |
-| flutter_ume_kit_ui | 0.3.0+1 |
-| flutter_ume_kit_device | 0.3.0 |
-| flutter_ume_kit_perf | 0.3.0 |
-| flutter_ume_kit_show_code | 0.3.0 |
-| flutter_ume_kit_console | 0.3.0 |
-| flutter_ume_kit_dio | 0.3.0 |
 
 ### Change log
 

@@ -359,6 +359,10 @@ showDialog(
 
 ⚠️ 意为未经过完整的兼容性测试，不建议使用。
 
+### 特例
+
+- Flutter 3.7 及以上版本请使用 `flutter_ume_kit_ui: ^1.1.0` 及以上版本
+
 ### 单测覆盖率
 
 | 包 | master | develop | develop_nullsafety |
@@ -374,18 +378,6 @@ showDialog(
 ### 版本号规则
 
 请参考 [Semantic versions](https://dart.dev/tools/pub/versioning#semantic-versions)
-
-### Null-safety 版本
-
-| 包 | null-safety 推荐版本号 |
-| ---- | ---- |
-| flutter_ume | 0.3.0+1 |
-| flutter_ume_kit_ui | 0.3.0+1 |
-| flutter_ume_kit_device | 0.3.0 |
-| flutter_ume_kit_perf | 0.3.0 |
-| flutter_ume_kit_show_code | 0.3.0 |
-| flutter_ume_kit_console | 0.3.0 |
-| flutter_ume_kit_dio | 0.3.0 |
 
 ### 更新日志
 

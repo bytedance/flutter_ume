@@ -108,6 +108,7 @@ class ChannelSliderTrack extends SliderTrackShape with BaseSliderTrackShape {
     bool isDiscrete = false,
     bool isEnabled = false,
     double additionalActiveTrackHeight = 2,
+    Offset? secondaryOffset,
   }) {
     assert(sliderTheme.disabledActiveTrackColor != null);
     assert(sliderTheme.disabledInactiveTrackColor != null);
