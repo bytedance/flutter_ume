@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0
+
+* 适配 Flutter 3.7，不兼容旧版本的适配
+
+* Adapt Flutter 3.7, breaking change.
+
 ## 1.0.0
 
 * 正式版
