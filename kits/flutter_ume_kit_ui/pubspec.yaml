@@ -13,15 +13,15 @@ dependencies:
   flutter_ume: ">=1.0.0 <2.0.0"
   touch_indicator: ^2.0.0
 
-  # for Cyclop
-  image: ^3.0.5
-  quiver: ^3.0.1
+  # for Cyclops
+  image: ^4.0.15
+  quiver: ^3.2.1
   basics: ">=0.6.0 <0.11.0"
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: ^5.0.12
+  mockito: ^5.3.2
   flutter_coverage_badge:
     git:
       url: https://github.com/smileShirely/flutter_coverage_badge.git

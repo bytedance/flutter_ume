@@ -9,13 +9,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  image: ^3.0.5
-  quiver: ^3.0.1
-  basics: ^0.6.0
+  image: ^4.0.15
+  quiver: ^3.2.1
+  basics: ^0.10.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.4
+  flutter_lints: ^2.0.1
 
 flutter:

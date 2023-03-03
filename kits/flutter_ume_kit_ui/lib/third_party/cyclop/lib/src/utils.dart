@@ -1,10 +1,9 @@
+import 'dart:async';
 import 'dart:ui' as ui;
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image/image.dart' as img;
-
 //bool get isPhoneScreen => !(screenSize.shortestSide >= 600);
 
 Size get screenSize => ui.window.physicalSize / ui.window.devicePixelRatio;
@@ -92,36 +91,32 @@ List<Color> getPixelColors(
       ),
     );
 
-Color getPixelColor(img.Image image, Offset offset) => (offset.dx >= 0 &&
-        offset.dy >= 0 &&
-        offset.dx < image.width &&
-        offset.dy < image.height)
-    ? abgr2Color(image.getPixel(offset.dx.toInt(), offset.dy.toInt()))
-    : const Color(0x00000000);
+ui.Color getPixelColor(img.Image image, Offset offset) {
+  img.Pixel pixel = image.getPixelSafe(offset.dx.toInt(), offset.dy.toInt());
+
+  return (offset.dx >= 0 &&
+          offset.dy >= 0 &&
+          offset.dx < image.width &&
+          offset.dy < image.height)
+      ? Color.fromARGB(
+          pixel.a.toInt(), pixel.r.toInt(), pixel.g.toInt(), pixel.b.toInt())
+      : const Color(0x00000000);
+}
 
 ui.Offset _offsetFromIndex(int index, int numColumns) => Offset(
       (index % numColumns).toDouble(),
       ((index ~/ numColumns) % numColumns).toDouble(),
     );
 
-Color abgr2Color(int value) {
-  final a = (value >> 24) & 0xFF;
-  final b = (value >> 16) & 0xFF;
-  final g = (value >> 8) & 0xFF;
-  final r = (value >> 0) & 0xFF;
-
-  return Color.fromARGB(a, r, g, b);
-}
-
 Future<img.Image?> repaintBoundaryToImage(
   RenderRepaintBoundary renderer,
 ) async {
   try {
     final rawImage = await renderer.toImage(pixelRatio: 1);
-    final byteData =
-        await rawImage.toByteData(format: ui.ImageByteFormat.rawRgba);
+    final byteData = await rawImage.toByteData(format: ui.ImageByteFormat.png);
     final pngBytes = byteData!.buffer.asUint8List();
-    return img.Image.fromBytes(rawImage.width, rawImage.height, pngBytes);
+
+    return img.decodeImage(pngBytes);
   } catch (err) {
     return null;
   }
