@@ -13,7 +13,7 @@ dependencies:
   flutter_ume: ">=1.0.0 <2.0.0"
   touch_indicator: ^2.0.0
 
-  # for Cyclops
+  # for Cyclop
   image: ^4.0.15
   quiver: ^3.2.1
   basics: ">=0.6.0 <0.11.0"
