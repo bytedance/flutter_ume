@@ -20,7 +20,7 @@ const defaultLocalizationsDelegates = const [
   GlobalCupertinoLocalizations.delegate,
 ];
 
-final GlobalKey<OverlayState> overlayKey = GlobalKey<OverlayState>();
+GlobalKey<OverlayState> overlayKey = GlobalKey<OverlayState>();
 
 /// Wrap your App widget. If [enable] is false, the function will return [child].
 class UMEWidget extends StatefulWidget {
@@ -55,18 +55,18 @@ class UMEWidget extends StatefulWidget {
 
 /// Hold the [_UMEWidgetState] as a global variable.
 _UMEWidgetState? _umeWidgetState;
-
+OverlayEntry? _umeOverlay;
 class _UMEWidgetState extends State<UMEWidget> {
   _UMEWidgetState() {
     // Make sure only a single `UMEWidget` is being used.
-    assert(
-      _umeWidgetState == null,
-      'Only one `UMEWidget` can be used at the same time.',
-    );
-    if (_umeWidgetState != null) {
-      throw StateError('Only one `UMEWidget` can be used at the same time.');
-    }
-    _umeWidgetState = this;
+    // assert(
+    //   _umeWidgetState == null,
+    //   'Only one `UMEWidget` can be used at the same time.',
+    // );
+    // if (_umeWidgetState != null) {
+    //   throw StateError('Only one `UMEWidget` can be used at the same time.');
+    // }
+    // _umeWidgetState = this;
   }
 
   final GlobalKey<_ContentPageState> _contentPageKey = GlobalKey();
@@ -81,6 +81,16 @@ class _UMEWidgetState extends State<UMEWidget> {
   @override
   void initState() {
     super.initState();
+    overlayKey = GlobalKey();
+    try {
+      if (_umeOverlay?.mounted == true) {
+        _umeOverlay?.remove();
+      }
+    } catch (e) {
+      // print(e);
+    } finally {
+      _umeOverlay = null;
+    }
     _replaceChild();
     _injectOverlay();
 
@@ -164,7 +174,19 @@ class _UMEWidgetState extends State<UMEWidget> {
   void _removeOverlay() {
     // Call `remove` only when the entry has been inserted.
     if (_overlayEntryInserted) {
+      if (_overlayEntry.mounted) {
       _overlayEntry.remove();
+      }
+      try {
+        if (_umeOverlay?.mounted == true) {
+          _umeOverlay?.remove();
+        }
+      } catch (e) {
+        // print(e);
+      } finally {
+        _umeOverlay = null;
+      }
+
       _overlayEntryInserted = false;
     }
   }
@@ -187,6 +209,7 @@ class _UMEWidgetState extends State<UMEWidget> {
             ),
           ),
         );
+        _umeOverlay = _overlayEntry;
         overlayKey.currentState?.insert(_overlayEntry);
         _overlayEntryInserted = true;
       }
