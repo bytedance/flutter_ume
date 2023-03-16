@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart'
-    hide FlutterLogo, FlutterLogoDecoration, FlutterLogoStyle;
+import 'package:flutter/material.dart' hide FlutterLogo, FlutterLogoDecoration, FlutterLogoStyle;
 import 'package:flutter_ume/core/pluggable_message_service.dart';
 import 'package:flutter_ume/core/ui/panel_action_define.dart';
 import 'package:flutter_ume/core/plugin_manager.dart';
@@ -42,8 +41,7 @@ class UMEWidget extends StatefulWidget {
   /// The method does not have side-effects whether the [UMEWidget]
   /// is not enabled or no plugin has been activated.
   static void closeActivatedPlugin() {
-    final _ContentPageState? state =
-        _umeWidgetState?._contentPageKey.currentState;
+    final _ContentPageState? state = _umeWidgetState?._contentPageKey.currentState;
     if (state?._currentSelected != null) {
       state?._closeActivatedPluggable();
     }
@@ -56,6 +54,7 @@ class UMEWidget extends StatefulWidget {
 /// Hold the [_UMEWidgetState] as a global variable.
 _UMEWidgetState? _umeWidgetState;
 OverlayEntry? _umeOverlay;
+
 class _UMEWidgetState extends State<UMEWidget> {
   _UMEWidgetState() {
     // Make sure only a single `UMEWidget` is being used.
@@ -94,13 +93,14 @@ class _UMEWidgetState extends State<UMEWidget> {
     _replaceChild();
     _injectOverlay();
 
-    _onMetricsChanged =
-        bindingAmbiguate(WidgetsBinding.instance)!.window.onMetricsChanged;
+    _onMetricsChanged = bindingAmbiguate(WidgetsBinding.instance)!.window.onMetricsChanged;
     bindingAmbiguate(WidgetsBinding.instance)!.window.onMetricsChanged = () {
       if (_onMetricsChanged != null) {
         _onMetricsChanged!();
-        _replaceChild();
-        setState(() {});
+        if (mounted) {
+          _replaceChild();
+          setState(() {});
+        }
       }
     };
   }
@@ -108,8 +108,7 @@ class _UMEWidgetState extends State<UMEWidget> {
   @override
   void dispose() {
     if (_onMetricsChanged != null) {
-      bindingAmbiguate(WidgetsBinding.instance)!.window.onMetricsChanged =
-          _onMetricsChanged;
+      bindingAmbiguate(WidgetsBinding.instance)!.window.onMetricsChanged = _onMetricsChanged;
     }
     super.dispose();
     // Do the cleaning at last.
@@ -134,12 +133,11 @@ class _UMEWidgetState extends State<UMEWidget> {
   }
 
   void _replaceChild() {
-    final nestedWidgets =
-        PluginManager.instance.pluginsMap.values.where((value) {
+    final nestedWidgets = PluginManager.instance.pluginsMap.values.where((value) {
       return value != null && value is PluggableWithNestedWidget;
     }).toList();
-    Widget layoutChild = _buildLayout(
-        widget.child, widget.supportedLocales, widget.localizationsDelegates);
+    Widget layoutChild =
+        _buildLayout(widget.child, widget.supportedLocales, widget.localizationsDelegates);
     for (var item in nestedWidgets) {
       if (item!.name != PluginManager.instance.activatedPluggableName) {
         continue;
@@ -149,18 +147,16 @@ class _UMEWidgetState extends State<UMEWidget> {
         break;
       }
     }
-    _child =
-        Directionality(textDirection: TextDirection.ltr, child: layoutChild);
+    _child = Directionality(textDirection: TextDirection.ltr, child: layoutChild);
   }
 
-  Stack _buildLayout(Widget child, Iterable<Locale>? supportedLocales,
-      Iterable<LocalizationsDelegate> delegates) {
+  Stack _buildLayout(
+      Widget child, Iterable<Locale>? supportedLocales, Iterable<LocalizationsDelegate> delegates) {
     return Stack(
       children: <Widget>[
         RepaintBoundary(child: child, key: rootKey),
         MediaQuery(
-          data: MediaQueryData.fromWindow(
-              bindingAmbiguate(WidgetsBinding.instance)!.window),
+          data: MediaQueryData.fromWindow(bindingAmbiguate(WidgetsBinding.instance)!.window),
           child: Localizations(
             locale: supportedLocales?.first ?? Locale('en', 'US'),
             delegates: delegates.toList(),
@@ -175,7 +171,7 @@ class _UMEWidgetState extends State<UMEWidget> {
     // Call `remove` only when the entry has been inserted.
     if (_overlayEntryInserted) {
       if (_overlayEntry.mounted) {
-      _overlayEntry.remove();
+        _overlayEntry.remove();
       }
       try {
         if (_umeOverlay?.mounted == true) {
@@ -292,8 +288,7 @@ class _ContentPageState extends State<_ContentPage> {
 
   void _updatePanelWidget() {
     setState(() {
-      _currentWidget =
-          _showedMenu ? (_minimalContent ? _toolbarWidget : _menuPage) : _empty;
+      _currentWidget = _showedMenu ? (_minimalContent ? _toolbarWidget : _menuPage) : _empty;
     });
   }
 
@@ -307,9 +302,7 @@ class _ContentPageState extends State<_ContentPage> {
   Widget _logoWidget() {
     if (_currentSelected != null) {
       return Container(
-          child: Image(image: _currentSelected!.iconImageProvider),
-          height: 30,
-          width: 30);
+          child: Image(image: _currentSelected!.iconImageProvider), height: 30, width: 30);
     }
     return FlutterLogo(size: 40, colors: _showedMenu ? Colors.red : null);
   }
@@ -347,8 +340,7 @@ class _ContentPageState extends State<_ContentPage> {
       if (pluginData is PluggableWithAnywhereDoor) {
         dynamic result;
         if (pluginData.routeNameAndArgs != null) {
-          result = await pluginData.navigator?.pushNamed(
-              pluginData.routeNameAndArgs!.item1,
+          result = await pluginData.navigator?.pushNamed(pluginData.routeNameAndArgs!.item1,
               arguments: pluginData.routeNameAndArgs!.item2);
         } else if (pluginData.route != null) {
           result = await pluginData.navigator?.push(pluginData.route!);
@@ -398,8 +390,7 @@ class _ContentPageState extends State<_ContentPage> {
     _context = context;
     if (_windowSize.isEmpty) {
       _dx = MediaQuery.of(context).size.width - dotSize.width - margin * 4;
-      _dy =
-          MediaQuery.of(context).size.height - dotSize.height - bottomDistance;
+      _dy = MediaQuery.of(context).size.height - dotSize.height - bottomDistance;
       _windowSize = MediaQuery.of(context).size;
     }
     return Container(
@@ -442,9 +433,7 @@ class _ContentPageState extends State<_ContentPage> {
                           right: 6,
                           top: 8,
                           child: RedDot(
-                            pluginDatas: PluginManager
-                                .instance.pluginsMap.values
-                                .toList(),
+                            pluginDatas: PluginManager.instance.pluginsMap.values.toList(),
                           ))
                     ],
                   ),
