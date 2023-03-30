@@ -129,15 +129,11 @@ class _ColorSuckerState extends State<ColorSucker> {
     if (_snapshot == null) return;
     double px = globalPosition.dx;
     double py = globalPosition.dy;
-    int pixel32 = _snapshot!.getPixelSafe(px.toInt(), py.toInt());
-    int hex = _abgrToArgb(pixel32);
-    _currentColor = Color(hex);
-  }
 
-  int _abgrToArgb(int argbColor) {
-    int r = (argbColor >> 16) & 0xFF;
-    int b = argbColor & 0xFF;
-    return (argbColor & 0xFF00FF00) | (b << 16) | r;
+    img.Pixel pixel = _snapshot!.getPixelSafe(px.toInt(), py.toInt());
+
+    _currentColor = Color.fromARGB(
+        pixel.a.toInt(), pixel.r.toInt(), pixel.g.toInt(), pixel.b.toInt());
   }
 
   @override
