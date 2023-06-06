@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ume_kit_ui/components/hit_test.dart';
 import 'package:flutter_ume/flutter_ume.dart';
 import 'package:flutter_ume_kit_ui/util/binding_ambiguate.dart';
-import 'search_bar.dart';
+import 'search_bar.dart' as search_bar;
 import 'icon.dart' as icon;
 
 class WidgetDetailInspector extends StatelessWidget implements Pluggable {
@@ -199,7 +199,7 @@ class __InfoPageState extends State<_InfoPage> {
               Padding(
                 padding: const EdgeInsets.only(
                     left: 12, right: 12, top: 10, bottom: 10),
-                child: SearchBar(
+                child: search_bar.SearchBar(
                     placeHolder: '请输入要搜索的widget', onChangeHandle: _textChange),
               ),
               Expanded(
