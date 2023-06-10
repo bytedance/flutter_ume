@@ -4,8 +4,9 @@
 ///
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../constants/extensions.dart';
 import '../instances.dart';
@@ -18,13 +19,13 @@ ButtonStyle _buttonStyle(
   EdgeInsetsGeometry? padding,
 }) {
   return TextButton.styleFrom(
+    foregroundColor: Colors.white,
     padding: padding ?? const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
     minimumSize: Size.zero,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(999999),
     ),
     backgroundColor: Theme.of(context).primaryColor,
-    primary: Colors.white,
     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
   );
 }
@@ -116,7 +117,7 @@ class DioPluggableState extends State<DioInspector> {
     return Material(
       color: Colors.black26,
       child: DefaultTextStyle.merge(
-        style: Theme.of(context).textTheme.bodyText2,
+        style: Theme.of(context).textTheme.bodyMedium,
         child: Align(
           alignment: Alignment.bottomCenter,
           child: Container(
@@ -139,7 +140,7 @@ class DioPluggableState extends State<DioInspector> {
                       const Spacer(),
                       Text(
                         'Dio Requests',
-                        style: Theme.of(context).textTheme.subtitle1,
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                       Expanded(
                         child: Align(
@@ -308,9 +309,40 @@ class _ResponseCardState extends State<_ResponseCard> {
         const SizedBox(width: 6),
         Text('${_duration.inMilliseconds}ms'),
         const Spacer(),
+        _shareButton(context),
+        const SizedBox(width: 6),
         _detailButton(context),
       ],
     );
+  }
+
+  Widget _shareButton(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        Share.share(_buildShareContent());
+      },
+      style: _buttonStyle(context),
+      child: const Text(
+        'Share↗',
+        style: TextStyle(fontSize: 12, height: 1.2),
+      ),
+    );
+  }
+
+  _buildShareContent() {
+    return "URL: $_requestUri\n" +
+        "**************\n" +
+        "Request headers\n" +
+        "$_requestHeadersBuilder\n" +
+        "**************\n" +
+        "Request Data\n" +
+        "$_requestDataBuilder\n" +
+        "**************\n" +
+        "Response body\n" +
+        "$_responseDataBuilder\n" +
+        "**************\n" +
+        "Response headers\n" +
+        "$_responseHeadersBuilder\n";
   }
 
   Widget _detailedContent(BuildContext context) {
