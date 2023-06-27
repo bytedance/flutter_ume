@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
   provider: ^6.0.3
   # For Dio Kit
-  dio: ^4.0.0
+  dio: ^5.1.2
 
 dependency_overrides:
   vm_service: ^9.4.0

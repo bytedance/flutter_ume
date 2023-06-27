@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                     (int i) => Future<void>.delayed(
                       Duration(seconds: i),
                       () => dio.get(
-                        'https://api.github.com'
+                        'https://apis.github.com'
                         '/?_t=${DateTime.now().millisecondsSinceEpoch}&$i',
                         options: Options(
                           headers: {'UME-Test': 'This is UME Dio kit.'},
