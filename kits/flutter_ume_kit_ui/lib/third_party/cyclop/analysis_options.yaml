@@ -57,4 +57,3 @@ linter:
     use_function_type_syntax_for_parameters: true
     use_rethrow_when_possible: true
     valid_regexps: true
-    unused_element : true
