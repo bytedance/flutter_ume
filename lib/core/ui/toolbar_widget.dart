@@ -27,29 +27,26 @@ const double _dragBarHeight = 32;
 const double _minimalHeight = 80;
 
 class _ToolBarWidgetState extends State<ToolBarWidget> {
-  Size _windowSize = windowSize;
   double _dy = 0;
+  late final double _maxDy;
 
   @override
   void initState() {
-    _dy = _windowSize.height - dotSize.height - bottomDistance;
+    final bottomPadding = WidgetsBinding.instance.window.padding.bottom / ratio;
+    _maxDy =
+        windowSize.height - _minimalHeight - _dragBarHeight - bottomPadding;
+    _dy = _maxDy;
     super.initState();
   }
 
   void _dragEvent(DragUpdateDetails details) {
     _dy += details.delta.dy;
-    _dy = min(max(0, _dy),
-        MediaQuery.of(context).size.height - _minimalHeight - _dragBarHeight);
+    _dy = min(max(0, _dy), _maxDy);
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_windowSize.isEmpty) {
-      _dy =
-          MediaQuery.of(context).size.height - dotSize.height - bottomDistance;
-      _windowSize = MediaQuery.of(context).size;
-    }
     return Positioned(
       left: 0,
       top: _dy,
@@ -200,7 +197,7 @@ class __ToolBarContentState extends State<_ToolBarContent> {
 
   void _saveData(List<Pluggable?> data) {
     List l = data.map((f) => f!.name).toList();
-    if (l == null || l.isEmpty) {
+    if (l.isEmpty) {
       return;
     }
     Future.delayed(Duration(milliseconds: 500), () {

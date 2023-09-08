@@ -1,72 +1,72 @@
 # Contributing
 
-[English](./CONTRIBUTING_en.md)
+[简体中文](./CONTRIBUTING_cn.md)
 
-感谢你对开源贡献感兴趣。
-不止是代码，提 issue、补充和扩展文档等贡献也都欢迎。
+Thank you for your interest in open source contributions.
+Not only the code, but also contributions such as issues and rich documents are also welcome.
 
-请根据本文的指引，对 UME 项目进行开源贡献。
+Please follow the guidelines in this article to make open source contributions to the UME project.
 
 - [Contributing](#contributing)
-  - [如何联系开发者](#如何联系开发者)
-  - [如何提 Issue](#如何提-issue)
-  - [如何提 Pull Request](#如何提-pull-request)
-  - [Commit Message 规范](#commit-message-规范)
+  - [How to contact author](#how-to-contact-author)
+  - [How to raise an Issue](#how-to-raise-an-issue)
+  - [How to raise a Pull Request](#how-to-raise-a-pull-request)
+  - [Commit Message specification](#commit-message-specification)
 
-## 如何联系开发者
+## How to contact author
 
-**可能你：**
+**Maybe...**
 
-- 发现文档错误、代码有 bug
-- 使用 UME 后应用运行产生异常
-- 发现新版本 Flutter 无法兼容
-- 有好的点子或产品建议
+- Found a bug in the code, or an error in the documentation
+- Produces an exception when you use the UME
+- UME is not compatible with the new version Flutter
+- Have a good idea or suggestion
 
-上述情况均可以[提一个 issue](#how-to-issue)。
+You can [submit an issue](#how-to-raise-an-issue) in any of the above situations。
 
-**可能你：**
+**Maybe...**
 
-- 想与开发者交流
-- 想与更多 Flutter 开发者交流
-- 想与 UME 开展交流或合作
+- Communicate with the author
+- Communicate with more community developers
+- Cooperate with UME
 
-欢迎[加入字节跳动 Flutter 交流群](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=b07u55bb-68f0-4a4b-871d-687637766a68)
+Welcome to [Join the ByteDance Flutter Exchange Group](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=b07u55bb-68f0-4a4b-871d-687637766a68).
 
-或随时[联系开发者](mailto:sunkai.dev@bytedance.com)
+Or contact [author](mailto:sunkai.dev@bytedance.com).
 
-## 如何提 Issue
+## How to raise an Issue
 
-1. 点击本仓库的 [Issue 页面](https://github.com/bytedance/flutter_ume/issues)
-2. 先搜索是否有和你类似情况的 issue，若有请直接在该 issue 中反馈问题
-3. 若没有类似情况 issue，点击 [New issue 按钮](https://github.com/bytedance/flutter_ume/issues/new/choose)
-4. 选择一个适合你的 issue 模板
-5. 在模板中填写对应信息
-6. 如果有能复现问题的最简 Demo 就再好不过了
+1. Go to [Issues](https://github.com/bytedance/flutter_ume/issues).
+2. Search for similar situations, if there is a match, directly feedback in it.
+3. If there is not, press [New issue](https://github.com/bytedance/flutter_ume/issues/new/choose) to raise a new one.
+4. Select a template.
+5. Describe your situation, and fill in the template.
+6. It is better to attach a demo that can reproduce the problem.
 
-## 如何提 Pull Request
+## How to raise a Pull Request
 
-1. Fork 本仓库
-2. 将你 fork 的仓库 clone 到本地
-3. 切换到对应开发分支，并 checkout 出新分支
-4. 在本地修改代码
-5. 修改 example 工程的测试代码，并进行手工测试
-6. 在 test 目录下，修改单元测试
-7. 在本地提交改动并推送到你 fork 的仓库，commit message 格式请遵循本文 [Commit Message 规范](#commit-message) 部分
-8. 在 GitHub 上创建 Pull Request，在模板中填写对应信息
+1. Fork the repository.
+2. Clone your fork repository.
+3. Checkout to the correct develop branch, and then create a new brnach based on the develop branch.
+4. Edit code.
+5. Edit test code in example project, and test it manually.
+6. Edit unit test in test directory.
+7. Commit your changes and push it. Please follow the [Commit Message specification](#commit-message-specification) to write the commit message.
+8. Create Pull Request in GitHub, and fill in the template.
 
-> 目前，UME 同时支持 null-safety 版本与非 null-safety 版本。
-> null-safety 版本开发分支为 `develop_nullsafety`，非 null-safety 版本开发分支为 `develop`。
-> PR 需要合入对应的开发分支中。
+> Now, UME support null-safety and non-null-safety.
+> Null-safety version corresponds to `develop_nullsafety` branch, non-null-safety version corresponds to `develop` branch.
+> PR should be merged into the corresponding branch.
 
-## Commit Message 规范
+## Commit Message specification
 
-1. 原则上请尽量使用英文
-2. 涉及到参考资料的，请附链接
-3. 格式：`[tags] description`
-   1. `tags` 为 PR 的类型，如 `fix` 修复错误、`feat` 新增功能、`improve` 改进代码或文档
-   2. `description` 为具体的改动描述
+1. Please use english.
+2. If you have references, please attach a link.
+3. Format: `[tags] description`
+   1. `tags` is the type of PR, such as `fix`, `feat`, `improve`.
+   2. `description` is used to describe changes.
 
-以下为标准的 Commit message 示例：
+The following is a standard Commit message example:
 
 ``` plaintext
 [fix] README.md document syntax error

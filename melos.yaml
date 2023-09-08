@@ -1,0 +1,44 @@
+name: byte_live_demo
+
+packages:
+  - kits/flutter_ume_kit_*
+  - example
+  - custom_plugin_example
+  - .
+
+command:
+  bootstrap:
+    usePubspecOverrides: true
+    runPubGetInParallel: false
+
+scripts:
+  run:demo:
+    run: |
+      melos exec -c 6 --fail-fast -- \
+        "flutter run"
+    description: Run demo app.
+    select-package:
+      scope:
+        - 'example'
+
+  build:example_android:
+    run: |
+      melos exec -c 6 --fail-fast -- \
+        "flutter build apk --no-pub"
+    description: Build a specific example app for Android.
+    select-package:
+      dir-exists:
+        - android
+      scope:
+        - 'example'
+
+  build:example_ios:
+    run: |
+      melos exec -c 6 --fail-fast -- \
+        "flutter build ios --no-codesign --no-pub"
+    description: Build a specific example app for iOS.
+    select-package:
+      dir-exists:
+        - ios
+      scope:
+        - 'example'

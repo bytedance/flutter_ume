@@ -3,11 +3,10 @@
 // found in the LICENSE file.
 
 import 'dart:math' as math;
-import 'dart:typed_data';
 import 'dart:ui' as ui show Gradient, TextBox, lerpDouble, Color;
+import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart'
     hide FlutterLogo, FlutterLogoDecoration, FlutterLogoStyle;
 
@@ -121,12 +120,7 @@ class FlutterLogoDecoration extends Decoration {
     ui.Color this.textColor = const Color(0xFF616161),
     this.style = FlutterLogoStyle.markOnly,
     EdgeInsets this.margin = EdgeInsets.zero,
-  })  : assert(lightColor != null),
-        assert(darkColor != null),
-        assert(textColor != null),
-        assert(style != null),
-        assert(margin != null),
-        _position = identical(style, FlutterLogoStyle.markOnly)
+  })  : _position = identical(style, FlutterLogoStyle.markOnly)
             ? 0.0
             : identical(style, FlutterLogoStyle.horizontal)
                 ? 1.0
@@ -187,11 +181,8 @@ class FlutterLogoDecoration extends Decoration {
     assert(lightColor != null &&
         darkColor != null &&
         textColor != null &&
-        style != null &&
         margin != null &&
-        _position != null &&
         _position.isFinite &&
-        _opacity != null &&
         _opacity >= 0.0 &&
         _opacity <= 1.0);
     return true;
@@ -215,7 +206,6 @@ class FlutterLogoDecoration extends Decoration {
   ///  * [Decoration.lerp], which interpolates between arbitrary decorations.
   static FlutterLogoDecoration? lerp(
       FlutterLogoDecoration? a, FlutterLogoDecoration? b, double t) {
-    assert(t != null);
     assert(a == null || a.debugAssertIsValid());
     assert(b == null || b.debugAssertIsValid());
     if (a == null && b == null) return null;
@@ -302,7 +292,7 @@ class FlutterLogoDecoration extends Decoration {
   @override
   int get hashCode {
     assert(debugAssertIsValid());
-    return hashValues(
+    return Object.hash(
       lightColor,
       darkColor,
       textColor,
@@ -317,17 +307,17 @@ class FlutterLogoDecoration extends Decoration {
     properties
         .add(DiagnosticsNode.message('$lightColor/$darkColor on $textColor'));
     properties.add(EnumProperty<FlutterLogoStyle>('style', style));
-    if (_inTransition)
+    if (_inTransition) {
       properties.add(DiagnosticsNode.message(
           'transition ${debugFormatDouble(_position)}:${debugFormatDouble(_opacity)}'));
+    }
   }
 }
 
 /// An object that paints a [BoxDecoration] into a canvas.
 class _FlutterLogoPainter extends BoxPainter {
   _FlutterLogoPainter(this._config)
-      : assert(_config != null),
-        assert(_config.debugAssertIsValid()),
+      : assert(_config.debugAssertIsValid()),
         super(null) {
     _prepareText();
   }

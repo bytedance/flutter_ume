@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart'
     hide FlutterLogo, FlutterLogoDecoration, FlutterLogoStyle;
 import 'package:flutter_ume/core/pluggable_message_service.dart';
@@ -18,7 +17,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 const defaultLocalizationsDelegates = const [
   GlobalMaterialLocalizations.delegate,
   GlobalWidgetsLocalizations.delegate,
-  DefaultCupertinoLocalizations.delegate,
   GlobalCupertinoLocalizations.delegate,
 ];
 
@@ -39,16 +37,46 @@ class UMEWidget extends StatefulWidget {
   final Iterable<Locale>? supportedLocales;
   final Iterable<LocalizationsDelegate> localizationsDelegates;
 
+  /// Close the activated plugin if any.
+  ///
+  /// The method does not have side-effects whether the [UMEWidget]
+  /// is not enabled or no plugin has been activated.
+  static void closeActivatedPlugin() {
+    final _ContentPageState? state =
+        _umeWidgetState?._contentPageKey.currentState;
+    if (state?._currentSelected != null) {
+      state?._closeActivatedPluggable();
+    }
+  }
+
   @override
   _UMEWidgetState createState() => _UMEWidgetState();
 }
 
-class _UMEWidgetState extends State<UMEWidget> {
-  late Widget _child;
+/// Hold the [_UMEWidgetState] as a global variable.
+_UMEWidgetState? _umeWidgetState;
 
+class _UMEWidgetState extends State<UMEWidget> {
+  _UMEWidgetState() {
+    // Make sure only a single `UMEWidget` is being used.
+    assert(
+      _umeWidgetState == null,
+      'Only one `UMEWidget` can be used at the same time.',
+    );
+    if (_umeWidgetState != null) {
+      throw StateError('Only one `UMEWidget` can be used at the same time.');
+    }
+    _umeWidgetState = this;
+  }
+
+  final GlobalKey<_ContentPageState> _contentPageKey = GlobalKey();
+  late Widget _child;
   VoidCallback? _onMetricsChanged;
 
-  OverlayEntry _overlayEntry = OverlayEntry(builder: (ctx) => Container());
+  bool _overlayEntryInserted = false;
+  OverlayEntry _overlayEntry = OverlayEntry(
+    builder: (_) => const SizedBox.shrink(),
+  );
 
   @override
   void initState() {
@@ -74,6 +102,8 @@ class _UMEWidgetState extends State<UMEWidget> {
           _onMetricsChanged;
     }
     super.dispose();
+    // Do the cleaning at last.
+    _umeWidgetState = null;
   }
 
   @override
@@ -131,22 +161,34 @@ class _UMEWidgetState extends State<UMEWidget> {
     );
   }
 
-  void _removeOverlay() => _overlayEntry.remove();
+  void _removeOverlay() {
+    // Call `remove` only when the entry has been inserted.
+    if (_overlayEntryInserted) {
+      _overlayEntry.remove();
+      _overlayEntryInserted = false;
+    }
+  }
 
   void _injectOverlay() {
-    bindingAmbiguate(WidgetsBinding.instance)!
-        .addPostFrameCallback((timeStamp) {
+    bindingAmbiguate(WidgetsBinding.instance)?.addPostFrameCallback((_) {
+      if (_overlayEntryInserted) {
+        return;
+      }
       if (widget.enable) {
         _overlayEntry = OverlayEntry(
-            builder: (_) => Material(
-                type: MaterialType.transparency,
-                child: _ContentPage(
-                  refreshChildLayout: () {
-                    _replaceChild();
-                    setState(() {});
-                  },
-                )));
+          builder: (_) => Material(
+            type: MaterialType.transparency,
+            child: _ContentPage(
+              key: _contentPageKey,
+              refreshChildLayout: () {
+                _replaceChild();
+                setState(() {});
+              },
+            ),
+          ),
+        );
         overlayKey.currentState?.insert(_overlayEntry);
+        _overlayEntryInserted = true;
       }
     });
   }
@@ -156,15 +198,15 @@ class _UMEWidgetState extends State<UMEWidget> {
 }
 
 class _ContentPage extends StatefulWidget {
-  _ContentPage({Key? key, this.refreshChildLayout}) : super(key: key);
+  const _ContentPage({Key? key, this.refreshChildLayout}) : super(key: key);
 
   final VoidCallback? refreshChildLayout;
 
   @override
-  __ContentPageState createState() => __ContentPageState();
+  _ContentPageState createState() => _ContentPageState();
 }
 
-class __ContentPageState extends State<_ContentPage> {
+class _ContentPageState extends State<_ContentPage> {
   PluginStoreManager _storeManager = PluginStoreManager();
   Size _windowSize = windowSize;
   double _dx = 0;
@@ -204,21 +246,25 @@ class __ContentPageState extends State<_ContentPage> {
 
   void onTap() {
     if (_currentSelected != null) {
-      PluginManager.instance.deactivatePluggable(_currentSelected!);
-      if (widget.refreshChildLayout != null) {
-        widget.refreshChildLayout!();
-      }
-      _currentSelected = null;
-      _currentWidget = _empty;
-      if (_minimalContent) {
-        _currentWidget = _toolbarWidget;
-        _showedMenu = true;
-      }
-      setState(() {});
+      _closeActivatedPluggable();
       return;
     }
     _showedMenu = !_showedMenu;
     _updatePanelWidget();
+  }
+
+  void _closeActivatedPluggable() {
+    PluginManager.instance.deactivatePluggable(_currentSelected!);
+    if (widget.refreshChildLayout != null) {
+      widget.refreshChildLayout!();
+    }
+    _currentSelected = null;
+    _currentWidget = _empty;
+    if (_minimalContent) {
+      _currentWidget = _toolbarWidget;
+      _showedMenu = true;
+    }
+    setState(() {});
   }
 
   void _updatePanelWidget() {
@@ -274,16 +320,26 @@ class __ContentPageState extends State<_ContentPage> {
     });
     _dx = _windowSize.width - dotSize.width - margin * 4;
     _dy = _windowSize.height - dotSize.height - bottomDistance;
-    MenuAction itemTapAction = (pluginData) {
-      _currentSelected = pluginData;
-      if (_currentSelected != null) {
-        PluginManager.instance.activatePluggable(_currentSelected!);
-      }
-      _handleAction(_context, pluginData!);
-      if (widget.refreshChildLayout != null) {
-        widget.refreshChildLayout!();
-      }
-      if (pluginData.onTrigger != null) {
+    MenuAction itemTapAction = (pluginData) async {
+      if (pluginData is PluggableWithAnywhereDoor) {
+        dynamic result;
+        if (pluginData.routeNameAndArgs != null) {
+          result = await pluginData.navigator?.pushNamed(
+              pluginData.routeNameAndArgs!.item1,
+              arguments: pluginData.routeNameAndArgs!.item2);
+        } else if (pluginData.route != null) {
+          result = await pluginData.navigator?.push(pluginData.route!);
+        }
+        pluginData.popResultReceive(result);
+      } else {
+        _currentSelected = pluginData;
+        if (_currentSelected != null) {
+          PluginManager.instance.activatePluggable(_currentSelected!);
+        }
+        _handleAction(_context, pluginData!);
+        if (widget.refreshChildLayout != null) {
+          widget.refreshChildLayout!();
+        }
         pluginData.onTrigger();
       }
     };
@@ -317,7 +373,6 @@ class __ContentPageState extends State<_ContentPage> {
   @override
   Widget build(BuildContext context) {
     _context = context;
-    // ugly code .. because in release mode, WidgetsBinding.instance.window.physicalSize's value is zero...What the Fuck!!!
     if (_windowSize.isEmpty) {
       _dx = MediaQuery.of(context).size.width - dotSize.width - margin * 4;
       _dy =

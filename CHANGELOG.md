@@ -2,6 +2,53 @@
 
 [简体中文](./CHANGELOG_cn.md)
 
+## [1.1.2]
+
+* #82 Fix flutter_logo.dart error in Flutter 3.0.5 
+
+## [1.1.1+1]
+
+* Update latest dependencies.
+
+## [1.1.1]
+
+* #66 [fix] toolbar initial position is incorrect
+
+## [1.1.0+3]
+
+* Fix static analyze issues.
+
+## [1.1.0+2]
+
+* Fix static analyze issues.
+
+## [1.1.0]
+
+* #76 Introduce `UMEWidget.closeActivatedPlugin()`. Issue #35
+* #75 Remove overlay entry only when it's been inserted. Issue #65
+* #72 [Android] Migrate the example to the v2 embedding
+
+## [1.0.2+1]
+
+* Dart format.
+
+## [1.0.2]
+
+* Fix error in code static analysis.
+
+## [1.0.1]
+
+* Fix error in pubspec.yaml in example
+
+## [1.0.0]
+
+* Normal version with adaption of Flutter 3.
+* Feature: Anywhere door (Route)
+
+## [1.0.0-dev.0]
+
+* Adapt Flutter 3.
+
 ## [0.3.0+1]
 
 * Fix the version error

@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: flutter_ume
+dependency_overrides:
+  flutter_ume:
+    path: ../..

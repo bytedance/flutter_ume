@@ -24,9 +24,9 @@ class PluggableMessageService {
     clearListener();
 
     PluginManager.instance.pluginsMap.values
-        .where((element) => element is PluggableWithStream)
+        .whereType<PluggableWithStream>()
         .forEach((element) {
-      final pluggable = element as PluggableWithStream;
+      final pluggable = element;
       // ignore: cancel_subscriptions
       final subscription = pluggable.stream.where((event) {
         return pluggable.streamFilter(event);

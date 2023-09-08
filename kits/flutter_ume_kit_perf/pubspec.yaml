@@ -1,6 +1,6 @@
 name: flutter_ume_kit_perf
 description: Performance kits for flutter_ume.
-version: 0.3.0
+version: 1.0.0
 homepage: https://github.com/bytedance/flutter_ume
 
 environment:
@@ -10,8 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  vm_service: ^7.1.1
-  flutter_ume: ">=0.3.0 <0.4.0"
+  vm_service: ^9.4.0
+  flutter_ume: ">=1.0.0 <2.0.0"
 
 dev_dependencies:
   flutter_test:

@@ -28,6 +28,7 @@ class OpacitySliderTrack extends SliderTrackShape with BaseSliderTrackShape {
     bool isDiscrete = false,
     bool isEnabled = false,
     double additionalActiveTrackHeight = 2,
+    Offset? secondaryOffset,
   }) {
     final trackRect = getPreferredRect(
       parentBox: parentBox,

@@ -1,6 +1,7 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:dio/dio.dart';
 import 'package:example/ume_switch.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ume/flutter_ume.dart';
 import 'package:provider/provider.dart';
 
 import 'main.dart';
@@ -34,15 +35,21 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextButton(
-                onPressed: () {
-                  debugPrint('statement');
-                },
-                child: const Text('debugPrint')),
+              onPressed: () => UMEWidget.closeActivatedPlugin(),
+              child: const Text('Close activated plugin'),
+            ),
             TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('detail');
-                },
-                child: const Text('Push Detail Page')),
+              onPressed: () {
+                debugPrint('statement');
+              },
+              child: const Text('debugPrint'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('detail');
+              },
+              child: const Text('Push Detail Page'),
+            ),
             TextButton(
               onPressed: () {
                 showDialog(
@@ -61,27 +68,6 @@ class _HomePageState extends State<HomePage> {
               child: const Text('Show Dialog'),
             ),
             TextButton(
-              child: const Text('Awesome_dialog show dialog'),
-              onPressed: () {
-                AwesomeDialog(
-                  context: context,
-                  dialogType: DialogType.INFO_REVERSED,
-                  borderSide: BorderSide(color: Colors.green, width: 2),
-                  width: 280,
-                  buttonsBorderRadius: BorderRadius.all(
-                    Radius.circular(2),
-                  ),
-                  headerAnimationLoop: false,
-                  animType: AnimType.BOTTOMSLIDE,
-                  title: 'INFO',
-                  desc: 'Dialog description here...',
-                  showCloseIcon: true,
-                  btnCancelOnPress: () {},
-                  btnOkOnPress: () {},
-                )..show();
-              },
-            ),
-            TextButton(
               onPressed: () {
                 Future.wait<void>(
                   List<Future<void>>.generate(
@@ -91,6 +77,9 @@ class _HomePageState extends State<HomePage> {
                       () => dio.get(
                         'https://api.github.com'
                         '/?_t=${DateTime.now().millisecondsSinceEpoch}&$i',
+                        options: Options(
+                          headers: {'UME-Test': 'This is UME Dio kit.'},
+                        ),
                       ),
                     ),
                   ),

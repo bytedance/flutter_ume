@@ -31,7 +31,6 @@ class PluginManager {
   /// Register multiple [plugins]
   void registerAll(List<Pluggable> plugins) {
     for (final plugin in plugins) {
-      assert(plugin is Pluggable);
       register(plugin);
     }
   }
