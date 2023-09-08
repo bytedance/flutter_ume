@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:math';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide SearchBar;
 import 'package:flutter_ume_kit_ui/components/hit_test.dart';
 import 'package:flutter_ume/flutter_ume.dart';
 import 'package:flutter_ume_kit_ui/util/binding_ambiguate.dart';
@@ -109,6 +109,7 @@ class _DetailModel {
     Random().nextInt(256)
   ];
   Element element;
+
   _DetailModel(this.element);
 }
 
