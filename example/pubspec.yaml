@@ -45,11 +45,6 @@ dev_dependencies:
     path: ../kits/flutter_ume_kit_dio
   flutter_ume_kit_channel_monitor:
     path: ../kits/flutter_ume_kit_channel_monitor
-
-dev_dependencies:
-  flutter_driver:
-    sdk: flutter
-  test: ^1.16.6
   
 flutter:
   uses-material-design: true
