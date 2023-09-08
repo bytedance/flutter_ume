@@ -12,6 +12,13 @@ dependencies:
   provider: ^6.0.3
   # For Dio Kit
   dio: ^4.0.0
+  flutter_ume: 0.2.1
+  flutter_ume_kit_ui: 0.2.1
+  flutter_ume_kit_perf: 0.2.1
+  flutter_ume_kit_show_code: 0.2.1
+  flutter_ume_kit_device: 0.2.1
+  flutter_ume_kit_console: 0.2.1
+  flutter_ume_kit_dio: 0.2.0
 
 dependency_overrides:
   vm_service: ^9.4.0
@@ -38,6 +45,6 @@ dev_dependencies:
     path: ../kits/flutter_ume_kit_dio
   flutter_ume_kit_channel_monitor:
     path: ../kits/flutter_ume_kit_channel_monitor
-
+  
 flutter:
   uses-material-design: true
