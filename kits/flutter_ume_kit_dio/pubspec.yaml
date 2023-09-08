@@ -12,7 +12,10 @@ dependencies:
     sdk: flutter
   flutter_ume: ">=1.0.0 <2.0.0"
 
-  dio: ^4.0.0
+  dio: ^5.1.2
+
+  share_plus: ^4.5.3
+
 
 dev_dependencies:
   flutter_test:
